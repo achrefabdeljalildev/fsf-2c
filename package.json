@@ -1,0 +1,175 @@
+{
+    "name": "fsf-2c-front",
+    "version": "v1.144.0-dev",
+    "engines": {
+        "node": "^20"
+    },
+    "scripts": {
+        "prepare": "husky",
+        "ng": "ng",
+        "commit": "npx git-cz",
+        "start": "ng serve --open  --proxy-config ./proxy.conf.json",
+        "build": "ng build",
+        "build-prod": "ng build --configuration production",
+        "build-staging": "ng build --configuration staging",
+        "watch": "ng build --watch --configuration development",
+        "test": "ng test",
+        "lint": "ng lint",
+        "format:check": "prettier --check .",
+        "format:write": "prettier --write .",
+        "sonar-scanner": "node_modules/sonar-scanner/bin/sonar-scanner",
+        "sonar": "sonar-scanner",
+        "release": "npx -p @semantic-release/changelog@^5.0.0 -p @semantic-release/git@^9.0.0  -p semantic-release@^17.0.0 semantic-release --no-ci --debug"
+    },
+    "private": true,
+    "dependencies": {
+        "@angular/animations": "^18.2.0",
+        "@angular/cdk": "^18.2.0",
+        "@angular/common": "^18.2.0",
+        "@angular/compiler": "^18.2.0",
+        "@angular/core": "^18.2.0",
+        "@angular/forms": "^18.2.0",
+        "@angular/platform-browser": "^18.2.0",
+        "@angular/platform-browser-dynamic": "^18.2.0",
+        "@angular/router": "^18.2.0",
+        "@bhplugin/ng-datatable": "^0.1.0",
+        "@dustfoundation/ngx-sortablejs": "^15.0.0",
+        "@fullcalendar/angular": "^6.1.15",
+        "@fullcalendar/core": "^6.1.15",
+        "@fullcalendar/daygrid": "^6.1.15",
+        "@fullcalendar/interaction": "^6.1.15",
+        "@fullcalendar/timegrid": "^6.1.15",
+        "@matheo/text-mask": "^17.0.0",
+        "@microsoft/signalr": "^8.0.7",
+        "@ng-select/ng-select": "^13.9.1",
+        "@ngrx/store": "^18.0.2",
+        "@ngx-translate/core": "^15.0.0",
+        "@ngx-translate/http-loader": "^8.0.0",
+        "@types/file-saver": "^2.0.7",
+        "@types/luxon": "^3.4.2",
+        "angularx-flatpickr": "^8.1.0",
+        "apexcharts": "^3.49.2",
+        "file-saver": "^2.0.5",
+        "file-upload-with-preview": "^6.1.2",
+        "flatpickr": "^4.6.13",
+        "flatpickr-hijri-calendar": "^1.0.0",
+        "headlessui-angular": "^0.0.9",
+        "html2canvas": "^1.4.1",
+        "jspdf": "^3.0.3",
+        "luxon": "^3.5.0",
+        "moment": "^2.30.1",
+        "moment-hijri": "^3.0.0",
+        "ng-apexcharts": "1.11.0",
+        "ngx-custom-modal": "^18.0.2",
+        "ngx-modal-dialog": "^4.0.0",
+        "ngx-quill": "^26.0.8",
+        "ngx-scrollbar": "^15.1.2",
+        "ngx-spinner": "^18.0.0",
+        "ngx-tippy-wrapper": "^6.1.0",
+        "primeicons": "^7.0.0",
+        "primeng": "^17.18.15",
+        "quill": "^2.0.2",
+        "rxjs": "~7.8.0",
+        "sonar-scanner": "^3.1.0",
+        "sortablejs": "^1.15.3",
+        "sweetalert2": "^11.14.4",
+        "swiper": "^12.0.3",
+        "tailwind-scrollbar": "^3.1.0",
+        "tslib": "^2.5.2",
+        "zone.js": "~0.14.4"
+    },
+    "devDependencies": {
+        "@angular-devkit/build-angular": "^18.2.0",
+        "@angular/cli": "^18.2.0",
+        "@angular/compiler-cli": "^18.2.0",
+        "@commitlint/cli": "^17.8.1",
+        "@commitlint/config-conventional": "^17.8.1",
+        "@tailwindcss/forms": "^0.5.3",
+        "@tailwindcss/typography": "^0.5.9",
+        "@types/flatpickr": "^3.0.2",
+        "@types/jasmine": "~5.1.4",
+        "@types/moment-hijri": "^2.1.4",
+        "@types/node": "^22.4.0",
+        "@types/sortablejs": "^1.15.8",
+        "autoprefixer": "^10.4.16",
+        "cz-conventional-changelog": "^3.3.0",
+        "husky": "^9.0.11",
+        "jasmine-core": "~5.2.0",
+        "karma": "~6.4.2",
+        "karma-chrome-launcher": "~3.2.0",
+        "karma-coverage": "~2.2.0",
+        "karma-jasmine": "~5.1.0",
+        "karma-jasmine-html-reporter": "^2.1.0",
+        "lint-staged": "^15.2.7",
+        "postcss": "^8.4.24",
+        "prettier": "^3.3.3",
+        "prettier-plugin-tailwindcss": "^0.6.6",
+        "release-it": "^17.3.0",
+        "sonarqube-scanner": "3.5.0",
+        "tailwindcss": "^3.4.10",
+        "typescript": "^5.5.4"
+    },
+    "release-it": {
+        "git": {
+            "commitMessage": "chore(release): ${version}",
+            "requireBranch": [
+                "develop"
+            ],
+            "tag": true
+        },
+        "npm": {
+            "publish": false
+        },
+        "github": {
+            "release": true,
+            "releaseName": "v${version}"
+        },
+        "plugins": [
+            "@semantic-release/commit-analyzer",
+            "@semantic-release/release-notes-generator",
+            "@semantic-release/changelog",
+            [
+                "@semantic-release/npm",
+                {
+                    "npmPublish": false
+                }
+            ],
+            [
+                "@semantic-release/git",
+                {
+                    "assets": [
+                        "package-lock.json",
+                        "package.json",
+                        "CHANGELOG.md"
+                    ],
+                    "message": "chore(release): ${nextRelease.version}\n\n${nextRelease.notes}"
+                }
+            ],
+            "@semantic-release/github"
+        ]
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "npm run build && lint-staged",
+            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+        }
+    },
+    "config": {
+        "commitizen": {
+            "path": "./node_modules/cz-conventional-changelog",
+            "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
+        }
+    },
+    "release": {
+        "branches": [
+            "production",
+            "develop",
+            "staging"
+        ],
+        "tagFormat": "v${version}-dev"
+    },
+    "optionalDependencies": {
+        "@esbuild/linux-x64": "*",
+        "@rollup/rollup-linux-arm64-gnu": "*"
+    }
+}

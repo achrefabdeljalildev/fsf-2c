@@ -1,0 +1,13 @@
+{
+    "**/api/**": {
+        "target": "https://api-fsf.com/",
+        "secure": false
+    },
+    "**/system/ws/**": {
+        "target": "https://api-fsf.com/",
+        "secure": false,
+        "ws": true,
+        "logLevel": "debug",
+        "changeOrigin": true
+    }
+}

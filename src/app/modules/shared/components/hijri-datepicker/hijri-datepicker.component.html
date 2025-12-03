@@ -1,0 +1,21 @@
+<!-- app.component.html -->
+<div class="datepicker-wrapper">
+    <input class="form-input mt-2" type="text" [(ngModel)]="selectedDate" (click)="toggleCalendar()" placeholder="Select Date" readonly />
+  
+    <div *ngIf="calendarVisible" class="datepicker-container" [ngStyle]="{ 'display': calendarVisible ? 'block' : 'none' }">
+      <div class="header">
+        <button (click)="changeMonth(-1)">&lt;</button>
+        <span>{{ currentMonthName }} {{ currentYear }}</span>
+        <button (click)="changeMonth(1)">&gt;</button>
+      </div>
+      <div class="days">
+        <div *ngFor="let day of days" 
+             [class.selected]="selectedDate.endsWith('/' + day)"
+             (click)="selectDate(day)">
+          {{ day }}
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  

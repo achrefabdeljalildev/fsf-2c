@@ -1,0 +1,45 @@
+/* app.component.css */
+.datepicker-wrapper {
+  position: relative;
+}
+
+.datepicker-container {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  display: none;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.datepicker-container .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.datepicker-container .days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+}
+
+.datepicker-container .days div {
+  text-align: center;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.datepicker-container .days div.selected {
+  background-color: #007bff;
+  color: white;
+}
+
+input {
+  width: 100%;
+  cursor: pointer;
+}

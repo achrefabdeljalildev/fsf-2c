@@ -1,0 +1,125 @@
+import { CommonModule } from '@angular/common';
+import {
+    HTTP_INTERCEPTORS,
+    HttpBackend,
+    HttpClient,
+    HttpClientModule,
+} from '@angular/common/http';
+import { CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID, NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { BrowserModule, Title } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+    NavigationEnd,
+    NavigationStart,
+    Router,
+    RouterModule,
+} from '@angular/router';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
+
+//Routes
+import { routes } from './app.route';
+
+import { AppComponent } from './app.component';
+
+// store
+import { StoreModule } from '@ngrx/store';
+import { indexReducer } from './store/index.reducer';
+
+// shared module
+import { SharedModule } from 'src/app/modules/shared/shared.module';
+
+// i18n
+import {
+    TranslateLoader,
+    TranslateModule,
+    TranslateService,
+} from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+// dashboard
+import { IndexComponent } from './index';
+
+// Layouts
+import { AppLayout } from './layouts/app-layout';
+import { AuthLayout } from './layouts/auth-layout';
+
+import { NgxSpinnerService } from 'ngx-spinner';
+import { FooterComponent } from './layouts/footer';
+import { HeaderComponent } from './layouts/header';
+import { SidebarComponent } from './layouts/sidebar/sidebar';
+import { ThemeCustomizerComponent } from './layouts/theme-customizer';
+import { InterceptService } from './modules/shared/services/intercept.service';
+import { DashboardComponent } from 'src/app/modules/dashboard/dashboard.component';
+
+// AOT compilation support
+export function HttpLoaderFactory(
+    httpHandler: HttpBackend,
+): TranslateHttpLoader {
+    return new TranslateHttpLoader(new HttpClient(httpHandler));
+}
+
+@NgModule({
+    imports: [
+        RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' }),
+        BrowserModule,
+        BrowserAnimationsModule,
+        CommonModule,
+        ToastModule,
+        FormsModule,
+        HttpClientModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpBackend],
+            },
+        }),
+        StoreModule.forRoot({ index: indexReducer }),
+        SharedModule.forRoot(),
+    ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    declarations: [
+        AppComponent,
+        HeaderComponent,
+        FooterComponent,
+        SidebarComponent,
+        DashboardComponent,
+        ThemeCustomizerComponent,
+        IndexComponent,
+        AppLayout,
+        AuthLayout,
+    ],
+    providers: [
+        Title,
+        { provide: HTTP_INTERCEPTORS, useClass: InterceptService, multi: true },
+        MessageService,
+        {
+            provide: LOCALE_ID,
+            deps: [TranslateService],
+            useFactory: (langService: TranslateService) =>
+                langService.currentLang ?? 'ar-SA',
+        },
+    ],
+    bootstrap: [AppComponent],
+})
+export class AppModule {
+    constructor(
+        private router: Router,
+        private spinnerService: NgxSpinnerService,
+    ) {
+        router.events.subscribe((event) => {
+            if (event instanceof NavigationStart) {
+                spinnerService.show();
+            }
+
+            if (event instanceof NavigationEnd) {
+                document
+                    .querySelector('meta[property=og\\:url')
+                    ?.setAttribute('content', window.location.href);
+                spinnerService.hide();
+            }
+        });
+    }
+}

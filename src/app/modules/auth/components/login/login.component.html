@@ -1,0 +1,175 @@
+<div class="h-screen flex" [dir]="isArabic ? 'rtl' : 'ltr'">
+    <!-- Left side: Image -->
+    <div class="hidden md:block relative h-screen flex-shrink-0">
+        <div
+            class="absolute left-0 right-0 bottom-1/4 flex flex-col items-center"
+        >
+            <span class="text-white text-3xl font-ibmPlexSansArabic">{{
+                'label.externalPortal' | translate
+            }}</span>
+            <span class="text-white text-3xl font-ibmPlexSansArabic">{{
+                'label.electronic' | translate
+            }}</span>
+            <span class="text-white text-3xl font-ibmPlexSansArabic">{{
+                'label.services' | translate
+            }}</span>
+        </div>
+
+        <div class="absolute bottom-4 right-4">
+            <img
+                src="assets/images/logo3.png"
+                alt="Logo"
+                class="h-8"
+                style="height: 80%"
+            />
+        </div>
+
+        <div class="absolute bottom-4 left-4">
+            <img
+                src="assets/images/logo1.png"
+                alt="Logo"
+                class="h-10"
+                style="height: 80%"
+            />
+        </div>
+    </div>
+
+    <!-- Right side: Login Form -->
+    <div class="w-full w-full flex items-center justify-center bg-white p-8">
+        <div class="max-w-md w-full space-y-6">
+            <div class="flex justify-center">
+                <img
+                    src="assets/images/logo 2.png"
+                    alt="Logo"
+                    style="height: 111px; width: 109px"
+                />
+            </div>
+
+            <div class="flex justify-center">
+                <h2
+                    class="text-3xl font-extrabold text-center text-gray-900 font-ibmPlexSansArabic"
+                >
+                    {{ 'auth.login' | translate }}
+                </h2>
+            </div>
+
+            <form
+                [formGroup]="loginForm"
+                (ngSubmit)="submit()"
+                class="space-y-4"
+            >
+                <div
+                    class="text-red-500 text-sm mt-1"
+                    style="min-height: 1.5rem"
+                >
+                    <span *ngIf="hasError == true">
+                        {{ messageError | translate }}
+                    </span>
+                </div>
+                <div>
+                    <div
+                        *ngIf="
+                            username?.invalid &&
+                            (username?.dirty || username?.touched)
+                        "
+                        class="text-red-500 text-sm mt-1"
+                    >
+                        <span *ngIf="username?.errors?.['required']">
+                            {{ 'common.required' | translate }}
+                        </span>
+                    </div>
+                </div>
+
+                <!-- add input for username -->
+                <div>
+                    <input
+                        id="username"
+                        type="text"
+                        formControlName="username"
+                        class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 font-ibmPlexSansArabic"
+                        [placeholder]="'auth.username' | translate"
+                    />
+                </div>
+
+                <div class="relative mt-1">
+                    <!-- Password Input -->
+                    <input
+                        id="password"
+                        [type]="showPassword ? 'text' : 'password'"
+                        formControlName="password"
+                        class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 font-ibmPlexSansArabic"
+                        [placeholder]="'auth.password' | translate"
+                    />
+
+                    <!-- Toggle Password Icon -->
+                    <img
+                        [src]="
+                            !showPassword
+                                ? 'assets/images/hide.png'
+                                : 'assets/images/vision.png'
+                        "
+                        alt="Toggle Password Visibility"
+                        (click)="togglePasswordVisibility()"
+                        class="absolute top-1/2 transform -translate-y-1/2 cursor-pointer h-6 w-6"
+                        [ngClass]="{ 'right-3': !isArabic, 'left-3': isArabic }"
+                    />
+                </div>
+
+                <div class="hidden">
+                    <a
+                        class="text-sm text-gray-500 hover:underline font-ibmPlexSansArabic"
+                        routerLink="/auth/forgot-password"
+                    >
+                        {{ 'auth.login.label.forgetPassord' | translate }}
+                    </a>
+                </div>
+
+                <button
+                    [disabled]="loginForm.invalid || isLoading"
+                    type="submit"
+                    class="w-full bg-primary hover:bg-secondary text-white font-medium py-2 px-4 rounded-md shadow-sm font-ibmPlexSansArabic flex justify-center items-center"
+                >
+                    <ng-container *ngIf="!isLoading">
+                        {{ 'auth.login' | translate }}
+                    </ng-container>
+                    <ng-container *ngIf="isLoading">
+                        <span class="me-1 ms-1">{{
+                            'auth.login' | translate
+                        }}</span>
+                        <svg
+                            class="animate-spin h-5 w-5 text-primary"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                        >
+                            <circle
+                                class="opacity-25"
+                                cx="12"
+                                cy="12"
+                                r="10"
+                                stroke="currentColor"
+                                stroke-width="4"
+                            ></circle>
+                            <path
+                                class="opacity-75"
+                                fill="currentColor"
+                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                            ></path>
+                        </svg>
+                    </ng-container>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div
+        class="flex justify-end items-center absolute top-4 left-4 right-4 z-10"
+    >
+        <button
+            (click)="toggleLanguage()"
+            class="text-sm text-gray-700 hover:underline font-ibmPlexSansArabic"
+        >
+            {{ isArabic ? 'English' : 'عربي' }}
+        </button>
+    </div>
+</div>
