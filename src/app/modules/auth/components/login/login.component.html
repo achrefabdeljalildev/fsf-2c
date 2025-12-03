@@ -1,42 +1,17 @@
-<div class="h-screen flex" [dir]="isArabic ? 'rtl' : 'ltr'">
-    <!-- Left side: Image -->
-    <div class="hidden md:block relative h-screen flex-shrink-0">
-        <div
-            class="absolute left-0 right-0 bottom-1/4 flex flex-col items-center"
-        >
-            <span class="text-white text-3xl font-ibmPlexSansArabic">{{
-                'label.externalPortal' | translate
-            }}</span>
-            <span class="text-white text-3xl font-ibmPlexSansArabic">{{
-                'label.electronic' | translate
-            }}</span>
-            <span class="text-white text-3xl font-ibmPlexSansArabic">{{
-                'label.services' | translate
-            }}</span>
-        </div>
-
-        <div class="absolute bottom-4 right-4">
-            <img
-                src="assets/images/logo3.png"
-                alt="Logo"
-                class="h-8"
-                style="height: 80%"
-            />
-        </div>
-
-        <div class="absolute bottom-4 left-4">
-            <img
-                src="assets/images/logo1.png"
-                alt="Logo"
-                class="h-10"
-                style="height: 80%"
-            />
-        </div>
-    </div>
-
+<div
+    class="h-screen flex bg-cover bg-center"
+    style="
+        background-image: url('assets/images/login-background.png');
+        background-size: cover;
+        background-position: center;
+    "
+    [dir]="isArabic ? 'rtl' : 'ltr'"
+>
     <!-- Right side: Login Form -->
-    <div class="w-full w-full flex items-center justify-center bg-white p-8">
-        <div class="max-w-md w-full space-y-6">
+    <div class="w-full flex items-center justify-center p-8">
+        <div
+            class="max-w-md w-full space-y-6 bg-white/90 backdrop-blur-sm p-6 rounded-xl shadow-lg"
+        >
             <div class="flex justify-center">
                 <img
                     src="assets/images/logo.png"
