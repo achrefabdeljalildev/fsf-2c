@@ -5,7 +5,6 @@
         "node": "^20"
     },
     "scripts": {
-        "prepare": "husky",
         "ng": "ng",
         "commit": "npx git-cz",
         "start": "ng serve --open  --proxy-config ./proxy.conf.json",

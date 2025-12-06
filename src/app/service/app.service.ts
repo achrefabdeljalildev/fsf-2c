@@ -6,7 +6,10 @@ import { TranslateService } from '@ngx-translate/core';
 @Injectable()
 export class AppService {
     storeData: any;
-    constructor(public translate: TranslateService, public store: Store<any>) {
+    constructor(
+        public translate: TranslateService,
+        public store: Store<any>,
+    ) {
         this.initStoreData();
     }
 
@@ -67,14 +70,18 @@ export class AppService {
                 code = localStorage.getItem('i18n_locale');
             }
 
-            item = this.storeData.languageList.find((d: any) => d.code === code);
+            item = this.storeData.languageList.find(
+                (d: any) => d.code === code,
+            );
             if (item) {
                 lang = item;
             }
         }
 
         if (!lang) {
-            lang = this.storeData.languageList.find((d: any) => d.code === 'en');
+            lang = this.storeData.languageList.find(
+                (d: any) => d.code === 'en',
+            );
         }
 
         this.translate.use(lang.code); // set language
