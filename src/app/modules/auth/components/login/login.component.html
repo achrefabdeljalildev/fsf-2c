@@ -10,7 +10,7 @@
     <!-- Right side: Login Form -->
     <div class="w-full flex items-center justify-center p-8">
         <div
-            class="max-w-md w-full space-y-6 bg-white/90 backdrop-blur-sm p-6 rounded-xl shadow-lg"
+            class="max-w-md w-full space-y-6 bg-white/80 backdrop-blur-xs p-6 rounded-xl shadow-lg"
         >
             <div class="flex justify-center">
                 <img
@@ -41,7 +41,16 @@
                         {{ messageError | translate }}
                     </span>
                 </div>
+
+                <!-- add input for username -->
                 <div>
+                    <input
+                        id="username"
+                        type="text"
+                        formControlName="username"
+                        class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 font-ibmPlexSansArabic"
+                        [placeholder]="'auth.username' | translate"
+                    />
                     <div
                         *ngIf="
                             username?.invalid &&
@@ -53,17 +62,6 @@
                             {{ 'common.required' | translate }}
                         </span>
                     </div>
-                </div>
-
-                <!-- add input for username -->
-                <div>
-                    <input
-                        id="username"
-                        type="text"
-                        formControlName="username"
-                        class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 font-ibmPlexSansArabic"
-                        [placeholder]="'auth.username' | translate"
-                    />
                 </div>
 
                 <div class="relative mt-1">
@@ -90,12 +88,25 @@
                     />
                 </div>
 
-                <div class="hidden">
+                <div class="flex justify-between">
+                    <!-- checkbox still logged in -->
+                    <label
+                        class="inline-flex gap-2 items-center font-ibmPlexSansArabic"
+                    >
+                        <input
+                            type="checkbox"
+                            formControlName="rememberMe"
+                            class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                        />
+                        <span class="ml-2 text-gray-500">
+                            {{ 'auth.rememberMe' | translate }}
+                        </span>
+                    </label>
                     <a
                         class="text-sm text-gray-500 hover:underline font-ibmPlexSansArabic"
                         routerLink="/auth/forgot-password"
                     >
-                        {{ 'auth.login.label.forgetPassord' | translate }}
+                        {{ 'auth.forgetPassword' | translate }}
                     </a>
                 </div>
 
@@ -108,9 +119,7 @@
                         {{ 'auth.login' | translate }}
                     </ng-container>
                     <ng-container *ngIf="isLoading">
-                        <span class="me-1 ms-1">{{
-                            'auth.login' | translate
-                        }}</span>
+                        <span class="mx-2">{{ 'auth.login' | translate }}</span>
                         <svg
                             class="animate-spin h-5 w-5 text-primary"
                             xmlns="http://www.w3.org/2000/svg"

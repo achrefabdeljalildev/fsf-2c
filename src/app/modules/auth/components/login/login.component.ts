@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
     isArabic: boolean = false;
     loginForm!: FormGroup;
     showPassword: boolean = false;
+
     constructor(
         private translate: TranslateService,
         private router: Router,
@@ -39,6 +40,7 @@ export class LoginComponent implements OnInit {
         this.isArabic = newLang === 'ar';
         this.translate.use(newLang);
         this.appSetting.toggleLanguage(newLang);
+
         if (newLang === 'ar') {
             this.storeData.dispatch({ type: 'toggleRTL', payload: 'rtl' });
             localStorage.setItem('i18n_locale', 'ar');
@@ -49,21 +51,17 @@ export class LoginComponent implements OnInit {
         window.location.reload();
     }
 
-    onSubmit() {
-        if (this.loginForm.invalid) {
-            return;
-        }
-        this.router.navigate(['/auth/verification']);
-    }
-
     submit() {
         this.isLoading = true;
         this.hasError = false;
-    }
 
-    private handleError(status?: string) {
-        this.hasError = true;
-        this.messageError = status === '502' ? 'serverError.serverUnavailable' : 'serverError.unknownError';
+        if (this.loginForm.invalid) {
+            return;
+        }
+        setTimeout(() => {
+            this.isLoading = false;
+            this.router.navigate(['/']);
+        }, 2000);
     }
 
     get username() {
@@ -82,6 +80,7 @@ export class LoginComponent implements OnInit {
         this.loginForm = this.fb.group({
             username: ['', Validators.compose([Validators.required])],
             password: ['', Validators.compose([Validators.required])],
+            rememberMe: [false],
         });
     }
 }

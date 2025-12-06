@@ -18,7 +18,7 @@ export const routes: Routes = [
     //     ],
     // },
     {
-        path: '',
+        path: 'pages',
         component: AuthLayout,
         children: [
             // pages
@@ -36,7 +36,7 @@ export const routes: Routes = [
             import('./modules/auth/auth.module').then((m) => m.AuthModule),
     },
     {
-        path: 'dashboard',
+        path: '',
         component: DashboardComponent,
     },
 ];

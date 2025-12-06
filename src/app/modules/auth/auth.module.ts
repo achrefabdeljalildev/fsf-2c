@@ -33,7 +33,17 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    declarations: [AuthComponent, LoginComponent, VerificationComponent, ForgotPasswordComponent],
-    imports: [CommonModule, SharedModule, RouterModule.forChild(routes), TranslateModule.forChild()],
+    declarations: [
+        AuthComponent,
+        LoginComponent,
+        VerificationComponent,
+        ForgotPasswordComponent,
+    ],
+    imports: [
+        CommonModule,
+        SharedModule,
+        RouterModule.forChild(routes),
+        TranslateModule.forChild(),
+    ],
 })
 export class AuthModule {}
