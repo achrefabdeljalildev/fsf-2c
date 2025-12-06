@@ -6,17 +6,10 @@ import { DashboardComponent } from 'src/app/modules/dashboard/dashboard.componen
 // import { AuthGuard } from './modules/shared/services/auth.guard';
 
 export const routes: Routes = [
-    // {
-    //     path: '',
-    //     component: AppLayout,
-    //     // canActivate: [AuthGuard],
-    //     children: [
-    //         {
-    //             path: 'dashboard',
-    //             component: DashboardComponent,
-    //         },
-    //     ],
-    // },
+    {
+        path: '',
+        component: DashboardComponent,
+    },
     {
         path: 'pages',
         component: AuthLayout,
@@ -36,7 +29,14 @@ export const routes: Routes = [
             import('./modules/auth/auth.module').then((m) => m.AuthModule),
     },
     {
-        path: '',
-        component: DashboardComponent,
+        path: 'services',
+        component: AppLayout,
+        // canActivate: [AuthGuard],
+        children: [
+            {
+                path: '',
+                component: DashboardComponent,
+            },
+        ],
     },
 ];

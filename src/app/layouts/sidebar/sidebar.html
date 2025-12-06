@@ -2,64 +2,64 @@
     <nav
         class="sidebar flex flex-col fixed h-[calc(100vh-50px)] lg:h-[calc(100vh-110px)] bottom-0 top-0 lg:top-[59px] m-6 z-50 w-[292px] transition-all duration-300"
     >
-        <div class="flex flex-col h-full justify-between">
-            <div class="flex flex-col flex-1 rounded-2.5 pb-6 border border-[#C3CAD980] bg-white dark:bg-[#0e1726] overflow-y-auto">
+        <div class="flex flex-col h-full justify-between gap-4">
+            <div
+                class="flex flex-col flex-1 rounded-2.5 pb-6 border border-[#C3CAD980] bg-white dark:bg-[#0e1726] overflow-y-auto"
+            >
                 <div class="flex flex-col p-4">
                     <div class="menu-actions flex items-center justify-between">
-                        <a class="flex items-center justify-center cursor-pointer size-10 bg-primary rounded-full shadow-action-shadow" (click)="logout()">
-                            <icon-logout class="text-white rotate-90 h-6 w-6" />
+                        <a
+                            class="flex items-center justify-center cursor-pointer size-10 bg-primary rounded-full shadow-action-shadow"
+                            (click)="logout()"
+                        >
+                            <i class="pi pi-sign-out text-white"></i>
                         </a>
                         <a
                             [routerLink]="['/profile']"
                             class="flex items-center justify-center cursor-pointer size-10 bg-primary rounded-full shadow-action-shadow"
                         >
-                            <icon-user class="text-white h-6 w-6" />
+                            <i class="pi pi-user text-white"></i>
                         </a>
                     </div>
                     <div class="relative flex justify-center items-center">
                         <!-- User Info -->
-                        <!-- <div class="user-image rounded-full size-[130px] border-2 border-primary-light p-0.5 relative">
-                            <ng-container *ngIf="userAccount">
-                                <app-profile-pic [fileId]="userAccount.profilePicture" [fullName]="userAccount.fullName || 'Guest User'" [isSidebar]="true" />
-                            </ng-container>
-                        </div> -->
+                        <div
+                            class="user-image rounded-full size-[130px] border-2 border-primary-light p-0.5 relative"
+                        >
+                            <img
+                                src="assets/images/avatar-user.png"
+                                alt="Logo"
+                            />
+                        </div>
                     </div>
 
                     <div class="user-text text-center mt-[14px]">
-                        <h4 class="text-xl font-medium text-secondary dark:text-white-dark">{{'app.sidebar.hello' | translate }} Test User</h4>
-                        <h4 class="text-md font-medium text-secondary dark:text-white-dark">Test user</h4>
+                        <h4 class="text-xl font-medium text-secondary">
+                            {{'فهد محمد عبد الله' | translate }}
+                        </h4>
+                        <h3 class="font-medium text-secondary">
+                            {{'مختص الاجازات' | translate }}
+                        </h3>
                     </div>
                 </div>
-                <ng-scrollbar class="relative flex-1 py-5 bg-white dark:bg-[#0e1726]" appearance="compact">
-                    <ul
-                        class="relative grid grid-cols-2 gap-0 mx-6 font-semibold justify-items-center rounded-2.5 overflow-hidden border-2 border-[#1B83541A] dark:border-[#17263c]"
-                    >
-                        <li
-                            *ngFor="let item of sidebarItems"
-                            (click)="navigateTo(item.routerLink)"
-                            class="flex justify-center items-center size-[120px] bg-white dark:bg-[#0e1726] border-b-2 border-r-2 rtl:border-l-2 rtl:border-r-0 border-menuBorder dark:border-[#17263c] hover:cursor-pointer"
-                        >
-                            <a class="nav-link group w-full h-full flex gap-2 flex-col justify-center items-center  hover:text-white {{isActive(item)}}">
-                                <div class="relative flex flex-col items-center justify-center gap-2">
-                                    <div
-                                        *ngIf="item.count"
-                                        class="absolute -top-2 ltr:-right-1 rtl:-left-1 size-6 bg-gold rounded-full font-black text-xs text-white flex items-center justify-center"
-                                    >
-                                        {{ item.count}}
-                                    </div>
-                                    <i [ngClass]="item.icon" class="text-3xl !text-greenText before:!text-greenText"></i>
-                                    <span class="font-bold"> {{ item.label | translate }} </span>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </ng-scrollbar>
             </div>
-            <div class="team p-3.5 rounded-2.5 bg-white dark:bg-[#0e1726] border border-[#C3CAD980] mt-4">
-                <a routerLink="team/list" class="flex justify-between items-center">
-                    <h4 class="text-lg text-primary font-bold">{{'app.sidebar.team' | translate }}</h4>
-                    <icon-users-group class="size-8"></icon-users-group>
-                    <div class="hidden -space-x-3 rtl:space-x-reverse">
+            <div
+                class="flex flex-col flex-1 rounded-2.5 pb-6 border border-[#C3CAD980] bg-white dark:bg-[#0e1726] overflow-y-auto"
+            >
+                <p-tree [value]="files" />
+            </div>
+            <div
+                class="team p-3.5 rounded-2.5 bg-white dark:bg-[#0e1726] border border-[#C3CAD980]"
+            >
+                <a
+                    routerLink="team/list"
+                    class="flex justify-between items-center"
+                >
+                    <h4 class="text-lg text-primary font-bold">
+                        {{'الفريق' | translate }}
+                    </h4>
+                    <i class="pi pi-users"></i>
+                    <div class="-space-x-6 flex">
                         <img
                             class="size-9 rounded-full object-cover ring-2 ring-white dark:ring-white-dark relative transition-all duration-300 hover:translate-x-1"
                             src="../../assets/images/team1.png"
@@ -78,11 +78,6 @@
                         <img
                             class="size-9 rounded-full object-cover ring-2 ring-white dark:ring-white-dark relative transition-all duration-300 hover:translate-x-1"
                             src="../../assets/images/team1.png"
-                            alt="Member 1"
-                        />
-                        <img
-                            class="size-9 rounded-full object-cover ring-2 ring-white dark:ring-white-dark relative transition-all duration-300 hover:translate-x-1"
-                            src="../../assets/images/team3.png"
                             alt="Member 1"
                         />
 

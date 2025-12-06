@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { slideDownUp } from '../../shared/animations';
+import { TreeNode } from 'primeng/api';
 
 interface SidebarItem {
     count?: number;
@@ -95,6 +96,125 @@ export class SidebarComponent implements OnDestroy {
         // },
     ];
 
+    files: TreeNode[] = [
+        {
+            key: '0',
+            label: 'الوثائق',
+            data: 'Documents Folder',
+            icon: 'pi pi-fw pi-inbox',
+            children: [
+                {
+                    key: '0-0',
+                    label: 'العمل',
+                    data: 'Work Folder',
+                    icon: 'pi pi-fw pi-cog',
+                    children: [
+                        {
+                            key: '0-0-0',
+                            label: 'مصروفات.doc',
+                            icon: 'pi pi-fw pi-file',
+                            data: 'Expenses Document',
+                        },
+                        {
+                            key: '0-0-1',
+                            label: 'السيرة الذاتية.doc',
+                            icon: 'pi pi-fw pi-file',
+                            data: 'Resume Document',
+                        },
+                    ],
+                },
+                {
+                    key: '0-1',
+                    label: 'المنزل',
+                    data: 'Home Folder',
+                    icon: 'pi pi-fw pi-home',
+                    children: [
+                        {
+                            key: '0-1-0',
+                            label: 'فواتير.txt',
+                            icon: 'pi pi-fw pi-file',
+                            data: 'Invoices for this month',
+                        },
+                    ],
+                },
+            ],
+        },
+        {
+            key: '1',
+            label: 'الفعاليات',
+            data: 'Events Folder',
+            icon: 'pi pi-fw pi-calendar',
+            children: [
+                {
+                    key: '1-0',
+                    label: 'اجتماع',
+                    icon: 'pi pi-fw pi-calendar-plus',
+                    data: 'Meeting',
+                },
+                {
+                    key: '1-1',
+                    label: 'إطلاق المنتج',
+                    icon: 'pi pi-fw pi-calendar-plus',
+                    data: 'Product Launch',
+                },
+                {
+                    key: '1-2',
+                    label: 'مراجعة التقرير',
+                    icon: 'pi pi-fw pi-calendar-plus',
+                    data: 'Report Review',
+                },
+            ],
+        },
+        {
+            key: '2',
+            label: 'الأفلام',
+            data: 'Movies Folder',
+            icon: 'pi pi-fw pi-star-fill',
+            children: [
+                {
+                    key: '2-0',
+                    icon: 'pi pi-fw pi-star-fill',
+                    label: 'آل باتشينو',
+                    data: 'Pacino Movies',
+                    children: [
+                        {
+                            key: '2-0-0',
+                            label: 'الوجه ذو الندبة (Scarface)',
+                            icon: 'pi pi-fw pi-video',
+                            data: 'Scarface Movie',
+                        },
+                        {
+                            key: '2-0-1',
+                            label: 'سيربيكو (Serpico)',
+                            icon: 'pi pi-fw pi-video',
+                            data: 'Serpico Movie',
+                        },
+                    ],
+                },
+                {
+                    key: '2-1',
+                    label: 'روبرت دي نيرو',
+                    icon: 'pi pi-fw pi-star-fill',
+                    data: 'De Niro Movies',
+                    children: [
+                        {
+                            key: '2-1-0',
+                            label: 'الإخوة الطيبون (Goodfellas)',
+                            icon: 'pi pi-fw pi-video',
+                            data: 'Goodfellas Movie',
+                        },
+                        {
+                            key: '2-1-1',
+                            label: 'غير القابلين للمساس (Untouchables)',
+                            icon: 'pi pi-fw pi-video',
+                            data: 'Untouchables Movie',
+                        },
+                    ],
+                },
+            ],
+        },
+    ];
+
     loading = false;
     private subscription: Subscription = new Subscription();
 
@@ -115,7 +235,9 @@ export class SidebarComponent implements OnDestroy {
         this.storeData
             .select((d) => d.index)
             .subscribe((d) => {
-                let index = this.sidebarItems.findIndex((e) => e.label === 'app.sidebar.approvalCenter');
+                let index = this.sidebarItems.findIndex(
+                    (e) => e.label === 'app.sidebar.approvalCenter',
+                );
                 this.sidebarItems[index].count = d.totalAwaitingApproval;
                 this.store = d;
             });
@@ -124,12 +246,15 @@ export class SidebarComponent implements OnDestroy {
     ngOnInit(): void {}
 
     setActiveDropdown() {
-        const selector = document.querySelector('.sidebar ul a[routerLink="' + window.location.pathname + '"]');
+        const selector = document.querySelector(
+            '.sidebar ul a[routerLink="' + window.location.pathname + '"]',
+        );
         if (selector) {
             selector.classList.add('active');
             const ul: any = selector.closest('ul.sub-menu');
             if (ul) {
-                let ele: any = ul.closest('li.menu').querySelectorAll('.nav-link') || [];
+                let ele: any =
+                    ul.closest('li.menu').querySelectorAll('.nav-link') || [];
                 if (ele.length) {
                     ele = ele[0];
                     setTimeout(() => {
@@ -158,7 +283,10 @@ export class SidebarComponent implements OnDestroy {
         }
     }
 
-    logout() {}
+    logout() {
+        // navigate to logout route
+        this.router.navigate(['/auth/login']);
+    }
     setActiveItem(item: string): void {
         this.activeItem = item;
     }
@@ -171,10 +299,13 @@ export class SidebarComponent implements OnDestroy {
         const url = this.router.url;
 
         // Special case for approval center
-        const isApprovalCenter = url.includes('approvalCenter=true') && url.startsWith('/services');
+        const isApprovalCenter =
+            url.includes('approvalCenter=true') && url.startsWith('/services');
 
         if (isApprovalCenter) {
-            return item.routerLink === '/approval-center' ? 'active text-white' : '';
+            return item.routerLink === '/approval-center'
+                ? 'active text-white'
+                : '';
         }
 
         // normal case for other items

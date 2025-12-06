@@ -17,6 +17,7 @@ import {
 } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { AppConfigModule } from './app-config.module';
 
 //Routes
 import { routes } from './app.route';
@@ -53,6 +54,9 @@ import { ThemeCustomizerComponent } from './layouts/theme-customizer';
 import { InterceptService } from './modules/shared/services/intercept.service';
 import { DashboardComponent } from 'src/app/modules/dashboard/dashboard.component';
 
+// primeng components
+import { Tree } from 'primeng/tree';
+
 // AOT compilation support
 export function HttpLoaderFactory(
     httpHandler: HttpBackend,
@@ -65,6 +69,7 @@ export function HttpLoaderFactory(
         RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' }),
         BrowserModule,
         BrowserAnimationsModule,
+        AppConfigModule,
         CommonModule,
         ToastModule,
         FormsModule,
@@ -78,6 +83,7 @@ export function HttpLoaderFactory(
         }),
         StoreModule.forRoot({ index: indexReducer }),
         SharedModule.forRoot(),
+        Tree,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     declarations: [
