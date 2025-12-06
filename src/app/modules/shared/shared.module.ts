@@ -13,10 +13,6 @@ import { TranslateModule } from '@ngx-translate/core';
 // perfect-scrollbar
 import { provideScrollbarOptions } from 'ngx-scrollbar';
 
-// headlessui
-import { MenuModule as HeadlessUIMenuModule } from 'headlessui-angular';
-
-import { MenuModule } from 'primeng/menu';
 // datatable
 import { DataTableModule } from '@bhplugin/ng-datatable';
 
@@ -43,8 +39,6 @@ import { PdfViewerComponent } from 'src/app/modules/shared/components/pdf-viewer
         ReactiveFormsModule,
         RouterModule,
         TranslateModule.forChild(),
-        MenuModule,
-        HeadlessUIMenuModule,
         DataTableModule,
         ConfirmDialogModule,
         FlatpickrModule.forRoot(),
@@ -77,8 +71,6 @@ import { PdfViewerComponent } from 'src/app/modules/shared/components/pdf-viewer
         FormsModule,
         ReactiveFormsModule,
         TranslateModule,
-        MenuModule,
-        HeadlessUIMenuModule,
         DataTableModule,
         FlatpickrModule,
         NgxCustomModalComponent,

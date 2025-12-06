@@ -3,11 +3,6 @@
 /* full calendar */
 @import 'fullcalendar.css';
 
-/* quill editor */
-@import 'quill-editor.css';
-
-@import 'primeicons/primeicons.css';
-
 /* Swiper */
 @import 'swiper.css';
 /* modal popup */
@@ -20,6 +15,7 @@
 @import 'dragndrop.css';
 /* modal popup */
 @import 'modal.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -28,7 +24,7 @@
 
 @layer components {
     * {
-        font-family: 'IBM Plex Sans Arabic', sans-serif !important;
+        /* font-family: 'IBM Plex Sans Arabic', sans-serif !important; */
     }
     html {
         @apply scroll-smooth;
