@@ -44,7 +44,10 @@ export function indexReducer(state = initialState, action: any) {
         } else if (payload == 'dark') {
             isDarkMode = true;
         } else if (payload == 'system') {
-            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            if (
+                window.matchMedia &&
+                window.matchMedia('(prefers-color-scheme: dark)').matches
+            ) {
                 isDarkMode = true;
             } else {
                 isDarkMode = false;

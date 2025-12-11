@@ -58,4 +58,23 @@ export class DashboardComponent extends BaseComponent {
             icon: 'assets/icons/general_settings.svg',
         },
     ];
+
+    constructor() {
+        super();
+
+        this.breadcrumbService.set([
+            {
+                label: this.translateService.instant('dashboard'),
+                route: '/',
+            },
+            {
+                label: this.translateService.instant('dashboard'),
+                route: '/',
+            },
+            {
+                label: this.translateService.instant('dashboard'),
+                route: '/',
+            },
+        ]);
+    }
 }

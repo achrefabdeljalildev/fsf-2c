@@ -5,6 +5,7 @@ import { inject } from '@angular/core';
 import { Location } from '@angular/common';
 import { ModalService } from '../../modals/modal.service';
 import { ToasterService } from 'src/app/modules/shared/services/toaster.service';
+import { BreadcrumbService } from 'src/app/modules/shared/components/mui-breadcrumb/breadcrumb.service';
 
 export abstract class BaseComponent {
     protected translateService: TranslateService;
@@ -14,6 +15,7 @@ export abstract class BaseComponent {
     protected location: Location;
     protected modalService: ModalService;
     protected toasterService: ToasterService;
+    protected breadcrumbService: BreadcrumbService;
 
     constructor() {
         this.translateService = inject(TranslateService);
@@ -23,6 +25,7 @@ export abstract class BaseComponent {
         this.location = inject(Location);
         this.modalService = inject(ModalService);
         this.toasterService = inject(ToasterService);
+        this.breadcrumbService = inject(BreadcrumbService);
     }
 
     // -----------------------
