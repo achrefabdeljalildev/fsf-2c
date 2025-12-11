@@ -1,20 +1,18 @@
 import { Component } from '@angular/core';
+import { BreadcrumbService } from 'src/app/modules/shared/components/mui-breadcrumb/breadcrumb.service';
 
 @Component({
     template: ` <div>
-        <ul class="flex space-x-2 rtl:space-x-reverse">
-            <li>
-                <a href="javascript:;" class="text-primary hover:underline"
-                    >الصفحات</a
-                >
-            </li>
-            <li class="before:content-['/'] ltr:before:mr-2 rtl:before:ml-2">
-                <span>صفحة تجريبية</span>
-            </li>
-        </ul>
-        <div class="panel mt-5 h-[calc(100vh-190px)]">
+        <div class="panel h-[calc(100vh-190px)]">
             <h1>صفحة تجريبية</h1>
         </div>
     </div>`,
 })
-export class SampleComponent {}
+export class SampleComponent {
+    constructor(private breadcrumbService: BreadcrumbService) {
+        this.breadcrumbService.setItems([
+            { label: 'الصفحة الرئيسية', route: '/' },
+            { label: 'صفحة تجريبية', route: '/services' },
+        ]);
+    }
+}

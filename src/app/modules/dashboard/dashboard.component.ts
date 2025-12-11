@@ -62,7 +62,7 @@ export class DashboardComponent extends BaseComponent {
     constructor() {
         super();
 
-        this.breadcrumbService.set([
+        this.breadcrumbService.setItems([
             {
                 label: this.translateService.instant('dashboard'),
                 route: '/',

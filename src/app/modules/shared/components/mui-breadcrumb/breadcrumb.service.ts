@@ -16,7 +16,7 @@ export class BreadcrumbService {
     // Expose as readonly observable
     readonly items$: Observable<BreadcrumbItem[]> = this._items$.asObservable();
 
-    set(items: BreadcrumbItem[]): void {
+    setItems(items: BreadcrumbItem[]): void {
         this._items$.next(items);
     }
 

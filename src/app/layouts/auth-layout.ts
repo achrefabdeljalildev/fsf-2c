@@ -9,14 +9,22 @@ import { AppService } from '../service/app.service';
 export class AuthLayout {
     store: any;
     showTopButton = false;
-    constructor(public storeData: Store<any>, private service: AppService) {
+    headerClass = '';
+
+    constructor(
+        public storeData: Store<any>,
+        private service: AppService,
+    ) {
         this.initStore();
     }
-    headerClass = '';
+
     ngOnInit() {
         this.toggleLoader();
         window.addEventListener('scroll', () => {
-            if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+            if (
+                document.body.scrollTop > 50 ||
+                document.documentElement.scrollTop > 50
+            ) {
                 this.showTopButton = true;
             } else {
                 this.showTopButton = false;
@@ -27,7 +35,10 @@ export class AuthLayout {
     toggleLoader() {
         this.storeData.dispatch({ type: 'toggleMainLoader', payload: true });
         setTimeout(() => {
-            this.storeData.dispatch({ type: 'toggleMainLoader', payload: false });
+            this.storeData.dispatch({
+                type: 'toggleMainLoader',
+                payload: false,
+            });
         }, 500);
     }
 

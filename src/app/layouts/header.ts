@@ -1,4 +1,4 @@
-﻿import { Component, OnDestroy, OnInit } from '@angular/core';
+﻿import { Component, Input, input, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { toggleAnimation } from 'src/app/shared/animations';
@@ -16,6 +16,8 @@ export class HeaderComponent
     extends BaseComponent
     implements OnInit, OnDestroy
 {
+    @Input() hasBreadcrumb: boolean = false;
+
     store: any;
     search = false;
     showDecisionPopup = false;

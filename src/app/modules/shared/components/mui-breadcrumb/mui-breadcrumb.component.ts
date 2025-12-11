@@ -8,13 +8,13 @@ import {
 @Component({
     selector: 'mui-breadcrumb',
     template: `
-        <ol class="breadcrumb flex flex-wrap text-sm md:text-base my-2">
+        <ol class="breadcrumb flex flex-wrap text-sm md:text-base p-4">
             <ng-container *ngFor="let item of items$ | async; let last = last">
                 <li class="flex items-center">
                     <ng-container *ngIf="!last; else plainText">
                         <a
                             [routerLink]="item.route"
-                            class="text-primary hover:underline font-bold"
+                            class="text-primary hover:underline font-regular"
                         >
                             {{ item.label | translate }}
                         </a>
@@ -37,7 +37,7 @@ import {
 export class MuiBreadcrumbComponent {
     items$: Observable<BreadcrumbItem[]> = this.breadcrumbService.items$;
 
-    @Input() separator: string = '/';
+    @Input() separator: string = '>';
 
     constructor(private breadcrumbService: BreadcrumbService) {}
 }

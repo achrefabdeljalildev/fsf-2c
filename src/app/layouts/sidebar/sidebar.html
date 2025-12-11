@@ -1,6 +1,6 @@
 ﻿<div [ngClass]="{ 'dark text-white-dark': store.semidark }">
     <nav
-        class="sidebar flex flex-col fixed h-[calc(100vh-50px)] lg:h-[calc(100vh-110px)] bottom-0 top-0 lg:top-[59px] m-6 z-50 w-[292px] transition-all duration-300"
+        class="sidebar flex flex-col fixed h-[calc(100vh-50px)] lg:h-[calc(100vh-110px)] bottom-0 top-0 lg:top-[110px] m-6 z-50 w-[292px] transition-all duration-300"
     >
         <div class="flex flex-col h-full justify-between gap-4">
             <div
@@ -47,46 +47,6 @@
                 class="flex flex-col flex-1 rounded-2.5 pb-6 border border-[#C3CAD980] bg-white dark:bg-[#0e1726] overflow-y-auto"
             >
                 <p-tree [value]="files" />
-            </div>
-            <div
-                class="team p-3.5 rounded-2.5 bg-white dark:bg-[#0e1726] border border-[#C3CAD980]"
-            >
-                <a
-                    routerLink="team/list"
-                    class="flex justify-between items-center"
-                >
-                    <h4 class="text-lg text-primary font-bold">
-                        {{'الفريق' | translate }}
-                    </h4>
-                    <i class="pi pi-users"></i>
-                    <div class="-space-x-6 flex">
-                        <img
-                            class="size-9 rounded-full object-cover ring-2 ring-white dark:ring-white-dark relative transition-all duration-300 hover:translate-x-1"
-                            src="../../assets/images/team1.png"
-                            alt="Member 1"
-                        />
-                        <img
-                            class="size-9 rounded-full object-cover ring-2 ring-white dark:ring-white-dark relative transition-all duration-300 hover:translate-x-1"
-                            src="../../assets/images/team2.png"
-                            alt="Member 1"
-                        />
-                        <img
-                            class="size-9 rounded-full object-cover ring-2 ring-white dark:ring-white-dark relative transition-all duration-300 hover:translate-x-1"
-                            src="../../assets/images/team3.png"
-                            alt="Member 1"
-                        />
-                        <img
-                            class="size-9 rounded-full object-cover ring-2 ring-white dark:ring-white-dark relative transition-all duration-300 hover:translate-x-1"
-                            src="../../assets/images/team1.png"
-                            alt="Member 1"
-                        />
-
-                        <span
-                            class="flex justify-center items-center size-9 text-center rounded-full object-cover bg-primary text-white text-base ring-2 ring-white dark:ring-white-dark relative transition-all duration-300 hover:translate-x-1"
-                            >+9</span
-                        >
-                    </div>
-                </a>
             </div>
         </div>
     </nav>
