@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { inject } from '@angular/core';
 import { Location } from '@angular/common';
 import { ModalService } from '../../modals/modal.service';
+import { ToasterService } from 'src/app/modules/shared/services/toaster.service';
 
 export abstract class BaseComponent {
     protected translateService: TranslateService;
@@ -12,6 +13,7 @@ export abstract class BaseComponent {
     protected formBuilder: FormBuilder;
     protected location: Location;
     protected modalService: ModalService;
+    protected toasterService: ToasterService;
 
     constructor() {
         this.translateService = inject(TranslateService);
@@ -20,18 +22,26 @@ export abstract class BaseComponent {
         this.formBuilder = inject(FormBuilder);
         this.location = inject(Location);
         this.modalService = inject(ModalService);
+        this.toasterService = inject(ToasterService);
+    }
+
+    // -----------------------
+    // Message utilities
+    // -----------------------
+    protected showMessage(message: string, title: string = 'success'): void {
+        this.toasterService.showMessage(message, title);
+    }
+
+    protected showSuccessMessage(message: string): void {
+        this.toasterService.showSuccessMessage(message);
+    }
+
+    protected showErrorMessage(message: string, title = 'error'): void {
+        this.toasterService.showErrorMessage(message);
     }
 
     protected navigateTo(url: string): void {
         this.router.navigate([url]);
-    }
-
-    protected translate(key: string): string {
-        return this.translateService.instant(key);
-    }
-
-    protected isArabeMode(): boolean {
-        return this.translateService.currentLang === 'ar';
     }
 
     protected isActiveLink(route: string) {
@@ -50,11 +60,31 @@ export abstract class BaseComponent {
         this.router.navigate([url], { queryParams: params });
     }
 
-    protected getTranslatedEnum(enumListName: string): { value: string; label: string }[] {
-        const translatedObj = this.translateService.instant(enumListName) as Record<string, string>;
+    protected getTranslatedEnum(
+        enumListName: string,
+    ): { value: string; label: string }[] {
+        const translatedObj = this.translateService.instant(
+            enumListName,
+        ) as Record<string, string>;
         return Object.keys(translatedObj).map((key) => ({
             value: key,
             label: translatedObj[key],
         }));
+    }
+
+    protected translate(key: string): string {
+        return this.translateService.instant(key);
+    }
+
+    protected isArabeMode(): boolean {
+        return this.translateService.currentLang === 'ar';
+    }
+
+    toggleLanguage() {
+        const newLang = this.isArabeMode() ? 'en' : 'ar';
+        this.translateService.use(newLang);
+        localStorage.setItem('i18n_locale', newLang);
+
+        window.location.reload();
     }
 }

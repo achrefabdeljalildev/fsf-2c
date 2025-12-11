@@ -33,32 +33,23 @@
                 (ngSubmit)="submit()"
                 class="space-y-4"
             >
-                <div
-                    class="text-red-500 text-sm mt-1"
-                    style="min-height: 1.5rem"
-                >
-                    <span *ngIf="hasError == true">
-                        {{ messageError | translate }}
-                    </span>
-                </div>
-
                 <!-- add input for username -->
                 <div>
                     <input
-                        id="username"
+                        id="emailOrPhone"
                         type="text"
-                        formControlName="username"
+                        formControlName="emailOrPhone"
                         class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 font-ibmPlexSansArabic"
                         [placeholder]="'auth.username' | translate"
                     />
                     <div
                         *ngIf="
-                            username?.invalid &&
-                            (username?.dirty || username?.touched)
+                            emailOrPhone?.invalid &&
+                            (emailOrPhone?.dirty || emailOrPhone?.touched)
                         "
                         class="text-red-500 text-sm mt-1"
                     >
-                        <span *ngIf="username?.errors?.['required']">
+                        <span *ngIf="emailOrPhone?.errors?.['required']">
                             {{ 'common.required' | translate }}
                         </span>
                     </div>
@@ -90,7 +81,7 @@
 
                 <div class="flex justify-between">
                     <!-- checkbox still logged in -->
-                    <label
+                    <!-- <label
                         class="inline-flex gap-2 items-center font-ibmPlexSansArabic"
                     >
                         <input
@@ -107,7 +98,7 @@
                         routerLink="/auth/forgot-password"
                     >
                         {{ 'auth.forgetPassword' | translate }}
-                    </a>
+                    </a> -->
                 </div>
 
                 <button

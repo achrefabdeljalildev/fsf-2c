@@ -1,17 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { TranslateService } from '@ngx-translate/core';
-import { AppService } from '../../../../service/app.service';
+import { AuthService } from 'src/app/modules/auth/services/auth.service';
+import { BaseComponent } from 'src/app/modules/shared/components/base-component/base-component';
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent extends BaseComponent implements OnInit {
     hasError: boolean = false;
-    messageError: string = '';
     returnUrl: string = '';
     isLoading: boolean = false;
 
@@ -20,13 +17,11 @@ export class LoginComponent implements OnInit {
     showPassword: boolean = false;
 
     constructor(
-        private translate: TranslateService,
-        private router: Router,
         private fb: FormBuilder,
-        private appSetting: AppService,
-        public storeData: Store<any>,
+        private authService: AuthService,
     ) {
-        const currentLang = this.translate.currentLang || 'en';
+        super();
+        const currentLang = this.translateService.currentLang || 'en';
         this.isArabic = currentLang === 'ar';
     }
 
@@ -34,38 +29,30 @@ export class LoginComponent implements OnInit {
         this.initForm();
     }
 
-    toggleLanguage() {
-        const newLang = this.isArabic ? 'en' : 'ar';
-        this.translate.use(newLang);
-        this.isArabic = newLang === 'ar';
-        this.translate.use(newLang);
-        this.appSetting.toggleLanguage(newLang);
-
-        if (newLang === 'ar') {
-            this.storeData.dispatch({ type: 'toggleRTL', payload: 'rtl' });
-            localStorage.setItem('i18n_locale', 'ar');
-        } else {
-            this.storeData.dispatch({ type: 'toggleRTL', payload: 'ltr' });
-            localStorage.setItem('i18n_locale', 'en');
-        }
-        window.location.reload();
-    }
-
     submit() {
         this.isLoading = true;
         this.hasError = false;
 
         if (this.loginForm.invalid) {
+            this.isLoading = false;
             return;
         }
-        setTimeout(() => {
-            this.isLoading = false;
-            this.router.navigate(['/']);
-        }, 2000);
+
+        this.authService.login(this.loginForm.value).subscribe({
+            next: (response) => {
+                this.isLoading = false;
+                this.router.navigate(['/']);
+            },
+            error: (error: any) => {
+                this.isLoading = false;
+                this.hasError = true;
+                this.showErrorMessage('invalid_login_credentials');
+            },
+        });
     }
 
-    get username() {
-        return this.loginForm.get('username');
+    get emailOrPhone() {
+        return this.loginForm.get('emailOrPhone');
     }
 
     togglePasswordVisibility() {
@@ -78,9 +65,9 @@ export class LoginComponent implements OnInit {
 
     initForm() {
         this.loginForm = this.fb.group({
-            username: ['', Validators.compose([Validators.required])],
+            emailOrPhone: ['', Validators.compose([Validators.required])],
             password: ['', Validators.compose([Validators.required])],
-            rememberMe: [false],
+            // rememberMe: [false],
         });
     }
 }

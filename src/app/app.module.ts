@@ -51,11 +51,11 @@ import { FooterComponent } from './layouts/footer';
 import { HeaderComponent } from './layouts/header';
 import { SidebarComponent } from './layouts/sidebar/sidebar';
 import { ThemeCustomizerComponent } from './layouts/theme-customizer';
-import { InterceptService } from './modules/shared/services/intercept.service';
 import { DashboardComponent } from 'src/app/modules/dashboard/dashboard.component';
 
 // primeng components
 import { Tree } from 'primeng/tree';
+import { BaseUrlInterceptor } from 'src/app/modules/shared/services/base-url-intercept.service';
 
 // AOT compilation support
 export function HttpLoaderFactory(
@@ -99,7 +99,11 @@ export function HttpLoaderFactory(
     ],
     providers: [
         Title,
-        { provide: HTTP_INTERCEPTORS, useClass: InterceptService, multi: true },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: BaseUrlInterceptor,
+            multi: true,
+        },
         MessageService,
         {
             provide: LOCALE_ID,

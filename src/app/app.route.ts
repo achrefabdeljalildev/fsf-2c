@@ -4,11 +4,13 @@ import { AppLayout } from './layouts/app-layout';
 import { AuthLayout } from './layouts/auth-layout';
 import { DashboardComponent } from 'src/app/modules/dashboard/dashboard.component';
 import { SampleComponent } from 'src/app/sample.component';
+import { AuthGuard } from 'src/app/modules/shared/services/guard.service';
 
 export const routes: Routes = [
     {
         path: '',
         component: DashboardComponent,
+        canActivate: [AuthGuard],
     },
     {
         path: 'pages',
@@ -21,7 +23,7 @@ export const routes: Routes = [
                     import('./pages/pages.module').then((d) => d.PagesModule),
             },
         ],
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
     },
     {
         path: 'auth',
@@ -31,7 +33,7 @@ export const routes: Routes = [
     {
         path: 'services',
         component: AppLayout,
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
         children: [
             {
                 path: '',

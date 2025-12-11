@@ -1,6 +1,8 @@
 {
-    "**/api/**": {
+    "/api": {
         "target": "http://securityopearation.runasp.net/",
-        "secure": false
+        "secure": false,
+        "changeOrigin": true,
+        "logLevel": "debug"
     }
 }

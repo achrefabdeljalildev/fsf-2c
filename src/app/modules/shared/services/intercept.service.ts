@@ -10,52 +10,34 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, filter, switchMap, take } from 'rxjs/operators';
 import { environment } from '../../../../environments/environment';
-import { AuthModel } from '../models/auth.model';
+import { AuthService } from '../../../modules/auth/services/auth.service';
 
 @Injectable()
 export class InterceptService implements HttpInterceptor {
-    private authLocalStorageToken = environment.USERDATA_KEY;
+    private readonly TOKEN_KEY = environment.USERDATA_KEY || 'authToken';
     private isRefreshing = false;
-    private refreshTokenSubject: BehaviorSubject<any> =
-        new BehaviorSubject<any>(null);
+    private refreshTokenSubject: BehaviorSubject<string | null> =
+        new BehaviorSubject<string | null>(null);
 
-    constructor(private router: Router) {}
-
-    private getAuthFromLocalStorage(): AuthModel | undefined {
-        try {
-            const lsValue = localStorage.getItem(this.authLocalStorageToken);
-            if (!lsValue) {
-                return undefined;
-            }
-            const authData = JSON.parse(lsValue);
-            return authData;
-        } catch (error) {
-            console.error(error);
-            return undefined;
-        }
-    }
-
-    private saveAuthToLocalStorage(auth: AuthModel): void {
-        localStorage.setItem(this.authLocalStorageToken, JSON.stringify(auth));
-    }
+    constructor(
+        private router: Router,
+        private authService: AuthService,
+    ) {}
 
     intercept(
         request: HttpRequest<any>,
         next: HttpHandler,
     ): Observable<HttpEvent<any>> {
-        const auth = this.getAuthFromLocalStorage();
-        if (auth) {
-            request = this.addTokenHeader(request, auth.accessToken);
-        } else {
-            console.error('Error token not found !!!', auth);
+        const token = this.getTokenFromLocalStorage();
+        if (token) {
+            request = this.addTokenHeader(request, token);
         }
 
         return next.handle(request).pipe(
             catchError((error: HttpErrorResponse) => {
                 if (
                     error.status === 401 &&
-                    auth &&
-                    !request.url.includes('/refreshtoken')
+                    !request.url.includes('/Authentication/Refresh')
                 ) {
                     return this.handle401Error(request, next);
                 }
@@ -72,40 +54,47 @@ export class InterceptService implements HttpInterceptor {
         });
     }
 
-    private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
-        // if (!this.isRefreshing) {
-        //     this.isRefreshing = true;
-        //     this.refreshTokenSubject.next(null);
+    private handle401Error(
+        request: HttpRequest<any>,
+        next: HttpHandler,
+    ): Observable<HttpEvent<any>> {
+        if (!this.isRefreshing) {
+            this.isRefreshing = true;
+            this.refreshTokenSubject.next(null);
 
-        //     const auth = this.getAuthFromLocalStorage();
-        //     if (auth?.refreshToken) {
-        //         return this.authHttpService.refreshToken(auth.tokenId, auth.refreshToken).pipe(
-        //             switchMap((tokenData: any) => {
-        //                 const updatedAuth: AuthModel = { ...auth, tokenId: tokenData.token };
-        //                 this.saveAuthToLocalStorage(updatedAuth);
-
-        //                 this.refreshTokenSubject.next(tokenData.token);
-        //                 this.isRefreshing = false;
-
-        //                 return next.handle(this.addTokenHeader(request, tokenData.token));
-        //             }),
-        //             catchError((err) => {
-        //                 this.isRefreshing = false;
-        //                 console.error(err);
-        //                 localStorage.removeItem(this.authLocalStorageToken);
-        //                 if (err.url.includes('Administration/api/Account/refreshtoken')) {
-        //                     this.router.navigate(['/auth/login']);
-        //                 }
-        //                 return throwError(() => err);
-        //             }),
-        //         );
-        //     }
-        // }
+            return this.authService.refreshToken().pipe(
+                switchMap((response) => {
+                    this.isRefreshing = false;
+                    this.refreshTokenSubject.next(response.accessToken);
+                    return next.handle(
+                        this.addTokenHeader(request, response.accessToken),
+                    );
+                }),
+                catchError((error) => {
+                    this.isRefreshing = false;
+                    console.error('Token refresh failed:', error);
+                    this.authService.logout();
+                    this.router.navigate(['/auth/login']);
+                    return throwError(() => error);
+                }),
+            );
+        }
 
         return this.refreshTokenSubject.pipe(
             filter((token) => token != null),
             take(1),
-            switchMap((jwt) => next.handle(this.addTokenHeader(request, jwt))),
+            switchMap((token) =>
+                next.handle(this.addTokenHeader(request, token!)),
+            ),
         );
+    }
+
+    private getTokenFromLocalStorage(): string | null {
+        try {
+            return localStorage.getItem(this.TOKEN_KEY);
+        } catch (error) {
+            console.error('Error reading token from localStorage:', error);
+            return null;
+        }
     }
 }

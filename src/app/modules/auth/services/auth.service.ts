@@ -5,14 +5,20 @@ import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 export interface LoginRequest {
-    username: string;
+    emailOrPhone: string;
     password: string;
 }
 
+export interface RefreshTokenData {
+    userName: string;
+    tokenString: string;
+    expireAt: string;
+}
+
 export interface LoginResponse {
-    token: string;
-    refreshToken: string;
-    user: UserInfo;
+    accessToken: string;
+    refreshToken: RefreshTokenData;
+    user?: UserInfo;
 }
 
 export interface UserInfo {
@@ -32,13 +38,13 @@ export interface AuthState {
     providedIn: 'root',
 })
 export class AuthService {
-    private readonly API_BASE = environment.production ? '/api' : '/api';
     private readonly TOKEN_KEY = environment.USERDATA_KEY || 'authToken';
     private readonly REFRESH_TOKEN_KEY = 'refreshToken';
 
     private authStateSubject = new BehaviorSubject<AuthState>(
         this.getInitialState(),
     );
+
     public authState$ = this.authStateSubject.asObservable();
 
     constructor(private http: HttpClient) {
@@ -75,16 +81,20 @@ export class AuthService {
     /**
      * Login with username and password
      */
-    login(credentials: LoginRequest): Observable<LoginResponse> {
+    login(credentials: LoginRequest): Observable<{
+        data: LoginResponse;
+    }> {
         return this.http
-            .post<LoginResponse>(`${this.API_BASE}/auth/login`, credentials)
+            .post<{
+                data: LoginResponse;
+            }>('/Authentication/AdminLogin', credentials)
             .pipe(
                 map((response) => {
-                    this.storeAuthData(response);
+                    this.storeAuthData(response.data);
                     this.authStateSubject.next({
                         isAuthenticated: true,
-                        user: response.user,
-                        token: response.token,
+                        user: response.data.user || null,
+                        token: response.data.accessToken,
                     });
 
                     return response;
@@ -152,7 +162,7 @@ export class AuthService {
         }
 
         return this.http
-            .post<LoginResponse>(`${this.API_BASE}/auth/refresh`, {
+            .post<LoginResponse>('/api/Authentication/Refresh', {
                 refreshToken,
             })
             .pipe(
@@ -160,8 +170,8 @@ export class AuthService {
                     this.storeAuthData(response);
                     this.authStateSubject.next({
                         isAuthenticated: true,
-                        user: response.user,
-                        token: response.token,
+                        user: response.user || null,
+                        token: response.accessToken,
                     });
                     return response;
                 }),
@@ -173,8 +183,10 @@ export class AuthService {
      */
     verifyToken(): Observable<{ valid: boolean }> {
         return this.http.post<{ valid: boolean }>(
-            `${this.API_BASE}/auth/verify`,
-            { token: this.getToken() },
+            '/api/Authentication/Verify',
+            {
+                token: this.getToken(),
+            },
         );
     }
 
@@ -182,9 +194,14 @@ export class AuthService {
      * Store auth data (token, refresh token, user) in localStorage
      */
     private storeAuthData(response: LoginResponse): void {
-        localStorage.setItem(this.TOKEN_KEY, response.token);
-        localStorage.setItem(this.REFRESH_TOKEN_KEY, response.refreshToken);
-        localStorage.setItem('currentUser', JSON.stringify(response.user));
+        localStorage.setItem(this.TOKEN_KEY, response.accessToken);
+        localStorage.setItem(
+            this.REFRESH_TOKEN_KEY,
+            response.refreshToken.tokenString,
+        );
+        if (response.user) {
+            localStorage.setItem('currentUser', JSON.stringify(response.user));
+        }
     }
 
     /**

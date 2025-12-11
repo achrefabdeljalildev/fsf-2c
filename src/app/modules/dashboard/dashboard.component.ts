@@ -58,12 +58,4 @@ export class DashboardComponent extends BaseComponent {
             icon: 'assets/icons/general_settings.svg',
         },
     ];
-
-    toggleLanguage() {
-        const newLang = this.isArabeMode() ? 'en' : 'ar';
-        this.translateService.use(newLang);
-        localStorage.setItem('i18n_locale', newLang);
-
-        window.location.reload();
-    }
 }
