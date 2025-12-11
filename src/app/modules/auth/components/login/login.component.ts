@@ -12,7 +12,6 @@ export class LoginComponent extends BaseComponent implements OnInit {
     returnUrl: string = '';
     isLoading: boolean = false;
 
-    isArabic: boolean = false;
     loginForm!: FormGroup;
     showPassword: boolean = false;
 
@@ -21,8 +20,10 @@ export class LoginComponent extends BaseComponent implements OnInit {
         private authService: AuthService,
     ) {
         super();
-        const currentLang = this.translateService.currentLang || 'en';
-        this.isArabic = currentLang === 'ar';
+
+        if (this.authService.isAuthenticated()) {
+            this.router.navigate(['/']);
+        }
     }
 
     ngOnInit(): void {
@@ -51,10 +52,6 @@ export class LoginComponent extends BaseComponent implements OnInit {
         });
     }
 
-    get emailOrPhone() {
-        return this.loginForm.get('emailOrPhone');
-    }
-
     togglePasswordVisibility() {
         this.showPassword = !this.showPassword;
     }
@@ -67,7 +64,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
         this.loginForm = this.fb.group({
             emailOrPhone: ['', Validators.compose([Validators.required])],
             password: ['', Validators.compose([Validators.required])],
-            // rememberMe: [false],
+            rememberMe: [false],
         });
     }
 }

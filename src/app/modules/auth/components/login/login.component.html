@@ -5,7 +5,7 @@
         background-size: cover;
         background-position: center;
     "
-    [dir]="isArabic ? 'rtl' : 'ltr'"
+    [dir]="isArabeMode() ? 'rtl' : 'ltr'"
 >
     <!-- Right side: Login Form -->
     <div class="w-full flex items-center justify-center p-8">
@@ -44,12 +44,19 @@
                     />
                     <div
                         *ngIf="
-                            emailOrPhone?.invalid &&
-                            (emailOrPhone?.dirty || emailOrPhone?.touched)
+                            loginForm.get('emailOrPhone')?.invalid &&
+                            (loginForm.get('emailOrPhone')?.dirty ||
+                                loginForm.get('emailOrPhone')?.touched)
                         "
                         class="text-red-500 text-sm mt-1"
                     >
-                        <span *ngIf="emailOrPhone?.errors?.['required']">
+                        <span
+                            *ngIf="
+                                loginForm.get('emailOrPhone')?.errors?.[
+                                    'required'
+                                ]
+                            "
+                        >
                             {{ 'common.required' | translate }}
                         </span>
                     </div>
@@ -75,13 +82,16 @@
                         alt="Toggle Password Visibility"
                         (click)="togglePasswordVisibility()"
                         class="absolute top-1/2 transform -translate-y-1/2 cursor-pointer h-6 w-6"
-                        [ngClass]="{ 'right-3': !isArabic, 'left-3': isArabic }"
+                        [ngClass]="{
+                            'right-3': !isArabeMode(),
+                            'left-3': isArabeMode(),
+                        }"
                     />
                 </div>
 
                 <div class="flex justify-between">
                     <!-- checkbox still logged in -->
-                    <!-- <label
+                    <label
                         class="inline-flex gap-2 items-center font-ibmPlexSansArabic"
                     >
                         <input
@@ -98,7 +108,7 @@
                         routerLink="/auth/forgot-password"
                     >
                         {{ 'auth.forgetPassword' | translate }}
-                    </a> -->
+                    </a>
                 </div>
 
                 <button
@@ -144,7 +154,7 @@
             (click)="toggleLanguage()"
             class="text-sm text-gray-700 hover:underline font-ibmPlexSansArabic"
         >
-            {{ isArabic ? 'English' : 'عربي' }}
+            {{ isArabeMode() ? 'English' : 'عربي' }}
         </button>
     </div>
 </div>
