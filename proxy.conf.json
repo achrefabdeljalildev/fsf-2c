@@ -1,13 +1,6 @@
 {
     "**/api/**": {
-        "target": "https://api-fsf.com/",
+        "target": "http://securityopearation.runasp.net/",
         "secure": false
-    },
-    "**/system/ws/**": {
-        "target": "https://api-fsf.com/",
-        "secure": false,
-        "ws": true,
-        "logLevel": "debug",
-        "changeOrigin": true
     }
 }

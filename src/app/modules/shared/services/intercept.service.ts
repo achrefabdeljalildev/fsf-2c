@@ -1,4 +1,10 @@
-import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import {
+    HttpErrorResponse,
+    HttpEvent,
+    HttpHandler,
+    HttpInterceptor,
+    HttpRequest,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
@@ -10,7 +16,8 @@ import { AuthModel } from '../models/auth.model';
 export class InterceptService implements HttpInterceptor {
     private authLocalStorageToken = environment.USERDATA_KEY;
     private isRefreshing = false;
-    private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+    private refreshTokenSubject: BehaviorSubject<any> =
+        new BehaviorSubject<any>(null);
 
     constructor(private router: Router) {}
 
@@ -32,7 +39,10 @@ export class InterceptService implements HttpInterceptor {
         localStorage.setItem(this.authLocalStorageToken, JSON.stringify(auth));
     }
 
-    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    intercept(
+        request: HttpRequest<any>,
+        next: HttpHandler,
+    ): Observable<HttpEvent<any>> {
         const auth = this.getAuthFromLocalStorage();
         if (auth) {
             request = this.addTokenHeader(request, auth.accessToken);
@@ -42,7 +52,11 @@ export class InterceptService implements HttpInterceptor {
 
         return next.handle(request).pipe(
             catchError((error: HttpErrorResponse) => {
-                if (error.status === 401 && auth && !request.url.includes('/refreshtoken')) {
+                if (
+                    error.status === 401 &&
+                    auth &&
+                    !request.url.includes('/refreshtoken')
+                ) {
                     return this.handle401Error(request, next);
                 }
                 return throwError(() => error);

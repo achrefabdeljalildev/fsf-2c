@@ -1,4 +1,4 @@
-﻿import { Component, NgModule } from '@angular/core';
+﻿import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 
@@ -10,7 +10,10 @@ import { Router } from '@angular/router';
 export class ThemeCustomizerComponent {
     store: any;
     showCustomizer = false;
-    constructor(public storeData: Store<any>, public router: Router) {
+    constructor(
+        public storeData: Store<any>,
+        public router: Router,
+    ) {
         this.initStore();
     }
     async initStore() {

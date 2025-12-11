@@ -3,7 +3,7 @@ import { Routes } from '@angular/router';
 import { AppLayout } from './layouts/app-layout';
 import { AuthLayout } from './layouts/auth-layout';
 import { DashboardComponent } from 'src/app/modules/dashboard/dashboard.component';
-// import { AuthGuard } from './modules/shared/services/auth.guard';
+import { SampleComponent } from 'src/app/sample.component';
 
 export const routes: Routes = [
     {
@@ -35,7 +35,7 @@ export const routes: Routes = [
         children: [
             {
                 path: '',
-                component: DashboardComponent,
+                component: SampleComponent,
             },
         ],
     },

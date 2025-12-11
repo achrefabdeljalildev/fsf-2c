@@ -23,9 +23,10 @@
 @layer reset, primeng;
 
 @layer components {
-    * {
-        /* font-family: 'IBM Plex Sans Arabic', sans-serif !important; */
+    *:not(i):not(i *) {
+        font-family: 'IBM Plex Sans Arabic', sans-serif !important;
     }
+
     html {
         @apply scroll-smooth;
     }

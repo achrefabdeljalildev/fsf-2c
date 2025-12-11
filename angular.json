@@ -39,7 +39,6 @@
                             "node_modules/ngx-spinner/animations/ball-clip-rotate.css"
                         ],
                         "scripts": [
-                            "src/assets/js/flatpickr-hijri-calendar.min.js",
                             "node_modules/apexcharts/dist/apexcharts.min.js"
                         ],
                         "allowedCommonJsDependencies": []
@@ -123,9 +122,6 @@
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
-                    "options": {
-                        "disableHostCheck": true
-                    },
                     "configurations": {
                         "production": {
                             "buildTarget": "fsf-2c-front:build:production"

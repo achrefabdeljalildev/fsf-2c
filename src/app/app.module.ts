@@ -40,7 +40,7 @@ import {
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 // dashboard
-import { IndexComponent } from './index';
+import { SampleComponent } from './sample.component';
 
 // Layouts
 import { AppLayout } from './layouts/app-layout';
@@ -93,7 +93,7 @@ export function HttpLoaderFactory(
         SidebarComponent,
         DashboardComponent,
         ThemeCustomizerComponent,
-        IndexComponent,
+        SampleComponent,
         AppLayout,
         AuthLayout,
     ],
