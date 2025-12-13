@@ -68,8 +68,9 @@
         <!-- Subcards Section -->
         <h1 class="text-3xl font-bold mb-8">الادارات</h1>
         <div class="grid grid-cols-4 gap-4 w-full">
-            <div
+            <a
                 *ngFor="let subcard of selectedCard.subcards"
+                routerLink="/locations"
                 class="bg-lightBlue shadow-sm hover:shadow-md transition-shadow border border-[#0E8A8A63] w-full cursor-pointer p-3 px-2 rounded-lg shadow-sm border border-gray-100"
             >
                 <div
@@ -80,7 +81,7 @@
                 <h3 class="font-bold text-gray-800 mb-3">
                     {{ subcard.title }}
                 </h3>
-            </div>
+            </a>
         </div>
     </div>
 </div>

@@ -14,19 +14,24 @@ import {
                     <ng-container *ngIf="!last; else plainText">
                         <a
                             [routerLink]="item.route"
-                            class="text-primary hover:underline font-regular"
+                            [style.color]="'#384250'"
+                            class="hover:underline font-regular"
                         >
                             {{ item.label | translate }}
                         </a>
                     </ng-container>
 
                     <ng-template #plainText>
-                        <span class="font-bold">
+                        <span class="font-bold text-primary">
                             {{ item.label | translate }}
                         </span>
                     </ng-template>
 
-                    <span *ngIf="!last" class="mx-2 text-primary font-bold">
+                    <span
+                        *ngIf="!last"
+                        [style.color]="'#384250'"
+                        class="mx-2 font-bold"
+                    >
                         {{ separator }}
                     </span>
                 </li>

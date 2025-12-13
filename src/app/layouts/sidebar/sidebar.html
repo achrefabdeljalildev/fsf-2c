@@ -1,10 +1,10 @@
 ﻿<div [ngClass]="{ 'dark text-white-dark': store.semidark }">
     <nav
-        class="sidebar flex flex-col fixed h-[calc(100vh-50px)] lg:h-[calc(100vh-110px)] bottom-0 top-0 lg:top-[110px] m-6 z-50 w-[292px] transition-all duration-300"
+        class="sidebar flex flex-col fixed h-[calc(100vh-50px)] lg:h-[calc(100vh-130px)] bottom-0 top-0 lg:top-[130px] m-6 z-50 w-[292px] transition-all duration-300"
     >
         <div class="flex flex-col h-full justify-between gap-4">
             <div
-                class="flex flex-col flex-1 rounded-2.5 pb-6 border border-[#C3CAD980] bg-white dark:bg-[#0e1726] overflow-y-auto"
+                class="flex flex-col flex-1 rounded-2.5 pb-6 border border-[#C3CAD980] bg-gradient-to-b from-[#0E8A8A] to-[#016565] overflow-y-auto"
             >
                 <div class="flex flex-col p-4">
                     <div class="menu-actions flex items-center justify-between">
@@ -24,7 +24,7 @@
                     <div class="relative flex justify-center items-center">
                         <!-- User Info -->
                         <div
-                            class="user-image rounded-full size-[130px] border-2 border-primary-light p-0.5 relative"
+                            class="user-image rounded-full size-[130px] border-4 border-primary-light p-0.5 relative"
                         >
                             <img
                                 src="assets/images/avatar-user.png"
@@ -33,11 +33,11 @@
                         </div>
                     </div>
 
-                    <div class="user-text text-center mt-[14px]">
-                        <h4 class="text-xl font-medium text-secondary">
+                    <div class="user-text text-center text-white mt-4">
+                        <h4 class="text-xl font-medium text-white">
                             {{'فهد محمد عبد الله' | translate }}
                         </h4>
-                        <h3 class="font-medium text-secondary">
+                        <h3 class="font-medium text-white">
                             {{'مختص الاجازات' | translate }}
                         </h3>
                     </div>

@@ -1,9 +1,7 @@
-﻿import { Component, Input, input, OnDestroy, OnInit } from '@angular/core';
-import { NavigationEnd } from '@angular/router';
+﻿import { Component, Input, OnInit } from '@angular/core';
+
 import { Store } from '@ngrx/store';
 import { toggleAnimation } from 'src/app/shared/animations';
-import { AppService } from '../service/app.service';
-import { LanguageService } from '../service/language.service';
 import { BaseComponent } from 'src/app/modules/shared/components/base-component/base-component';
 import { AuthService } from 'src/app/modules/auth/services/auth.service';
 
@@ -14,7 +12,7 @@ import { AuthService } from 'src/app/modules/auth/services/auth.service';
     animations: [toggleAnimation],
 })
 export class HeaderComponent extends BaseComponent implements OnInit {
-    @Input() hasBreadcrumb: boolean = false;
+    @Input() hasBreadcrumb: boolean = true;
 
     currentDate!: string;
     currentTime!: string;

@@ -31,6 +31,15 @@ export const routes: Routes = [
             import('./modules/auth/auth.module').then((m) => m.AuthModule),
     },
     {
+        path: 'locations',
+        component: AppLayout,
+        canActivate: [AuthGuard],
+        loadChildren: () =>
+            import('./modules/location/location.module').then(
+                (m) => m.LocationModule,
+            ),
+    },
+    {
         path: 'services',
         component: AppLayout,
         canActivate: [AuthGuard],

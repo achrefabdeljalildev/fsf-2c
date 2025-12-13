@@ -96,6 +96,7 @@ module.exports = {
                 },
                 lightBlue: {
                     DEFAULT: '#F5FAFA',
+                    light: '#DBECED',
                 },
             },
             fontFamily: {

@@ -23,7 +23,7 @@
 @layer reset, primeng;
 
 @layer components {
-    *:not(i):not(i *) {
+    *:not(i):not(i *):not(span.pi):not(span.pi *) {
         font-family: 'IBM Plex Sans Arabic', sans-serif !important;
     }
 
