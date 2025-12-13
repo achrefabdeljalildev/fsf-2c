@@ -27,7 +27,11 @@ export class LoginComponent extends BaseComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.initForm();
+        this.loginForm = this.fb.group({
+            emailOrPhone: ['', Validators.compose([Validators.required])],
+            password: ['', Validators.compose([Validators.required])],
+            rememberMe: [false],
+        });
     }
 
     submit() {
@@ -39,32 +43,28 @@ export class LoginComponent extends BaseComponent implements OnInit {
             return;
         }
 
-        this.authService.login(this.loginForm.value).subscribe({
-            next: (response) => {
-                this.isLoading = false;
-                this.router.navigate(['/']);
-            },
-            error: (error: any) => {
-                this.isLoading = false;
-                this.hasError = true;
-                this.showErrorMessage('invalid_login_credentials');
-            },
-        });
+        const subscription = this.authService
+            .login(this.loginForm.value)
+            .subscribe({
+                next: (response) => {
+                    this.isLoading = false;
+                    this.router.navigate(['/']);
+                },
+                error: (error: any) => {
+                    this.isLoading = false;
+                    this.hasError = true;
+                    this.showErrorMessage('invalid_login_credentials');
+                },
+            });
+
+        this.subscriptions.add(subscription);
     }
 
     togglePasswordVisibility() {
         this.showPassword = !this.showPassword;
     }
 
-    get f() {
-        return this.loginForm.controls;
-    }
-
-    initForm() {
-        this.loginForm = this.fb.group({
-            emailOrPhone: ['', Validators.compose([Validators.required])],
-            password: ['', Validators.compose([Validators.required])],
-            rememberMe: [false],
-        });
+    ngOnDestroy(): void {
+        this.subscriptions.unsubscribe();
     }
 }

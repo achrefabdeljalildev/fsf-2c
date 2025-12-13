@@ -105,7 +105,7 @@ export class AuthService {
     /**
      * Logout and clear stored auth data
      */
-    logout(): void {
+    logout(): Observable<void> | void {
         localStorage.removeItem(this.TOKEN_KEY);
         localStorage.removeItem(this.REFRESH_TOKEN_KEY);
         sessionStorage.removeItem(this.TOKEN_KEY);

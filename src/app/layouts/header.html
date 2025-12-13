@@ -5,15 +5,24 @@
         <div class="flex gap-4">
             <span class="flex items-center gap-2">
                 <i class="pi pi-calendar"></i>
-                <span>9 ديسمبر 2025</span>
+                <span>{{ currentDate }}</span>
             </span>
             <span class="flex items-center gap-2">
                 <i class="pi pi-clock"></i>
-                <span>09:00</span>
+                <span>{{ currentTime }}</span>
             </span>
             <span class="flex items-center gap-2">
                 <i class="pi pi-map-marker"></i>
-                <span>الرياض</span>
+                <span>{{ currentLocation }}</span>
+            </span>
+        </div>
+        <div class="flex gap-4">
+            <span
+                class="flex items-center gap-2 cursor-pointer rotate-180 origin-center"
+                (click)="logout()"
+                title="تسجيل الخروج"
+            >
+                <i class="pi pi-sign-out"></i>
             </span>
         </div>
     </div>
