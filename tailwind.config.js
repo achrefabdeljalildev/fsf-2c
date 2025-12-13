@@ -94,6 +94,9 @@ module.exports = {
                 beige: {
                     DEFAULT: '#F5F5F1',
                 },
+                lightBlue: {
+                    DEFAULT: '#F5FAFA',
+                },
             },
             fontFamily: {
                 ibmPlexSansArabic: ['IBM Plex Sans Arabic', 'sans-serif'],
