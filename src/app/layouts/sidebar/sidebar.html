@@ -4,7 +4,8 @@
     >
         <div class="flex flex-col h-full justify-between gap-4">
             <div
-                class="flex flex-col flex-1 rounded-2.5 pb-6 border border-[#C3CAD980] bg-gradient-to-b from-[#0E8A8A] to-[#016565] overflow-y-auto"
+                class="relative flex flex-col rounded-2.5 border border-[#C3CAD980] bg-gradient-to-b from-[#0E8A8A] to-[#016565] transition-all duration-300 overflow-hidden"
+                [ngClass]="isCollapsed ? 'h-fit' : 'h-auto'"
             >
                 <div class="flex flex-col p-4">
                     <div class="menu-actions flex items-center justify-between">
@@ -15,13 +16,19 @@
                             <i class="pi pi-sign-out text-white"></i>
                         </a>
                         <a
-                            [routerLink]="['/profile']"
+                            (click)="toggleUserCard()"
                             class="flex items-center justify-center cursor-pointer size-10 bg-primary rounded-full shadow-action-shadow"
                         >
-                            <i class="pi pi-user text-white"></i>
+                            <i
+                                [class]="isCollapsed ? 'pi pi-angle-down' : 'pi pi-angle-up'"
+                                class="cursor-pointer text-white"
+                            ></i>
                         </a>
                     </div>
-                    <div class="relative flex justify-center items-center">
+                    <div
+                        class="relative flex justify-center items-center"
+                        *ngIf="!isCollapsed"
+                    >
                         <!-- User Info -->
                         <div
                             class="user-image rounded-full size-[130px] border-4 border-primary-light p-0.5 relative"
@@ -33,7 +40,10 @@
                         </div>
                     </div>
 
-                    <div class="user-text text-center text-white mt-4">
+                    <div
+                        class="user-text text-center text-white mt-4"
+                        *ngIf="!isCollapsed"
+                    >
                         <h4 class="text-xl font-medium text-white">
                             {{'فهد محمد عبد الله' | translate }}
                         </h4>
