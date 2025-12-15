@@ -3,6 +3,11 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
 import { LocationListComponent } from './location-list/location-list.component';
+import { Card } from 'primeng/card';
+import { TagModule } from 'primeng/tag';
+import { DividerModule } from 'primeng/divider';
+import { TableModule } from 'primeng/table';
+import { CheckboxModule } from 'primeng/checkbox';
 
 const routes: Routes = [
     {
@@ -15,7 +20,12 @@ const routes: Routes = [
     imports: [
         CommonModule,
         RouterModule.forChild(routes),
-        LocationListComponent,
+        Card,
+        TagModule,
+        DividerModule,
+        TableModule,
+        CheckboxModule,
     ],
+    declarations: [LocationListComponent],
 })
 export class LocationModule {}

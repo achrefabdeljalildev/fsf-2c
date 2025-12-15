@@ -1,61 +1,81 @@
-<div class="h-screen w-screen flex overflow-hidden relative" [dir]="isArabic ? 'rtl' : 'ltr'">
+<div
+    class="h-screen w-screen flex overflow-hidden relative"
+    [dir]="isArabic ? 'rtl' : 'ltr'"
+>
+    <!-- Background Image -->
+    <div
+        class="absolute inset-0 bg-cover bg-center"
+        style="background-image: url('assets/images/bg-activateRegister.png')"
+    ></div>
 
-  <!-- Background Image -->
-  <div class="absolute inset-0 bg-cover bg-center"
-       style="background-image: url('assets/images/bg-activateRegister.png');">
-  </div>
+    <!-- Overlay for dimming -->
+    <div class="absolute inset-0 bg-black bg-opacity-50"></div>
 
-  <!-- Overlay for dimming -->
-  <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+    <!-- Activation Code Form -->
+    <div class="relative z-10 w-full md:w-1/5 lg:w-1/5 p-8 m-auto">
+        <h2
+            class="text-3xl font-extrabold text-center text-white mb-6 font-ibmPlexSansArabic"
+        >
+            {{ 'auth.activate.label.title' | translate }}
+        </h2>
+        <p class="text-center text-md text-yellow mb-4 font-ibmPlexSansArabic">
+            {{ 'auth.activate.label.subtitle' | translate }}
+        </p>
 
-  <!-- Activation Code Form -->
-  <div class="relative z-10 w-full md:w-1/5 lg:w-1/5 p-8 m-auto">
-    <h2 class="text-3xl font-extrabold text-center text-white mb-6 font-ibmPlexSansArabic">
-    {{ 'auth.activate.label.title' | translate }}
-    </h2>
-     <p class="text-center text-md text-yellow mb-4 font-ibmPlexSansArabic">
-      {{ 'auth.activate.label.subtitle' | translate }}
-    </p>
+        <form
+            class="space-y-6"
+            [formGroup]="activationForm"
+            (ngSubmit)="onSubmit()"
+        >
+            <!-- Activation Code Input -->
+            <div>
+                <input
+                    id="activation-code"
+                    formControlName="activationCode"
+                    type="text"
+                    required
+                    class="mt-1 block w-full px-4 py-3 rounded-md shadow-sm text-center tracking-widest uppercase"
+                    placeholder=""
+                />
 
-    <form class="space-y-6" [formGroup]="activationForm" (ngSubmit)="onSubmit()">
-      <!-- Activation Code Input -->
-      <div>
-        <input
-          id="activation-code"
-           formControlName="activationCode"
-          type="text"
-          required
-          class="mt-1 block w-full px-4 py-3  rounded-md shadow-sm
+                <!-- Error Message -->
+                <div
+                    *ngIf="
+                        activationForm.get('activationCode')?.invalid &&
+                        activationForm.get('activationCode')?.touched
+                    "
+                    class="text-red-500 text-sm mt-2"
+                >
+                    {{ 'auth.activate.error.invalidNumber' | translate }}
+                </div>
+            </div>
 
-                 text-center tracking-widest uppercase"
-          placeholder="" />
+            <!-- Submit Button -->
+            <div class="flex justify-center">
+                <button
+                    type="submit"
+                    class="w-40 bg-green-dark hover:bg-green-900 text-white py-3 px-4 rounded-full font-medium shadow-sm border border-transparent transition duration-300 font-ibmPlexSansArabic flex items-center justify-center"
+                >
+                    <!-- Logo inside the button -->
+                    <img
+                        src="assets/images/left-c.png"
+                        alt="Icon"
+                        class="h-10 w-10 object-contain me-8"
+                    />
 
-              <!-- Error Message -->
-          <div *ngIf="activationForm.get('activationCode')?.invalid && activationForm.get('activationCode')?.touched"
-             class="text-red-500 text-sm mt-2">
-          {{ 'auth.activate.error.invalidNumber' | translate }}
-        </div>
-      </div>
+                    {{ 'auth.activate.button.activate' | translate }}
+                </button>
+            </div>
+        </form>
+    </div>
 
-      <!-- Submit Button -->
-      <div class="flex justify-center">
-        <button type="submit"
-          class="w-40 bg-green-dark hover:bg-green-900
-                 text-white py-3 px-4 rounded-full font-medium shadow-sm
-                 border border-transparent transition duration-300 font-ibmPlexSansArabic flex items-center justify-center "
-                 >
-        <!-- Logo inside the button -->
-    <img src="assets/images/left-c.png" alt="Icon" class="h-10 w-10 object-contain me-8" />
-
-    {{ 'auth.activate.button.activate' | translate }}
-        </button>
-      </div>
-    </form>
-  </div>
-
-
-  <div class="flex justify-end items-center absolute top-4 left-4 right-4 z-10 ">
-        <button (click)="toggleLanguage()" class="text-sm text-gray-700 hover:underline font-ibmPlexSansArabic">
+    <div
+        class="flex justify-end items-center absolute top-4 left-4 right-4 z-10"
+    >
+        <button
+            (click)="toggleLanguage()"
+            class="text-sm text-gray-700 hover:underline font-ibmPlexSansArabic"
+        >
             {{ isArabic ? 'English' : 'عربي' }}
         </button>
     </div>

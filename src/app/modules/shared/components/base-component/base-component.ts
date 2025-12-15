@@ -3,7 +3,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { inject } from '@angular/core';
 import { Location } from '@angular/common';
-import { ModalService } from '../../modals/modal.service';
 import { ToasterService } from 'src/app/modules/shared/services/toaster.service';
 import { BreadcrumbService } from 'src/app/modules/shared/components/mui-breadcrumb/breadcrumb.service';
 import { Subscription } from 'rxjs';
@@ -14,7 +13,6 @@ export abstract class BaseComponent {
     protected route: ActivatedRoute;
     protected formBuilder: FormBuilder;
     protected location: Location;
-    protected modalService: ModalService;
     protected toasterService: ToasterService;
     protected breadcrumbService: BreadcrumbService;
 
@@ -26,7 +24,6 @@ export abstract class BaseComponent {
         this.route = inject(ActivatedRoute);
         this.formBuilder = inject(FormBuilder);
         this.location = inject(Location);
-        this.modalService = inject(ModalService);
         this.toasterService = inject(ToasterService);
         this.breadcrumbService = inject(BreadcrumbService);
     }

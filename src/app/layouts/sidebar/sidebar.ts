@@ -6,11 +6,10 @@ import { slideDownUp } from '../../shared/animations';
 import { TreeNode } from 'primeng/api';
 
 @Component({
-    moduleId: module.id,
     selector: 'sidebar',
     templateUrl: './sidebar.html',
     animations: [slideDownUp],
-    standalone: false
+    standalone: false,
 })
 export class SidebarComponent {
     store: any;

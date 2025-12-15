@@ -6,11 +6,10 @@ import { BaseComponent } from 'src/app/modules/shared/components/base-component/
 import { AuthService } from 'src/app/modules/auth/services/auth.service';
 
 @Component({
-    moduleId: module.id,
     selector: 'header',
     templateUrl: './header.html',
     animations: [toggleAnimation],
-    standalone: false
+    standalone: false,
 })
 export class HeaderComponent extends BaseComponent implements OnInit {
     @Input() hasBreadcrumb: boolean = true;
