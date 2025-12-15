@@ -15,12 +15,15 @@
             "prefix": "app",
             "architect": {
                 "build": {
-                    "builder": "@angular-devkit/build-angular:browser-esbuild",
+                    "builder": "@angular-devkit/build-angular:application",
                     "options": {
-                        "outputPath": "dist",
+                        "outputPath": {
+                          "base": "dist"
+                        },
                         "index": "src/index.html",
-                        "main": "src/main.ts",
-                        "polyfills": "src/polyfills.ts",
+                        "polyfills": [
+                          "src/polyfills.ts"
+                        ],
                         "tsConfig": "tsconfig.app.json",
                         "assets": [
                             "src/assets",
@@ -41,7 +44,8 @@
                         "scripts": [
                             "node_modules/apexcharts/dist/apexcharts.min.js"
                         ],
-                        "allowedCommonJsDependencies": []
+                        "allowedCommonJsDependencies": [],
+                        "browser": "src/main.ts"
                     },
                     "configurations": {
                         "production": {
@@ -74,7 +78,6 @@
                             "sourceMap": false,
                             "namedChunks": false,
                             "aot": true,
-                            "buildOptimizer": true,
                             "outputHashing": "all"
                         },
                         "staging": {
@@ -107,12 +110,10 @@
                             "sourceMap": false,
                             "namedChunks": false,
                             "aot": true,
-                            "buildOptimizer": true,
                             "outputHashing": "all"
                         },
                         "development": {
-                            "buildOptimizer": false,
-                            "optimization": false,
+                          "optimization": false,
                             "extractLicenses": false,
                             "sourceMap": true,
                             "namedChunks": true

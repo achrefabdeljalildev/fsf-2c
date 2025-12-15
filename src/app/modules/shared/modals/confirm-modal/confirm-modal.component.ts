@@ -4,6 +4,7 @@ import {BaseComponent} from "../../components/base-component/base-component";
 @Component({
     selector: 'app-confirm-comment-modal',
     templateUrl: './confirm-modal.component.html',
+    standalone: false
 })
 export class ConfirmModalComponent extends BaseComponent implements OnInit, OnDestroy {
 

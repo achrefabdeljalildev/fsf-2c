@@ -2,6 +2,7 @@ import { AfterViewInit, Directive, ElementRef, Input, OnInit, Renderer2 } from '
 
 @Directive({
     selector: '[buttonBusy]',
+    standalone: false
 })
 export class ButtonBusyDirective implements OnInit, AfterViewInit {
     @Input() busyText: string = '';

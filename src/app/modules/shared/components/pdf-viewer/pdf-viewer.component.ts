@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
     selector: 'pdf-viewer',
     templateUrl: './pdf-viewer.component.html',
     styleUrls: ['./pdf-viewer.component.css'],
+    standalone: false
 })
 export class PdfViewerComponent implements OnInit, OnDestroy {
     @Input() src: any = null;

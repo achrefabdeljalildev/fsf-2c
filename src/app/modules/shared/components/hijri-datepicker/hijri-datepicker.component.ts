@@ -4,9 +4,10 @@ import moment from 'moment-hijri';
 // @ts-ignore
 
 @Component({
-  selector: 'app-hijri-datepicker',
-  templateUrl: './hijri-datepicker.component.html',
-  styleUrls: ['./hijri-datepicker.component.css']
+    selector: 'app-hijri-datepicker',
+    templateUrl: './hijri-datepicker.component.html',
+    styleUrls: ['./hijri-datepicker.component.css'],
+    standalone: false
 })
 export class HijriDatepickerComponent {
   selectedDate: string = moment().format('iYYYY/iMM/iDD');

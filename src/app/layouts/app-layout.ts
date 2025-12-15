@@ -7,6 +7,7 @@ import { AppService } from '../service/app.service';
 @Component({
     selector: 'app-root',
     templateUrl: './app-layout.html',
+    standalone: false
 })
 export class AppLayout {
     store: any;

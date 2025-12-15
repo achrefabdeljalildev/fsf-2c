@@ -10,6 +10,7 @@ import { TreeNode } from 'primeng/api';
     selector: 'sidebar',
     templateUrl: './sidebar.html',
     animations: [slideDownUp],
+    standalone: false
 })
 export class SidebarComponent {
     store: any;

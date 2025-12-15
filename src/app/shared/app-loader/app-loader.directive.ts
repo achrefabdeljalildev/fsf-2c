@@ -3,6 +3,7 @@ import { NgxSpinnerComponent, NgxSpinnerService } from 'ngx-spinner';
 
 @Directive({
     selector: '[appLoading]',
+    standalone: false
 })
 export class LoadingDirective implements OnChanges {
     private static index = 0;

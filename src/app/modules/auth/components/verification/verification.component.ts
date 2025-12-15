@@ -10,6 +10,7 @@ import {Store} from '@ngrx/store';
 @Component({
     selector: 'app-verification',
     templateUrl: './verification.component.html',
+    standalone: false
 })
 export class VerificationComponent {
     isArabic: boolean = false;

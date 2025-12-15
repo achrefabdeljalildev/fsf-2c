@@ -12,7 +12,6 @@
         "noFallthroughCasesInSwitch": true,
         "sourceMap": true,
         "declaration": false,
-        "downlevelIteration": true,
         "experimentalDecorators": true,
         "moduleResolution": "node",
         "importHelpers": true,
@@ -20,8 +19,7 @@
         "module": "ES2022",
         "useDefineForClassFields": false,
         "lib": ["ES2022", "dom"],
-        "esModuleInterop": true,
-        "allowSyntheticDefaultImports": true
+        "esModuleInterop": true
     },
     "angularCompilerOptions": {
         "enableI18nLegacyMessageIdFormat": false,

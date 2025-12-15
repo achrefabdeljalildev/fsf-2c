@@ -45,7 +45,6 @@ interface SiteRow {
 
 @Component({
     selector: 'app-location-list',
-    standalone: true,
     imports: [
         CommonModule,
         FormsModule,
@@ -58,7 +57,7 @@ interface SiteRow {
         CheckboxModule,
         DividerModule,
     ],
-    templateUrl: './location-list.component.html',
+    templateUrl: './location-list.component.html'
 })
 export class LocationListComponent extends BaseComponent {
     // Top stats
