@@ -4,8 +4,9 @@
     >
         <div class="flex flex-col h-full justify-between gap-4">
             <div
-                class="relative flex flex-col rounded-2.5 border border-[#C3CAD980] bg-gradient-to-b from-[#0E8A8A] to-[#016565] transition-all duration-300 overflow-hidden"
-                [ngClass]="isCollapsed ? 'h-fit' : 'h-auto'"
+                class="relative flex flex-col rounded-2.5 border border-[#C3CAD980] bg-gradient-to-b from-[#0E8A8A] to-[#016565] overflow-hidden"
+                [style.maxHeight]="isCollapsed ? '70px' : '400px'"
+                style="transition: max-height 0.3s ease"
             >
                 <div class="flex flex-col p-4">
                     <div class="menu-actions flex items-center justify-between">
@@ -15,6 +16,16 @@
                         >
                             <i class="pi pi-sign-out text-white"></i>
                         </a>
+                        <div
+                            class="user-image rounded-full size-[40px] border-4 border-primary-light p-0.5 relative"
+                            style="transition: opacity 0.3s ease"
+                            [style.opacity]="isCollapsed ? 1 : 0"
+                        >
+                            <img
+                                src="assets/images/avatar-user.png"
+                                alt="Logo"
+                            />
+                        </div>
                         <a
                             (click)="toggleUserCard()"
                             class="flex items-center justify-center cursor-pointer size-10 bg-primary rounded-full shadow-action-shadow"
@@ -27,7 +38,8 @@
                     </div>
                     <div
                         class="relative flex justify-center items-center"
-                        *ngIf="!isCollapsed"
+                        style="transition: opacity 0.3s ease"
+                        [style.opacity]="isCollapsed ? 0 : 1"
                     >
                         <!-- User Info -->
                         <div
@@ -42,7 +54,8 @@
 
                     <div
                         class="user-text text-center text-white mt-4"
-                        *ngIf="!isCollapsed"
+                        style="transition: opacity 0.3s ease"
+                        [style.opacity]="isCollapsed ? 0 : 1"
                     >
                         <h4 class="text-xl font-medium text-white">
                             {{'فهد محمد عبد الله' | translate }}
