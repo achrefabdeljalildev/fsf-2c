@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { slideDownUp } from '../../shared/animations';
 import { TreeNode } from 'primeng/api';
+import { AuthService } from 'src/app/modules/auth/services/auth.service';
 
 @Component({
     selector: 'sidebar',
@@ -82,6 +83,7 @@ export class SidebarComponent {
         public translate: TranslateService,
         public storeData: Store<any>,
         public router: Router,
+        private authService: AuthService,
     ) {
         this.initStore();
     }
@@ -95,6 +97,7 @@ export class SidebarComponent {
     }
 
     logout() {
+        this.authService.logout();
         this.router.navigate(['/auth/login']);
     }
 

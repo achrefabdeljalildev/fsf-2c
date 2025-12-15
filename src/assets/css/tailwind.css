@@ -188,16 +188,7 @@ hover:text-primary hover:before:!bg-primary ltr:before:mr-2 rtl:before:ml-2 dark
     .collapsible-vertical .main-content {
         @apply lg:w-[calc(100%-70px)] lg:ltr:ml-[70px] lg:rtl:mr-[70px];
     }
-    /* .collapsible-vertical .sidebar .collapse-icon,
-    .collapsible-vertical .main-logo > span {
-        @apply transition-opacity duration-300 lg:opacity-0;
-    }
-    .collapsible-vertical .sidebar:hover .collapse-icon,
-    .collapsible-vertical.toggle-sidebar .collapse-icon,
-    .collapsible-vertical .sidebar:hover .main-logo > span,
-    .collapsible-vertical.toggle-sidebar .main-logo > span {
-        @apply duration-500 lg:opacity-100;
-    } */
+
     .collapsible-vertical.toggle-sidebar .sidebar .collapse-icon {
         @apply flex rotate-0;
     }
@@ -544,23 +535,8 @@ hover:text-primary hover:before:!bg-primary ltr:before:mr-2 rtl:before:ml-2 dark
     }
 }
 
-/* perfect scrollbar */
-.ng-scrollbar {
-    --scrollbar-size: 6px !important;
-    --scrollbar-thumb-color: #dddddd !important;
-    --scrollbar-padding: 0px !important;
-}
-
 .collapsible-vertical .sidebar .ng-scroll-content {
     @apply !block !w-full;
-}
-
-.sidebar .ng-scrollbar {
-    --scrollbar-padding: 2px !important;
-}
-
-.dark .ng-scrollbar {
-    --scrollbar-thumb-color: #2d334c !important;
 }
 
 /* swal2 */
@@ -597,169 +573,6 @@ hover:text-primary hover:before:!bg-primary ltr:before:mr-2 rtl:before:ml-2 dark
     @apply bg-success;
 }
 
-/* apex chart */
-.apexcharts-canvas .apexcharts-tooltip.apexcharts-theme-light,
-.apexcharts-canvas .apexcharts-xaxistooltip.apexcharts-theme-light {
-    box-shadow: none;
-    @apply border-[#050717cc] bg-[#050717cc] text-white;
-}
-
-.apexcharts-canvas .apexcharts-xaxistooltip-bottom:before,
-.apexcharts-canvas .apexcharts-xaxistooltip-bottom:after {
-    @apply border-b-[#050717cc];
-}
-
-.apexcharts-canvas .apexcharts-tooltip-series-group.apexcharts-active {
-    @apply text-white;
-}
-
-.apexcharts-canvas
-    .apexcharts-tooltip.apexcharts-theme-light
-    .apexcharts-tooltip-title {
-    @apply border-dark bg-[#060818];
-}
-
-.apexcharts-legend-series {
-    @apply ltr:!mr-2 rtl:!ml-2;
-}
-
-.dark .apexcharts-title-text {
-    fill: #e0e6ed;
-}
-
-.dark .apexcharts-canvas .apexcharts-text.apexcharts-xaxis-label,
-.dark .apexcharts-canvas .apexcharts-text.apexcharts-yaxis-label {
-    fill: #e0e6ed;
-}
-
-.dark .apexcharts-canvas .apexcharts-text,
-.dark .apexcharts-canvas .apexcharts-text {
-    fill: #e0e6ed;
-}
-
-.dark .apexcharts-canvas .apexcharts-legend-text {
-    color: #e0e6ed !important;
-}
-
-.dark
-    .apexcharts-canvas
-    .apexcharts-radialbar-track.apexcharts-track
-    .apexcharts-radialbar-area {
-    stroke: #191e3a;
-}
-.dark
-    .apexcharts-canvas
-    .apexcharts-series-markers.apexcharts-series-bubble
-    .apexcharts-marker {
-    stroke: #191e3a;
-}
-
-.dark .apexcharts-canvas .apexcharts-pie-label,
-.dark .apexcharts-canvas .apexcharts-datalabel,
-.dark .apexcharts-canvas .apexcharts-datalabel-label,
-.dark .apexcharts-canvas .apexcharts-datalabel-value {
-    fill: #bfc9d4;
-}
-
-.dark .apexcharts-canvas .apexcharts-tooltip.apexcharts-theme-dark {
-    box-shadow: none;
-}
-
-.apexcharts-canvas .apexcharts-legend-marker {
-    @apply ltr:!mr-1.5 rtl:!mr-0 rtl:ml-1.5;
-}
-
-[dir='rtl'] .apexcharts-tooltip-marker {
-    @apply ml-2.5 mr-0;
-}
-
-/* Animations */
-.slide-down-enter-active {
-    @apply transition duration-100 ease-out;
-}
-.slide-down-leave-active {
-    @apply transition duration-75 ease-in;
-}
-.slide-down-enter-from,
-.slide-down-leave-to {
-    @apply scale-95 transform opacity-0;
-}
-.slide-down-enter-to,
-.slide-down-leave-from {
-    @apply scale-100 transform opacity-100;
-}
-
-.modal-fade-enter-active {
-    @apply transition duration-300 ease-out;
-}
-.modal-fade-leave-active {
-    @apply transition duration-200 ease-in;
-}
-.modal-fade-enter-from,
-.modal-fade-leave-to {
-    @apply scale-95 transform opacity-0;
-}
-.modal-fade-enter-to,
-.modal-fade-leave-from {
-    @apply scale-100 transform opacity-100;
-}
-
-/* highlightjs */
-pre code.hljs {
-    @apply overflow-x-auto rounded-md !bg-[#191e3a] p-4 text-white;
-}
-
-/* ngx-scrollbar */
-.ng-scroll-viewport {
-    @apply w-full;
-}
-
-.tajawal-extralight {
-    font-family: 'Tajawal', sans-serif;
-    font-weight: 200;
-    font-style: normal;
-}
-
-.tajawal-light {
-    font-family: 'Tajawal', sans-serif;
-    font-weight: 300;
-    font-style: normal;
-}
-
-.tajawal-regular {
-    font-family: 'Tajawal', sans-serif;
-    font-weight: 400;
-    font-style: normal;
-}
-
-.tajawal-medium {
-    font-family: 'Tajawal', sans-serif;
-    font-weight: 500;
-    font-style: normal;
-}
-
-.tajawal-bold {
-    font-family: 'Tajawal', sans-serif;
-    font-weight: 700;
-    font-style: normal;
-}
-
-.tajawal-extrabold {
-    font-family: 'Tajawal', sans-serif;
-    font-weight: 800;
-    font-style: normal;
-}
-
-.tajawal-black {
-    font-family: 'Tajawal', sans-serif;
-    font-weight: 900;
-    font-style: normal;
-}
-
-.card-white {
-    @apply bg-white p-6 border border-[#C3CAD980] rounded-2.5;
-}
-
 .sidebar li .nav-link.active {
     width: 100%;
     height: 100%;
@@ -790,82 +603,17 @@ pre code.hljs {
     height: 5px !important;
     margin: 0 2px !important;
 }
+
 .swiper-pagination-bullet-active {
     @apply bg-secondary;
 }
+
 .text-shadow {
     @apply text-2xl leading-4 font-bold text-secondary;
 }
+
 .flex-center {
     @apply flex justify-center items-center;
-}
-.bh-table-responsive {
-    @apply overflow-x-auto text-secondary;
-}
-.datatable .bh-datatable {
-    @apply grid;
-}
-.bh-datatable .bh-table-responsive table.whitespace-nowrap {
-    border-collapse: separate !important;
-    border-spacing: 0 10px !important;
-}
-table thead tr,
-table tfoot tr {
-    @apply !bg-primary-light;
-}
-
-.bh-datatable .bh-table-responsive table.whitespace-nowrap tbody tr td {
-    @apply !bg-white border-t border-b !border-grayBorder text-secondary text-base;
-}
-.bh-datatable
-    .bh-table-responsive
-    table.whitespace-nowrap
-    tbody
-    tr
-    td:first-child {
-    @apply ltr:!rounded-tl-md ltr:!rounded-bl-md ltr:border-l !border-grayBorder rtl:border-r rtl:!rounded-tr-md rtl:!rounded-br-md;
-}
-.bh-datatable
-    .bh-table-responsive
-    table.whitespace-nowrap
-    tbody
-    tr
-    td:last-child {
-    @apply ltr:!rounded-tr-md ltr:!rounded-br-md ltr:border-r !border-grayBorder rtl:border-l rtl:!rounded-tl-md rtl:!rounded-bl-md;
-}
-.bh-datatable .bh-pagination .bh-page-item {
-    border-radius: 6px !important;
-    height: 50px !important;
-    width: 50px !important;
-    @apply !border !border-grayBorder;
-}
-.bh-datatable .bh-table-responsive table tbody tr td {
-    @apply !py-[1.4rem] rtl:text-right;
-}
-.bh-datatable .bh-table-responsive table thead tr th {
-    @apply !py-[1.1rem];
-}
-.bh-datatable .bh-table-responsive table thead tr th:first-child {
-    @apply ltr:!rounded-tl-md ltr:!rounded-bl-md rtl:!rounded-tr-md rtl:!rounded-br-md;
-}
-.bh-datatable .bh-table-responsive table thead tr th:last-child {
-    @apply ltr:!rounded-tr-md ltr:!rounded-br-md rtl:!rounded-tl-md rtl:!rounded-bl-md;
-}
-.bh-datatable .bh-pagination .bh-page-item.bh-active {
-    @apply !bg-white !text-[#2D4158];
-}
-.first-page,
-.last-page {
-    @apply !hidden;
-}
-.bh-datatable .bh-table-responsive table tbody tr td,
-.bh-datatable .bh-table-responsive table tfoot tr th,
-.bh-datatable .bh-table-responsive table thead tr th {
-    @apply rtl:!text-right;
-}
-
-.ng-select.ng-select-focused:not(.ng-select-opened) > .ng-select-container {
-    @apply !shadow-none !border-primary;
 }
 
 label {
@@ -875,183 +623,8 @@ label {
     top: 80px !important;
     white-space: pre-line;
 }
-.p-organizationchart-table > tbody > tr {
-    border-bottom: none !important;
-}
-.p-organizationchart-table > tbody > tr > td {
-    text-align: center !important;
-    vertical-align: top;
-    padding: 0 0.75rem;
-}
-.p-organizationchart .p-organizationchart-node-content {
-    @apply card-white;
-}
-.p-organizationchart .p-organizationchart-node-content .p-node-toggler {
-    transition:
-        background-color 0.2s,
-        color 0.2s,
-        border-color 0.2s,
-        box-shadow 0.2s,
-        outline-color 0.2s;
-    border: 1px solid #e2e8f0;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    @apply rounded-full bg-white;
-}
-.p-organizationchart .p-organizationchart-line-down {
-    background: #e2e8f0;
-}
-.p-organizationchart .p-organizationchart-line-left {
-    @apply ltr:border-r rtl:border-l border-[#e2e8f0];
-}
-.p-organizationchart .p-organizationchart-line-top {
-    border-top: 1px solid #e2e8f0;
-    border-color: #e2e8f0;
-}
-.p-organizationchart
-    .p-organizationchart-lines
-    :nth-child(1 of .p-organizationchart-line-left) {
-    border-right: 0 none;
-}
-.p-organizationchart
-    .p-organizationchart-lines
-    :nth-last-child(1 of .p-organizationchart-line-left) {
-    border-top-right-radius: 6px;
-}
-
-.p-organizationchart
-    .p-organizationchart-lines
-    :nth-child(1 of .p-organizationchart-line-right) {
-    @apply ltr:border-l rtl:border-r border-[#e2e8f0];
-}
-
-.p-organizationchart-preservespace .p-organizationchart-node-hidden {
-    display: none !important;
-}
 
 [disabled] {
     cursor: not-allowed !important;
     @apply disabled:cursor-not-allowed disabled:!bg-gray-50 disabled:!text-gray-500 disabled:!ring-gray-200;
-}
-.request-text-body[disabled] .ql-toolbar.ql-snow {
-    @apply !hidden;
-}
-.ql-container.ql-disabled {
-    @apply bg-primary-light text-secondary !border-t !border-solid rounded-md !border-t-[#e0e6ed];
-}
-.ng-select.ng-select-disabled > .ng-select-container {
-    cursor: not-allowed !important;
-    @apply !bg-gray-50 !text-gray-500 !ring-gray-200 !border-gray-200;
-}
-
-.custom-input-file input[type='file'] {
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100% !important;
-    width: 100%;
-    cursor: pointer;
-    opacity: 0;
-}
-
-.text-custom-blue {
-    color: #007bff;
-}
-
-.text-custom-green {
-    color: #28a745;
-}
-
-.text-custom-red {
-    color: #dc3545;
-}
-
-.text-custom-gray {
-    color: #6c757d;
-}
-
-.text-custom-indigo {
-    color: #6610f2;
-}
-
-.text-custom-teal {
-    color: #20c997;
-}
-
-.text-custom-purple {
-    color: #6f42c1;
-}
-.text-custom-info {
-    color: #21b0ed;
-}
-.text-custom-orange {
-    color: #fd7e14;
-}
-.text-custom-success {
-    color: #2bb86d;
-}
-
-.text-custom-lime {
-    color: #c0e200;
-}
-.text-custom-gold {
-    color: #ffd700;
-}
-.text-custom-cyan {
-    color: #0967ae;
-}
-
-.p-dataview .p-dataview-content {
-    @apply !bg-transparent;
-}
-.p-paginator {
-    @apply !bg-transparent mt-8 sm:!justify-end gap-1;
-}
-.p-paginator-first,
-.p-paginator-last {
-    @apply !hidden;
-}
-.p-paginator-element {
-    @apply font-bold text-base;
-}
-.p-paginator-element,
-.p-paginator-element.p-disabled {
-    @apply !bg-primary-light rounded-lg;
-}
-.p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
-    @apply !bg-white !text-secondary;
-}
-.p-paginator-pages {
-    @apply flex gap-1;
-}
-
-.p-paginator-prev,
-.p-paginator-next {
-    @apply rtl:rotate-y-180;
-}
-
-.blog-shadow {
-    box-shadow: 0px 4px 4px 0px #56593e0a;
-}
-
-.p-galleria .p-galleria-item-nav,
-.p-galleria .p-galleria-close {
-    @apply !text-white;
-}
-.p-galleria-mask {
-    @apply !bg-[rgba(86,89,62,0.91)];
-}
-.p-rating {
-    @apply md:!gap-10 !gap-5;
-}
-.p-rating .p-rating-item .p-rating-icon {
-    @apply md:size-14 size-6;
-}
-
-.p-rating .p-rating-item.p-rating-item-active .p-rating-icon {
-    @apply !text-secondary;
-}
-.p-rating-item:hover .p-rating-icon {
-    @apply !text-secondary;
 }

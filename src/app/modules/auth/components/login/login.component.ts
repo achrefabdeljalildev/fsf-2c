@@ -6,7 +6,7 @@ import { BaseComponent } from 'src/app/modules/shared/components/base-component/
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
-    standalone: false
+    standalone: false,
 })
 export class LoginComponent extends BaseComponent implements OnInit {
     hasError: boolean = false;
