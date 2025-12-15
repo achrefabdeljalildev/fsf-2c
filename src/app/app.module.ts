@@ -47,7 +47,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 // primeng components
 import { Tree } from 'primeng/tree';
 import { BaseUrlInterceptor } from 'src/app/modules/shared/services/base-url-intercept.service';
-import { AppLayoutsModule } from 'src/app/layouts/app-layouts.module';
+import { AppLayoutsModule } from 'src/app/layouts/layouts.module';
 
 // AOT compilation support
 export function HttpLoaderFactory(
