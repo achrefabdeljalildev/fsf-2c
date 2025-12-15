@@ -40,8 +40,6 @@ import {
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 // dashboard
-import { SampleComponent } from './sample.component';
-
 import { NgxSpinnerService } from 'ngx-spinner';
 
 // primeng components
@@ -79,7 +77,7 @@ export function HttpLoaderFactory(
         AppLayoutsModule,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    declarations: [AppComponent, SampleComponent],
+    declarations: [AppComponent],
     providers: [
         Title,
         {

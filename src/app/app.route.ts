@@ -2,9 +2,9 @@ import { Routes } from '@angular/router';
 // dashboard
 import { AppLayout } from './layouts/app-layout/app-layout';
 import { AuthLayout } from './layouts/auth-layout/auth-layout';
-import { SampleComponent } from 'src/app/sample.component';
 import { AuthGuard } from 'src/app/modules/shared/services/guard.service';
 import { DashboardComponent } from 'src/app/layouts/dashboard/dashboard.component';
+import { MaintenenceComponent } from 'src/app/pages/maintenence';
 
 export const routes: Routes = [
     {
@@ -47,7 +47,7 @@ export const routes: Routes = [
         children: [
             {
                 path: '',
-                component: SampleComponent,
+                component: MaintenenceComponent,
             },
         ],
     },
