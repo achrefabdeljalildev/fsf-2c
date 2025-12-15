@@ -26,14 +26,16 @@
                 class="space-y-4"
             >
                 <!-- add input for username -->
-                <div>
+                <div class="relative flex items-center">
                     <input
                         id="emailOrPhone"
                         type="text"
                         formControlName="emailOrPhone"
-                        class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 font-ibmPlexSansArabic"
+                        class="block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 font-ibmPlexSansArabic"
                         [placeholder]="'auth.username' | translate"
                     />
+
+                    <i class="pi pi-user absolute end-3"></i>
                     <div
                         *ngIf="
                             loginForm.get('emailOrPhone')?.invalid &&
@@ -54,31 +56,23 @@
                     </div>
                 </div>
 
-                <div class="relative mt-1">
+                <div class="relative flex items-center">
                     <!-- Password Input -->
                     <input
                         id="password"
                         [type]="showPassword ? 'text' : 'password'"
                         formControlName="password"
-                        class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 font-ibmPlexSansArabic"
+                        class="block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 font-ibmPlexSansArabic"
                         [placeholder]="'auth.password' | translate"
                     />
 
-                    <!-- Toggle Password Icon -->
-                    <img
-                        [src]="
-                            !showPassword
-                                ? 'assets/images/hide.png'
-                                : 'assets/images/vision.png'
-                        "
-                        alt="Toggle Password Visibility"
+                    <i
+                        class="absolute h-fit end-3 cursor-pointer"
                         (click)="togglePasswordVisibility()"
-                        class="absolute top-1/2 transform -translate-y-1/2 cursor-pointer h-6 w-6"
-                        [ngClass]="{
-                            'right-3': !isArabeMode(),
-                            'left-3': isArabeMode(),
-                        }"
-                    />
+                        [ngClass]="
+                            showPassword ? 'pi pi-eye' : 'pi pi-eye-slash'
+                        "
+                    ></i>
                 </div>
 
                 <div class="flex justify-between">

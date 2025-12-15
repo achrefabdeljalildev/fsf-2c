@@ -54,7 +54,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
                 error: (error: any) => {
                     this.isLoading = false;
                     this.hasError = true;
-                    this.showErrorMessage('invalid_login_credentials');
+                    this.showErrorMessage('usernameOrEmailIsNotCorrect');
                 },
             });
 

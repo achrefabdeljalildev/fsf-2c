@@ -1,7 +1,4 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
 import { BaseComponent } from 'src/app/modules/shared/components/base-component/base-component';
 
 interface Card {
@@ -20,8 +17,7 @@ interface SubCard {
 @Component({
     selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
-    standalone: true,
-    imports: [CommonModule, RouterModule, TranslateModule],
+    standalone: false,
 })
 export class DashboardComponent extends BaseComponent {
     cards: Card[] = [

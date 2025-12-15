@@ -1,4 +1,4 @@
-﻿import { Component, Input, OnInit } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 import { toggleAnimation } from 'src/app/shared/animations';
@@ -6,7 +6,7 @@ import { BaseComponent } from 'src/app/modules/shared/components/base-component/
 import { AuthService } from 'src/app/modules/auth/services/auth.service';
 
 @Component({
-    selector: 'header',
+    selector: 'app-header',
     templateUrl: './header.html',
     animations: [toggleAnimation],
     standalone: false,
