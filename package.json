@@ -40,6 +40,7 @@
         "@ngrx/store": "^18.0.2",
         "@ngx-translate/core": "^15.0.0",
         "@ngx-translate/http-loader": "^8.0.0",
+        "@primeng/themes": "^19.0.6",
         "@types/luxon": "^3.4.2",
         "angularx-flatpickr": "^8.1.0",
         "apexcharts": "^3.49.2",
@@ -53,7 +54,6 @@
         "ngx-custom-modal": "^18.0.2",
         "ngx-scrollbar": "^15.1.2",
         "ngx-spinner": "^18.0.0",
-        "@primeng/themes": "^19.0.6",
         "primeicons": "^7.0.0",
         "primeng": "^18.0.2",
         "rxjs": "~7.8.0",
@@ -82,7 +82,7 @@
         "prettier": "^3.3.3",
         "prettier-plugin-tailwindcss": "^0.6.6",
         "tailwindcss": "^3.4.10",
-        "typescript": "^5.5.4"
+        "typescript": "~5.8"
     },
     "optionalDependencies": {
         "@esbuild/linux-x64": "*",
