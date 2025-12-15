@@ -1,20 +1,11 @@
 /* animation */
 @import 'animate.css';
-/* full calendar */
-@import 'fullcalendar.css';
 
 /* Swiper */
 @import 'swiper.css';
-/* modal popup */
-@import 'modal.css';
-/* flatpickr */
-@import 'flatpickr.css';
-/* ng-datatable */
-@import 'datatable.css';
+
 /* dragndrop */
 @import 'dragndrop.css';
-/* modal popup */
-@import 'modal.css';
 
 @tailwind base;
 @tailwind components;
