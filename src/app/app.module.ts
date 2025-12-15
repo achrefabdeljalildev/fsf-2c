@@ -43,7 +43,6 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { SampleComponent } from './sample.component';
 
 import { NgxSpinnerService } from 'ngx-spinner';
-import { DashboardComponent } from 'src/app/modules/dashboard/dashboard.component';
 
 // primeng components
 import { Tree } from 'primeng/tree';
@@ -67,7 +66,6 @@ export function HttpLoaderFactory(
         ToastModule,
         FormsModule,
         HttpClientModule,
-        AppLayoutsModule,
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
@@ -78,9 +76,10 @@ export function HttpLoaderFactory(
         StoreModule.forRoot({ index: indexReducer }),
         SharedModule.forRoot(),
         Tree,
+        AppLayoutsModule,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    declarations: [AppComponent, SampleComponent, DashboardComponent],
+    declarations: [AppComponent, SampleComponent],
     providers: [
         Title,
         {

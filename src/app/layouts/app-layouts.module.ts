@@ -8,16 +8,9 @@ import { AppLayout } from './app-layout/app-layout';
 import { AuthLayout } from './auth-layout/auth-layout';
 import { HeaderComponent } from './header/header';
 import { SidebarComponent } from './sidebar/sidebar';
-import { ThemeCustomizerComponent } from './theme-settings/theme-settings';
 
 @NgModule({
-    declarations: [
-        AppLayout,
-        AuthLayout,
-        HeaderComponent,
-        SidebarComponent,
-        ThemeCustomizerComponent,
-    ],
+    declarations: [AppLayout, AuthLayout, HeaderComponent, SidebarComponent],
     imports: [
         CommonModule,
         RouterModule,
