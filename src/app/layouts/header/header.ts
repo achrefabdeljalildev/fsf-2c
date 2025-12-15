@@ -12,8 +12,6 @@ import { AuthService } from 'src/app/modules/auth/services/auth.service';
     standalone: false,
 })
 export class HeaderComponent extends BaseComponent implements OnInit {
-    @Input() hasBreadcrumb: boolean = true;
-
     currentDate!: string;
     currentTime!: string;
     currentLocation: string = 'الرياض';

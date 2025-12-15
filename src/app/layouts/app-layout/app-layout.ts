@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
-import { AppService } from '../service/app.service';
+import { AppService } from '../../service/app.service';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app-layout.html',
-    standalone: false
+    standalone: false,
 })
 export class AppLayout {
     store: any;
@@ -26,7 +26,10 @@ export class AppLayout {
         this.toggleLoader();
 
         window.addEventListener('scroll', () => {
-            if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+            if (
+                document.body.scrollTop > 50 ||
+                document.documentElement.scrollTop > 50
+            ) {
                 this.showTopButton = true;
             } else {
                 this.showTopButton = false;
@@ -55,7 +58,10 @@ export class AppLayout {
     toggleLoader() {
         this.storeData.dispatch({ type: 'toggleMainLoader', payload: true });
         setTimeout(() => {
-            this.storeData.dispatch({ type: 'toggleMainLoader', payload: false });
+            this.storeData.dispatch({
+                type: 'toggleMainLoader',
+                payload: false,
+            });
         }, 500);
     }
 

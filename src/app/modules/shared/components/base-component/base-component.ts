@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { inject } from '@angular/core';
 import { Location } from '@angular/common';
 import { ToasterService } from 'src/app/modules/shared/services/toaster.service';
-import { BreadcrumbService } from 'src/app/modules/shared/components/mui-breadcrumb/breadcrumb.service';
 import { Subscription } from 'rxjs';
 
 export abstract class BaseComponent {
@@ -14,7 +13,6 @@ export abstract class BaseComponent {
     protected formBuilder: FormBuilder;
     protected location: Location;
     protected toasterService: ToasterService;
-    protected breadcrumbService: BreadcrumbService;
 
     subscriptions: Subscription = new Subscription();
 
@@ -25,7 +23,6 @@ export abstract class BaseComponent {
         this.formBuilder = inject(FormBuilder);
         this.location = inject(Location);
         this.toasterService = inject(ToasterService);
-        this.breadcrumbService = inject(BreadcrumbService);
     }
 
     // -----------------------

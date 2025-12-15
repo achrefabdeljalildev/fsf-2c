@@ -11,12 +11,11 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { SkeletonModule } from 'primeng/skeleton';
 import { LoadingDirective } from 'src/app/shared/app-loader/app-loader.directive';
 import { ButtonBusyDirective } from 'src/app/shared/button-loader/button-busy.directive';
-import { SafePipe } from './pipes/safe.pipe';
-import { MuiBreadcrumbComponent } from 'src/app/modules/shared/components/mui-breadcrumb/mui-breadcrumb.component';
 import { PdfViewerComponent } from 'src/app/modules/shared/components/pdf-viewer/pdf-viewer.component';
+import { SkeletonModule } from 'primeng/skeleton';
+import { SafePipe } from './pipes/safe.pipe';
 
 @NgModule({
     imports: [
@@ -35,7 +34,6 @@ import { PdfViewerComponent } from 'src/app/modules/shared/components/pdf-viewer
         PdfViewerComponent,
         //modals
         SafePipe,
-        MuiBreadcrumbComponent,
     ],
     exports: [
         // components
@@ -51,7 +49,6 @@ import { PdfViewerComponent } from 'src/app/modules/shared/components/pdf-viewer
         LoadingDirective,
         ButtonBusyDirective,
         NgxSpinnerModule,
-        MuiBreadcrumbComponent,
     ],
 })
 export class SharedModule {

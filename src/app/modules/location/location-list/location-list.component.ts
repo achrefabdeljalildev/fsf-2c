@@ -124,14 +124,6 @@ export class LocationListComponent extends BaseComponent {
 
     constructor() {
         super();
-
-        this.breadcrumbService.setItems([
-            { label: 'الصفحة الرئيسية', route: '/' },
-            { label: 'صفحة تجريبية', route: '/services' },
-            { label: 'صفحة تجريبية', route: '/services' },
-            { label: 'صفحة تجريبية', route: '/services' },
-            { label: 'صفحة تجريبية', route: '/services' },
-        ]);
     }
 
     get filteredRows(): SiteRow[] {

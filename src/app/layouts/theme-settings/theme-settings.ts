@@ -3,13 +3,14 @@ import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 
 @Component({
-    selector: 'setting',
-    templateUrl: './theme-customizer.html',
+    selector: 'theme-settings',
+    templateUrl: './theme-settings.html',
     standalone: false,
 })
 export class ThemeCustomizerComponent {
     store: any;
     showCustomizer = false;
+
     constructor(
         public storeData: Store<any>,
         public router: Router,

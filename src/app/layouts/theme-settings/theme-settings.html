@@ -1,7 +1,7 @@
 ﻿<div>
     <div
-        class="fixed inset-0 z-[51] hidden bg-[black]/60 px-4 transition-[display]"
         [ngClass]="{ '!block': showCustomizer }"
+        class="fixed inset-0 z-[51] hidden bg-[black]/60 px-4 transition-[display]"
         (click)="showCustomizer = false"
     ></div>
 
@@ -16,7 +16,9 @@
         >
             <icon-settings class="h-5 w-5 animate-[spin_3s_linear_infinite]" />
         </a>
-        <ng-scrollbar class="relative h-full overflow-x-hidden ltr:-mr-3 ltr:pr-3 rtl:-ml-3 rtl:pl-3">
+        <ng-scrollbar
+            class="relative h-full overflow-x-hidden ltr:-mr-3 ltr:pr-3 rtl:-ml-3 rtl:pl-3"
+        >
             <div>
                 <div class="relative pb-5 text-center">
                     <a
@@ -26,12 +28,22 @@
                     >
                         <icon-x class="h-5 w-5" />
                     </a>
-                    <h4 class="mb-1 tajawal-bold text-primary">{{ "customizer.title" | translate }}</h4>
-                    <p class="text-white-dark">{{ "customizer.description" | translate }}</p>
+                    <h4 class="mb-1 tajawal-bold text-primary">
+                        {{ "customizer.title" | translate }}
+                    </h4>
+                    <p class="text-white-dark">
+                        {{ "customizer.description" | translate }}
+                    </p>
                 </div>
-                <div class="mb-3 rounded-md border border-dashed border-[#e0e6ed] p-3 dark:border-[#1b2e4b]">
-                    <h5 class="mb-1 text-base leading-none dark:text-white">{{ "customizer.colorScheme.title" | translate }}</h5>
-                    <p class="text-xs text-white-dark">{{ "customizer.colorScheme.description" | translate }}</p>
+                <div
+                    class="mb-3 rounded-md border border-dashed border-[#e0e6ed] p-3 dark:border-[#1b2e4b]"
+                >
+                    <h5 class="mb-1 text-base leading-none dark:text-white">
+                        {{ "customizer.colorScheme.title" | translate }}
+                    </h5>
+                    <p class="text-xs text-white-dark">
+                        {{ "customizer.colorScheme.description" | translate }}
+                    </p>
                     <div class="mt-3 grid grid-cols-3 gap-2">
                         <button
                             type="button"
@@ -39,7 +51,9 @@
                             [ngClass]="[store.theme === 'light' ? 'btn-primary' : 'btn-outline-primary']"
                             (click)="storeData.dispatch({ type: 'toggleTheme', payload: 'light'})"
                         >
-                            <icon-sun class="h-5 w-5 shrink-0 ltr:mr-2 rtl:ml-2" />
+                            <icon-sun
+                                class="h-5 w-5 shrink-0 ltr:mr-2 rtl:ml-2"
+                            />
                             {{ "theme.light" | translate }}
                         </button>
                         <button
@@ -48,7 +62,9 @@
                             [ngClass]="[store.theme === 'dark' ? 'btn-primary' : 'btn-outline-primary']"
                             (click)="storeData.dispatch({ type: 'toggleTheme', payload: 'dark'})"
                         >
-                            <icon-moon class="h-5 w-5 shrink-0 ltr:mr-2 rtl:ml-2" />
+                            <icon-moon
+                                class="h-5 w-5 shrink-0 ltr:mr-2 rtl:ml-2"
+                            />
                             {{ "theme.dark" | translate }}
                         </button>
                         <button
@@ -57,15 +73,24 @@
                             [ngClass]="[store.theme === 'system' ? 'btn-primary' : 'btn-outline-primary']"
                             (click)="storeData.dispatch({ type: 'toggleTheme', payload:'system'})"
                         >
-                            <icon-laptop class="h-5 w-5 shrink-0 ltr:mr-2 rtl:ml-2" />
+                            <icon-laptop
+                                class="h-5 w-5 shrink-0 ltr:mr-2 rtl:ml-2"
+                            />
                             {{ "theme.system" | translate }}
                         </button>
                     </div>
                 </div>
 
-                <div class="mb-3 rounded-md border border-dashed border-[#e0e6ed] p-3 dark:border-[#1b2e4b]">
-                    <h5 class="mb-1 text-base leading-none dark:text-white">{{ "customizer.navigationPosition.title" | translate }}</h5>
-                    <p class="text-xs text-white-dark">{{ "customizer.navigationPosition.description" | translate }}</p>
+                <div
+                    class="mb-3 rounded-md border border-dashed border-[#e0e6ed] p-3 dark:border-[#1b2e4b]"
+                >
+                    <h5 class="mb-1 text-base leading-none dark:text-white">
+                        {{ "customizer.navigationPosition.title" | translate }}
+                    </h5>
+                    <p class="text-xs text-white-dark">
+                        {{ "customizer.navigationPosition.description" |
+                        translate }}
+                    </p>
                     <div class="mt-3 grid grid-cols-3 gap-2">
                         <button
                             type="button"
@@ -104,9 +129,15 @@
                         </label>
                     </div>
                 </div>
-                <div class="mb-3 rounded-md border border-dashed border-[#e0e6ed] p-3 dark:border-[#1b2e4b]">
-                    <h5 class="mb-1 text-base leading-none dark:text-white">{{ "customizer.layoutStyle.title" | translate }}</h5>
-                    <p class="text-xs text-white-dark">{{ "customizer.layoutStyle.description" | translate }}</p>
+                <div
+                    class="mb-3 rounded-md border border-dashed border-[#e0e6ed] p-3 dark:border-[#1b2e4b]"
+                >
+                    <h5 class="mb-1 text-base leading-none dark:text-white">
+                        {{ "customizer.layoutStyle.title" | translate }}
+                    </h5>
+                    <p class="text-xs text-white-dark">
+                        {{ "customizer.layoutStyle.description" | translate }}
+                    </p>
                     <div class="mt-3 flex gap-2">
                         <button
                             type="button"
@@ -126,9 +157,15 @@
                         </button>
                     </div>
                 </div>
-                <div class="mb-3 rounded-md border border-dashed border-[#e0e6ed] p-3 dark:border-[#1b2e4b]">
-                    <h5 class="mb-1 text-base leading-none dark:text-white">{{ "customizer.direction.title" | translate }}</h5>
-                    <p class="text-xs text-white-dark">{{ "customizer.direction.description" | translate }}</p>
+                <div
+                    class="mb-3 rounded-md border border-dashed border-[#e0e6ed] p-3 dark:border-[#1b2e4b]"
+                >
+                    <h5 class="mb-1 text-base leading-none dark:text-white">
+                        {{ "customizer.direction.title" | translate }}
+                    </h5>
+                    <p class="text-xs text-white-dark">
+                        {{ "customizer.direction.description" | translate }}
+                    </p>
                     <div class="mt-3 flex gap-2">
                         <button
                             type="button"
@@ -149,9 +186,15 @@
                     </div>
                 </div>
 
-                <div class="mb-3 rounded-md border border-dashed border-[#e0e6ed] p-3 dark:border-[#1b2e4b]">
-                    <h5 class="mb-1 text-base leading-none dark:text-white">{{ "customizer.navbarType.title" | translate }}</h5>
-                    <p class="text-xs text-white-dark">{{ "customizer.navbarType.description" | translate }}</p>
+                <div
+                    class="mb-3 rounded-md border border-dashed border-[#e0e6ed] p-3 dark:border-[#1b2e4b]"
+                >
+                    <h5 class="mb-1 text-base leading-none dark:text-white">
+                        {{ "customizer.navbarType.title" | translate }}
+                    </h5>
+                    <p class="text-xs text-white-dark">
+                        {{ "customizer.navbarType.description" | translate }}
+                    </p>
                     <div class="mt-3 flex items-center gap-3 text-primary">
                         <label class="mb-0 inline-flex">
                             <input
@@ -186,25 +229,52 @@
                     </div>
                 </div>
 
-                <div class="mb-3 rounded-md border border-dashed border-[#e0e6ed] p-3 dark:border-[#1b2e4b]">
-                    <h5 class="mb-1 text-base leading-none dark:text-white">{{ "customizer.routerTransition.title" | translate }}</h5>
-                    <p class="text-xs text-white-dark">{{ "customizer.routerTransition.description" | translate }}</p>
+                <div
+                    class="mb-3 rounded-md border border-dashed border-[#e0e6ed] p-3 dark:border-[#1b2e4b]"
+                >
+                    <h5 class="mb-1 text-base leading-none dark:text-white">
+                        {{ "customizer.routerTransition.title" | translate }}
+                    </h5>
+                    <p class="text-xs text-white-dark">
+                        {{ "customizer.routerTransition.description" | translate
+                        }}
+                    </p>
                     <div class="mt-3">
                         <select
                             [ngModel]="store.animation"
                             class="form-select border-primary text-primary"
                             (ngModelChange)="storeData.dispatch({type: 'toggleAnimation', payload:$event})"
                         >
-                            <option value="">{{ "animation.none" | translate }}</option>
-                            <option value="animate__fadeIn">{{ "animation.fade" | translate }}</option>
-                            <option value="animate__fadeInDown">{{ "animation.fadeDown" | translate }}</option>
-                            <option value="animate__fadeInUp">{{ "animation.fadeUp" | translate }}</option>
-                            <option value="animate__fadeInLeft">{{ "animation.fadeLeft" | translate }}</option>
-                            <option value="animate__fadeInRight">{{ "animation.fadeRight" | translate }}</option>
-                            <option value="animate__slideInDown">{{ "animation.slideDown" | translate }}</option>
-                            <option value="animate__slideInLeft">{{ "animation.slideLeft" | translate }}</option>
-                            <option value="animate__slideInRight">{{ "animation.slideRight" | translate }}</option>
-                            <option value="animate__zoomIn">{{ "animation.zoomIn" | translate }}</option>
+                            <option value="">
+                                {{ "animation.none" | translate }}
+                            </option>
+                            <option value="animate__fadeIn">
+                                {{ "animation.fade" | translate }}
+                            </option>
+                            <option value="animate__fadeInDown">
+                                {{ "animation.fadeDown" | translate }}
+                            </option>
+                            <option value="animate__fadeInUp">
+                                {{ "animation.fadeUp" | translate }}
+                            </option>
+                            <option value="animate__fadeInLeft">
+                                {{ "animation.fadeLeft" | translate }}
+                            </option>
+                            <option value="animate__fadeInRight">
+                                {{ "animation.fadeRight" | translate }}
+                            </option>
+                            <option value="animate__slideInDown">
+                                {{ "animation.slideDown" | translate }}
+                            </option>
+                            <option value="animate__slideInLeft">
+                                {{ "animation.slideLeft" | translate }}
+                            </option>
+                            <option value="animate__slideInRight">
+                                {{ "animation.slideRight" | translate }}
+                            </option>
+                            <option value="animate__zoomIn">
+                                {{ "animation.zoomIn" | translate }}
+                            </option>
                         </select>
                     </div>
                 </div>

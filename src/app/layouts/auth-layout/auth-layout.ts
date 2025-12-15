@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AppService } from '../service/app.service';
+import { AppService } from '../../service/app.service';
 
 @Component({
     selector: 'app-root',
     templateUrl: './auth-layout.html',
-    standalone: false
+    standalone: false,
 })
 export class AuthLayout {
     store: any;

@@ -42,20 +42,13 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 // dashboard
 import { SampleComponent } from './sample.component';
 
-// Layouts
-import { AppLayout } from './layouts/app-layout';
-import { AuthLayout } from './layouts/auth-layout';
-
 import { NgxSpinnerService } from 'ngx-spinner';
-import { FooterComponent } from './layouts/footer';
-import { HeaderComponent } from './layouts/header';
-import { SidebarComponent } from './layouts/sidebar/sidebar';
-import { ThemeCustomizerComponent } from './layouts/theme-customizer';
 import { DashboardComponent } from 'src/app/modules/dashboard/dashboard.component';
 
 // primeng components
 import { Tree } from 'primeng/tree';
 import { BaseUrlInterceptor } from 'src/app/modules/shared/services/base-url-intercept.service';
+import { AppLayoutsModule } from 'src/app/layouts/app-layouts.module';
 
 // AOT compilation support
 export function HttpLoaderFactory(
@@ -74,6 +67,7 @@ export function HttpLoaderFactory(
         ToastModule,
         FormsModule,
         HttpClientModule,
+        AppLayoutsModule,
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
@@ -86,17 +80,7 @@ export function HttpLoaderFactory(
         Tree,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    declarations: [
-        AppComponent,
-        HeaderComponent,
-        FooterComponent,
-        SidebarComponent,
-        DashboardComponent,
-        ThemeCustomizerComponent,
-        SampleComponent,
-        AppLayout,
-        AuthLayout,
-    ],
+    declarations: [AppComponent, SampleComponent, DashboardComponent],
     providers: [
         Title,
         {
