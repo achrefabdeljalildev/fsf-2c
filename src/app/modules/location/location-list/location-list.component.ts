@@ -1,16 +1,4 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-
-// PrimeNG 18
-import { CardModule } from 'primeng/card';
-import { ButtonModule } from 'primeng/button';
-import { BadgeModule } from 'primeng/badge';
-import { TagModule } from 'primeng/tag';
-import { TableModule } from 'primeng/table';
-import { InputTextModule } from 'primeng/inputtext';
-import { CheckboxModule } from 'primeng/checkbox';
-import { DividerModule } from 'primeng/divider';
 import { BaseComponent } from 'src/app/modules/shared/components/base-component/base-component';
 
 type ActionSeverity = 'success' | 'info' | 'warn' | 'danger';
@@ -45,20 +33,8 @@ interface SiteRow {
 
 @Component({
     selector: 'app-location-list',
-    standalone: true,
-    imports: [
-        CommonModule,
-        FormsModule,
-        CardModule,
-        ButtonModule,
-        BadgeModule,
-        TagModule,
-        TableModule,
-        InputTextModule,
-        CheckboxModule,
-        DividerModule,
-    ],
     templateUrl: './location-list.component.html',
+    standalone: false,
 })
 export class LocationListComponent extends BaseComponent {
     // Top stats

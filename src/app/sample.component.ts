@@ -7,6 +7,7 @@ import { BreadcrumbService } from 'src/app/modules/shared/components/mui-breadcr
             <h1>صفحة تجريبية</h1>
         </div>
     </div>`,
+    standalone: false
 })
 export class SampleComponent {
     constructor(private breadcrumbService: BreadcrumbService) {

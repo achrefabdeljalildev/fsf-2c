@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
     selector: 'app-auth',
     templateUrl: './auth.component.html',
+    standalone: false
 })
 export class AuthComponent {
     constructor(private translateService: TranslateService) {

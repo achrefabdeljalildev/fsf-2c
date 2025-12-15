@@ -38,6 +38,7 @@ import {
             </ng-container>
         </ol>
     `,
+    standalone: false
 })
 export class MuiBreadcrumbComponent {
     items$: Observable<BreadcrumbItem[]> = this.breadcrumbService.items$;

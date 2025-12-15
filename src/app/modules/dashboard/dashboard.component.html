@@ -67,7 +67,7 @@
     <div *ngIf="selectedCard" class="py-12">
         <!-- Subcards Section -->
         <h1 class="text-3xl font-bold mb-8">الادارات</h1>
-        <div class="grid grid-cols-4 gap-4 w-full">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 w-full">
             <a
                 *ngFor="let subcard of selectedCard.subcards"
                 routerLink="/locations"
