@@ -1,16 +1,15 @@
-import {Component} from "@angular/core";
+import { Component } from '@angular/core';
 
-
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {TranslateService} from '@ngx-translate/core';
-import {Router} from '@angular/router';
-import {AppService} from '../../../../service/app.service';
-import {Store} from '@ngrx/store';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
+import { Router } from '@angular/router';
+import { AppService } from '../../../../shared/services/app.service';
+import { Store } from '@ngrx/store';
 
 @Component({
     selector: 'app-verification',
     templateUrl: './verification.component.html',
-    standalone: false
+    standalone: false,
 })
 export class VerificationComponent {
     isArabic: boolean = false;
@@ -29,7 +28,10 @@ export class VerificationComponent {
         this.translate.setDefaultLang('en');
         // Create the FormGroup with a 'activationCode' control
         this.activationForm = this.fb.group({
-            activationCode: ['', [Validators.required, Validators.pattern('^[0-9]{6}$')]],
+            activationCode: [
+                '',
+                [Validators.required, Validators.pattern('^[0-9]{6}$')],
+            ],
         });
     }
 
@@ -49,10 +51,10 @@ export class VerificationComponent {
         this.translate.use(newLang);
         this.appSetting.toggleLanguage(newLang);
         if (newLang === 'ar') {
-            this.storeData.dispatch({type: 'toggleRTL', payload: 'rtl'});
+            this.storeData.dispatch({ type: 'toggleRTL', payload: 'rtl' });
             localStorage.setItem('i18n_locale', 'ar');
         } else {
-            this.storeData.dispatch({type: 'toggleRTL', payload: 'ltr'});
+            this.storeData.dispatch({ type: 'toggleRTL', payload: 'ltr' });
             localStorage.setItem('i18n_locale', 'en');
         }
         window.location.reload();

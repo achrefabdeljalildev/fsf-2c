@@ -1,0 +1,14 @@
+/* Breadcrumb */
+html[dir='rtl'] .p-breadcrumb-separator {
+    transform: rotate(180deg);
+}
+
+.p-breadcrumb {
+    padding-inline-start: 0px !important;
+    padding-block-start: 0px !important;
+    background-color: transparent !important;
+}
+
+.p-icon {
+    height: 0.7rem !important;
+}

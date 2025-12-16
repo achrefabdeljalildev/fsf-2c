@@ -1,0 +1,161 @@
+<!-- Modal Backdrop -->
+<div
+    *ngIf="isVisible"
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm"
+    (click)="onBackdropClick($event)"
+>
+    <!-- Modal Container -->
+    <div
+        class="relative flex flex-col w-full max-w-6xl h-[90vh] mx-4 bg-white rounded-2xl shadow-2xl overflow-hidden animate-in fade-in-0 zoom-in-95 duration-300"
+    >
+        <!-- Modal Header -->
+        <div
+            class="flex items-center justify-end p-6 border-b border-gray-200 bg-gradient-to-r from-primary/5 to-primary/10"
+        >
+            <!-- Action Buttons -->
+            <div class="flex items-center gap-3">
+                <button
+                    type="button"
+                    (click)="downloadDocument()"
+                    [disabled]="isLoading || !src"
+                    class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
+                >
+                    <svg
+                        class="w-4 h-4 mr-2"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                        ></path>
+                    </svg>
+                    {{ 'decisions.modal.download' | translate }}
+                </button>
+
+                <button
+                    type="button"
+                    (click)="printDocument()"
+                    [disabled]="isLoading || !src"
+                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-primary border border-transparent rounded-lg hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
+                >
+                    <svg
+                        class="w-4 h-4 mr-2"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"
+                        ></path>
+                    </svg>
+                    {{ 'decisions.modal.print' | translate }}
+                </button>
+
+                <button
+                    type="button"
+                    (click)="onClose()"
+                    class="inline-flex items-center justify-center w-8 h-8 text-gray-400 bg-transparent rounded-lg hover:bg-gray-100 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-300 transition-colors duration-200"
+                >
+                    <svg
+                        class="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12"
+                        ></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Modal Body -->
+        <div class="flex-1 p-6 overflow-hidden">
+            <!-- Loading State -->
+            <div
+                *ngIf="isLoading"
+                class="flex flex-col items-center justify-center h-full space-y-4"
+            >
+                <div class="relative">
+                    <div
+                        class="w-16 h-16 border-4 border-primary/20 border-t-primary rounded-full animate-spin"
+                    ></div>
+                </div>
+                <p class="text-lg font-medium text-gray-600">
+                    {{ 'decisions.modal.loading' | translate }}
+                </p>
+                <p class="text-sm text-gray-500">
+                    {{ 'decisions.modal.loadingDescription' | translate }}
+                </p>
+            </div>
+
+            <!-- Error State -->
+            <div
+                *ngIf="error && !isLoading"
+                class="flex flex-col items-center justify-center h-full space-y-4"
+            >
+                <div class="p-4 bg-red-100 rounded-full">
+                    <svg
+                        class="w-12 h-12 text-red-600"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"
+                        ></path>
+                    </svg>
+                </div>
+                <p class="text-lg font-medium text-gray-900">
+                    {{ 'decisions.modal.error' | translate }}
+                </p>
+                <p class="text-sm text-gray-600">
+                    {{ 'decisions.modal.errorDescription' | translate }}
+                </p>
+                <button
+                    type="button"
+                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-primary bg-primary/10 border border-primary/20 rounded-lg hover:bg-primary/20 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-colors duration-200"
+                >
+                    <svg
+                        class="w-4 h-4 mr-2"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                        ></path>
+                    </svg>
+                    {{ 'decisions.modal.retry' | translate }}
+                </button>
+            </div>
+
+            <!-- Document Viewer -->
+            <div *ngIf="src && !isLoading && !error" class="h-full">
+                <iframe
+                    [src]="blobDocument | safe: 'resourceUrl'"
+                    class="w-full h-full border-0 rounded-lg shadow-inner"
+                    frameborder="0"
+                >
+                </iframe>
+            </div>
+        </div>
+    </div>
+</div>

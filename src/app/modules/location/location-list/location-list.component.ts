@@ -1,34 +1,13 @@
 import { Component } from '@angular/core';
-import { BaseComponent } from 'src/app/modules/shared/components/base-component/base-component';
+import { BaseComponent } from 'src/app/shared/components/base-component/base-component';
+import { DataTableColumn } from 'src/app/shared/components/base-datatable/base-datatable.component';
 
-type ActionSeverity = 'success' | 'info' | 'warn' | 'danger';
-
-interface StatCard {
-    icon: string;
-    value: string;
-    label: string;
-}
-
-interface ActionLogItem {
-    team: string;
-    statusLabel: string;
-    severity: ActionSeverity;
-    description: string;
-}
-
-interface RankedItem {
-    title: string;
-    subtitle: string;
-    dateText: string;
-}
-
-interface SiteRow {
-    selected: boolean;
-    code: string;
+export interface User {
+    id: number;
     name: string;
-    mobileRounds: number;
-    fixedRounds: number;
-    equipment: string;
+    email: string;
+    role: string;
+    active: boolean;
 }
 
 @Component({
@@ -37,121 +16,365 @@ interface SiteRow {
     standalone: false,
 })
 export class LocationListComponent extends BaseComponent {
-    // Top stats
-    stats: StatCard[] = [
-        { icon: 'pi pi-map-marker', value: '15', label: 'عدد مواقع المنطقة' },
-        {
-            icon: 'pi pi-percentage',
-            value: '25%',
-            label: 'نسبة المواقع المرممة',
-        },
-        { icon: 'pi pi-home', value: '10', label: 'المواقع بإنتظار التنشيط' },
-        { icon: 'pi pi-id-card', value: '08', label: 'بإنتظار التحقق' },
+    columns: DataTableColumn[] = [
+        { field: 'id', header: 'ID' },
+        { field: 'name', header: 'Name' },
+        { field: 'email', header: 'Email' },
     ];
 
-    // Action log
-    actionLog: ActionLogItem[] = [
+    // component.ts
+    users: User[] = [
         {
-            team: 'الفريق 150',
-            statusLabel: 'تفقد',
-            severity: 'success',
-            description: 'وصف سريع يتناسب مع هذه الجزئية بشكل مبسط وسلس...',
+            id: 1,
+            name: 'John Doe',
+            email: 'john.doe@example.com',
+            role: 'Admin',
+            active: true,
         },
         {
-            team: 'الفريق 150',
-            statusLabel: 'تفقد',
-            severity: 'success',
-            description: 'وصف سريع يتناسب مع هذه الجزئية بشكل مبسط وسلس...',
+            id: 2,
+            name: 'Jane Smith',
+            email: 'jane.smith@example.com',
+            role: 'User',
+            active: false,
         },
         {
-            team: 'الفريق 150',
-            statusLabel: 'تفقد',
-            severity: 'success',
-            description: 'وصف سريع يتناسب مع هذه الجزئية بشكل مبسط وسلس...',
+            id: 3,
+            name: 'Michael Brown',
+            email: 'michael.brown@example.com',
+            role: 'Manager',
+            active: true,
         },
         {
-            team: 'الفريق 150',
-            statusLabel: 'وسم',
-            severity: 'warn',
-            description: 'وصف سريع يتناسب مع هذه الجزئية بشكل مبسط وسلس...',
+            id: 1,
+            name: 'John Doe',
+            email: 'john.doe@example.com',
+            role: 'Admin',
+            active: true,
+        },
+        {
+            id: 2,
+            name: 'Jane Smith',
+            email: 'jane.smith@example.com',
+            role: 'User',
+            active: false,
+        },
+        {
+            id: 3,
+            name: 'Michael Brown',
+            email: 'michael.brown@example.com',
+            role: 'Manager',
+            active: true,
+        },
+        {
+            id: 1,
+            name: 'John Doe',
+            email: 'john.doe@example.com',
+            role: 'Admin',
+            active: true,
+        },
+        {
+            id: 2,
+            name: 'Jane Smith',
+            email: 'jane.smith@example.com',
+            role: 'User',
+            active: false,
+        },
+        {
+            id: 3,
+            name: 'Michael Brown',
+            email: 'michael.brown@example.com',
+            role: 'Manager',
+            active: true,
+        },
+        {
+            id: 1,
+            name: 'John Doe',
+            email: 'john.doe@example.com',
+            role: 'Admin',
+            active: true,
+        },
+        {
+            id: 2,
+            name: 'Jane Smith',
+            email: 'jane.smith@example.com',
+            role: 'User',
+            active: false,
+        },
+        {
+            id: 3,
+            name: 'Michael Brown',
+            email: 'michael.brown@example.com',
+            role: 'Manager',
+            active: true,
+        },
+        {
+            id: 1,
+            name: 'John Doe',
+            email: 'john.doe@example.com',
+            role: 'Admin',
+            active: true,
+        },
+        {
+            id: 2,
+            name: 'Jane Smith',
+            email: 'jane.smith@example.com',
+            role: 'User',
+            active: false,
+        },
+        {
+            id: 3,
+            name: 'Michael Brown',
+            email: 'michael.brown@example.com',
+            role: 'Manager',
+            active: true,
+        },
+        {
+            id: 1,
+            name: 'John Doe',
+            email: 'john.doe@example.com',
+            role: 'Admin',
+            active: true,
+        },
+        {
+            id: 2,
+            name: 'Jane Smith',
+            email: 'jane.smith@example.com',
+            role: 'User',
+            active: false,
+        },
+        {
+            id: 3,
+            name: 'Michael Brown',
+            email: 'michael.brown@example.com',
+            role: 'Manager',
+            active: true,
+        },
+        {
+            id: 1,
+            name: 'John Doe',
+            email: 'john.doe@example.com',
+            role: 'Admin',
+            active: true,
+        },
+        {
+            id: 2,
+            name: 'Jane Smith',
+            email: 'jane.smith@example.com',
+            role: 'User',
+            active: false,
+        },
+        {
+            id: 3,
+            name: 'Michael Brown',
+            email: 'michael.brown@example.com',
+            role: 'Manager',
+            active: true,
+        },
+        {
+            id: 1,
+            name: 'John Doe',
+            email: 'john.doe@example.com',
+            role: 'Admin',
+            active: true,
+        },
+        {
+            id: 2,
+            name: 'Jane Smith',
+            email: 'jane.smith@example.com',
+            role: 'User',
+            active: false,
+        },
+        {
+            id: 3,
+            name: 'Michael Brown',
+            email: 'michael.brown@example.com',
+            role: 'Manager',
+            active: true,
+        },
+        {
+            id: 1,
+            name: 'John Doe',
+            email: 'john.doe@example.com',
+            role: 'Admin',
+            active: true,
+        },
+        {
+            id: 2,
+            name: 'Jane Smith',
+            email: 'jane.smith@example.com',
+            role: 'User',
+            active: false,
+        },
+        {
+            id: 3,
+            name: 'Michael Brown',
+            email: 'michael.brown@example.com',
+            role: 'Manager',
+            active: true,
+        },
+        {
+            id: 1,
+            name: 'John Doe',
+            email: 'john.doe@example.com',
+            role: 'Admin',
+            active: true,
+        },
+        {
+            id: 2,
+            name: 'Jane Smith',
+            email: 'jane.smith@example.com',
+            role: 'User',
+            active: false,
+        },
+        {
+            id: 3,
+            name: 'Michael Brown',
+            email: 'michael.brown@example.com',
+            role: 'Manager',
+            active: true,
+        },
+        {
+            id: 1,
+            name: 'John Doe',
+            email: 'john.doe@example.com',
+            role: 'Admin',
+            active: true,
+        },
+        {
+            id: 2,
+            name: 'Jane Smith',
+            email: 'jane.smith@example.com',
+            role: 'User',
+            active: false,
+        },
+        {
+            id: 3,
+            name: 'Michael Brown',
+            email: 'michael.brown@example.com',
+            role: 'Manager',
+            active: true,
+        },
+        {
+            id: 1,
+            name: 'John Doe',
+            email: 'john.doe@example.com',
+            role: 'Admin',
+            active: true,
+        },
+        {
+            id: 2,
+            name: 'Jane Smith',
+            email: 'jane.smith@example.com',
+            role: 'User',
+            active: false,
+        },
+        {
+            id: 3,
+            name: 'Michael Brown',
+            email: 'michael.brown@example.com',
+            role: 'Manager',
+            active: true,
+        },
+        {
+            id: 1,
+            name: 'John Doe',
+            email: 'john.doe@example.com',
+            role: 'Admin',
+            active: true,
+        },
+        {
+            id: 2,
+            name: 'Jane Smith',
+            email: 'jane.smith@example.com',
+            role: 'User',
+            active: false,
+        },
+        {
+            id: 3,
+            name: 'Michael Brown',
+            email: 'michael.brown@example.com',
+            role: 'Manager',
+            active: true,
+        },
+        {
+            id: 1,
+            name: 'John Doe',
+            email: 'john.doe@example.com',
+            role: 'Admin',
+            active: true,
+        },
+        {
+            id: 2,
+            name: 'Jane Smith',
+            email: 'jane.smith@example.com',
+            role: 'User',
+            active: false,
+        },
+        {
+            id: 3,
+            name: 'Michael Brown',
+            email: 'michael.brown@example.com',
+            role: 'Manager',
+            active: true,
+        },
+        {
+            id: 1,
+            name: 'John Doe',
+            email: 'john.doe@example.com',
+            role: 'Admin',
+            active: true,
+        },
+        {
+            id: 2,
+            name: 'Jane Smith',
+            email: 'jane.smith@example.com',
+            role: 'User',
+            active: false,
+        },
+        {
+            id: 3,
+            name: 'Michael Brown',
+            email: 'michael.brown@example.com',
+            role: 'Manager',
+            active: true,
+        },
+        {
+            id: 1,
+            name: 'John Doe',
+            email: 'john.doe@example.com',
+            role: 'Admin',
+            active: true,
+        },
+        {
+            id: 2,
+            name: 'Jane Smith',
+            email: 'jane.smith@example.com',
+            role: 'User',
+            active: false,
+        },
+        {
+            id: 3,
+            name: 'Michael Brown',
+            email: 'michael.brown@example.com',
+            role: 'Manager',
+            active: true,
         },
     ];
 
-    // Ranking list
-    ranking: RankedItem[] = Array.from({ length: 4 }).map(() => ({
-        title: 'شركة أرامكو للبترول',
-        subtitle: 'آخر تحديث لاستماراة المسح الميداني',
-        dateText: 'يوم 5 نوفمبر 2025',
-    }));
+    totalRecords = 0;
+    loading = false;
 
-    // Table
-    searchText = '';
+    loadUsers(event: any) {
+        this.loading = true;
+        console.log('test', event);
 
-    rows: SiteRow[] = [
-        {
-            selected: false,
-            code: 'A-87650RT',
-            name: 'أرامكو للبترول',
-            mobileRounds: 5,
-            fixedRounds: 9,
-            equipment: 'الدراعية',
-        },
-        {
-            selected: false,
-            code: 'A-87650RT',
-            name: 'أرامكو للبترول',
-            mobileRounds: 10,
-            fixedRounds: 10,
-            equipment: 'المجمعة',
-        },
-        {
-            selected: false,
-            code: 'A-87650RT',
-            name: 'أرامكو للبترول',
-            mobileRounds: 12,
-            fixedRounds: 10,
-            equipment: 'الغاط',
-        },
-        {
-            selected: false,
-            code: 'A-87650RT',
-            name: 'أرامكو للبترول',
-            mobileRounds: 0,
-            fixedRounds: 20,
-            equipment: 'الدراعية',
-        },
-    ];
-
-    constructor() {
-        super();
-
-        this.breadcrumbService.setItems([
-            { label: 'الصفحة الرئيسية', route: '/' },
-            { label: 'صفحة تجريبية', route: '/services' },
-            { label: 'صفحة تجريبية', route: '/services' },
-            { label: 'صفحة تجريبية', route: '/services' },
-            { label: 'صفحة تجريبية', route: '/services' },
-        ]);
+        setTimeout(() => {
+            this.loading = false;
+        }, 1000);
     }
 
-    get filteredRows(): SiteRow[] {
-        return this.rows;
-        // const q = (this.searchText || '').trim().toLowerCase();
-        // if (!q) return this.rows;
-
-        // return this.rows.filter(
-        //     (r) =>
-        //         r.code.toLowerCase().includes(q) ||
-        //         r.name.toLowerCase().includes(q) ||
-        //         r.equipment.toLowerCase().includes(q),
-        // );
+    onRowSelected($event: User) {
+        console.log($event);
     }
-
-    clearSearch(): void {
-        this.searchText = '';
-    }
-
-    // Dummy handlers
-    viewMore(): void {}
-    openRankItem(item: RankedItem): void {}
 }

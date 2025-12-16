@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
 // dashboard
-import { AppLayout } from './layouts/app-layout';
-import { AuthLayout } from './layouts/auth-layout';
-import { DashboardComponent } from 'src/app/modules/dashboard/dashboard.component';
-import { SampleComponent } from 'src/app/sample.component';
-import { AuthGuard } from 'src/app/modules/shared/services/guard.service';
+import { AppLayout } from './layouts/app-layout/app-layout';
+import { AuthLayout } from './layouts/auth-layout/auth-layout';
+import { DashboardComponent } from 'src/app/layouts/dashboard/dashboard.component';
+import { MaintenenceComponent } from 'src/app/pages/maintenence';
+import { AuthGuard } from 'src/app/shared/services/guard.service';
 
 export const routes: Routes = [
     {
@@ -27,6 +27,7 @@ export const routes: Routes = [
     },
     {
         path: 'auth',
+        component: AuthLayout,
         loadChildren: () =>
             import('./modules/auth/auth.module').then((m) => m.AuthModule),
     },
@@ -46,7 +47,7 @@ export const routes: Routes = [
         children: [
             {
                 path: '',
-                component: SampleComponent,
+                component: MaintenenceComponent,
             },
         ],
     },

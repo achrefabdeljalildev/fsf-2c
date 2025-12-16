@@ -8,6 +8,8 @@
         "username": "اسم المستخدم",
         "password": "كلمة المرور",
         "forgetPassword": "نسيت كلمة المرور؟",
-        "rememberMe": "تذكرني"
+        "rememberMe": "تذكرني",
+        "getforgotPassword": "استعادة كلمة المرور",
+        "usernameOrEmailIsNotCorrect": "اسم المستخدم أو البريد الإلكتروني غير صحيح"
     }
 }

@@ -1,0 +1,87 @@
+<app-header></app-header>
+
+<!-- Hero Section -->
+<div
+    class="bg-gradient-to-r from-[#042424] to-[#0E8A8A] py-16 px-8 text-center text-white relative overflow-hidden"
+>
+    <div class="relative z-10 max-w-4xl mx-auto">
+        <h1 class="text-4xl font-bold mb-4">الأنظمة الأمنية</h1>
+        <p class="text-lg text-teal-100">
+            هنا يمكنك تخصيص وصف أ رابعة أسطر هنا يمكنك تخصيص وصف و أ رابعة أسطر
+            هنا يمكنك تخصيص وصف.
+        </p>
+    </div>
+
+    <img
+        class="absolute right-6 top-0 h-full"
+        src="assets/images/lines-effect.png"
+        alt=""
+    />
+</div>
+
+<!-- Cards Grid -->
+<div class="px-20 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <!-- All Cards -->
+        <div
+            *ngFor="let card of cards"
+            (click)="selectCard(card)"
+            [ngClass]="
+                card === selectedCard
+                    ? 'bg-teal-600 text-white'
+                    : 'bg-lightBlue text-gray-800'
+            "
+            class="cursor-pointer p-8 rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-100"
+        >
+            <div class="flex flex-col items-center text-center mb-6">
+                <div
+                    [ngClass]="
+                        card === selectedCard
+                            ? 'bg-white text-teal-600'
+                            : 'bg-teal-600 text-white'
+                    "
+                    class="px-5 py-4 rounded-full mb-4"
+                >
+                    <i [class]="card.icon"></i>
+                </div>
+                <h3
+                    class="text-xl font-bold text-gray-800 mb-3"
+                    [ngClass]="
+                        card === selectedCard ? 'text-white' : 'text-gray-800'
+                    "
+                >
+                    {{ card.title }}
+                </h3>
+            </div>
+            <p
+                [ngClass]="
+                    card === selectedCard ? 'text-white' : 'text-gray-600'
+                "
+                class="text-sm mb-6 text-right"
+            >
+                هنا يمكنك تخصيص وصف أ رابعة أسطر هنا يمكنك تخصيص وصف و أ رابعة
+                أسطر هنا يمكنك تخصيص وصف.
+            </p>
+        </div>
+    </div>
+    <div *ngIf="selectedCard" class="py-12">
+        <!-- Subcards Section -->
+        <h1 class="text-3xl font-bold mb-8">الادارات</h1>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 w-full">
+            <a
+                *ngFor="let subcard of selectedCard.subcards"
+                routerLink="/locations"
+                class="bg-lightBlue shadow-sm hover:shadow-md transition-shadow border border-[#0E8A8A63] w-full cursor-pointer p-3 px-2 rounded-lg shadow-sm border border-gray-100"
+            >
+                <div
+                    class="bg-teal-600 text-3xl text-center w-12 h-12 rounded-full mb-4 hover:bg-teal-700 text-white transition-colors"
+                >
+                    <i class="pi pi-address-book"></i>
+                </div>
+                <h3 class="font-bold text-gray-800 mb-3">
+                    {{ subcard.title }}
+                </h3>
+            </a>
+        </div>
+    </div>
+</div>

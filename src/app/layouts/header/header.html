@@ -1,0 +1,61 @@
+﻿<!-- Top Menu Bar -->
+<div class="bg-primary text-white px-8 py-1 sticky top-0 z-50">
+    <div class="flex justify-between items-center gap-4 text-white">
+        <!-- Right Menu (now on right in RTL) -->
+        <div class="flex gap-4">
+            <span class="flex items-center gap-2">
+                <i class="pi pi-calendar"></i>
+                <span>{{ currentDate }}</span>
+            </span>
+            <span class="flex items-center gap-2">
+                <i class="pi pi-clock"></i>
+                <span>{{ currentTime }}</span>
+            </span>
+            <span class="flex items-center gap-2">
+                <i class="pi pi-map-marker"></i>
+                <span>{{ currentLocation }}</span>
+            </span>
+        </div>
+        <div class="flex gap-4">
+            <span
+                class="flex items-center gap-2 cursor-pointer rotate-180 origin-center"
+                (click)="logout()"
+                title="تسجيل الخروج"
+            >
+                <i class="pi pi-sign-out"></i>
+            </span>
+        </div>
+    </div>
+</div>
+<div
+    class="bg-white border-b border-gray-200 px-8 sticky top-[28px] z-40 dark:bg-[#0b0e23] dark:border-b-gray-700"
+>
+    <div class="flex justify-between items-center gap-4 h-full">
+        <a class="flex gap-4 h-full" routerLink="/">
+            <img src="assets/images/logo.png" alt="Logo" class="h-10" />
+        </a>
+
+        <div class="flex gap-4 h-full">
+            <div
+                class="hover:bg-primary hover:text-white cursor-pointer flex items-center gap-1 px-2 py-4 rounded"
+            >
+                <i class="pi pi-search"></i>
+                <span>بحث</span>
+            </div>
+            <div
+                class="flex items-center hover:bg-primary hover:text-white cursor-pointer flex items-center gap-1 px-2 py-4 rounded"
+            >
+                <i class="pi pi-cog"></i>
+                <span>الإعدادات</span>
+            </div>
+            <div
+                class="flex items-center hover:bg-primary hover:text-white cursor-pointer flex items-center gap-1 px-2 py-4 rounded"
+            >
+                <i class="pi pi-language"></i>
+                <span (click)="toggleLanguage()">
+                    {{ isArabeMode() ? 'عربي' : 'English' }}
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

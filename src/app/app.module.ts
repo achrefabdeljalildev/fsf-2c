@@ -15,13 +15,11 @@ import {
     Router,
     RouterModule,
 } from '@angular/router';
+
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
-import { AppConfigModule } from './app-config.module';
 
-//Routes
 import { routes } from './app.route';
-
 import { AppComponent } from './app.component';
 
 // store
@@ -29,7 +27,7 @@ import { StoreModule } from '@ngrx/store';
 import { indexReducer } from './store/index.reducer';
 
 // shared module
-import { SharedModule } from 'src/app/modules/shared/shared.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 // i18n
 import {
@@ -40,22 +38,17 @@ import {
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 // dashboard
-import { SampleComponent } from './sample.component';
-
-// Layouts
-import { AppLayout } from './layouts/app-layout';
-import { AuthLayout } from './layouts/auth-layout';
-
 import { NgxSpinnerService } from 'ngx-spinner';
-import { FooterComponent } from './layouts/footer';
-import { HeaderComponent } from './layouts/header';
-import { SidebarComponent } from './layouts/sidebar/sidebar';
-import { ThemeCustomizerComponent } from './layouts/theme-customizer';
-import { DashboardComponent } from 'src/app/modules/dashboard/dashboard.component';
 
 // primeng components
 import { Tree } from 'primeng/tree';
-import { BaseUrlInterceptor } from 'src/app/modules/shared/services/base-url-intercept.service';
+import { AppLayoutsModule } from 'src/app/layouts/layouts.module';
+import { BaseUrlInterceptor } from 'src/app/shared/services/base-url-intercept.service';
+
+// App config (PrimeNG + async animations)
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { providePrimeNG } from 'primeng/config';
+import Aura from '@primeng/themes/aura';
 
 // AOT compilation support
 export function HttpLoaderFactory(
@@ -63,6 +56,21 @@ export function HttpLoaderFactory(
 ): TranslateHttpLoader {
     return new TranslateHttpLoader(new HttpClient(httpHandler));
 }
+
+@NgModule({
+    providers: [
+        provideAnimationsAsync(),
+        providePrimeNG({
+            theme: {
+                preset: Aura,
+                options: {
+                    darkModeSelector: false || 'none',
+                },
+            },
+        }),
+    ],
+})
+export class AppConfigModule {}
 
 @NgModule({
     imports: [
@@ -84,19 +92,10 @@ export function HttpLoaderFactory(
         StoreModule.forRoot({ index: indexReducer }),
         SharedModule.forRoot(),
         Tree,
+        AppLayoutsModule,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    declarations: [
-        AppComponent,
-        HeaderComponent,
-        FooterComponent,
-        SidebarComponent,
-        DashboardComponent,
-        ThemeCustomizerComponent,
-        SampleComponent,
-        AppLayout,
-        AuthLayout,
-    ],
+    declarations: [AppComponent],
     providers: [
         Title,
         {
