@@ -8,6 +8,7 @@ import { TagModule } from 'primeng/tag';
 import { DividerModule } from 'primeng/divider';
 import { TableModule } from 'primeng/table';
 import { CheckboxModule } from 'primeng/checkbox';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 const routes: Routes = [
     {
@@ -18,13 +19,14 @@ const routes: Routes = [
 
 @NgModule({
     imports: [
-        CommonModule,
         RouterModule.forChild(routes),
+        CommonModule,
         Card,
         TagModule,
         DividerModule,
         TableModule,
         CheckboxModule,
+        SharedModule,
     ],
     declarations: [LocationListComponent],
 })

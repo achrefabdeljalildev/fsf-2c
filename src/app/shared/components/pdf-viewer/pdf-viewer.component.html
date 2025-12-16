@@ -9,7 +9,9 @@
         class="relative flex flex-col w-full max-w-6xl h-[90vh] mx-4 bg-white rounded-2xl shadow-2xl overflow-hidden animate-in fade-in-0 zoom-in-95 duration-300"
     >
         <!-- Modal Header -->
-        <div class="flex items-center justify-end p-6 border-b border-gray-200 bg-gradient-to-r from-primary/5 to-primary/10">
+        <div
+            class="flex items-center justify-end p-6 border-b border-gray-200 bg-gradient-to-r from-primary/5 to-primary/10"
+        >
             <!-- Action Buttons -->
             <div class="flex items-center gap-3">
                 <button
@@ -86,10 +88,16 @@
                 class="flex flex-col items-center justify-center h-full space-y-4"
             >
                 <div class="relative">
-                    <div class="w-16 h-16 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
+                    <div
+                        class="w-16 h-16 border-4 border-primary/20 border-t-primary rounded-full animate-spin"
+                    ></div>
                 </div>
-                <p class="text-lg font-medium text-gray-600">{{ 'decisions.modal.loading' | translate }}</p>
-                <p class="text-sm text-gray-500">{{ 'decisions.modal.loadingDescription' | translate }}</p>
+                <p class="text-lg font-medium text-gray-600">
+                    {{ 'decisions.modal.loading' | translate }}
+                </p>
+                <p class="text-sm text-gray-500">
+                    {{ 'decisions.modal.loadingDescription' | translate }}
+                </p>
             </div>
 
             <!-- Error State -->
@@ -112,8 +120,12 @@
                         ></path>
                     </svg>
                 </div>
-                <p class="text-lg font-medium text-gray-900">{{ 'decisions.modal.error' | translate }}</p>
-                <p class="text-sm text-gray-600">{{ 'decisions.modal.errorDescription' | translate }}</p>
+                <p class="text-lg font-medium text-gray-900">
+                    {{ 'decisions.modal.error' | translate }}
+                </p>
+                <p class="text-sm text-gray-600">
+                    {{ 'decisions.modal.errorDescription' | translate }}
+                </p>
                 <button
                     type="button"
                     class="inline-flex items-center px-4 py-2 text-sm font-medium text-primary bg-primary/10 border border-primary/20 rounded-lg hover:bg-primary/20 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-colors duration-200"
@@ -136,10 +148,7 @@
             </div>
 
             <!-- Document Viewer -->
-            <div
-                *ngIf="src && !isLoading && !error"
-                class="h-full"
-            >
+            <div *ngIf="src && !isLoading && !error" class="h-full">
                 <iframe
                     [src]="blobDocument | safe: 'resourceUrl'"
                     class="w-full h-full border-0 rounded-lg shadow-inner"
