@@ -11,6 +11,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { SkeletonModule } from 'primeng/skeleton';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
+import { TableModule } from 'primeng/table';
+import { PaginatorModule } from 'primeng/paginator';
 
 // App - services
 import { AppService } from 'src/app/shared/services/app.service';
@@ -19,11 +21,15 @@ import { AppService } from 'src/app/shared/services/app.service';
 import { LoadingDirective } from 'src/app/shared/directives/app-loader.directive';
 import { ButtonBusyDirective } from 'src/app/shared/directives/button-busy.directive';
 
-// App - components
-import { PdfViewerComponent } from 'src/app/shared/components/pdf-viewer/pdf-viewer.component';
-
 // App - pipes
 import { SafePipe } from './pipes/safe.pipe';
+
+// App - components
+import { PdfViewerComponent } from 'src/app/shared/components/pdf-viewer/pdf-viewer.component';
+import {
+    BaseDatatableComponent,
+    BaseDatatableColumnDirective,
+} from 'src/app/shared/components/base-datatable/base-datatable.component';
 
 @NgModule({
     imports: [
@@ -35,6 +41,8 @@ import { SafePipe } from './pipes/safe.pipe';
         ConfirmDialogModule,
         SkeletonModule,
         BreadcrumbModule,
+        TableModule,
+        PaginatorModule,
     ],
     declarations: [
         // pipes
@@ -44,6 +52,8 @@ import { SafePipe } from './pipes/safe.pipe';
         LoadingDirective,
         ButtonBusyDirective,
         PdfViewerComponent,
+        BaseDatatableComponent,
+        BaseDatatableColumnDirective,
     ],
     exports: [
         // pipes
@@ -59,9 +69,12 @@ import { SafePipe } from './pipes/safe.pipe';
         ButtonBusyDirective,
         NgxSpinnerModule,
         BreadcrumbModule,
+        TableModule,
+        BaseDatatableColumnDirective,
 
         // components
         PdfViewerComponent,
+        BaseDatatableComponent,
     ],
 })
 export class SharedModule {

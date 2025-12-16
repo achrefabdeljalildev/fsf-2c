@@ -1,0 +1,93 @@
+<!-- base-datatable.component.html -->
+<div class="datatable-container rounded-lg shadow-sm">
+    <!-- Custom Toolbar -->
+    <div
+        class="flex justify-between items-center bg-white border-b pb-2 px-2 mb-2 rounded-t-lg"
+    >
+        <div class="flex gap-2">
+            <div class="relative w-full max-w-md flex items-center">
+                <!-- Search Icon -->
+                <i class="pi pi-search absolute start-2"></i>
+
+                <!-- Input -->
+                <input
+                    [(ngModel)]="filterEvent.searchTerm"
+                    id="datatable-container-search"
+                    type="text"
+                    placeholder="بحث..."
+                    class="w-full rounded-lg border border-gray-300 bg-white py-2 pr-10 pl-10 text-sm text-gray-700 placeholder-gray-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                />
+
+                <!-- Heroicons X -->
+                <i
+                    class="pi pi-times text-lg absolute end-2 cursor-pointer hover:text-red-600"
+                    (click)="clearSearch()"
+                ></i>
+            </div>
+            <button class="btn btn-primary btn-sm" (click)="emitSearch()">
+                بحث
+            </button>
+        </div>
+        <div *ngIf="showPaginator">
+            <p-paginator
+                [first]="first"
+                [rows]="rows"
+                [totalRecords]="totalRecords"
+                [rowsPerPageOptions]="[5, 10, 20, 30]"
+                [showCurrentPageReport]="true"
+                currentPageReportTemplate="{first} - {last} / {totalRecords}"
+                (onPageChange)="onPageChange($event)"
+            ></p-paginator>
+        </div>
+    </div>
+
+    <p-table
+        #dt
+        [value]="value"
+        [rows]="rows"
+        [totalRecords]="totalRecords"
+        [lazy]="lazy"
+        [loading]="loading"
+        (onLazyLoad)="onLazyLoad($event)"
+        (onRowSelect)="onRowSelect($event)"
+        [selectionMode]="selectionMode"
+        [globalFilterFields]="globalFilterFields"
+        responsiveLayout="scroll"
+    >
+        <!-- Header -->
+        <ng-template pTemplate="header">
+            <tr>
+                <th *ngFor="let col of columns" [style.width]="col.width">
+                    {{ col.header | translate }}
+                </th>
+            </tr>
+        </ng-template>
+
+        <!-- Body -->
+        <ng-template pTemplate="body" let-row>
+            <tr>
+                <td *ngFor="let col of columns">
+                    <ng-container
+                        *ngIf="templateMap.get(col.field); else default"
+                    >
+                        <ng-container
+                            [ngTemplateOutlet]="templateMap.get(col.field)"
+                            [ngTemplateOutletContext]="{
+                                $implicit: row,
+                                col: col,
+                                value: row[col.field],
+                            }"
+                        ></ng-container>
+                    </ng-container>
+                    <ng-template #default>
+                        {{
+                            col.formatter
+                                ? col.formatter(row[col.field], row)
+                                : row[col.field]
+                        }}
+                    </ng-template>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
