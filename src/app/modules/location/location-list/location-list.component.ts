@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BaseComponent } from 'src/app/modules/shared/components/base-component/base-component';
+import { BaseComponent } from 'src/app/shared/components/base-component/base-component';
 
 type ActionSeverity = 'success' | 'info' | 'warn' | 'danger';
 

@@ -2,7 +2,7 @@
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
-import { slideDownUp } from '../../shared/animations';
+import { slideDownUp } from '../../shared/util/animations';
 import { TreeNode } from 'primeng/api';
 import { AuthService } from 'src/app/modules/auth/services/auth.service';
 

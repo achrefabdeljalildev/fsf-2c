@@ -9,8 +9,8 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, filter, switchMap, take } from 'rxjs/operators';
-import { environment } from '../../../../environments/environment';
-import { AuthService } from '../../../modules/auth/services/auth.service';
+import { AuthService } from 'src/app/modules/auth/services/auth.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class InterceptService implements HttpInterceptor {

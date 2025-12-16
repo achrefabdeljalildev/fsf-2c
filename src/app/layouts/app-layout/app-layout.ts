@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
-import { AppService } from '../../service/app.service';
+import { AppService } from '../../shared/services/app.service';
 
 @Component({
     selector: 'app-root',

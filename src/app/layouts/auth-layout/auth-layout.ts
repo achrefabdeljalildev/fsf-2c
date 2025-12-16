@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AppService } from '../../service/app.service';
+import { AppService } from '../../shared/services/app.service';
 
 @Component({
     selector: 'app-root',

@@ -3,8 +3,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { inject } from '@angular/core';
 import { Location } from '@angular/common';
-import { ToasterService } from 'src/app/modules/shared/services/toaster.service';
 import { Subscription } from 'rxjs';
+import { ToasterService } from 'src/app/shared/services/toaster.service';
 
 export abstract class BaseComponent {
     protected translateService: TranslateService;

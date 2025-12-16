@@ -15,13 +15,11 @@ import {
     Router,
     RouterModule,
 } from '@angular/router';
+
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
-import { AppConfigModule } from './app-config.module';
 
-//Routes
 import { routes } from './app.route';
-
 import { AppComponent } from './app.component';
 
 // store
@@ -29,7 +27,7 @@ import { StoreModule } from '@ngrx/store';
 import { indexReducer } from './store/index.reducer';
 
 // shared module
-import { SharedModule } from 'src/app/modules/shared/shared.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 // i18n
 import {
@@ -44,8 +42,13 @@ import { NgxSpinnerService } from 'ngx-spinner';
 
 // primeng components
 import { Tree } from 'primeng/tree';
-import { BaseUrlInterceptor } from 'src/app/modules/shared/services/base-url-intercept.service';
 import { AppLayoutsModule } from 'src/app/layouts/layouts.module';
+import { BaseUrlInterceptor } from 'src/app/shared/services/base-url-intercept.service';
+
+// App config (PrimeNG + async animations)
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { providePrimeNG } from 'primeng/config';
+import Aura from '@primeng/themes/aura';
 
 // AOT compilation support
 export function HttpLoaderFactory(
@@ -53,6 +56,21 @@ export function HttpLoaderFactory(
 ): TranslateHttpLoader {
     return new TranslateHttpLoader(new HttpClient(httpHandler));
 }
+
+@NgModule({
+    providers: [
+        provideAnimationsAsync(),
+        providePrimeNG({
+            theme: {
+                preset: Aura,
+                options: {
+                    darkModeSelector: false || 'none',
+                },
+            },
+        }),
+    ],
+})
+export class AppConfigModule {}
 
 @NgModule({
     imports: [

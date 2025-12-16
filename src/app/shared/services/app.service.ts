@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { $themeConfig } from '../theme.config';
+import { $themeConfig } from '../util/theme.config';
 import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()

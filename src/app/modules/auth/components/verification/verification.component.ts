@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
-import { AppService } from '../../../../service/app.service';
+import { AppService } from '../../../../shared/services/app.service';
 import { Store } from '@ngrx/store';
 
 @Component({

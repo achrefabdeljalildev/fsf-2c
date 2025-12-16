@@ -5,15 +5,15 @@ import { Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 
 // service
-import { AppService } from 'src/app/service/app.service';
+import { AppService } from 'src/app/shared/services/app.service';
 // i18n
 import { TranslateModule } from '@ngx-translate/core';
 
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { LoadingDirective } from 'src/app/shared/app-loader/app-loader.directive';
-import { ButtonBusyDirective } from 'src/app/shared/button-loader/button-busy.directive';
-import { PdfViewerComponent } from 'src/app/modules/shared/components/pdf-viewer/pdf-viewer.component';
+import { LoadingDirective } from 'src/app/shared/directives/app-loader/app-loader.directive';
+import { ButtonBusyDirective } from 'src/app/shared/directives/button-loader/button-busy.directive';
+import { PdfViewerComponent } from 'src/app/shared/components/pdf-viewer/pdf-viewer.component';
 import { SkeletonModule } from 'primeng/skeleton';
 import { SafePipe } from './pipes/safe.pipe';
 

@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
-import { saudiNationalIdNumberValidator } from 'src/app/modules/shared/validators/saudi-arabia-id.validator';
-import { AppService } from 'src/app/service/app.service';
+import { saudiNationalIdNumberValidator } from 'src/app/shared/validators/saudi-arabia-id.validator';
+import { AppService } from 'src/app/shared/services/app.service';
 
 @Component({
     selector: 'app-forgot-password',
@@ -19,7 +18,6 @@ export class ForgotPasswordComponent implements OnInit {
     isArabic = false;
 
     constructor(
-        private router: Router,
         private fb: FormBuilder,
         private translateService: TranslateService,
         private translate: TranslateService,
