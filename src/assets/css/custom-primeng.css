@@ -18,3 +18,11 @@ html[dir='rtl'] .p-breadcrumb-separator {
     font-size: 1rem !important;
     cursor: pointer;
 }
+
+.p-datatable-table thead th {
+    background-color: #eaf3fa !important;
+}
+
+.p-paginator-page {
+    background-color: #eaf3fa !important;
+}
