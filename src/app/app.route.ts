@@ -1,29 +1,21 @@
 import { Routes } from '@angular/router';
-// dashboard
+import { AuthGuard } from 'src/app/shared/services/guard.service';
 import { AppLayout } from './layouts/app-layout/app-layout';
 import { AuthLayout } from './layouts/auth-layout/auth-layout';
 import { DashboardComponent } from 'src/app/layouts/dashboard/dashboard.component';
-import { MaintenenceComponent } from 'src/app/pages/maintenence';
-import { AuthGuard } from 'src/app/shared/services/guard.service';
 
 export const routes: Routes = [
     {
         path: '',
-        component: DashboardComponent,
         canActivate: [AuthGuard],
+        component: DashboardComponent,
     },
     {
         path: 'pages',
-        component: AuthLayout,
-        children: [
-            // pages
-            {
-                path: '',
-                loadChildren: () =>
-                    import('./pages/pages.module').then((d) => d.PagesModule),
-            },
-        ],
         canActivate: [AuthGuard],
+        component: AuthLayout,
+        loadChildren: () =>
+            import('./shared/pages/pages.module').then((d) => d.PagesModule),
     },
     {
         path: 'auth',
@@ -33,22 +25,20 @@ export const routes: Routes = [
     },
     {
         path: 'locations',
-        component: AppLayout,
         canActivate: [AuthGuard],
+        component: AppLayout,
         loadChildren: () =>
             import('./modules/location/location.module').then(
                 (m) => m.LocationModule,
             ),
     },
     {
-        path: 'services',
-        component: AppLayout,
+        path: 'regions',
         canActivate: [AuthGuard],
-        children: [
-            {
-                path: '',
-                component: MaintenenceComponent,
-            },
-        ],
+        component: AppLayout,
+        loadChildren: () =>
+            import('./modules/regions/region.module').then(
+                (m) => m.RegionModule,
+            ),
     },
 ];

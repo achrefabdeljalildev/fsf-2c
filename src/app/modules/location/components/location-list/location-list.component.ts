@@ -17,9 +17,9 @@ export interface User {
 })
 export class LocationListComponent extends BaseComponent {
     columns: DataTableColumn[] = [
-        { field: 'id', header: 'ID' },
-        { field: 'name', header: 'Name' },
-        { field: 'email', header: 'Email' },
+        { field: 'id', label: 'ID' },
+        { field: 'name', label: 'Name' },
+        { field: 'email', label: 'Email' },
     ];
 
     // component.ts

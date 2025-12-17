@@ -22,7 +22,7 @@ export class BaseDatatableColumnDirective {
 
 export interface DataTableColumn {
     field: string;
-    header: string;
+    label: string;
     width?: string;
     formatter?: (value: any, row?: any) => string;
 }
