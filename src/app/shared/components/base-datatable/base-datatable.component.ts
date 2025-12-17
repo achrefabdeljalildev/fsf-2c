@@ -10,6 +10,7 @@ import {
     QueryList,
     AfterContentInit,
 } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Directive({
     selector: 'ng-template[baseDatatableColumn]',
@@ -43,7 +44,6 @@ export class BaseDatatableComponent<T> implements AfterContentInit {
     @Input() value: T[] = [];
     @Input() totalRecords = 0;
     @Input() loading = false;
-    @Input() rows = 10;
     @Input() paginator = true;
     @Input() lazy = false;
     @Input() selectionMode: 'single' | 'multiple' | null = null;
@@ -51,11 +51,16 @@ export class BaseDatatableComponent<T> implements AfterContentInit {
     @Input() globalFilterFields: string[] = [];
     @Input() showPaginator = true;
     @Input() first = 0;
+    @Input() showCustomToolbar = true;
+    @Input() showAddNewRecordButton = true;
+    @Input() addNewRecordLabel: string = 'جديد';
+    @Input() addNewRecordLink: string = '';
 
     @Output() lazyLoad = new EventEmitter<any>();
     @Output() rowSelect = new EventEmitter<T>();
     @Output() pageChange = new EventEmitter<any>();
     @Output() filterChange = new EventEmitter<FilterEvent>();
+    @Output() addNewRecord = new EventEmitter<void>();
 
     @ContentChildren(BaseDatatableColumnDirective)
     columnTemplates!: QueryList<BaseDatatableColumnDirective>;
@@ -66,6 +71,8 @@ export class BaseDatatableComponent<T> implements AfterContentInit {
         pageNumber: 1,
         searchTerm: '',
     };
+
+    constructor(private router: Router) {}
 
     ngAfterContentInit() {
         this.templateMap = new Map(
@@ -80,7 +87,7 @@ export class BaseDatatableComponent<T> implements AfterContentInit {
         this.lazyLoad.emit(event);
     }
 
-    onRowSelect(event: any) {
+    onRowClick(event: any) {
         this.rowSelect.emit(event.data);
     }
 
@@ -97,5 +104,13 @@ export class BaseDatatableComponent<T> implements AfterContentInit {
 
     emitSearch() {
         this.filterChange.emit(this.filterEvent);
+    }
+
+    emitAddNewRecord() {
+        if (this.addNewRecordLink) {
+            this.router.navigateByUrl(this.addNewRecordLink);
+        } else {
+            this.addNewRecord.emit();
+        }
     }
 }

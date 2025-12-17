@@ -12,7 +12,11 @@ const routes: Routes = [
         component: RegionListComponent,
     },
     {
-        path: 'view/:id',
+        path: 'create',
+        component: RegionViewComponent,
+    },
+    {
+        path: 'edit/:id',
         component: RegionViewComponent,
     },
 ];
