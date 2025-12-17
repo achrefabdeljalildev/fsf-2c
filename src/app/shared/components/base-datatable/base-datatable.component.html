@@ -3,7 +3,7 @@
     <!-- add new record button -->
     @if (showAddNewRecordButton && !showCustomToolbar) {
         <a
-            class="btn btn-success btn-sm mb-2 p-3 flex items-center gap-2 cursor-pointer"
+            class="btn btn-success btn-sm mb-2 p-2 flex items-center gap-2 cursor-pointer"
             (click)="emitAddNewRecord()"
         >
             <i class="pi pi-plus"></i>
@@ -13,11 +13,11 @@
     <!-- Custom Toolbar -->
     @if (showCustomToolbar) {
         <div
-            class="flex justify-between items-center bg-white border-b pb-2 px-2 mb-2 rounded-t-lg"
+            class="flex justify-between items-center bg-white border-b p-2 mb-2 rounded-t-lg"
         >
             @if (showAddNewRecordButton && showCustomToolbar) {
                 <a
-                    class="btn btn-success btn-sm mb-2 p-3 flex items-center gap-2 cursor-pointer"
+                    class="btn btn-success btn-sm p-2 flex items-center gap-2 cursor-pointer"
                     (click)="emitAddNewRecord()"
                 >
                     <i class="pi pi-plus"></i>
@@ -49,32 +49,30 @@
                     بحث
                 </button>
             </div>
-            <div *ngIf="showPaginator">
-                <p-paginator
-                    [first]="first"
-                    [rows]="filterEvent.pageSize"
-                    [totalRecords]="totalRecords"
-                    [rowsPerPageOptions]="[5, 10, 20, 30]"
-                    [showCurrentPageReport]="true"
-                    currentPageReportTemplate="{first} - {last} / {totalRecords}"
-                    (onPageChange)="onPageChange($event)"
-                />
-            </div>
         </div>
     }
 
+    <div class="flex items-center w-full justify-end p-3 px-4 bg-white">
+        <div class="text-sm text-gray-600">
+            {{ getRangeLabel() }}
+        </div>
+    </div>
+
     <p-table
-        #dt
         [value]="value"
         [rows]="filterEvent.pageSize"
         [totalRecords]="totalRecords"
         [lazy]="lazy"
         [loading]="loading"
-        (onLazyLoad)="onLazyLoad($event)"
-        (onRowSelect)="onRowClick($event)"
         [selectionMode]="selectionMode"
         [globalFilterFields]="globalFilterFields"
+        dataKey="id"
         responsiveLayout="scroll"
+        stripedRows
+        [paginator]="true"
+        [rowsPerPageOptions]="[1, 2, 5, 10, 20]"
+        (onLazyLoad)="onLazyLoad($event)"
+        (onPage)="onPageChange($event)"
     >
         <!-- Header -->
         <ng-template pTemplate="header">
@@ -87,7 +85,7 @@
 
         <!-- Body -->
         <ng-template pTemplate="body" let-row>
-            <tr class="cursor-pointer">
+            <tr class="cursor-pointer" (click)="onRowClick(row)">
                 <td *ngFor="let col of columns">
                     <ng-container
                         *ngIf="templateMap.get(col.field); else default"

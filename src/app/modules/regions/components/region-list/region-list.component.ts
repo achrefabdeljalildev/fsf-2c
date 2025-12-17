@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RegionService } from 'src/app/modules/regions/services/region.service';
+import { BaseComponent } from 'src/app/shared/components/base-component/base-component';
 import { DataTableColumn } from 'src/app/shared/components/base-datatable/base-datatable.component';
 import { CriteriaModel } from 'src/app/shared/models/base/criteria.model';
 
@@ -8,7 +9,7 @@ import { CriteriaModel } from 'src/app/shared/models/base/criteria.model';
     templateUrl: './region-list.component.html',
     standalone: false,
 })
-export class RegionListComponent {
+export class RegionListComponent extends BaseComponent {
     regionsList: any[] = [];
     loading: boolean = false;
     totalRecords: number = 0;
@@ -19,6 +20,7 @@ export class RegionListComponent {
     ];
 
     constructor(private regionService: RegionService) {
+        super();
         this.loadRegions();
     }
 
@@ -32,11 +34,13 @@ export class RegionListComponent {
     }
 
     filterChange(event: any) {
-        console.log(event);
-
         this.criteria.pageSize = event.pageSize;
         this.criteria.pageNumber = event.pageNumber;
         this.criteria.searchTerm = event.searchTerm;
         this.loadRegions();
+    }
+
+    onRowClick(event: any) {
+        this.router.navigate(['regions/edit', event.id]);
     }
 }

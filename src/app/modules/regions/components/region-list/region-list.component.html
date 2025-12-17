@@ -8,10 +8,11 @@
 />
 
 <base-datatable
-    addNewRecordButtonLink="/regions/create"
+    addNewRecordLink="/regions/create"
+    [loading]="loading"
     [columns]="columns"
     [value]="regionsList"
     [totalRecords]="totalRecords"
-    [loading]="loading"
     (filterChange)="filterChange($event)"
+    (rowClick)="onRowClick($event)"
 />

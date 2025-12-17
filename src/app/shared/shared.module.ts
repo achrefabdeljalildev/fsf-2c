@@ -13,6 +13,9 @@ import { SkeletonModule } from 'primeng/skeleton';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { TableModule } from 'primeng/table';
 import { PaginatorModule } from 'primeng/paginator';
+import { InputTextModule } from 'primeng/inputtext';
+import { TextareaModule } from 'primeng/textarea';
+import { ButtonModule } from 'primeng/button';
 
 // App - services
 import { AppService } from 'src/app/shared/services/app.service';
@@ -43,6 +46,9 @@ import {
         BreadcrumbModule,
         TableModule,
         PaginatorModule,
+        InputTextModule,
+        TextareaModule,
+        ButtonModule,
     ],
     declarations: [
         // pipes
@@ -70,6 +76,11 @@ import {
         NgxSpinnerModule,
         BreadcrumbModule,
         TableModule,
+        InputTextModule,
+        TextareaModule,
+        ButtonModule,
+
+        // directives
         BaseDatatableColumnDirective,
 
         // components

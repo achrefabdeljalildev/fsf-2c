@@ -1,10 +1,8 @@
-export interface PagedResponse<T> {
+export interface ApiResponseModel<T> {
     isSuccess: boolean;
     statusCode: number;
     message: string;
-    data: {
-        items: T[];
-    };
+    data: T;
     meta: {
         total: number;
         page: number;
@@ -12,4 +10,8 @@ export interface PagedResponse<T> {
     };
     errors: any[];
     correlationId: string;
+}
+
+export interface PagedResponse<T> {
+    items: T[];
 }

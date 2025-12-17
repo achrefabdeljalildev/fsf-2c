@@ -374,7 +374,7 @@ export class LocationListComponent extends BaseComponent {
         }, 1000);
     }
 
-    onRowSelected($event: User) {
+    onRowSelected($event: any) {
         console.log($event);
     }
 }
