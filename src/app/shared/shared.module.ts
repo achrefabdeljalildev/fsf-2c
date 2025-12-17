@@ -33,6 +33,7 @@ import {
     BaseDatatableComponent,
     BaseDatatableColumnDirective,
 } from 'src/app/shared/components/base-datatable/base-datatable.component';
+import { BaseFormHeaderComponent } from 'src/app/shared/components/base-form-header/base-form-header.component';
 
 @NgModule({
     imports: [
@@ -60,6 +61,7 @@ import {
         PdfViewerComponent,
         BaseDatatableComponent,
         BaseDatatableColumnDirective,
+        BaseFormHeaderComponent,
     ],
     exports: [
         // pipes
@@ -86,6 +88,7 @@ import {
         // components
         PdfViewerComponent,
         BaseDatatableComponent,
+        BaseFormHeaderComponent,
     ],
 })
 export class SharedModule {

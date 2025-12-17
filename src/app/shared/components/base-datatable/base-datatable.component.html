@@ -3,7 +3,7 @@
     <!-- add new record button -->
     @if (showAddNewRecordButton && !showCustomToolbar) {
         <a
-            class="btn btn-success btn-sm mb-2 p-2 flex items-center gap-2 cursor-pointer"
+            class="btn btn-warning btn-sm mb-2 p-2 flex items-center gap-2 cursor-pointer"
             (click)="emitAddNewRecord()"
         >
             <i class="pi pi-plus"></i>
@@ -17,7 +17,7 @@
         >
             @if (showAddNewRecordButton && showCustomToolbar) {
                 <a
-                    class="btn btn-success btn-sm p-2 flex items-center gap-2 cursor-pointer"
+                    class="btn btn-warning btn-sm p-2 flex items-center gap-2 cursor-pointer"
                     (click)="emitAddNewRecord()"
                 >
                     <i class="pi pi-plus"></i>
@@ -45,7 +45,7 @@
                         (click)="clearSearch()"
                     ></i>
                 </div>
-                <button class="btn btn-primary btn-sm" (click)="emitSearch()">
+                <button class="btn btn-secondary btn-sm" (click)="emitSearch()">
                     بحث
                 </button>
             </div>

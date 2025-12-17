@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { BaseComponent } from 'src/app/shared/components/base-component/base-component';
 import { RegionService } from '../../services/region.service';
 import { Region } from '../../models/region.model';
@@ -90,6 +89,26 @@ export class RegionViewComponent extends BaseComponent implements OnInit {
 
     cancel(): void {
         this.router.navigate(['/regions']);
+    }
+
+    remove(): void {
+        if (!this.regionId) return;
+        this.isLoading = true;
+        const subscription = this.regionService
+            .deleteById(this.regionId)
+            .subscribe({
+                next: () => {
+                    this.isLoading = false;
+                    this.showSuccessMessage('تم حذف المنطقة بنجاح');
+                    this.router.navigate(['/regions']);
+                },
+                error: () => {
+                    this.isLoading = false;
+                    this.showErrorMessage('حدث خطأ أثناء حذف المنطقة');
+                },
+            });
+
+        this.subscriptions.add(subscription);
     }
 
     ngOnDestroy(): void {

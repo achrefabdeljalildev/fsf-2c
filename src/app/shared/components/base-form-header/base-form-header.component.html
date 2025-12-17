@@ -1,0 +1,36 @@
+<!-- Action Buttons -->
+<div class="flex gap-2 mb-6">
+    <button
+        class="btn btn-md bg-warning text-white flex items-center gap-2 px-3"
+        [disabled]="isDisabled"
+        (click)="submit.emit()"
+    >
+        <i class="pi" [ngClass]="isEditMode ? 'pi-check' : 'pi-save'"></i>
+        {{ isEditMode ? 'حفظ ' : 'إضافة' }}
+    </button>
+
+    <!-- add delete on edit -->
+    @if (isEditMode) {
+        <button
+            type="button"
+            label="حذف"
+            class="btn btn-md bg-red-600 text-white flex items-center gap-2 px-3"
+            (click)="remove.emit()"
+            [disabled]="isLoading"
+        >
+            <i class="pi pi-trash"></i>
+            حذف
+        </button>
+    }
+
+    <button
+        type="button"
+        label="إلغاء"
+        class="btn btn-md flex items-center gap-2 px-3"
+        (click)="cancel.emit()"
+        [disabled]="isLoading"
+    >
+        <i class="pi pi-times"></i>
+        إلغاء
+    </button>
+</div>
