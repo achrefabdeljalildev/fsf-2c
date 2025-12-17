@@ -1,0 +1,80 @@
+<p-breadcrumb
+    [model]="[
+        { label: 'الأنظمة الأمنية' },
+        { label: 'الإدارة العامة لحماية المنشآت' },
+        { label: ' إدارة المسح الميداني' },
+        { label: 'المناطق', routerLink: '/regions' },
+        { label: isEditMode ? 'تعديل' : 'جديد' },
+    ]"
+/>
+
+<div class="bg-white rounded-lg shadow p-6">
+    <form [formGroup]="regionForm" (ngSubmit)="submit()" class="space-y-6">
+        <base-form-header
+            [isLoading]="isLoading"
+            [isEditMode]="isEditMode"
+            (submit)="submit()"
+            (cancel)="cancel()"
+            (remove)="remove()"
+        />
+
+        <!-- Name in Arabic -->
+        <div class="form-group">
+            <label for="nameAr" class="block text-sm font-medium mb-2">
+                الاسم
+                <span class="text-red-500">*</span>
+            </label>
+            <input
+                id="nameAr"
+                type="text"
+                formControlName="nameAr"
+                pInputText
+                class="w-full"
+                placeholder="أدخل اسم المنطقة "
+            />
+            <small
+                *ngIf="
+                    regionForm.get('nameAr')?.invalid &&
+                    (regionForm.get('nameAr')?.dirty ||
+                        regionForm.get('nameAr')?.touched)
+                "
+                class="text-red-500"
+            >
+                <span *ngIf="regionForm.get('nameAr')?.errors?.['required']">
+                    هذا الحقل مطلوب
+                </span>
+            </small>
+        </div>
+
+        <!-- Description in Arabic -->
+        <div class="form-group">
+            <label for="descriptionAr" class="block text-sm font-medium mb-2">
+                الوصف
+            </label>
+            <textarea
+                id="descriptionAr"
+                formControlName="descriptionAr"
+                pInputTextarea
+                rows="5"
+                class="w-full"
+                placeholder="أدخل وصف المنطقة "
+            ></textarea>
+            <small
+                *ngIf="
+                    regionForm.get('descriptionAr')?.invalid &&
+                    (regionForm.get('descriptionAr')?.dirty ||
+                        regionForm.get('descriptionAr')?.touched)
+                "
+                class="text-red-500"
+            >
+                <span
+                    *ngIf="
+                        regionForm.get('descriptionAr')?.errors?.['required']
+                    "
+                >
+                    هذا الحقل مطلوب
+                </span>
+            </small>
+        </div>
+    </form>
+</div>

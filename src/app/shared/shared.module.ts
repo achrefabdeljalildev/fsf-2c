@@ -13,6 +13,9 @@ import { SkeletonModule } from 'primeng/skeleton';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { TableModule } from 'primeng/table';
 import { PaginatorModule } from 'primeng/paginator';
+import { InputTextModule } from 'primeng/inputtext';
+import { TextareaModule } from 'primeng/textarea';
+import { ButtonModule } from 'primeng/button';
 
 // App - services
 import { AppService } from 'src/app/shared/services/app.service';
@@ -30,6 +33,7 @@ import {
     BaseDatatableComponent,
     BaseDatatableColumnDirective,
 } from 'src/app/shared/components/base-datatable/base-datatable.component';
+import { BaseFormHeaderComponent } from 'src/app/shared/components/base-form-header/base-form-header.component';
 
 @NgModule({
     imports: [
@@ -43,6 +47,9 @@ import {
         BreadcrumbModule,
         TableModule,
         PaginatorModule,
+        InputTextModule,
+        TextareaModule,
+        ButtonModule,
     ],
     declarations: [
         // pipes
@@ -54,6 +61,7 @@ import {
         PdfViewerComponent,
         BaseDatatableComponent,
         BaseDatatableColumnDirective,
+        BaseFormHeaderComponent,
     ],
     exports: [
         // pipes
@@ -70,11 +78,17 @@ import {
         NgxSpinnerModule,
         BreadcrumbModule,
         TableModule,
+        InputTextModule,
+        TextareaModule,
+        ButtonModule,
+
+        // directives
         BaseDatatableColumnDirective,
 
         // components
         PdfViewerComponent,
         BaseDatatableComponent,
+        BaseFormHeaderComponent,
     ],
 })
 export class SharedModule {

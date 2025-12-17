@@ -4,11 +4,11 @@ import { RouterModule, Routes } from '@angular/router';
 
 // shared module
 
-import { SharedModule } from '../shared/shared.module';
 import { Error404Component } from './error404';
 import { Error500Component } from './error500';
 import { Error503Component } from './error503';
 import { MaintenenceComponent } from './maintenence';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 const routes: Routes = [
     {

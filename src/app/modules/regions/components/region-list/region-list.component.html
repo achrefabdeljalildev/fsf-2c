@@ -1,0 +1,18 @@
+<p-breadcrumb
+    [model]="[
+        { label: 'الأنظمة الأمنية' },
+        { label: 'الإدارة العامة لحماية المنشآت' },
+        { label: ' إدارة المسح الميداني' },
+        { label: 'المناطق' },
+    ]"
+/>
+
+<base-datatable
+    addNewRecordLink="/regions/create"
+    [loading]="loading"
+    [columns]="columns"
+    [value]="regionsList"
+    [totalRecords]="totalRecords"
+    (filterChange)="filterChange($event)"
+    (rowClick)="onRowClick($event)"
+/>

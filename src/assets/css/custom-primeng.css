@@ -6,9 +6,23 @@ html[dir='rtl'] .p-breadcrumb-separator {
 .p-breadcrumb {
     padding-inline-start: 0px !important;
     padding-block-start: 0px !important;
+    padding-top: 5px !important;
     background-color: transparent !important;
 }
 
 .p-icon {
     height: 0.7rem !important;
+}
+
+.p-breadcrumb-item-label {
+    font-size: 1rem !important;
+    cursor: pointer;
+}
+
+.p-datatable-table thead th {
+    background-color: #eaf3fa !important;
+}
+
+.p-paginator-page {
+    background-color: #eaf3fa !important;
 }

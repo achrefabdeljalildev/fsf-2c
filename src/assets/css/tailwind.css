@@ -259,7 +259,7 @@ hover:text-primary hover:before:!bg-primary ltr:before:mr-2 rtl:before:ml-2 dark
     }
 
     .btn-secondary {
-        @apply border-secondary bg-secondary text-white shadow-secondary/60;
+        @apply border-secondary bg-secondary text-white shadow-primary/60;
     }
     /* .btn-outline-secondary {
         @apply border-secondary text-secondary shadow-none hover:bg-secondary hover:text-white;

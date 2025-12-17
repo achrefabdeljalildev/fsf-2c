@@ -15,7 +15,7 @@
         [loading]="loading"
         [lazy]="true"
         (lazyLoad)="loadUsers($event)"
-        (rowSelect)="onRowSelected($event)"
+        (rowClick)="onRowSelected($event)"
     >
         <ng-template baseDatatableColumn="name" let-value="value">
             <span style="text-decoration: underline">{{ value }}</span>

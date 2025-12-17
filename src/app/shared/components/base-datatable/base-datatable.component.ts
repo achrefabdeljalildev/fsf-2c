@@ -10,6 +10,7 @@ import {
     QueryList,
     AfterContentInit,
 } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Directive({
     selector: 'ng-template[baseDatatableColumn]',
@@ -22,7 +23,7 @@ export class BaseDatatableColumnDirective {
 
 export interface DataTableColumn {
     field: string;
-    header: string;
+    label: string;
     width?: string;
     formatter?: (value: any, row?: any) => string;
 }
@@ -43,19 +44,22 @@ export class BaseDatatableComponent<T> implements AfterContentInit {
     @Input() value: T[] = [];
     @Input() totalRecords = 0;
     @Input() loading = false;
-    @Input() rows = 10;
     @Input() paginator = true;
     @Input() lazy = false;
     @Input() selectionMode: 'single' | 'multiple' | null = null;
     @Input() paginatorPosition: string = 'top';
     @Input() globalFilterFields: string[] = [];
     @Input() showPaginator = true;
-    @Input() first = 0;
+    @Input() showCustomToolbar = true;
+    @Input() showAddNewRecordButton = true;
+    @Input() addNewRecordLabel: string = 'جديد';
+    @Input() addNewRecordLink: string = '';
 
     @Output() lazyLoad = new EventEmitter<any>();
-    @Output() rowSelect = new EventEmitter<T>();
+    @Output() rowClick = new EventEmitter<any>();
     @Output() pageChange = new EventEmitter<any>();
     @Output() filterChange = new EventEmitter<FilterEvent>();
+    @Output() addNewRecord = new EventEmitter<void>();
 
     @ContentChildren(BaseDatatableColumnDirective)
     columnTemplates!: QueryList<BaseDatatableColumnDirective>;
@@ -66,6 +70,8 @@ export class BaseDatatableComponent<T> implements AfterContentInit {
         pageNumber: 1,
         searchTerm: '',
     };
+
+    constructor(private router: Router) {}
 
     ngAfterContentInit() {
         this.templateMap = new Map(
@@ -80,13 +86,14 @@ export class BaseDatatableComponent<T> implements AfterContentInit {
         this.lazyLoad.emit(event);
     }
 
-    onRowSelect(event: any) {
-        this.rowSelect.emit(event.data);
+    onRowClick(event: any) {
+        this.rowClick.emit(event);
     }
 
     onPageChange(event: any) {
         this.filterEvent.pageNumber = event.first / event.rows + 1;
         this.filterEvent.pageSize = event.rows;
+
         this.filterChange.emit(this.filterEvent);
     }
 
@@ -98,4 +105,27 @@ export class BaseDatatableComponent<T> implements AfterContentInit {
     emitSearch() {
         this.filterChange.emit(this.filterEvent);
     }
+
+    emitAddNewRecord() {
+        if (this.addNewRecordLink) {
+            this.router.navigateByUrl(this.addNewRecordLink);
+        } else {
+            this.addNewRecord.emit();
+        }
+    }
+
+    getRangeLabel = () => {
+        if (this.totalRecords === 0 || this.filterEvent.pageSize === 0)
+            return `عرض 0 من ${this.totalRecords}`;
+
+        const startIndex =
+            (this.filterEvent.pageNumber! - 1) * this.filterEvent.pageSize!;
+        const endIndex = Math.min(
+            startIndex + this.filterEvent.pageSize!,
+            this.totalRecords,
+        );
+
+        // ملاحظة: +1 لأن العرض يبدأ من 1 وليس 0
+        return `عرض ${startIndex < 1 ? 1 : startIndex} - ${endIndex} من ${this.totalRecords}`;
+    };
 }

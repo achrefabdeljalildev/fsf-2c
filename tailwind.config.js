@@ -16,18 +16,14 @@ module.exports = {
         },
         extend: {
             colors: {
-                meeting: '#db0b2e',
-                activity: '#2b8bd9',
-                holiday: '#07ba37',
-                training: '#757994',
                 primary: {
                     DEFAULT: '#016565',
                     light: '#c6e9e9ff',
                     'dark-light': 'rgba(67,97,238,.15)',
                 },
                 secondary: {
-                    DEFAULT: '#104631',
-                    light: '#ebe4f7',
+                    DEFAULT: '#0E8A8A',
+                    light: '#0E8A8A',
                     'dark-light': 'rgb(128 93 202 / 15%)',
                 },
                 success: {
