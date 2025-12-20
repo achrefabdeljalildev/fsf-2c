@@ -13,7 +13,7 @@ export class ToasterService {
             toast: true,
             position: 'top-start',
             showConfirmButton: false,
-            timer: 10000,
+            timer: 5000,
             customClass: { container: 'toast' },
         });
         toast.fire({

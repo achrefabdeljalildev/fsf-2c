@@ -1,10 +1,9 @@
-/* animation */
 @import 'animate.css';
 
-/* Swiper */
 @import 'swiper.css';
 
-/* dragndrop */
+@import 'datatable.css';
+
 @import 'dragndrop.css';
 
 @tailwind base;

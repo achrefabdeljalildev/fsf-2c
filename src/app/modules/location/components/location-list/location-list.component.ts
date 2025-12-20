@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
+import { colDef } from '@bhplugin/ng-datatable';
 import { BaseComponent } from 'src/app/shared/components/base-component/base-component';
-import { DataTableColumn } from 'src/app/shared/components/base-datatable/base-datatable.component';
 
 export interface User {
     id: number;
@@ -16,10 +16,10 @@ export interface User {
     standalone: false,
 })
 export class LocationListComponent extends BaseComponent {
-    columns: DataTableColumn[] = [
-        { field: 'id', label: 'ID' },
-        { field: 'name', label: 'Name' },
-        { field: 'email', label: 'Email' },
+    columns: colDef[] = [
+        { field: 'id', title: 'ID' },
+        { field: 'name', title: 'Name' },
+        { field: 'email', title: 'Email' },
     ];
 
     // component.ts

@@ -14,7 +14,7 @@ import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class InterceptService implements HttpInterceptor {
-    private readonly TOKEN_KEY = environment.USERDATA_KEY || 'authToken';
+    private readonly TOKEN_KEY = 'authToken';
     private isRefreshing = false;
     private refreshTokenSubject: BehaviorSubject<string | null> =
         new BehaviorSubject<string | null>(null);
@@ -47,6 +47,8 @@ export class InterceptService implements HttpInterceptor {
     }
 
     private addTokenHeader(request: HttpRequest<any>, token: string) {
+        console.log(token);
+
         return request.clone({
             setHeaders: {
                 Authorization: `Bearer ${token}`,

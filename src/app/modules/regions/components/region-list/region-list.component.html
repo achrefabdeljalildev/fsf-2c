@@ -7,12 +7,38 @@
     ]"
 />
 
-<base-datatable
-    addNewRecordLink="/regions/create"
-    [loading]="loading"
-    [columns]="columns"
-    [value]="regionsList"
-    [totalRecords]="totalRecords"
-    (filterChange)="filterChange($event)"
-    (rowClick)="onRowClick($event)"
+<list-header
+    addNewRecordLabel="{{ 'regions.addNewRegion' | translate }}"
+    tableTitle="{{ 'regions.regionList' | translate }}"
+    [paginationInfo]="paginationInfo"
+    (search)="onSearch($event)"
+    (addNewRecord)="openCreateDialog()"
+/>
+
+<ng-datatable
+    [rows]="rows"
+    [columns]="cols"
+    [hasCheckbox]="true"
+    [sortable]="true"
+    [loading]="isLoading"
+    [pageSize]="criteria.pageSize"
+    rowClass="cursor-pointer"
+    noDataContent="{{ 'common.noDataOnList' | translate }}"
+>
+    <ng-template slot="actions" let-value="data">
+        <div class="flex gap-2">
+            <div (click)="openEditDialog(value.id)" class="cursor-pointer">
+                <i class="pi pi-pencil"></i>
+            </div>
+            <div (click)="removeRegion(value.id)" class="cursor-pointer">
+                <i class="pi pi-trash"></i>
+            </div>
+        </div>
+    </ng-template>
+</ng-datatable>
+
+<app-region-view
+    [(visible)]="showDialog"
+    [regionId]="selectedRegionId"
+    (onSave)="onDialogSave()"
 />

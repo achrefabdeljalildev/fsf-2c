@@ -12,8 +12,9 @@ export class SortModel {
 
 export class CriteriaModel {
     pageNumber: number = 1;
-    pageSize: number = 10;
+    pageSize: number = 15;
     filters: FilterCriteriaModel[] = [];
     sorts: SortModel[] = [];
     searchTerm: string = '';
+    totalCount?: number = 0;
 }

@@ -1,23 +1,12 @@
-<p-breadcrumb
-    [model]="[
-        { label: 'الأنظمة الأمنية' },
-        { label: 'الإدارة العامة لحماية المنشآت' },
-        { label: ' إدارة المسح الميداني' },
-        { label: 'المناطق', routerLink: '/regions' },
-        { label: isEditMode ? 'تعديل' : 'جديد' },
-    ]"
-/>
-
-<div class="bg-white rounded-lg shadow p-6">
+<p-dialog
+    [(visible)]="visible"
+    [header]="isEditMode ? 'تعديل منطقة' : 'إضافة منطقة جديدة'"
+    [modal]="true"
+    [style]="{ width: '50vw' }"
+    [breakpoints]="{ '960px': '75vw', '640px': '90vw' }"
+    (onHide)="closeDialog()"
+>
     <form [formGroup]="regionForm" (ngSubmit)="submit()" class="space-y-6">
-        <base-form-header
-            [isLoading]="isLoading"
-            [isEditMode]="isEditMode"
-            (submit)="submit()"
-            (cancel)="cancel()"
-            (remove)="remove()"
-        />
-
         <!-- Name in Arabic -->
         <div class="form-group">
             <label for="nameAr" class="block text-sm font-medium mb-2">
@@ -77,4 +66,25 @@
             </small>
         </div>
     </form>
-</div>
+
+    <ng-template pTemplate="footer">
+        <div class="flex justify-end gap-2">
+            <button
+                type="button"
+                class="btn bg-gray-50 hover:bg-gray-100 text-gray-700"
+                (click)="closeDialog()"
+                [disabled]="isLoading"
+            >
+                إلغاء
+            </button>
+            <button
+                type="button"
+                class="btn btn-primary"
+                (click)="submit()"
+                [disabled]="regionForm.invalid || isLoading"
+            >
+                {{ isEditMode ? 'حفظ ' : 'إضافة' }}
+            </button>
+        </div>
+    </ng-template>
+</p-dialog>

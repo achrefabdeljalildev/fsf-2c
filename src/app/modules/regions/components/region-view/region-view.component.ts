@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BaseComponent } from 'src/app/shared/components/base-component/base-component';
 import { RegionService } from '../../services/region.service';
@@ -10,9 +10,13 @@ import { Region } from '../../models/region.model';
     standalone: false,
 })
 export class RegionViewComponent extends BaseComponent implements OnInit {
+    @Input() visible: boolean = false;
+    @Input() regionId: number | null = null;
+    @Output() visibleChange = new EventEmitter<boolean>();
+    @Output() onSave = new EventEmitter<void>();
+
     regionForm!: FormGroup;
     isLoading: boolean = false;
-    regionId: number | null = null;
     isEditMode: boolean = false;
 
     constructor(
@@ -24,7 +28,16 @@ export class RegionViewComponent extends BaseComponent implements OnInit {
 
     ngOnInit(): void {
         this.initForm();
-        this.checkEditMode();
+    }
+
+    ngOnChanges(): void {
+        if (this.visible && this.regionId) {
+            this.isEditMode = true;
+            this.loadRegion(this.regionId);
+        } else if (this.visible && !this.regionId) {
+            this.isEditMode = false;
+            this.regionForm?.reset();
+        }
     }
 
     initForm(): void {
@@ -32,15 +45,6 @@ export class RegionViewComponent extends BaseComponent implements OnInit {
             nameAr: ['', [Validators.required]],
             descriptionAr: [''],
         });
-    }
-
-    checkEditMode(): void {
-        const id = this.route.snapshot.paramMap.get('id');
-        if (id && id !== 'new') {
-            this.regionId = +id;
-            this.isEditMode = true;
-            this.loadRegion(this.regionId);
-        }
     }
 
     loadRegion(id: number): void {
@@ -76,7 +80,8 @@ export class RegionViewComponent extends BaseComponent implements OnInit {
                         ? 'تم تحديث المنطقة بنجاح'
                         : 'تم إضافة المنطقة بنجاح',
                 );
-                this.router.navigate(['/regions']);
+                this.onSave.emit();
+                this.closeDialog();
             },
             error: (error) => {
                 this.isLoading = false;
@@ -88,7 +93,15 @@ export class RegionViewComponent extends BaseComponent implements OnInit {
     }
 
     cancel(): void {
-        this.router.navigate(['/regions']);
+        this.closeDialog();
+    }
+
+    closeDialog(): void {
+        this.visible = false;
+        this.visibleChange.emit(false);
+        this.regionForm.reset();
+        this.regionId = null;
+        this.isEditMode = false;
     }
 
     remove(): void {
@@ -100,7 +113,8 @@ export class RegionViewComponent extends BaseComponent implements OnInit {
                 next: () => {
                     this.isLoading = false;
                     this.showSuccessMessage('تم حذف المنطقة بنجاح');
-                    this.router.navigate(['/regions']);
+                    this.onSave.emit();
+                    this.closeDialog();
                 },
                 error: () => {
                     this.isLoading = false;

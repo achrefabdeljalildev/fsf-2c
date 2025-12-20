@@ -21,6 +21,7 @@ html[dir='rtl'] .p-breadcrumb-separator {
 
 .p-datatable-table thead th {
     background-color: #eaf3fa !important;
+    font-weight: 700 !important;
 }
 
 .p-paginator-page {

@@ -1,11 +1,18 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
+import {
+    Component,
+    Input,
+    Output,
+    EventEmitter,
+    OnInit,
+    OnDestroy,
+} from '@angular/core';
 import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'pdf-viewer',
     templateUrl: './pdf-viewer.component.html',
     styleUrls: ['./pdf-viewer.component.css'],
-    standalone: false
+    standalone: false,
 })
 export class PdfViewerComponent implements OnInit, OnDestroy {
     @Input() src: any = null;
