@@ -66,10 +66,63 @@
                     </div>
                 </div>
             </div>
+
             <div
                 class="flex flex-col flex-1 rounded-2.5 pb-6 border border-[#C3CAD980] bg-white dark:bg-[#0e1726] overflow-y-auto"
             >
-                <p-tree [value]="files" />
+                <h2 class="p-3 w-full flex justify-center gap-2 font-bold">
+                    <i class="pi pi-home"></i>
+                    الإدارة العامة لحماية المنشآت
+                </h2>
+                <div class="menu-list">
+                    <div *ngFor="let item of files" class="menu-item">
+                        <!-- Parent Item -->
+                        <div
+                            class="flex items-center justify-between px-4 py-3 cursor-pointer hover:bg-gray-50 dark:hover:bg-[#1b2e4b] border-b border-[#C3CAD980]"
+                            (click)="toggleMenuItem(item.key!)"
+                        >
+                            <div class="flex items-center gap-3 py-2">
+                                <i
+                                    [class]="item.icon"
+                                    class="text-primary text-lg"
+                                ></i>
+                                <span
+                                    class="font-medium text-gray-700 dark:text-white-dark"
+                                >
+                                    {{ item.label }}
+                                </span>
+                            </div>
+                            <i
+                                [class]="isExpanded(item.key!) ? 'pi pi-angle-up' : 'pi pi-angle-down'"
+                                class="text-gray-500 dark:text-white-dark transition-transform"
+                            ></i>
+                        </div>
+
+                        <!-- Children Items -->
+                        <div
+                            *ngIf="isExpanded(item.key!)"
+                            class="bg-gray-50 dark:bg-[#0e1726]"
+                            [@slideDownUp]
+                        >
+                            <div
+                                *ngFor="let child of item.children"
+                                [routerLink]="child.routerLink"
+                                routerLinkActive="bg-primary-light"
+                                class="flex items-center gap-3 px-4 py-3 ps-12 cursor-pointer hover:bg-gray-100 dark:hover:bg-[#1b2e4b] border-b border-[#C3CAD980]"
+                            >
+                                <i
+                                    [class]="child.icon"
+                                    class="text-gray-500 dark:text-white-dark"
+                                ></i>
+                                <span
+                                    class="text-gray-600 dark:text-white-dark"
+                                >
+                                    {{ child.label }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>

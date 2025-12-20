@@ -12,6 +12,7 @@ import { Region } from '../../models/region.model';
 export class RegionViewComponent extends BaseComponent implements OnInit {
     @Input() visible: boolean = false;
     @Input() regionId: number | null = null;
+
     @Output() visibleChange = new EventEmitter<boolean>();
     @Output() onSave = new EventEmitter<void>();
 

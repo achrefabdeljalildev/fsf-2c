@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { slideDownUp } from '../../shared/util/animations';
-import { TreeNode } from 'primeng/api';
 import { AuthService } from 'src/app/modules/auth/services/auth.service';
 
 @Component({
@@ -15,31 +14,34 @@ import { AuthService } from 'src/app/modules/auth/services/auth.service';
 export class SidebarComponent {
     store: any;
     isCollapsed: boolean = false;
+    expandedItems: { [key: string]: boolean } = {};
 
-    files: TreeNode[] = [
+    files: any[] = [
         {
             key: '1',
-            label: 'القيادة و التحكم',
+            label: ' المواقع',
             data: 'command and control',
             icon: 'pi pi-sitemap',
             children: [
                 {
                     key: '11',
-                    label: ' التحكم و التوجيه',
+                    label: ' لوحة القيادة',
                     data: 'Sub Control 1',
-                    icon: 'pi pi-file',
+                    icon: 'pi pi-objects-column',
+                    routerLink: '/locations/dashboard',
                 },
                 {
                     key: '12',
-                    label: ' الخطط و الاسناد الامني',
+                    label: 'قائمة المواقع',
                     data: 'Sub Control 2',
-                    icon: 'pi pi-file',
+                    icon: 'pi pi-list',
+                    routerLink: '/locations',
                 },
             ],
         },
         {
             key: '2',
-            label: 'حماية المنشآت',
+            label: 'المسح الميداني',
             data: 'Field Survey',
             icon: 'pi pi-video',
             children: [
@@ -48,32 +50,65 @@ export class SidebarComponent {
                     label: ' المسح الميداني',
                     data: 'Sub Survey 1',
                     icon: 'pi pi-file',
+                    routerLink: '/field-survey',
                 },
                 {
                     key: '22',
                     label: ' الحماية الميدانية',
                     data: 'Sub Survey 2',
                     icon: 'pi pi-file',
+                    routerLink: '/field-protection',
                 },
             ],
         },
         {
             key: '3',
-            label: 'الأمن الذاتي للمنشآت',
+            label: 'التقارير',
             data: 'Security Support',
             icon: 'pi pi-shield',
             children: [
                 {
-                    key: '31',
-                    label: ' السلامة الصناعية',
-                    data: 'Sub Support 1',
+                    key: '3َ1',
+                    label: ' الحماية الميدانية',
+                    data: 'Sub Survey 2',
                     icon: 'pi pi-file',
+                    routerLink: '/reports',
+                },
+            ],
+        },
+        {
+            key: '4',
+            label: 'الإعدادات',
+            data: 'Security Support',
+            icon: 'pi pi-cog',
+            children: [
+                {
+                    key: '41',
+                    label: 'الجهات',
+                    data: 'Sub Survey 2',
+                    icon: 'pi pi-list',
+                    routerLink: '/settings/entities',
                 },
                 {
-                    key: '32',
-                    label: ' متابعة الأمن الذاتي',
-                    data: 'Sub Support 2',
-                    icon: 'pi pi-file',
+                    key: '42',
+                    label: 'المناطق',
+                    data: 'Sub Survey 2',
+                    icon: 'pi pi-list',
+                    routerLink: '/regions',
+                },
+                {
+                    key: '43',
+                    label: 'المحافظات',
+                    data: 'Sub Survey 2',
+                    icon: 'pi pi-list',
+                    routerLink: '/settings/provinces',
+                },
+                {
+                    key: '44',
+                    label: 'التصنيفات',
+                    data: 'Sub Survey 2',
+                    icon: 'pi pi-list',
+                    routerLink: '/settings/categories',
                 },
             ],
         },
@@ -103,5 +138,13 @@ export class SidebarComponent {
 
     toggleUserCard() {
         this.isCollapsed = !this.isCollapsed;
+    }
+
+    toggleMenuItem(key: string) {
+        this.expandedItems[key] = !this.expandedItems[key];
+    }
+
+    isExpanded(key: string): boolean {
+        return this.expandedItems[key] || false;
     }
 }
