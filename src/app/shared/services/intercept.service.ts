@@ -28,6 +28,8 @@ export class InterceptService implements HttpInterceptor {
         request: HttpRequest<any>,
         next: HttpHandler,
     ): Observable<HttpEvent<any>> {
+        request = this.addBaseUrl(request);
+
         const token = this.getTokenFromLocalStorage();
         if (token) {
             request = this.addTokenHeader(request, token);
@@ -47,12 +49,16 @@ export class InterceptService implements HttpInterceptor {
     }
 
     private addTokenHeader(request: HttpRequest<any>, token: string) {
-        console.log(token);
-
         return request.clone({
             setHeaders: {
                 Authorization: `Bearer ${token}`,
             },
+        });
+    }
+
+    private addBaseUrl(request: HttpRequest<any>) {
+        return request.clone({
+            url: environment.baseUrl + request.url,
         });
     }
 
@@ -93,6 +99,7 @@ export class InterceptService implements HttpInterceptor {
 
     private getTokenFromLocalStorage(): string | null {
         try {
+            console.log('Reading token from localStorage');
             return localStorage.getItem(this.TOKEN_KEY);
         } catch (error) {
             console.error('Error reading token from localStorage:', error);

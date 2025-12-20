@@ -63,4 +63,9 @@ export class RegionListComponent extends BaseListComponent<Region> {
             });
         }
     }
+
+    onRowClick(event: any) {
+        // Handle row click event here
+        console.log('Row clicked:', event);
+    }
 }
