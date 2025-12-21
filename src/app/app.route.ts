@@ -41,4 +41,13 @@ export const routes: Routes = [
                 (m) => m.RegionModule,
             ),
     },
+    {
+        path: 'countries',
+        canActivate: [AuthGuard],
+        component: AppLayout,
+        loadChildren: () =>
+            import('./modules/countries/country.module').then(
+                (m) => m.CountryModule,
+            ),
+    },
 ];

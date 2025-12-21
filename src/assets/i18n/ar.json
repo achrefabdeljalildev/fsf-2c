@@ -14,8 +14,12 @@
         "getforgotPassword": "استعادة كلمة المرور",
         "usernameOrEmailIsNotCorrect": "اسم المستخدم أو البريد الإلكتروني غير صحيح"
     },
-    "regions": {
+    "region": {
         "addNewRegion": "إضافة منطقة",
         "regionList": "قائمة المناطق"
+    },
+    "country": {
+        "addNewCountry": "إضافة دولة",
+        "countryList": "قائمة الدول"
     }
 }

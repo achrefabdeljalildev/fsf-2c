@@ -101,7 +101,7 @@ export class SidebarComponent {
                     label: 'المحافظات',
                     data: 'Sub Survey 2',
                     icon: 'pi pi-list',
-                    routerLink: '/settings/provinces',
+                    routerLink: '/countries',
                 },
                 {
                     key: '44',
