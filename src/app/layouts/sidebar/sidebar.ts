@@ -1,9 +1,10 @@
-﻿import { Component, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
+﻿import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { slideDownUp } from '../../shared/util/animations';
 import { AuthService } from 'src/app/modules/auth/services/auth.service';
+import { filter } from 'rxjs/operators';
 
 @Component({
     selector: 'sidebar',
@@ -11,7 +12,7 @@ import { AuthService } from 'src/app/modules/auth/services/auth.service';
     animations: [slideDownUp],
     standalone: false,
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit {
     store: any;
     isCollapsed: boolean = false;
     expandedItems: { [key: string]: boolean } = {};
@@ -46,18 +47,18 @@ export class SidebarComponent {
             icon: 'pi pi-video',
             children: [
                 {
-                    key: '21',
-                    label: ' المسح الميداني',
-                    data: 'Sub Survey 1',
-                    icon: 'pi pi-file',
-                    routerLink: '/field-survey',
+                    key: '20',
+                    label: 'لوحة المسح الميداني',
+                    data: 'Sub Survey Dashboard',
+                    icon: 'pi pi-chart-bar',
+                    routerLink: '/field-survey/dashboard',
                 },
                 {
-                    key: '22',
-                    label: ' الحماية الميدانية',
-                    data: 'Sub Survey 2',
+                    key: '21',
+                    label: 'قائمة المسح الميداني',
+                    data: 'Sub Survey 1',
                     icon: 'pi pi-file',
-                    routerLink: '/field-protection',
+                    routerLink: '/field-survey/list',
                 },
             ],
         },
@@ -121,6 +122,33 @@ export class SidebarComponent {
         private authService: AuthService,
     ) {
         this.initStore();
+    }
+
+    ngOnInit() {
+        // Expand current route on init
+        this.expandCurrentRoute();
+
+        // Listen to route changes and expand accordingly
+        this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
+            this.expandCurrentRoute();
+        });
+    }
+
+    expandCurrentRoute() {
+        const currentUrl = this.router.url;
+
+        // Find the parent item that contains the current route
+        for (const item of this.files) {
+            if (item.children) {
+                const hasActiveChild = item.children.some(
+                    (child: any) => child.routerLink && currentUrl.startsWith(child.routerLink),
+                );
+
+                if (hasActiveChild) {
+                    this.expandedItems[item.key] = true;
+                }
+            }
+        }
     }
 
     async initStore() {

@@ -29,6 +29,13 @@ export const routes: Routes = [
             import('./modules/location/location.module').then((m) => m.LocationModule),
     },
     {
+        path: 'field-survey',
+        canActivate: [AuthGuard],
+        component: AppLayout,
+        loadChildren: () =>
+            import('./modules/field-survey/field-survey.module').then((m) => m.FieldSurveyModule),
+    },
+    {
         path: 'regions',
         canActivate: [AuthGuard],
         component: AppLayout,

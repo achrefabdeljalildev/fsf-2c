@@ -12,33 +12,29 @@ import { SharedModule } from 'src/app/shared/shared.module';
 
 const routes: Routes = [
     {
-        path: 'pages/error404',
+        path: 'error404',
         component: Error404Component,
         data: { title: 'Error 404' },
     },
     {
-        path: 'pages/error500',
+        path: 'error500',
         component: Error500Component,
         data: { title: 'Error 500' },
     },
     {
-        path: 'pages/error503',
+        path: 'error503',
         component: Error503Component,
         data: { title: 'Error 503' },
     },
     {
-        path: 'pages/maintenence',
+        path: 'maintenence',
         component: MaintenenceComponent,
         data: { title: 'Maintenence' },
     },
 ];
 @NgModule({
     imports: [RouterModule.forChild(routes), CommonModule, SharedModule],
-    declarations: [
-        Error404Component,
-        Error500Component,
-        Error503Component,
-        MaintenenceComponent,
-    ],
+    declarations: [Error404Component, Error500Component, Error503Component, MaintenenceComponent],
+    exports: [MaintenenceComponent],
 })
 export class PagesModule {}

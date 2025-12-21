@@ -21,8 +21,9 @@ export class ProvinceListComponent extends BaseListComponent<Province> {
 
     protected override getColumns(): colDef[] {
         return [
-            { field: 'nameAr', title: 'الاسم' },
-            { field: 'actions', title: 'الاجراءات', width: '150px' },
+            { field: 'nameAr', title: this.translate('الاسم') },
+            { field: 'regionName', title: this.translate('المنطقة') },
+            { field: 'actions', title: this.translate('الاجراءات'), width: '150px' },
         ];
     }
 

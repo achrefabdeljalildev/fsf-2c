@@ -21,10 +21,7 @@
                             style="transition: opacity 0.3s ease"
                             [style.opacity]="isCollapsed ? 1 : 0"
                         >
-                            <img
-                                src="assets/images/avatar-user.png"
-                                alt="Logo"
-                            />
+                            <img src="assets/images/avatar-user.png" alt="Logo" />
                         </div>
                         <a
                             (click)="toggleUserCard()"
@@ -45,10 +42,7 @@
                         <div
                             class="user-image rounded-full size-[130px] border-4 border-primary-light p-0.5 relative"
                         >
-                            <img
-                                src="assets/images/avatar-user.png"
-                                alt="Logo"
-                            />
+                            <img src="assets/images/avatar-user.png" alt="Logo" />
                         </div>
                     </div>
 
@@ -60,9 +54,7 @@
                         <h4 class="text-xl font-medium text-white">
                             {{'فهد محمد عبد الله' | translate }}
                         </h4>
-                        <h3 class="font-medium text-white">
-                            {{'مختص الاجازات' | translate }}
-                        </h3>
+                        <h3 class="font-medium text-white">{{'مختص الاجازات' | translate }}</h3>
                     </div>
                 </div>
             </div>
@@ -82,13 +74,8 @@
                             (click)="toggleMenuItem(item.key!)"
                         >
                             <div class="flex items-center gap-3 py-2">
-                                <i
-                                    [class]="item.icon"
-                                    class="text-primary text-lg"
-                                ></i>
-                                <span
-                                    class="font-medium text-gray-700 dark:text-white-dark"
-                                >
+                                <i [class]="item.icon" class="text-primary text-lg"></i>
+                                <span class="font-medium text-gray-700 dark:text-white-dark">
                                     {{ item.label }}
                                 </span>
                             </div>
@@ -107,18 +94,11 @@
                             <div
                                 *ngFor="let child of item.children"
                                 [routerLink]="child.routerLink"
-                                routerLinkActive="bg-primary-light"
+                                routerLinkActive="bg-primary  text-white"
                                 class="flex items-center gap-3 px-4 py-3 ps-12 cursor-pointer hover:bg-gray-100 dark:hover:bg-[#1b2e4b] border-b border-[#C3CAD980]"
                             >
-                                <i
-                                    [class]="child.icon"
-                                    class="text-gray-500 dark:text-white-dark"
-                                ></i>
-                                <span
-                                    class="text-gray-600 dark:text-white-dark"
-                                >
-                                    {{ child.label }}
-                                </span>
+                                <i [class]="child.icon"></i>
+                                <span> {{ child.label }} </span>
                             </div>
                         </div>
                     </div>

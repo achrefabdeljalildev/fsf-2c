@@ -7,6 +7,37 @@
     (onHide)="closeDialog()"
 >
     <form [formGroup]="provinceForm" (ngSubmit)="submit()" class="space-y-6">
+        <!-- Region Selection -->
+        <div class="form-group">
+            <label for="regionId" class="block text-sm font-medium mb-2">
+                المنطقة
+                <span class="text-red-500">*</span>
+            </label>
+            <p-autocomplete
+                id="regionId"
+                formControlName="regionId"
+                [suggestions]="filteredRegions"
+                (completeMethod)="searchRegion($event)"
+                optionLabel="nameAr"
+                optionValue="id"
+                [dropdown]="true"
+                placeholder="اختر المنطقة"
+                [style]="{ width: '100%' }"
+            >
+            </p-autocomplete>
+            <small
+                *ngIf="
+                    provinceForm.get('regionId')?.invalid &&
+                    (provinceForm.get('regionId')?.dirty || provinceForm.get('regionId')?.touched)
+                "
+                class="text-red-500"
+            >
+                <span *ngIf="provinceForm.get('regionId')?.errors?.['required']">
+                    هذا الحقل مطلوب
+                </span>
+            </small>
+        </div>
+
         <!-- Name in Arabic -->
         <div class="form-group">
             <label for="nameAr" class="block text-sm font-medium mb-2">

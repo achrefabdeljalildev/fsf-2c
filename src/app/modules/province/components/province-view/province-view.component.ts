@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BaseComponent } from 'src/app/shared/components/base-component/base-component';
 import { ProvinceService } from '../../services/province.service';
 import { Province } from '../../models/province.model';
+import { RegionService } from 'src/app/modules/regions/services/region.service';
+import { Region } from 'src/app/modules/regions/models/region.model';
+import { CriteriaModel } from 'src/app/shared/models/base/criteria.model';
 
 @Component({
     selector: 'app-province-view',
@@ -19,16 +22,20 @@ export class ProvinceViewComponent extends BaseComponent implements OnInit {
     provinceForm!: FormGroup;
     isLoading: boolean = false;
     isEditMode: boolean = false;
+    regions: Region[] = [];
+    filteredRegions: Region[] = [];
 
     constructor(
         private fb: FormBuilder,
         private provinceService: ProvinceService,
+        private regionService: RegionService,
     ) {
         super();
     }
 
     ngOnInit(): void {
         this.initForm();
+        this.loadRegions();
     }
 
     ngOnChanges(): void {
@@ -45,6 +52,7 @@ export class ProvinceViewComponent extends BaseComponent implements OnInit {
         this.provinceForm = this.fb.group({
             nameAr: ['', [Validators.required]],
             descriptionAr: [''],
+            regionId: [null, [Validators.required]],
         });
     }
 
@@ -54,10 +62,26 @@ export class ProvinceViewComponent extends BaseComponent implements OnInit {
             this.provinceForm.patchValue({
                 nameAr: response.data.nameAr,
                 descriptionAr: response.data.descriptionAr,
+                regionId: response.data.regionId,
             });
 
             this.isLoading = false;
         });
+    }
+
+    loadRegions(): void {
+        const regionCriteria = new CriteriaModel();
+        this.regionService.getPagedList(regionCriteria).subscribe((response) => {
+            this.regions = response.data.items;
+            this.filteredRegions = response.data.items;
+        });
+    }
+
+    searchRegion(event: any): void {
+        const query = event.query.toLowerCase();
+        this.filteredRegions = this.regions.filter((region) =>
+            region.nameAr.toLowerCase().includes(query),
+        );
     }
 
     submit(): void {
