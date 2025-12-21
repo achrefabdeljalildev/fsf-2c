@@ -10,11 +10,26 @@ import { TableModule } from 'primeng/table';
 import { CheckboxModule } from 'primeng/checkbox';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { LocationDashboardComponent } from 'src/app/modules/location/components/location-dashboard/location-dashboard.component';
+import { LocationViewComponent } from 'src/app/modules/location/components/location-view/location-view.component';
+import { TabsModule } from 'primeng/tabs';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 
 const routes: Routes = [
     {
-        path: '',
+        path: 'dashboard',
+        component: LocationDashboardComponent,
+    },
+    {
+        path: 'list',
         component: LocationListComponent,
+    },
+    {
+        path: 'create',
+        component: LocationViewComponent,
+    },
+    {
+        path: 'edit/:id',
+        component: LocationViewComponent,
     },
 ];
 
@@ -27,8 +42,10 @@ const routes: Routes = [
         DividerModule,
         TableModule,
         CheckboxModule,
+        TabsModule,
+        AutoCompleteModule,
         SharedModule,
     ],
-    declarations: [LocationDashboardComponent, LocationListComponent],
+    declarations: [LocationDashboardComponent, LocationListComponent, LocationViewComponent],
 })
 export class LocationModule {}

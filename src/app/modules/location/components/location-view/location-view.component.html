@@ -1,0 +1,629 @@
+<p-breadcrumb
+    [model]="[
+        { label: 'الأنظمة الأمنية' },
+        { label: 'الإدارة العامة لحماية المنشآت' },
+        { label: ' إدارة المسح الميداني' },
+        { label: 'المواقع', routerLink: '/location/list' },
+        { label: isEditMode ? 'تعديل موقع' : 'إضافة موقع جديد' },
+    ]"
+/>
+
+<div class="mt-6">
+    <div class="mb-5 flex items-center justify-between">
+        <div class="flex gap-2">
+            <button type="button" class="btn btn-outline-primary">
+                <i class="pi pi-pencil ml-2"></i>
+                تعديل
+            </button>
+            <button type="button" class="btn btn-primary" (click)="submit()">
+                <i class="pi pi-download ml-2"></i>
+                تصدير
+            </button>
+        </div>
+    </div>
+    <form [formGroup]="locationForm" (ngSubmit)="submit()" class="space-y-6 flex flex-col">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Main Information Grid -->
+            <div class="panel grid grid-cols-1 md:grid-cols-2 gap-4 border-t pt-4 col-span-2">
+                <!-- رمز الموقع - Location Code -->
+                <div class="form-group">
+                    <label for="code" class="block text-sm font-medium mb-2">
+                        رمز الموقع
+                        <span class="text-red-500">*</span>
+                    </label>
+                    <input
+                        id="code"
+                        type="text"
+                        formControlName="code"
+                        pInputText
+                        class="w-full"
+                        placeholder="الرمز"
+                    />
+                </div>
+
+                <!-- اسم الموقع - Location Name -->
+                <div class="form-group">
+                    <label for="nameAr" class="block text-sm font-medium mb-2">
+                        اسم الموقع
+                        <span class="text-red-500">*</span>
+                    </label>
+                    <input
+                        id="nameAr"
+                        type="text"
+                        formControlName="nameAr"
+                        pInputText
+                        class="w-full"
+                        placeholder="اسم الموقع"
+                    />
+                </div>
+
+                <!-- الجهة التابعة لها - Affiliated Entity -->
+                <div class="form-group">
+                    <label for="destinationId" class="block text-sm font-medium mb-2">
+                        الجهة التابعة لها
+                    </label>
+                    <p-autocomplete
+                        formControlName="destinationId"
+                        [dropdown]="true"
+                        [suggestions]="[]"
+                        (completeMethod)="search($event)"
+                        placeholder="الجهة التابعة لها"
+                        [style]="{ width: '100%' }"
+                    />
+                </div>
+
+                <!-- المنطقة - Region -->
+                <div class="form-group">
+                    <label for="area" class="block text-sm font-medium mb-2">المنطقة</label>
+                    <p-autocomplete
+                        formControlName="area"
+                        [dropdown]="true"
+                        [suggestions]="[]"
+                        (completeMethod)="search($event)"
+                        placeholder="المنطقة"
+                        [style]="{ width: '100%' }"
+                    />
+                </div>
+
+                <!-- المحافظة - Province -->
+                <div class="form-group">
+                    <label for="countryId" class="block text-sm font-medium mb-2">
+                        المحافظة
+                        <span class="text-red-500">*</span>
+                    </label>
+                    <p-autocomplete
+                        formControlName="countryId"
+                        [dropdown]="true"
+                        [suggestions]="[]"
+                        (completeMethod)="search($event)"
+                        placeholder="المحافظة"
+                        [style]="{ width: '100%' }"
+                    />
+                </div>
+
+                <!-- تصنيف الموقع - Location Classification -->
+                <div class="form-group">
+                    <label for="siteType" class="block text-sm font-medium mb-2">
+                        تصنيف الموقع
+                    </label>
+                    <p-autocomplete
+                        formControlName="siteType"
+                        [dropdown]="true"
+                        [suggestions]="[]"
+                        (completeMethod)="search($event)"
+                        placeholder="تصنيف الموقع"
+                        [style]="{ width: '100%' }"
+                    />
+                </div>
+
+                <!-- تاريخ افتتاح الموقع - Opening Date -->
+                <div class="form-group">
+                    <label for="openingDate" class="block text-sm font-medium mb-2">
+                        تاريخ افتتاح الموقع
+                    </label>
+                    <input
+                        id="openingDate"
+                        type="date"
+                        formControlName="openingDate"
+                        pInputText
+                        class="w-full"
+                    />
+                </div>
+
+                <!-- إحداثيات - Coordinates -->
+                <div class="form-group">
+                    <label for="siteCoordinates" class="block text-sm font-medium mb-2">
+                        إحداثيات
+                    </label>
+                    <input
+                        id="siteCoordinates"
+                        type="text"
+                        formControlName="siteCoordinates"
+                        pInputText
+                        class="w-full"
+                        placeholder="إحداثيات"
+                    />
+                </div>
+
+                <!-- المنطقة (second) -->
+                <div class="form-group">
+                    <label for="siteLocation" class="block text-sm font-medium mb-2">
+                        المنطقة
+                    </label>
+                    <p-autocomplete
+                        formControlName="siteLocation"
+                        [dropdown]="true"
+                        [suggestions]="[]"
+                        (completeMethod)="search($event)"
+                        placeholder="المنطقة"
+                        [style]="{ width: '100%' }"
+                    />
+                </div>
+
+                <!-- إحداثيات (second) -->
+                <div class="form-group">
+                    <label for="opearationCenter" class="block text-sm font-medium mb-2">
+                        إحداثيات
+                    </label>
+                    <input
+                        id="opearationCenter"
+                        type="text"
+                        formControlName="opearationCenter"
+                        pInputText
+                        class="w-full"
+                        placeholder="إحداثيات"
+                    />
+                </div>
+            </div>
+
+            <div class="col-span-1">
+                <div class="panel rounded-md p-4 mb-4">
+                    <h6 class="text-md font-semibold text-lg">سجل الإجراءات</h6>
+                    <div class="flex gap-4 items-center py-4 flex-col">
+                        <div class="flex flex-col w-full bg-lightBlue p-4 gap-2 rounded-md">
+                            <div class="flex gap-2 items-center">
+                                <i class="pi pi-check-circle"></i>
+                                <div class="font-bold">
+                                    الفريق 150 <p-tag rounded="true">نشط</p-tag>
+                                </div>
+                            </div>
+                            <div class="font-semibold ps-4">
+                                وصف سريع يتناسب مع هذه الجزئية بشكل مبسط وسلسل...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- المرفقات - Attachments Section -->
+                <div class="panel rounded-md p-2">
+                    <div class="flex justify-between w-full items-center">
+                        <h6 class="text-md font-semibold text-lg">
+                            <i class="pi pi-file-plus"></i>
+                            المرفقات
+                        </h6>
+                        <button type="button" class="btn btn-sm btn-success">
+                            <i class="pi pi-file-plus"></i>
+                        </button>
+                    </div>
+                    <div class="flex gap-4 items-center py-4 flex-col">
+                        <div
+                            class="flex justify-between w-full items-center bg-lightBlue p-4 rounded-md"
+                        >
+                            <div class="flex gap-2">
+                                <i class="pi pi-file-pdf"></i>
+                                <div>اسم_الملف.pdf</div>
+                            </div>
+                            <div class="flex gap-2">
+                                <i class="pi pi-download cursor-pointer"></i>
+                                <i class="pi pi-trash cursor-pointer"></i>
+                            </div>
+                        </div>
+                        <div
+                            class="flex justify-between w-full items-center bg-lightBlue p-4 rounded-md"
+                        >
+                            <div class="flex gap-2">
+                                <i class="pi pi-file-pdf"></i>
+                                <div>اسم_الملف.pdf</div>
+                            </div>
+                            <div class="flex gap-2">
+                                <i class="pi pi-download cursor-pointer"></i>
+                                <i class="pi pi-trash cursor-pointer"></i>
+                            </div>
+                        </div>
+                        <div
+                            class="flex justify-between w-full items-center bg-lightBlue p-4 rounded-md"
+                        >
+                            <div class="flex gap-2">
+                                <i class="pi pi-file-pdf"></i>
+                                <div>اسم_الملف.pdf</div>
+                            </div>
+                            <div class="flex gap-2">
+                                <i class="pi pi-download cursor-pointer"></i>
+                                <i class="pi pi-trash cursor-pointer"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs Section -->
+        <p-tabs value="0">
+            <p-tablist>
+                <p-tab value="0">حدود الموقع</p-tab>
+                <p-tab value="1">إضافة ملاحظة</p-tab>
+                <p-tab value="2">المقر الإداري أو الموقع</p-tab>
+            </p-tablist>
+            <p-tabpanels>
+                <!-- حدود الموقع - Location Boundaries -->
+                <p-tabpanel value="0">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                        <!-- الحد الشمالي - North Boundary -->
+                        <div class="form-group">
+                            <label for="northBoundar" class="block text-sm font-medium mb-2">
+                                الحد الشمالي
+                            </label>
+                            <input
+                                id="northBoundar"
+                                type="text"
+                                formControlName="northBoundar"
+                                pInputText
+                                class="w-full"
+                            />
+                        </div>
+
+                        <!-- الحد الجنوبي - South Boundary -->
+                        <div class="form-group">
+                            <label for="southBoundar" class="block text-sm font-medium mb-2">
+                                الحد الجنوبي
+                            </label>
+                            <input
+                                id="southBoundar"
+                                type="text"
+                                formControlName="southBoundar"
+                                pInputText
+                                class="w-full"
+                            />
+                        </div>
+
+                        <!-- الحد الغربي - West Boundary -->
+                        <div class="form-group">
+                            <label for="westBoundar" class="block text-sm font-medium mb-2">
+                                الحد الغربي
+                            </label>
+                            <input
+                                id="westBoundar"
+                                type="text"
+                                formControlName="westBoundar"
+                                pInputText
+                                class="w-full"
+                            />
+                        </div>
+
+                        <!-- الحد الشرقي - East Boundary -->
+                        <div class="form-group">
+                            <label for="eastBoundar" class="block text-sm font-medium mb-2">
+                                الحد الشرقي
+                            </label>
+                            <input
+                                id="eastBoundar"
+                                type="text"
+                                formControlName="eastBoundar"
+                                pInputText
+                                class="w-full"
+                            />
+                        </div>
+
+                        <!-- طول الموقع - Site Length -->
+                        <div class="form-group">
+                            <label for="siteLength" class="block text-sm font-medium mb-2">
+                                طول الموقع
+                            </label>
+                            <input
+                                id="siteLength"
+                                type="text"
+                                formControlName="siteLength"
+                                pInputText
+                                class="w-full"
+                            />
+                        </div>
+
+                        <!-- أقرب مركز شرطة - Nearest Police Station -->
+                        <div class="form-group">
+                            <label
+                                for="nearestPoliceStation"
+                                class="block text-sm font-medium mb-2"
+                            >
+                                أقرب مركز شرطة
+                            </label>
+                            <input
+                                id="nearestPoliceStation"
+                                type="text"
+                                formControlName="nearestPoliceStation"
+                                pInputText
+                                class="w-full"
+                            />
+                        </div>
+
+                        <!-- أقرب مركز دفاع - Nearest Defense Center -->
+                        <div class="form-group">
+                            <label
+                                for="nearestDefenseCenter"
+                                class="block text-sm font-medium mb-2"
+                            >
+                                أقرب مركز دفاع
+                            </label>
+                            <input
+                                id="nearestDefenseCenter"
+                                type="text"
+                                formControlName="nearestDefenseCenter"
+                                pInputText
+                                class="w-full"
+                            />
+                        </div>
+                    </div>
+                </p-tabpanel>
+
+                <!-- إضافة ملاحظة - Add Note -->
+                <p-tabpanel value="1">
+                    <div class="mt-4">
+                        <div class="form-group">
+                            <label for="descriptionAr" class="block text-sm font-medium mb-2">
+                                الملاحظات
+                            </label>
+                            <textarea
+                                id="descriptionAr"
+                                formControlName="descriptionAr"
+                                pInputTextarea
+                                rows="5"
+                                class="w-full"
+                                placeholder="أدخل الملاحظات"
+                            ></textarea>
+                        </div>
+                    </div>
+                </p-tabpanel>
+
+                <!-- المقر الإداري أو الموقع - Administrative Headquarters -->
+                <p-tabpanel value="2">
+                    <div class="mt-4">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <!-- نوع المدق - Building Type -->
+                            <div class="form-group">
+                                <label
+                                    for="administrativeSiteType"
+                                    class="block text-sm font-medium mb-2"
+                                >
+                                    نوع المدق
+                                </label>
+                                <p-autocomplete
+                                    formControlName="administrativeSiteType"
+                                    [dropdown]="true"
+                                    [suggestions]="[]"
+                                    (completeMethod)="search($event)"
+                                    placeholder="نوع المدق"
+                                    [style]="{ width: '100%' }"
+                                />
+                            </div>
+
+                            <!-- عدد - Number -->
+                            <div class="form-group">
+                                <label
+                                    for="administrativeOfficeNumber"
+                                    class="block text-sm font-medium mb-2"
+                                >
+                                    عدد
+                                </label>
+                                <input
+                                    id="administrativeOfficeNumber"
+                                    type="number"
+                                    formControlName="administrativeOfficeNumber"
+                                    pInputText
+                                    class="w-full"
+                                    placeholder="عدد"
+                                />
+                            </div>
+
+                            <!-- دورة مياه - Bathrooms -->
+                            <div class="form-group">
+                                <label
+                                    for="administrativeWCNumber"
+                                    class="block text-sm font-medium mb-2"
+                                >
+                                    دورة مياه
+                                </label>
+                                <input
+                                    id="administrativeWCNumber"
+                                    type="number"
+                                    formControlName="administrativeWCNumber"
+                                    pInputText
+                                    class="w-full"
+                                    placeholder="عدد دورات المياه"
+                                />
+                            </div>
+
+                            <!-- غرف الخدمات - Service Rooms -->
+                            <div class="form-group">
+                                <label class="block text-sm font-medium mb-2"> غرف الخدمات </label>
+                                <p-autocomplete
+                                    [dropdown]="true"
+                                    [suggestions]="[]"
+                                    (completeMethod)="search($event)"
+                                    placeholder="غرف الخدمات"
+                                    [style]="{ width: '100%' }"
+                                />
+                            </div>
+
+                            <!-- عدد غرف الخدمات - Number of Service Rooms -->
+                            <div class="form-group">
+                                <label
+                                    for="administrativeServiceNumber"
+                                    class="block text-sm font-medium mb-2"
+                                >
+                                    عدد غرف الخدمات
+                                </label>
+                                <input
+                                    id="administrativeServiceNumber"
+                                    type="number"
+                                    formControlName="administrativeServiceNumber"
+                                    pInputText
+                                    class="w-full"
+                                    placeholder="عدد"
+                                />
+                            </div>
+
+                            <!-- نوع المدق (second) -->
+                            <div class="form-group">
+                                <label
+                                    for="administrativeSite"
+                                    class="block text-sm font-medium mb-2"
+                                >
+                                    نوع المدق
+                                </label>
+                                <p-autocomplete
+                                    formControlName="administrativeSite"
+                                    [dropdown]="true"
+                                    [suggestions]="[]"
+                                    (completeMethod)="search($event)"
+                                    placeholder="نوع المدق"
+                                    [style]="{ width: '100%' }"
+                                />
+                            </div>
+                        </div>
+
+                        <!-- Checkboxes Section -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                            <!-- مستودع أسلحة - Weapons Warehouse -->
+                            <div class="flex items-center gap-2">
+                                <p-checkbox
+                                    formControlName="weaponsWarehouse"
+                                    [binary]="true"
+                                    inputId="weaponsWarehouse"
+                                />
+                                <label for="weaponsWarehouse">مستودع أسلحة</label>
+                            </div>
+
+                            <!-- تحديد المساحة - Define Area -->
+                            <div class="form-group">
+                                <label for="warhouseArea" class="block text-sm font-medium mb-2">
+                                    تحديد المساحة
+                                </label>
+                                <input
+                                    id="warhouseArea"
+                                    type="text"
+                                    formControlName="warhouseArea"
+                                    pInputText
+                                    class="w-full"
+                                />
+                            </div>
+
+                            <!-- ورشة صيانة - Maintenance Workshop -->
+                            <div class="flex items-center gap-2">
+                                <p-checkbox
+                                    formControlName="maintainceWorkShop"
+                                    [binary]="true"
+                                    inputId="maintainceWorkShop"
+                                />
+                                <label for="maintainceWorkShop">ورشة صيانة</label>
+                            </div>
+
+                            <div></div>
+
+                            <!-- يوجد مواقف للضباط والأفراد - Parking for Officers -->
+                            <div class="flex items-center gap-2">
+                                <p-checkbox
+                                    formControlName="parkingSpaces"
+                                    [binary]="true"
+                                    inputId="parkingSpaces"
+                                />
+                                <label for="parkingSpaces">يوجد مواقف للضباط والأفراد</label>
+                            </div>
+
+                            <!-- عدد المواقف - Number of Parking Spaces -->
+                            <div class="form-group">
+                                <label
+                                    for="parkingSpacesNumber"
+                                    class="block text-sm font-medium mb-2"
+                                >
+                                    عدد المواقف
+                                </label>
+                                <input
+                                    id="parkingSpacesNumber"
+                                    type="number"
+                                    formControlName="parkingSpacesNumber"
+                                    pInputText
+                                    class="w-full"
+                                />
+                            </div>
+                        </div>
+
+                        <!-- Additional Fields -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                            <!-- الموقع الإداري - Administrative Site -->
+                            <div class="form-group">
+                                <label
+                                    for="administrativeSiteDistance"
+                                    class="block text-sm font-medium mb-2"
+                                >
+                                    مسافة الموقع الإداري
+                                </label>
+                                <input
+                                    id="administrativeSiteDistance"
+                                    type="text"
+                                    formControlName="administrativeSiteDistance"
+                                    pInputText
+                                    class="w-full"
+                                />
+                            </div>
+
+                            <!-- تاريخ استلام الموقع - Site Receipt Date -->
+                            <div class="form-group">
+                                <label for="siteReceiptDate" class="block text-sm font-medium mb-2">
+                                    تاريخ استلام الموقع
+                                </label>
+                                <input
+                                    id="siteReceiptDate"
+                                    type="date"
+                                    formControlName="siteReceiptDate"
+                                    pInputText
+                                    class="w-full"
+                                />
+                            </div>
+
+                            <!-- عدد الموظفين - Staff Number -->
+                            <div class="form-group">
+                                <label for="staff" class="block text-sm font-medium mb-2">
+                                    عدد الموظفين
+                                </label>
+                                <input
+                                    id="staff"
+                                    type="number"
+                                    formControlName="staff"
+                                    pInputText
+                                    class="w-full"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </p-tabpanel>
+            </p-tabpanels>
+        </p-tabs>
+
+        <!-- Form Actions -->
+        <div class="mt-8 flex justify-end gap-2">
+            <button
+                type="button"
+                class="btn bg-gray-50 hover:bg-gray-100 text-gray-700"
+                (click)="cancel()"
+                [disabled]="isLoading"
+            >
+                إلغاء
+            </button>
+            <button
+                type="submit"
+                class="btn btn-primary"
+                [disabled]="locationForm.invalid || isLoading"
+            >
+                {{ isEditMode ? 'حفظ' : 'إضافة' }}
+            </button>
+        </div>
+    </form>
+</div>

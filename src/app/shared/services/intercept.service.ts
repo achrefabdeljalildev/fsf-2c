@@ -99,7 +99,6 @@ export class InterceptService implements HttpInterceptor {
 
     private getTokenFromLocalStorage(): string | null {
         try {
-            console.log('Reading token from localStorage');
             return localStorage.getItem(this.TOKEN_KEY);
         } catch (error) {
             console.error('Error reading token from localStorage:', error);

@@ -21,5 +21,9 @@
     "country": {
         "addNewCountry": "إضافة دولة",
         "countryList": "قائمة الدول"
+    },
+    "location": {
+        "addNewLocation": "إضافة موقع",
+        "locationList": "قائمة المواقع"
     }
 }

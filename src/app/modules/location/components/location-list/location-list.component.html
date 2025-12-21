@@ -1,24 +1,39 @@
 <p-breadcrumb
     [model]="[
-        { label: 'الالكترونيات' },
-        { label: 'الحاسوب' },
+        { label: 'الأنظمة الأمنية' },
+        { label: 'الإدارة العامة لحماية المنشآت' },
+        { label: ' إدارة المسح الميداني' },
         { label: 'المواقع' },
-        { label: 'الجرد' },
-        { label: 'التنطيق' },
     ]"
 />
-<div class="min-h-screen bg-slate-50" dir="rtl">
-    <!-- <base-datatable
-        [columns]="columns"
-        [value]="users"
-        [totalRecords]="users.length"
-        [loading]="loading"
-        [lazy]="true"
-        (lazyLoad)="loadUsers($event)"
-        (rowClick)="onRowSelected($event)"
-    >
-        <ng-template baseDatatableColumn="name" let-value="value">
-            <span style="text-decoration: underline">{{ value }}</span>
-        </ng-template>
-    </base-datatable> -->
-</div>
+
+<list-header
+    addNewRecordLabel="{{ 'location.addNewLocation' | translate }}"
+    tableTitle="{{ 'location.locationList' | translate }}"
+    [paginationInfo]="paginationInfo"
+    (search)="onSearch($event)"
+    (addNewRecord)="openCreateDialog()"
+/>
+
+<ng-datatable
+    [rows]="rows"
+    [columns]="cols"
+    [hasCheckbox]="true"
+    [sortable]="false"
+    [loading]="isLoading"
+    [pagination]="true"
+    [pageSize]="criteria.pageSize"
+    rowClass="cursor-pointer"
+    noDataContent="{{ 'common.noDataOnList' | translate }}"
+>
+    <ng-template slot="actions" let-value="data">
+        <div class="flex gap-2">
+            <div (click)="openEditDialog(value.id)" class="cursor-pointer">
+                <i class="pi pi-pencil"></i>
+            </div>
+            <div (click)="removeLocation(value.id)" class="cursor-pointer">
+                <i class="pi pi-trash"></i>
+            </div>
+        </div>
+    </ng-template>
+</ng-datatable>

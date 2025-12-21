@@ -14,40 +14,31 @@ export const routes: Routes = [
         path: 'pages',
         canActivate: [AuthGuard],
         component: AuthLayout,
-        loadChildren: () =>
-            import('./shared/pages/pages.module').then((d) => d.PagesModule),
+        loadChildren: () => import('./shared/pages/pages.module').then((d) => d.PagesModule),
     },
     {
         path: 'auth',
         component: AuthLayout,
-        loadChildren: () =>
-            import('./modules/auth/auth.module').then((m) => m.AuthModule),
+        loadChildren: () => import('./modules/auth/auth.module').then((m) => m.AuthModule),
     },
     {
-        path: 'locations',
+        path: 'location',
         canActivate: [AuthGuard],
         component: AppLayout,
         loadChildren: () =>
-            import('./modules/location/location.module').then(
-                (m) => m.LocationModule,
-            ),
+            import('./modules/location/location.module').then((m) => m.LocationModule),
     },
     {
         path: 'regions',
         canActivate: [AuthGuard],
         component: AppLayout,
-        loadChildren: () =>
-            import('./modules/regions/region.module').then(
-                (m) => m.RegionModule,
-            ),
+        loadChildren: () => import('./modules/regions/region.module').then((m) => m.RegionModule),
     },
     {
         path: 'countries',
         canActivate: [AuthGuard],
         component: AppLayout,
         loadChildren: () =>
-            import('./modules/countries/country.module').then(
-                (m) => m.CountryModule,
-            ),
+            import('./modules/countries/country.module').then((m) => m.CountryModule),
     },
 ];
