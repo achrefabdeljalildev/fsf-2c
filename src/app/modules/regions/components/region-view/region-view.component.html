@@ -24,8 +24,7 @@
             <small
                 *ngIf="
                     regionForm.get('nameAr')?.invalid &&
-                    (regionForm.get('nameAr')?.dirty ||
-                        regionForm.get('nameAr')?.touched)
+                    (regionForm.get('nameAr')?.dirty || regionForm.get('nameAr')?.touched)
                 "
                 class="text-red-500"
             >
@@ -37,9 +36,7 @@
 
         <!-- Description in Arabic -->
         <div class="form-group">
-            <label for="descriptionAr" class="block text-sm font-medium mb-2">
-                الوصف
-            </label>
+            <label for="descriptionAr" class="block text-sm font-medium mb-2"> الوصف </label>
             <textarea
                 id="descriptionAr"
                 formControlName="descriptionAr"
@@ -56,11 +53,7 @@
                 "
                 class="text-red-500"
             >
-                <span
-                    *ngIf="
-                        regionForm.get('descriptionAr')?.errors?.['required']
-                    "
-                >
+                <span *ngIf="regionForm.get('descriptionAr')?.errors?.['required']">
                     هذا الحقل مطلوب
                 </span>
             </small>
