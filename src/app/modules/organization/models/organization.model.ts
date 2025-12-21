@@ -1,4 +1,4 @@
-export interface Country {
+export interface Organization {
     id?: number;
     nameAr: string;
     descriptionAr: string;

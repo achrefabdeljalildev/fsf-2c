@@ -87,7 +87,7 @@ export class SidebarComponent {
                     label: 'الجهات',
                     data: 'Sub Survey 2',
                     icon: 'pi pi-list',
-                    routerLink: '/settings/entities',
+                    routerLink: '/organization',
                 },
                 {
                     key: '42',
@@ -101,7 +101,7 @@ export class SidebarComponent {
                     label: 'المحافظات',
                     data: 'Sub Survey 2',
                     icon: 'pi pi-list',
-                    routerLink: '/countries',
+                    routerLink: '/province',
                 },
                 {
                     key: '44',

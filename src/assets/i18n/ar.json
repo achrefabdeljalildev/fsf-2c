@@ -25,5 +25,13 @@
     "location": {
         "addNewLocation": "إضافة موقع",
         "locationList": "قائمة المواقع"
+    },
+    "province": {
+        "addNewProvince": "إضافة محافظة",
+        "provinceList": "قائمة المحافظات"
+    },
+    "organization": {
+        "addNewOrganization": "إضافة جهة",
+        "organizationList": "قائمة الجهات"
     }
 }

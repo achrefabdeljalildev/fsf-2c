@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Country } from '../models/country.model';
+import { Province } from '../models/province.model';
 import { BaseService } from 'src/app/shared/services/base.service';
 
 @Injectable({
     providedIn: 'root',
 })
-export class CountryService extends BaseService<Country> {
+export class ProvinceService extends BaseService<Province> {
     constructor() {
-        super('/Countries');
+        super('/Provinces');
     }
 }

@@ -1,12 +1,12 @@
 <p-dialog
     [(visible)]="visible"
-    [header]="isEditMode ? 'تعديل دولة' : 'إضافة دولة جديدة'"
+    [header]="isEditMode ? 'تعديل جهة' : 'إضافة جهة جديدة'"
     [modal]="true"
     [style]="{ width: '50vw' }"
     [breakpoints]="{ '960px': '75vw', '640px': '90vw' }"
     (onHide)="closeDialog()"
 >
-    <form [formGroup]="countryForm" (ngSubmit)="submit()" class="space-y-6">
+    <form [formGroup]="organizationForm" (ngSubmit)="submit()" class="space-y-6">
         <!-- Name in Arabic -->
         <div class="form-group">
             <label for="nameAr" class="block text-sm font-medium mb-2">
@@ -19,17 +19,17 @@
                 formControlName="nameAr"
                 pInputText
                 class="w-full"
-                placeholder="أدخل اسم الدولة "
+                placeholder="أدخل اسم الجهة "
             />
             <small
                 *ngIf="
-                    countryForm.get('nameAr')?.invalid &&
-                    (countryForm.get('nameAr')?.dirty ||
-                        countryForm.get('nameAr')?.touched)
+                    organizationForm.get('nameAr')?.invalid &&
+                    (organizationForm.get('nameAr')?.dirty ||
+                        organizationForm.get('nameAr')?.touched)
                 "
                 class="text-red-500"
             >
-                <span *ngIf="countryForm.get('nameAr')?.errors?.['required']">
+                <span *ngIf="organizationForm.get('nameAr')?.errors?.['required']">
                     هذا الحقل مطلوب
                 </span>
             </small>
@@ -37,30 +37,24 @@
 
         <!-- Description in Arabic -->
         <div class="form-group">
-            <label for="descriptionAr" class="block text-sm font-medium mb-2">
-                الوصف
-            </label>
+            <label for="descriptionAr" class="block text-sm font-medium mb-2"> الوصف </label>
             <textarea
                 id="descriptionAr"
                 formControlName="descriptionAr"
                 pInputTextarea
                 rows="5"
                 class="w-full"
-                placeholder="أدخل وصف الدولة "
+                placeholder="أدخل وصف الجهة "
             ></textarea>
             <small
                 *ngIf="
-                    countryForm.get('descriptionAr')?.invalid &&
-                    (countryForm.get('descriptionAr')?.dirty ||
-                        countryForm.get('descriptionAr')?.touched)
+                    organizationForm.get('descriptionAr')?.invalid &&
+                    (organizationForm.get('descriptionAr')?.dirty ||
+                        organizationForm.get('descriptionAr')?.touched)
                 "
                 class="text-red-500"
             >
-                <span
-                    *ngIf="
-                        countryForm.get('descriptionAr')?.errors?.['required']
-                    "
-                >
+                <span *ngIf="organizationForm.get('descriptionAr')?.errors?.['required']">
                     هذا الحقل مطلوب
                 </span>
             </small>
@@ -81,7 +75,7 @@
                 type="button"
                 class="btn btn-primary"
                 (click)="submit()"
-                [disabled]="countryForm.invalid || isLoading"
+                [disabled]="organizationForm.invalid || isLoading"
             >
                 {{ isEditMode ? 'حفظ ' : 'إضافة' }}
             </button>

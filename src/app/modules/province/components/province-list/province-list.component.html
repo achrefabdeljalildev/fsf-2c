@@ -3,13 +3,13 @@
         { label: 'الأنظمة الأمنية' },
         { label: 'الإدارة العامة لحماية المنشآت' },
         { label: ' إدارة المسح الميداني' },
-        { label: 'الدول' },
+        { label: 'المحافظات' },
     ]"
 />
 
 <list-header
-    addNewRecordLabel="{{ 'country.addNewCountry' | translate }}"
-    tableTitle="{{ 'country.countryList' | translate }}"
+    addNewRecordLabel="{{ 'province.addNewProvince' | translate }}"
+    tableTitle="{{ 'province.provinceList' | translate }}"
     [paginationInfo]="paginationInfo"
     (search)="onSearch($event)"
     (addNewRecord)="openCreateDialog()"
@@ -31,15 +31,15 @@
             <div (click)="openEditDialog(value.id)" class="cursor-pointer">
                 <i class="pi pi-pencil"></i>
             </div>
-            <div (click)="removeCountry(value.id)" class="cursor-pointer">
+            <div (click)="removeProvince(value.id)" class="cursor-pointer">
                 <i class="pi pi-trash"></i>
             </div>
         </div>
     </ng-template>
 </ng-datatable>
 
-<app-country-view
+<app-province-view
     [(visible)]="showDialog"
-    [countryId]="selectedCountryId"
+    [provinceId]="selectedProvinceId"
     (onSave)="onDialogSave()"
 />

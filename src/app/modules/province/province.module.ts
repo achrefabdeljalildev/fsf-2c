@@ -3,26 +3,26 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../shared/shared.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CountryListComponent } from './components/country-list/country-list.component';
-import { CountryViewComponent } from './components/country-view/country-view.component';
+import { ProvinceListComponent } from './components/province-list/province-list.component';
+import { ProvinceViewComponent } from './components/province-view/province-view.component';
 
 const routes: Routes = [
     {
         path: '',
-        component: CountryListComponent,
+        component: ProvinceListComponent,
     },
     {
         path: 'create',
-        component: CountryViewComponent,
+        component: ProvinceViewComponent,
     },
     {
         path: 'edit/:id',
-        component: CountryViewComponent,
+        component: ProvinceViewComponent,
     },
 ];
 
 @NgModule({
-    declarations: [CountryListComponent, CountryViewComponent],
+    declarations: [ProvinceListComponent, ProvinceViewComponent],
     imports: [
         CommonModule,
         SharedModule,
@@ -30,4 +30,4 @@ const routes: Routes = [
         TranslateModule.forChild(),
     ],
 })
-export class CountryModule {}
+export class ProvinceModule {}

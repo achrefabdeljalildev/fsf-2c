@@ -35,10 +35,17 @@ export const routes: Routes = [
         loadChildren: () => import('./modules/regions/region.module').then((m) => m.RegionModule),
     },
     {
-        path: 'countries',
+        path: 'province',
         canActivate: [AuthGuard],
         component: AppLayout,
         loadChildren: () =>
-            import('./modules/countries/country.module').then((m) => m.CountryModule),
+            import('./modules/province/province.module').then((m) => m.ProvinceModule),
+    },
+    {
+        path: 'organization',
+        canActivate: [AuthGuard],
+        component: AppLayout,
+        loadChildren: () =>
+            import('./modules/organization/organization.module').then((m) => m.OrganizationModule),
     },
 ];

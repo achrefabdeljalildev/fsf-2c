@@ -7,16 +7,11 @@
     <div class="relative z-10 max-w-4xl mx-auto">
         <h1 class="text-4xl font-bold mb-4">الأنظمة الأمنية</h1>
         <p class="text-lg text-teal-100">
-            هنا يمكنك تخصيص وصف أ رابعة أسطر هنا يمكنك تخصيص وصف و أ رابعة أسطر
-            هنا يمكنك تخصيص وصف.
+            هنا يمكنك تخصيص وصف أ رابعة أسطر هنا يمكنك تخصيص وصف و أ رابعة أسطر هنا يمكنك تخصيص وصف.
         </p>
     </div>
 
-    <img
-        class="absolute right-6 top-0 h-full"
-        src="assets/images/lines-effect.png"
-        alt=""
-    />
+    <img class="absolute right-6 top-0 h-full" src="assets/images/lines-effect.png" alt="" />
 </div>
 
 <!-- Cards Grid -->
@@ -27,18 +22,14 @@
             *ngFor="let card of cards"
             (click)="selectCard(card)"
             [ngClass]="
-                card === selectedCard
-                    ? 'bg-teal-600 text-white'
-                    : 'bg-lightBlue text-gray-800'
+                card === selectedCard ? 'bg-teal-600 text-white' : 'bg-lightBlue text-gray-800'
             "
             class="cursor-pointer p-8 rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-100"
         >
             <div class="flex flex-col items-center text-center mb-6">
                 <div
                     [ngClass]="
-                        card === selectedCard
-                            ? 'bg-white text-teal-600'
-                            : 'bg-teal-600 text-white'
+                        card === selectedCard ? 'bg-white text-teal-600' : 'bg-teal-600 text-white'
                     "
                     class="px-5 py-4 rounded-full mb-4"
                 >
@@ -46,21 +37,17 @@
                 </div>
                 <h3
                     class="text-xl font-bold text-gray-800 mb-3"
-                    [ngClass]="
-                        card === selectedCard ? 'text-white' : 'text-gray-800'
-                    "
+                    [ngClass]="card === selectedCard ? 'text-white' : 'text-gray-800'"
                 >
                     {{ card.title }}
                 </h3>
             </div>
             <p
-                [ngClass]="
-                    card === selectedCard ? 'text-white' : 'text-gray-600'
-                "
+                [ngClass]="card === selectedCard ? 'text-white' : 'text-gray-600'"
                 class="text-sm mb-6 text-right"
             >
-                هنا يمكنك تخصيص وصف أ رابعة أسطر هنا يمكنك تخصيص وصف و أ رابعة
-                أسطر هنا يمكنك تخصيص وصف.
+                هنا يمكنك تخصيص وصف أ رابعة أسطر هنا يمكنك تخصيص وصف و أ رابعة أسطر هنا يمكنك تخصيص
+                وصف.
             </p>
         </div>
     </div>
@@ -70,7 +57,7 @@
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 w-full">
             <a
                 *ngFor="let subcard of selectedCard.subcards"
-                routerLink="/locations"
+                routerLink="/location/dashboard"
                 class="bg-lightBlue shadow-sm hover:shadow-md transition-shadow border border-[#0E8A8A63] w-full cursor-pointer p-3 px-2 rounded-lg shadow-sm border border-gray-100"
             >
                 <div

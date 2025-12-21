@@ -1,24 +1,21 @@
 import { Component } from '@angular/core';
 import { colDef } from '@bhplugin/ng-datatable';
 import { Observable } from 'rxjs';
-import { Country } from '../../models/country.model';
-import { CountryService } from '../../services/country.service';
+import { Organization } from '../../models/organization.model';
+import { OrganizationService } from '../../services/organization.service';
 import { BaseListComponent } from 'src/app/shared/components/base-list-component/base-list-component';
-import {
-    ApiResponseModel,
-    PagedResponse,
-} from 'src/app/shared/models/base/paged-response.model';
+import { ApiResponseModel, PagedResponse } from 'src/app/shared/models/base/paged-response.model';
 
 @Component({
-    selector: 'app-country-list',
-    templateUrl: './country-list.component.html',
+    selector: 'app-organization-list',
+    templateUrl: './organization-list.component.html',
     standalone: false,
 })
-export class CountryListComponent extends BaseListComponent<Country> {
+export class OrganizationListComponent extends BaseListComponent<Organization> {
     showDialog: boolean = false;
-    selectedCountryId: number | null = null;
+    selectedOrganizationId: number | null = null;
 
-    constructor(private countryService: CountryService) {
+    constructor(private organizationService: OrganizationService) {
         super();
     }
 
@@ -29,10 +26,8 @@ export class CountryListComponent extends BaseListComponent<Country> {
         ];
     }
 
-    protected override fetchPage(): Observable<
-        ApiResponseModel<PagedResponse<Country>>
-    > {
-        return this.countryService.getPagedList(this.criteria);
+    protected override fetchPage(): Observable<ApiResponseModel<PagedResponse<Organization>>> {
+        return this.organizationService.getPagedList(this.criteria);
     }
 
     filterChange(event: any) {
@@ -42,12 +37,12 @@ export class CountryListComponent extends BaseListComponent<Country> {
     }
 
     openCreateDialog() {
-        this.selectedCountryId = null;
+        this.selectedOrganizationId = null;
         this.showDialog = true;
     }
 
     openEditDialog(id: number) {
-        this.selectedCountryId = id;
+        this.selectedOrganizationId = id;
         this.showDialog = true;
     }
 
@@ -55,10 +50,10 @@ export class CountryListComponent extends BaseListComponent<Country> {
         this.loadData();
     }
 
-    removeCountry(id: number) {
-        if (confirm('هل أنت متأكد من حذف هذه الدولة؟')) {
-            this.countryService.deleteById(id).subscribe(() => {
-                this.showSuccessMessage('تم حذف الدولة بنجاح');
+    removeOrganization(id: number) {
+        if (confirm('هل أنت متأكد من حذف هذه الجهة؟')) {
+            this.organizationService.deleteById(id).subscribe(() => {
+                this.showSuccessMessage('تم حذف الجهة بنجاح');
                 this.loadData();
             });
         }
