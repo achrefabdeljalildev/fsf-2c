@@ -9,17 +9,23 @@
 />
 
 <div class="mt-6">
-    <div class="mb-5 flex items-center justify-between">
-        <div class="flex gap-2">
-            <button type="button" class="btn btn-outline-primary">
-                <i class="pi pi-pencil ml-2"></i>
-                تعديل
-            </button>
-            <button type="button" class="btn btn-primary" (click)="submit()">
-                <i class="pi pi-download ml-2"></i>
-                تصدير
-            </button>
-        </div>
+    <!-- Form Actions -->
+    <div class="mt-8 flex gap-2 mb-3">
+        <button
+            type="button"
+            class="btn bg-gray-50 hover:bg-gray-100 text-gray-700"
+            (click)="cancel()"
+            [disabled]="isLoading"
+        >
+            إلغاء
+        </button>
+        <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="locationForm.invalid || isLoading"
+        >
+            {{ isEditMode ? 'حفظ' : 'إضافة' }}
+        </button>
     </div>
     <form [formGroup]="locationForm" (ngSubmit)="submit()" class="space-y-6 flex flex-col">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -144,38 +150,7 @@
                         placeholder="إحداثيات"
                     />
                 </div>
-
-                <!-- المنطقة (second) -->
-                <div class="form-group">
-                    <label for="siteLocation" class="block text-sm font-medium mb-2">
-                        المنطقة
-                    </label>
-                    <p-autocomplete
-                        formControlName="siteLocation"
-                        [dropdown]="true"
-                        [suggestions]="[]"
-                        (completeMethod)="search($event)"
-                        placeholder="المنطقة"
-                        [style]="{ width: '100%' }"
-                    />
-                </div>
-
-                <!-- إحداثيات (second) -->
-                <div class="form-group">
-                    <label for="opearationCenter" class="block text-sm font-medium mb-2">
-                        إحداثيات
-                    </label>
-                    <input
-                        id="opearationCenter"
-                        type="text"
-                        formControlName="opearationCenter"
-                        pInputText
-                        class="w-full"
-                        placeholder="إحداثيات"
-                    />
-                </div>
             </div>
-
             <div class="col-span-1">
                 <div class="panel rounded-md p-4 mb-4">
                     <h6 class="text-md font-semibold text-lg">سجل الإجراءات</h6>
@@ -249,8 +224,8 @@
         <!-- Tabs Section -->
         <p-tabs value="0">
             <p-tablist>
-                <p-tab value="0">حدود الموقع</p-tab>
                 <p-tab value="1">إضافة ملاحظة</p-tab>
+                <p-tab value="0">حدود الموقع</p-tab>
                 <p-tab value="2">المقر الإداري أو الموقع</p-tab>
             </p-tablist>
             <p-tabpanels>
@@ -606,24 +581,5 @@
                 </p-tabpanel>
             </p-tabpanels>
         </p-tabs>
-
-        <!-- Form Actions -->
-        <div class="mt-8 flex justify-end gap-2">
-            <button
-                type="button"
-                class="btn bg-gray-50 hover:bg-gray-100 text-gray-700"
-                (click)="cancel()"
-                [disabled]="isLoading"
-            >
-                إلغاء
-            </button>
-            <button
-                type="submit"
-                class="btn btn-primary"
-                [disabled]="locationForm.invalid || isLoading"
-            >
-                {{ isEditMode ? 'حفظ' : 'إضافة' }}
-            </button>
-        </div>
     </form>
 </div>
