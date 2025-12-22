@@ -21,8 +21,14 @@ export class LocationListComponent extends BaseListComponent<Location> {
         return [
             { field: 'code', title: 'الكود' },
             { field: 'nameAr', title: 'الاسم' },
-            { field: 'area', title: 'المنطقة' },
-            { field: 'siteLocation', title: 'موقع الموقع' },
+            { field: 'provinceNameAr', title: 'المحافظة' },
+            { field: 'organizationNameAr', title: 'الجهة التابعة لها' },
+            {
+                field: 'siteReceiptDate',
+                title: 'تاريخ الاستلام',
+                cellRenderer: (d: Location) =>
+                    new Date(d.siteReceiptDate).toLocaleDateString('fr-EG'),
+            },
             { field: 'actions', title: 'الاجراءات', width: '150px' },
         ];
     }

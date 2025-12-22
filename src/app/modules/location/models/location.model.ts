@@ -1,11 +1,21 @@
+import { Organization } from 'src/app/modules/organization/models/organization.model';
+import { Province } from 'src/app/modules/province/models/province.model';
+
+export enum SiteType {
+    None = 1,
+    Found = 2,
+    Inside = 3,
+    Outside = 4,
+}
+
 export interface Location {
     id?: number;
     nameAr: string;
     descriptionAr: string;
     code: string;
     area: string;
-    countryId: number;
-    destinationId: number;
+    provinceId: number;
+    organizationId: number;
     opearationCenter: string;
     openingDate: string;
     siteLocation: string;
@@ -18,17 +28,19 @@ export interface Location {
     southBoundar: string;
     westBoundar: string;
     eastBoundar: string;
-    siteType: 'None' | string;
-    administrativeSite: string;
-    administrativeSiteDistance: string;
-    administrativeSiteType: string;
-    administrativeOfficeNumber: number;
-    administrativeWCNumber: number;
-    administrativeServiceNumber: number;
+    siteType: SiteType;
+    administrativeSite?: string;
+    administrativeSiteDistance?: string;
+    administrativeSiteType?: string;
+    administrativeOfficeNumber?: number;
+    administrativeWCNumber?: number;
+    administrativeServiceNumber?: number;
     weaponsWarehouse: boolean;
     warhouseArea: string;
     maintainceWorkShop: boolean;
     parkingSpaces: boolean;
-    parkingSpacesNumber: number;
+    parkingSpacesNumber?: number;
     staff: number;
+    province?: Province;
+    organization?: Organization;
 }

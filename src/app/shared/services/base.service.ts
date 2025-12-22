@@ -9,11 +9,15 @@ export class BaseService<T> {
 
     constructor(protected baseUrl: string) {}
 
-    getPagedList(criteria: CriteriaModel): Observable<ApiResponseModel<PagedResponse<T>>> {
+    getPagedList(
+        criteria: CriteriaModel = new CriteriaModel(),
+    ): Observable<ApiResponseModel<PagedResponse<T>>> {
         return this.http.post<ApiResponseModel<PagedResponse<T>>>(`${this.baseUrl}/List`, criteria);
     }
 
-    getAll(criteria?: CriteriaModel): Observable<ApiResponseModel<PagedResponse<T>>> {
+    getAll(
+        criteria: CriteriaModel = new CriteriaModel(),
+    ): Observable<ApiResponseModel<PagedResponse<T>>> {
         return this.http.post<ApiResponseModel<PagedResponse<T>>>(this.baseUrl, criteria || {});
     }
 

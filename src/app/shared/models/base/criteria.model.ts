@@ -17,4 +17,9 @@ export class CriteriaModel {
     sorts: SortModel[] = [];
     searchTerm: string = '';
     totalCount?: number = 0;
+
+    // add constructor to initialize with default searchTerm
+    constructor(init?: Partial<CriteriaModel>) {
+        Object.assign(this, init);
+    }
 }
