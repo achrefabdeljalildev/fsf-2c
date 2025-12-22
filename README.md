@@ -54,17 +54,17 @@ Releases are handled automatically by the semantic release script. Ensure your c
 
 ## Branch Naming Convention
 
-To link your development information to Jira issues, your team must include Jira issue keys in their development actions. The key you will use is **PGD**.
+To link your development information to Jira issues, your team must include Jira issue keys in their development actions. The key you will use is **C2**.
 
 ### Branch Naming Format
 
 When checking out a new branch in your repo, use the following format for the branch name:
 
-**`git checkout -b PGD-<issue-number>-<branch-name>`**
+**`git checkout -b C2-<issue-number>-<branch-name>`**
 
 **Example**: If the issue number is `123` and the branch name is `feature-login`, you would use:
 
-**`git checkout -b PGD-123-feature-login`**
+**`git checkout -b C2-123-feature-login`**
 
 ### Commit Messages
 
@@ -72,16 +72,16 @@ When committing changes to your branch, include the issue key in your commit mes
 
 **Example**:
 
-**`git commit -m "feat(PGD-123): Implement login feature"`**
+**`git commit -m "feat(C2-123): Implement login feature"`**
 
 ### Pull Requests
 
 When creating a pull request, include the issue key in the pull request title:
 
-**`PGD-<issue-number> <pull request title>`**
+**`C2-<issue-number> <pull request title>`**
 
 **Example**:
 
-**`PGD-123 Add login feature`**
+**`C2-123 Add login feature`**
 
 After you push your branch, you'll see development information in your Jira issue.
