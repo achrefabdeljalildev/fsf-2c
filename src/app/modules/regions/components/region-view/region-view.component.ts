@@ -77,9 +77,7 @@ export class RegionViewComponent extends BaseComponent implements OnInit {
             next: (response) => {
                 this.isLoading = false;
                 this.showSuccessMessage(
-                    this.isEditMode
-                        ? 'تم تحديث المنطقة بنجاح'
-                        : 'تم إضافة المنطقة بنجاح',
+                    this.isEditMode ? 'تم تحديث المنطقة بنجاح' : 'تم إضافة المنطقة بنجاح',
                 );
                 this.onSave.emit();
                 this.closeDialog();
@@ -108,20 +106,18 @@ export class RegionViewComponent extends BaseComponent implements OnInit {
     remove(): void {
         if (!this.regionId) return;
         this.isLoading = true;
-        const subscription = this.regionService
-            .deleteById(this.regionId)
-            .subscribe({
-                next: () => {
-                    this.isLoading = false;
-                    this.showSuccessMessage('تم حذف المنطقة بنجاح');
-                    this.onSave.emit();
-                    this.closeDialog();
-                },
-                error: () => {
-                    this.isLoading = false;
-                    this.showErrorMessage('حدث خطأ أثناء حذف المنطقة');
-                },
-            });
+        const subscription = this.regionService.deleteById(this.regionId).subscribe({
+            next: () => {
+                this.isLoading = false;
+                this.showSuccessMessage('تم حذف المنطقة بنجاح');
+                this.onSave.emit();
+                this.closeDialog();
+            },
+            error: () => {
+                this.isLoading = false;
+                this.showErrorMessage('حدث خطأ أثناء حذف المنطقة');
+            },
+        });
 
         this.subscriptions.add(subscription);
     }

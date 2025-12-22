@@ -38,8 +38,4 @@
     </ng-template>
 </ng-datatable>
 
-<app-region-view
-    [(visible)]="showDialog"
-    [regionId]="selectedRegionId"
-    (onSave)="onDialogSave()"
-/>
+<app-region-view [(visible)]="showDialog" [regionId]="selectedRegionId" (onSave)="onDialogSave()" />

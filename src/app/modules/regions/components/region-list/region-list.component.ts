@@ -4,10 +4,7 @@ import { Observable } from 'rxjs';
 import { Region } from 'src/app/modules/regions/models/region.model';
 import { RegionService } from 'src/app/modules/regions/services/region.service';
 import { BaseListComponent } from 'src/app/shared/components/base-list-component/base-list-component';
-import {
-    ApiResponseModel,
-    PagedResponse,
-} from 'src/app/shared/models/base/paged-response.model';
+import { ApiResponseModel, PagedResponse } from 'src/app/shared/models/base/paged-response.model';
 
 @Component({
     selector: 'app-region-list',
@@ -29,9 +26,7 @@ export class RegionListComponent extends BaseListComponent<Region> {
         ];
     }
 
-    protected override fetchPage(): Observable<
-        ApiResponseModel<PagedResponse<Region>>
-    > {
+    protected override fetchPage(): Observable<ApiResponseModel<PagedResponse<Region>>> {
         return this.regionService.getPagedList(this.criteria);
     }
 
