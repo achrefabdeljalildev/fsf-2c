@@ -38,7 +38,7 @@ export interface AuthState {
     providedIn: 'root',
 })
 export class AuthService {
-    private readonly TOKEN_KEY = environment.USERDATA_KEY || 'authToken';
+    private readonly TOKEN_KEY = 'authToken';
     private readonly REFRESH_TOKEN_KEY = 'refreshToken';
 
     private authStateSubject = new BehaviorSubject<AuthState>(

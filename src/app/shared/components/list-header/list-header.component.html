@@ -1,0 +1,46 @@
+<div
+    class="flex justify-between items-center bg-white border-b p-2 mb-2 rounded-t-lg"
+>
+    <a
+        class="btn btn-outline-primary btn-sm p-2 flex items-center gap-2 cursor-pointer"
+        (click)="onAddNewRecord()"
+    >
+        <i class="pi pi-plus"></i>
+        {{ addNewRecordLabel }}
+    </a>
+
+    <div class="flex gap-2">
+        <div class="relative w-full max-w-md flex items-center">
+            <!-- Search Icon -->
+            <i class="pi pi-search absolute start-2"></i>
+
+            <!-- Input -->
+            <input
+                [(ngModel)]="searchTerm"
+                id="datatable-container-search"
+                type="text"
+                placeholder="بحث..."
+                class="w-full rounded-lg border border-gray-300 bg-white py-2 pr-10 pl-10 text-sm text-gray-700 placeholder-gray-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            />
+
+            <!-- Heroicons X -->
+            <i
+                class="pi pi-times text-lg absolute end-2 cursor-pointer hover:text-red-600"
+                (click)="onSearch('')"
+            ></i>
+        </div>
+        <button class="btn btn-secondary btn-sm" (click)="onSearch(searchTerm)">
+            بحث
+        </button>
+    </div>
+</div>
+
+<div class="flex items-center w-full justify-between p-6 px-4 bg-white">
+    <!-- add title here -->
+    <h4 class="text-lg font-semibold flex-grow">
+        {{ tableTitle | translate }}
+    </h4>
+    <div class="text-sm text-gray-600">
+        {{ paginationInfo }}
+    </div>
+</div>

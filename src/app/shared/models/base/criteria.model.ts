@@ -16,4 +16,5 @@ export class CriteriaModel {
     filters: FilterCriteriaModel[] = [];
     sorts: SortModel[] = [];
     searchTerm: string = '';
+    totalCount?: number = 0;
 }

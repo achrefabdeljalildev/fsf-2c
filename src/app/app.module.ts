@@ -43,12 +43,12 @@ import { NgxSpinnerService } from 'ngx-spinner';
 // primeng components
 import { Tree } from 'primeng/tree';
 import { AppLayoutsModule } from 'src/app/layouts/layouts.module';
-import { BaseUrlInterceptor } from 'src/app/shared/services/base-url-intercept.service';
 
 // App config (PrimeNG + async animations)
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeng/themes/aura';
+import { InterceptService } from 'src/app/shared/services/intercept.service';
 
 // AOT compilation support
 export function HttpLoaderFactory(
@@ -100,7 +100,7 @@ export class AppConfigModule {}
         Title,
         {
             provide: HTTP_INTERCEPTORS,
-            useClass: BaseUrlInterceptor,
+            useClass: InterceptService,
             multi: true,
         },
         MessageService,

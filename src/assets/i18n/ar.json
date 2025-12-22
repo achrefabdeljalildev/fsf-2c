@@ -1,7 +1,9 @@
 {
     "common": {
         "loading": "جار التحميل...",
-        "required": "هذا الحقل مطلوب !"
+        "required": "هذا الحقل مطلوب !",
+        "noDataOnList": "لا توجد بيانات للعرض",
+        "errorLoadingData": "حدث خطأ أثناء تحميل البيانات."
     },
     "auth": {
         "login": "تسجيل الدخول",
@@ -11,5 +13,25 @@
         "rememberMe": "تذكرني",
         "getforgotPassword": "استعادة كلمة المرور",
         "usernameOrEmailIsNotCorrect": "اسم المستخدم أو البريد الإلكتروني غير صحيح"
+    },
+    "region": {
+        "addNewRegion": "إضافة منطقة",
+        "regionList": "قائمة المناطق"
+    },
+    "country": {
+        "addNewCountry": "إضافة دولة",
+        "countryList": "قائمة الدول"
+    },
+    "location": {
+        "addNewLocation": "إضافة موقع",
+        "locationList": "قائمة المواقع"
+    },
+    "province": {
+        "addNewProvince": "إضافة محافظة",
+        "provinceList": "قائمة المحافظات"
+    },
+    "organization": {
+        "addNewOrganization": "إضافة جهة",
+        "organizationList": "قائمة الجهات"
     }
 }

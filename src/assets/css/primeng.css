@@ -19,8 +19,15 @@ html[dir='rtl'] .p-breadcrumb-separator {
     cursor: pointer;
 }
 
+/* last breadcrumb item bold and primary color */
+.p-breadcrumb-item:last-child .p-breadcrumb-item-label {
+    font-weight: 500 !important;
+    color: #0e8a8a !important;
+}
+
 .p-datatable-table thead th {
     background-color: #eaf3fa !important;
+    font-weight: 700 !important;
 }
 
 .p-paginator-page {

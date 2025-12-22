@@ -1,10 +1,10 @@
-﻿import { Component, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
+﻿import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { slideDownUp } from '../../shared/util/animations';
-import { TreeNode } from 'primeng/api';
 import { AuthService } from 'src/app/modules/auth/services/auth.service';
+import { filter } from 'rxjs/operators';
 
 @Component({
     selector: 'sidebar',
@@ -12,68 +12,104 @@ import { AuthService } from 'src/app/modules/auth/services/auth.service';
     animations: [slideDownUp],
     standalone: false,
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit {
     store: any;
     isCollapsed: boolean = false;
+    expandedItems: { [key: string]: boolean } = {};
 
-    files: TreeNode[] = [
+    files: any[] = [
         {
             key: '1',
-            label: 'القيادة و التحكم',
+            label: ' المواقع',
             data: 'command and control',
             icon: 'pi pi-sitemap',
             children: [
                 {
                     key: '11',
-                    label: ' التحكم و التوجيه',
+                    label: ' لوحة القيادة',
                     data: 'Sub Control 1',
-                    icon: 'pi pi-file',
+                    icon: 'pi pi-objects-column',
+                    routerLink: '/location/dashboard',
                 },
                 {
                     key: '12',
-                    label: ' الخطط و الاسناد الامني',
+                    label: 'قائمة المواقع',
                     data: 'Sub Control 2',
-                    icon: 'pi pi-file',
+                    icon: 'pi pi-list',
+                    routerLink: '/location/list',
                 },
             ],
         },
         {
             key: '2',
-            label: 'حماية المنشآت',
+            label: 'المسح الميداني',
             data: 'Field Survey',
             icon: 'pi pi-video',
             children: [
                 {
-                    key: '21',
-                    label: ' المسح الميداني',
-                    data: 'Sub Survey 1',
-                    icon: 'pi pi-file',
+                    key: '20',
+                    label: 'لوحة المسح الميداني',
+                    data: 'Sub Survey Dashboard',
+                    icon: 'pi pi-chart-bar',
+                    routerLink: '/field-survey/dashboard',
                 },
                 {
-                    key: '22',
-                    label: ' الحماية الميدانية',
-                    data: 'Sub Survey 2',
+                    key: '21',
+                    label: 'قائمة المسح الميداني',
+                    data: 'Sub Survey 1',
                     icon: 'pi pi-file',
+                    routerLink: '/field-survey/list',
                 },
             ],
         },
         {
             key: '3',
-            label: 'الأمن الذاتي للمنشآت',
+            label: 'التقارير',
             data: 'Security Support',
             icon: 'pi pi-shield',
             children: [
                 {
-                    key: '31',
-                    label: ' السلامة الصناعية',
-                    data: 'Sub Support 1',
+                    key: '3َ1',
+                    label: ' الحماية الميدانية',
+                    data: 'Sub Survey 2',
                     icon: 'pi pi-file',
+                    routerLink: '/reports',
+                },
+            ],
+        },
+        {
+            key: '4',
+            label: 'الإعدادات',
+            data: 'Security Support',
+            icon: 'pi pi-cog',
+            children: [
+                {
+                    key: '41',
+                    label: 'الجهات',
+                    data: 'Sub Survey 2',
+                    icon: 'pi pi-list',
+                    routerLink: '/organization',
                 },
                 {
-                    key: '32',
-                    label: ' متابعة الأمن الذاتي',
-                    data: 'Sub Support 2',
-                    icon: 'pi pi-file',
+                    key: '42',
+                    label: 'المناطق',
+                    data: 'Sub Survey 2',
+                    icon: 'pi pi-list',
+                    routerLink: '/regions',
+                },
+                {
+                    key: '43',
+                    label: 'المحافظات',
+                    data: 'Sub Survey 2',
+                    icon: 'pi pi-list',
+                    routerLink: '/province',
+                },
+                {
+                    key: '44',
+                    label: 'التصنيفات',
+                    data: 'Sub Survey 2',
+                    icon: 'pi pi-list',
+                    routerLink: '/settings/categories',
                 },
             ],
         },
@@ -86,6 +122,33 @@ export class SidebarComponent {
         private authService: AuthService,
     ) {
         this.initStore();
+    }
+
+    ngOnInit() {
+        // Expand current route on init
+        this.expandCurrentRoute();
+
+        // Listen to route changes and expand accordingly
+        this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
+            this.expandCurrentRoute();
+        });
+    }
+
+    expandCurrentRoute() {
+        const currentUrl = this.router.url;
+
+        // Find the parent item that contains the current route
+        for (const item of this.files) {
+            if (item.children) {
+                const hasActiveChild = item.children.some(
+                    (child: any) => child.routerLink && currentUrl.startsWith(child.routerLink),
+                );
+
+                if (hasActiveChild) {
+                    this.expandedItems[item.key] = true;
+                }
+            }
+        }
     }
 
     async initStore() {
@@ -103,5 +166,13 @@ export class SidebarComponent {
 
     toggleUserCard() {
         this.isCollapsed = !this.isCollapsed;
+    }
+
+    toggleMenuItem(key: string) {
+        this.expandedItems[key] = !this.expandedItems[key];
+    }
+
+    isExpanded(key: string): boolean {
+        return this.expandedItems[key] || false;
     }
 }

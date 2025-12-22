@@ -1,0 +1,34 @@
+export interface Location {
+    id?: number;
+    nameAr: string;
+    descriptionAr: string;
+    code: string;
+    area: string;
+    countryId: number;
+    destinationId: number;
+    opearationCenter: string;
+    openingDate: string;
+    siteLocation: string;
+    siteCoordinates: string;
+    siteReceiptDate: string;
+    nearestPoliceStation: string;
+    nearestDefenseCenter: string;
+    siteLength: string;
+    northBoundar: string;
+    southBoundar: string;
+    westBoundar: string;
+    eastBoundar: string;
+    siteType: 'None' | string;
+    administrativeSite: string;
+    administrativeSiteDistance: string;
+    administrativeSiteType: string;
+    administrativeOfficeNumber: number;
+    administrativeWCNumber: number;
+    administrativeServiceNumber: number;
+    weaponsWarehouse: boolean;
+    warhouseArea: string;
+    maintainceWorkShop: boolean;
+    parkingSpaces: boolean;
+    parkingSpacesNumber: number;
+    staff: number;
+}

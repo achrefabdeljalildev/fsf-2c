@@ -14,7 +14,7 @@ import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class InterceptService implements HttpInterceptor {
-    private readonly TOKEN_KEY = environment.USERDATA_KEY || 'authToken';
+    private readonly TOKEN_KEY = 'authToken';
     private isRefreshing = false;
     private refreshTokenSubject: BehaviorSubject<string | null> =
         new BehaviorSubject<string | null>(null);
@@ -28,6 +28,8 @@ export class InterceptService implements HttpInterceptor {
         request: HttpRequest<any>,
         next: HttpHandler,
     ): Observable<HttpEvent<any>> {
+        request = this.addBaseUrl(request);
+
         const token = this.getTokenFromLocalStorage();
         if (token) {
             request = this.addTokenHeader(request, token);
@@ -51,6 +53,12 @@ export class InterceptService implements HttpInterceptor {
             setHeaders: {
                 Authorization: `Bearer ${token}`,
             },
+        });
+    }
+
+    private addBaseUrl(request: HttpRequest<any>) {
+        return request.clone({
+            url: environment.baseUrl + request.url,
         });
     }
 

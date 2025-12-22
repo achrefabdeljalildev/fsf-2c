@@ -14,31 +14,45 @@ export const routes: Routes = [
         path: 'pages',
         canActivate: [AuthGuard],
         component: AuthLayout,
-        loadChildren: () =>
-            import('./shared/pages/pages.module').then((d) => d.PagesModule),
+        loadChildren: () => import('./shared/pages/pages.module').then((d) => d.PagesModule),
     },
     {
         path: 'auth',
         component: AuthLayout,
-        loadChildren: () =>
-            import('./modules/auth/auth.module').then((m) => m.AuthModule),
+        loadChildren: () => import('./modules/auth/auth.module').then((m) => m.AuthModule),
     },
     {
-        path: 'locations',
+        path: 'location',
         canActivate: [AuthGuard],
         component: AppLayout,
         loadChildren: () =>
-            import('./modules/location/location.module').then(
-                (m) => m.LocationModule,
-            ),
+            import('./modules/location/location.module').then((m) => m.LocationModule),
+    },
+    {
+        path: 'field-survey',
+        canActivate: [AuthGuard],
+        component: AppLayout,
+        loadChildren: () =>
+            import('./modules/field-survey/field-survey.module').then((m) => m.FieldSurveyModule),
     },
     {
         path: 'regions',
         canActivate: [AuthGuard],
         component: AppLayout,
+        loadChildren: () => import('./modules/regions/region.module').then((m) => m.RegionModule),
+    },
+    {
+        path: 'province',
+        canActivate: [AuthGuard],
+        component: AppLayout,
         loadChildren: () =>
-            import('./modules/regions/region.module').then(
-                (m) => m.RegionModule,
-            ),
+            import('./modules/province/province.module').then((m) => m.ProvinceModule),
+    },
+    {
+        path: 'organization',
+        canActivate: [AuthGuard],
+        component: AppLayout,
+        loadChildren: () =>
+            import('./modules/organization/organization.module').then((m) => m.OrganizationModule),
     },
 ];

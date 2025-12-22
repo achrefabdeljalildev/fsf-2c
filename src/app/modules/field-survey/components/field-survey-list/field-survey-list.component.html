@@ -1,0 +1,39 @@
+<p-breadcrumb
+    [model]="[
+        { label: 'الأنظمة الأمنية' },
+        { label: 'الإدارة العامة لحماية المنشآت' },
+        { label: 'المسح الميداني' },
+        { label: 'قائمة المسح الميداني' },
+    ]"
+/>
+
+<list-header
+    addNewRecordLabel="إضافة مسح ميداني جديد"
+    tableTitle="قائمة المسح الميداني"
+    [paginationInfo]="paginationInfo"
+    (search)="onSearch($event)"
+    (addNewRecord)="router.navigate(['/field-survey/create'])"
+/>
+
+<ng-datatable
+    [rows]="rows"
+    [columns]="cols"
+    [hasCheckbox]="true"
+    [sortable]="false"
+    [loading]="isLoading"
+    [pagination]="true"
+    [pageSize]="criteria.pageSize"
+    rowClass="cursor-pointer"
+    noDataContent="{{ 'common.noDataOnList' | translate }}"
+>
+    <ng-template slot="actions" let-value="data">
+        <div class="flex gap-2">
+            <div (click)="router.navigate(['/field-survey/edit', value.id])" class="cursor-pointer">
+                <i class="pi pi-pencil"></i>
+            </div>
+            <div (click)="removeFieldSurvey(value.id)" class="cursor-pointer">
+                <i class="pi pi-trash"></i>
+            </div>
+        </div>
+    </ng-template>
+</ng-datatable>

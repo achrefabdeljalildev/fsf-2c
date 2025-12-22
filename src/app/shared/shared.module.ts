@@ -16,6 +16,8 @@ import { PaginatorModule } from 'primeng/paginator';
 import { InputTextModule } from 'primeng/inputtext';
 import { TextareaModule } from 'primeng/textarea';
 import { ButtonModule } from 'primeng/button';
+import { DialogModule } from 'primeng/dialog';
+import { DataTableModule } from '@bhplugin/ng-datatable';
 
 // App - services
 import { AppService } from 'src/app/shared/services/app.service';
@@ -29,11 +31,8 @@ import { SafePipe } from './pipes/safe.pipe';
 
 // App - components
 import { PdfViewerComponent } from 'src/app/shared/components/pdf-viewer/pdf-viewer.component';
-import {
-    BaseDatatableComponent,
-    BaseDatatableColumnDirective,
-} from 'src/app/shared/components/base-datatable/base-datatable.component';
 import { BaseFormHeaderComponent } from 'src/app/shared/components/base-form-header/base-form-header.component';
+import { ListHeaderComponent } from 'src/app/shared/components/list-header/list-header.component';
 
 @NgModule({
     imports: [
@@ -50,6 +49,8 @@ import { BaseFormHeaderComponent } from 'src/app/shared/components/base-form-hea
         InputTextModule,
         TextareaModule,
         ButtonModule,
+        DataTableModule,
+        DialogModule,
     ],
     declarations: [
         // pipes
@@ -59,9 +60,8 @@ import { BaseFormHeaderComponent } from 'src/app/shared/components/base-form-hea
         LoadingDirective,
         ButtonBusyDirective,
         PdfViewerComponent,
-        BaseDatatableComponent,
-        BaseDatatableColumnDirective,
         BaseFormHeaderComponent,
+        ListHeaderComponent,
     ],
     exports: [
         // pipes
@@ -82,13 +82,12 @@ import { BaseFormHeaderComponent } from 'src/app/shared/components/base-form-hea
         TextareaModule,
         ButtonModule,
 
-        // directives
-        BaseDatatableColumnDirective,
-
         // components
         PdfViewerComponent,
-        BaseDatatableComponent,
         BaseFormHeaderComponent,
+        DataTableModule,
+        ListHeaderComponent,
+        DialogModule,
     ],
 })
 export class SharedModule {

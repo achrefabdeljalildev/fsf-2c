@@ -1,9 +1,16 @@
-import { ComponentRef, Directive, Input, OnChanges, SimpleChanges, ViewContainerRef } from '@angular/core';
+import {
+    ComponentRef,
+    Directive,
+    Input,
+    OnChanges,
+    SimpleChanges,
+    ViewContainerRef,
+} from '@angular/core';
 import { NgxSpinnerComponent, NgxSpinnerService } from 'ngx-spinner';
 
 @Directive({
     selector: '[appLoading]',
-    standalone: false
+    standalone: false,
 })
 export class LoadingDirective implements OnChanges {
     private static index = 0;
@@ -13,7 +20,8 @@ export class LoadingDirective implements OnChanges {
     isBusy = false;
     private spinnerName = '';
 
-    private spinnerComponentRef: ComponentRef<NgxSpinnerComponent> | null = null;
+    private spinnerComponentRef: ComponentRef<NgxSpinnerComponent> | null =
+        null;
 
     constructor(
         private _viewContainer: ViewContainerRef,
@@ -35,7 +43,8 @@ export class LoadingDirective implements OnChanges {
     }
 
     loadComponent() {
-        this.spinnerComponentRef = this._viewContainer.createComponent(NgxSpinnerComponent);
+        this.spinnerComponentRef =
+            this._viewContainer.createComponent(NgxSpinnerComponent);
         this.spinnerName = `busyIfSpinner-${LoadingDirective.index++}-${Math.floor(Math.random() * 1000000)}`;
 
         let spinner = this.spinnerComponentRef.instance;
@@ -43,8 +52,8 @@ export class LoadingDirective implements OnChanges {
         spinner.fullScreen = false;
         spinner.type = 'ball-clip-rotate';
         spinner.size = 'medium';
-        spinner.bdColor = 'rgba(161,161,161,0.4)';
-        spinner.template = `<svg width="64" height="64" viewBox="0 0 135 135" xmlns="http://www.w3.org/2000/svg" fill="#909567">
+        spinner.bdColor = '#016565';
+        spinner.template = `<svg width="64" height="64" viewBox="0 0 135 135" xmlns="http://www.w3.org/2000/svg" fill="#016565">
         <path d="M67.447 58c5.523 0 10-4.477 10-10s-4.477-10-10-10-10 4.477-10 10 4.477 10 10 10zm9.448 9.447c0 5.523 4.477 10 10 10 5.522 0 10-4.477 10-10s-4.478-10-10-10c-5.523 0-10 4.477-10 10zm-9.448 9.448c-5.523 0-10 4.477-10 10 0 5.522 4.477 10 10 10s10-4.478 10-10c0-5.523-4.477-10-10-10zM58 67.447c0-5.523-4.477-10-10-10s-10 4.477-10 10 4.477 10 10 10 10-4.477 10-10z">
           <animateTransform attributeName="transform" type="rotate" from="0 67 67" to="-360 67 67" dur="2.5s" repeatCount="indefinite"/>
         </path>

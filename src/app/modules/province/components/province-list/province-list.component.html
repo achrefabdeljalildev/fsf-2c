@@ -1,0 +1,45 @@
+<p-breadcrumb
+    [model]="[
+        { label: 'الأنظمة الأمنية' },
+        { label: 'الإدارة العامة لحماية المنشآت' },
+        { label: 'إدارة المسح الميداني' },
+        { label: 'المحافظات' },
+    ]"
+/>
+
+<list-header
+    addNewRecordLabel="{{ 'province.addNewProvince' | translate }}"
+    tableTitle="{{ 'province.provinceList' | translate }}"
+    [paginationInfo]="paginationInfo"
+    (search)="onSearch($event)"
+    (addNewRecord)="openCreateDialog()"
+/>
+
+<ng-datatable
+    [rows]="rows"
+    [columns]="cols"
+    [hasCheckbox]="true"
+    [sortable]="false"
+    [loading]="isLoading"
+    [pagination]="true"
+    [pageSize]="criteria.pageSize"
+    rowClass="cursor-pointer"
+    noDataContent="{{ 'common.noDataOnList' | translate }}"
+>
+    <ng-template slot="actions" let-value="data">
+        <div class="flex gap-2">
+            <div (click)="openEditDialog(value.id)" class="cursor-pointer">
+                <i class="pi pi-pencil"></i>
+            </div>
+            <div (click)="removeProvince(value.id)" class="cursor-pointer">
+                <i class="pi pi-trash"></i>
+            </div>
+        </div>
+    </ng-template>
+</ng-datatable>
+
+<app-province-view
+    [(visible)]="showDialog"
+    [provinceId]="selectedProvinceId"
+    (onSave)="onDialogSave()"
+/>
