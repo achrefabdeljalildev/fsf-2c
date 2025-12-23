@@ -13,6 +13,9 @@ import { ApiResponseModel, PagedResponse } from 'src/app/shared/models/base/page
     standalone: false,
 })
 export class LocationListComponent extends BaseListComponent<Location> {
+    showDeleteDialog: boolean = false;
+    itemToDelete: number | null = null;
+
     constructor(private locationService: LocationService) {
         super();
     }
@@ -52,9 +55,16 @@ export class LocationListComponent extends BaseListComponent<Location> {
     }
 
     removeLocation(id: number) {
-        if (confirm('هل أنت متأكد من حذف هذا الموقع؟')) {
-            this.locationService.deleteById(id).subscribe(() => {
+        this.itemToDelete = id;
+        this.showDeleteDialog = true;
+    }
+
+    confirmDelete() {
+        if (this.itemToDelete) {
+            this.locationService.deleteById(this.itemToDelete).subscribe(() => {
                 this.showSuccessMessage('تم حذف الموقع بنجاح');
+                this.showDeleteDialog = false;
+                this.itemToDelete = null;
                 this.loadData();
             });
         }

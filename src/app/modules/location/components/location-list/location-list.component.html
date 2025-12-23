@@ -39,3 +39,11 @@
         </ng-template>
     </ng-datatable>
 </div>
+
+<app-confirm-delete
+    [(visible)]="showDeleteDialog"
+    [title]="'تأكيد الحذف'"
+    [message]="'هل أنت متأكد من حذف هذا الموقع؟'"
+    (onConfirm)="confirmDelete()"
+    (onCancel)="showDeleteDialog = false"
+/>

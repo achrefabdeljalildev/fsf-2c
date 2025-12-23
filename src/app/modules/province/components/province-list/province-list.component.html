@@ -45,3 +45,11 @@
     [provinceId]="selectedProvinceId"
     (onSave)="onDialogSave()"
 />
+
+<app-confirm-delete
+    [(visible)]="showDeleteDialog"
+    [title]="'تأكيد الحذف'"
+    [message]="'هل أنت متأكد من حذف هذه المحافظة؟'"
+    (onConfirm)="confirmDelete()"
+    (onCancel)="showDeleteDialog = false"
+/>
