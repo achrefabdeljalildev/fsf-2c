@@ -382,13 +382,13 @@
                                 >
                                     نوع المدق
                                 </label>
-                                <p-autocomplete
+                                <input
+                                    id="administrativeSiteType"
+                                    type="text"
                                     formControlName="administrativeSiteType"
-                                    [dropdown]="true"
-                                    [suggestions]="[]"
-                                    (completeMethod)="search($event)"
+                                    pInputText
+                                    class="w-full"
                                     placeholder="نوع المدق"
-                                    [style]="{ width: '100%' }"
                                 />
                             </div>
 
@@ -430,13 +430,15 @@
 
                             <!-- غرف الخدمات - Service Rooms -->
                             <div class="form-group">
-                                <label class="block text-sm font-medium mb-2"> غرف الخدمات </label>
-                                <p-autocomplete
-                                    [dropdown]="true"
-                                    [suggestions]="[]"
-                                    (completeMethod)="search($event)"
+                                <label for="serviceRooms" class="block text-sm font-medium mb-2">
+                                    غرف الخدمات
+                                </label>
+                                <input
+                                    id="serviceRooms"
+                                    type="text"
+                                    pInputText
+                                    class="w-full"
                                     placeholder="غرف الخدمات"
-                                    [style]="{ width: '100%' }"
                                 />
                             </div>
 
@@ -466,13 +468,13 @@
                                 >
                                     نوع المدق
                                 </label>
-                                <p-autocomplete
+                                <input
+                                    id="administrativeSite"
+                                    type="text"
                                     formControlName="administrativeSite"
-                                    [dropdown]="true"
-                                    [suggestions]="[]"
-                                    (completeMethod)="search($event)"
+                                    pInputText
+                                    class="w-full"
                                     placeholder="نوع المدق"
-                                    [style]="{ width: '100%' }"
                                 />
                             </div>
                         </div>
