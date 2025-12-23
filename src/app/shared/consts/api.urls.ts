@@ -16,4 +16,4 @@ export const API_URL_ORGANIZATIONS = '/Organizations';
 export const API_URL_LOCATIONS = '/Locations';
 
 // Field Surveys
-export const API_URL_FIELD_SURVEYS = '/FieldSurvys';
+export const API_URL_FIELD_SURVEYS = '/FieldSurveys';
