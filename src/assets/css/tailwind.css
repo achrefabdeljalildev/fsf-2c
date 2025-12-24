@@ -163,6 +163,14 @@
         @apply bg-gradient-to-r from-[#EF1262] to-[#4361EE] text-white hover:from-[#4361EE] hover:to-[#EF1262];
     }
 
+    .pi.pi-trash {
+        @apply text-danger;
+    }
+
+    .pi.pi-pencil {
+        @apply text-primary;
+    }
+
     /* Form */
     .form-input,
     .form-textarea,

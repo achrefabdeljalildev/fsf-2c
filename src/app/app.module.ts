@@ -1,20 +1,10 @@
 import { CommonModule } from '@angular/common';
-import {
-    HTTP_INTERCEPTORS,
-    HttpBackend,
-    HttpClient,
-    HttpClientModule,
-} from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpBackend, HttpClient, HttpClientModule } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {
-    NavigationEnd,
-    NavigationStart,
-    Router,
-    RouterModule,
-} from '@angular/router';
+import { NavigationEnd, NavigationStart, Router, RouterModule } from '@angular/router';
 
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
@@ -30,11 +20,7 @@ import { indexReducer } from './store/index.reducer';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 // i18n
-import {
-    TranslateLoader,
-    TranslateModule,
-    TranslateService,
-} from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 // dashboard
@@ -47,13 +33,11 @@ import { AppLayoutsModule } from 'src/app/layouts/layouts.module';
 // App config (PrimeNG + async animations)
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
-import Aura from '@primeng/themes/aura';
 import { InterceptService } from 'src/app/shared/services/intercept.service';
+import Aura from '@primeuix/themes/aura';
 
 // AOT compilation support
-export function HttpLoaderFactory(
-    httpHandler: HttpBackend,
-): TranslateHttpLoader {
+export function HttpLoaderFactory(httpHandler: HttpBackend): TranslateHttpLoader {
     return new TranslateHttpLoader(new HttpClient(httpHandler));
 }
 
@@ -107,8 +91,7 @@ export class AppConfigModule {}
         {
             provide: LOCALE_ID,
             deps: [TranslateService],
-            useFactory: (langService: TranslateService) =>
-                langService.currentLang ?? 'ar-SA',
+            useFactory: (langService: TranslateService) => langService.currentLang ?? 'ar-SA',
         },
     ],
     bootstrap: [AppComponent],

@@ -15,7 +15,9 @@ export interface Location {
     code: string;
     area: string;
     provinceId: number;
+    provinceNameAr?: string;
     organizationId: number;
+    organizationNameAr?: string;
     opearationCenter: string;
     openingDate: string;
     siteLocation: string;

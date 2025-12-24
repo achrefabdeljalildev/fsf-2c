@@ -7,6 +7,8 @@ import { ProvinceService } from 'src/app/modules/province/services/province.serv
 import { Province } from 'src/app/modules/province/models/province.model';
 import { OrganizationService } from 'src/app/modules/organization/services/organization.service';
 import { Organization } from 'src/app/modules/organization/models/organization.model';
+import { RegionService } from 'src/app/modules/regions/services/region.service';
+import { Region } from 'src/app/modules/regions/models/region.model';
 import { CriteriaModel } from 'src/app/shared/models/base/criteria.model';
 
 @Component({
@@ -22,6 +24,7 @@ export class LocationViewComponent extends BaseComponent implements OnInit {
 
     filteredProvinces: Province[] = [];
     filteredOrganizations: Organization[] = [];
+    filteredRegions: Region[] = [];
 
     siteTypeOptions = [
         { label: 'لا يوجد', value: SiteType.None },
@@ -36,6 +39,7 @@ export class LocationViewComponent extends BaseComponent implements OnInit {
         private locationService: LocationService,
         private provinceService: ProvinceService,
         private organizationService: OrganizationService,
+        private regionService: RegionService,
     ) {
         super();
     }
@@ -43,7 +47,7 @@ export class LocationViewComponent extends BaseComponent implements OnInit {
     ngOnInit(): void {
         this.initForm();
         this.searchOrganization();
-        this.searchProvince();
+        // this.searchProvince();
         this.route.params.subscribe((params) => {
             if (params['id']) {
                 this.locationId = +params['id'];
@@ -51,6 +55,15 @@ export class LocationViewComponent extends BaseComponent implements OnInit {
                 this.loadLocation(this.locationId);
             }
         });
+
+        // when region changes, update provinces
+        this.subscriptions.add(
+            this.locationForm.get('regionId')!.valueChanges.subscribe((regionId) => {
+                this.searchRelatedRegionProvince(regionId);
+                // Clear province selection when region changes
+                this.locationForm.patchValue({ provinceId: null });
+            }),
+        );
     }
 
     initForm(): void {
@@ -59,6 +72,7 @@ export class LocationViewComponent extends BaseComponent implements OnInit {
             descriptionAr: [''],
             code: ['', [Validators.required]],
             area: [''],
+            regionId: [null],
             provinceId: [0, [Validators.required]],
             organizationId: [0],
             opearationCenter: [''],
@@ -95,6 +109,7 @@ export class LocationViewComponent extends BaseComponent implements OnInit {
             this.locationForm.patchValue(response.data);
             this.locationForm.patchValue({
                 organizationId: response?.data?.organization?.id ?? null,
+                regionId: response?.data?.province?.region?.id ?? null,
                 provinceId: response?.data?.province?.id ?? null,
             });
 
@@ -109,7 +124,10 @@ export class LocationViewComponent extends BaseComponent implements OnInit {
         }
 
         this.isLoading = true;
-        const locationData: Location = this.locationForm.value;
+        const locationData: Location = { ...this.locationForm.value } as Location;
+        // regionId is used for UI only; backend expects area (string)
+        // Avoid sending regionId if backend model doesn't support it
+        delete (locationData as any).regionId;
 
         // Convert dates to ISO format
         if (locationData.openingDate) {
@@ -139,6 +157,11 @@ export class LocationViewComponent extends BaseComponent implements OnInit {
 
         this.subscriptions.add(subscription);
     }
+    onRegionSelected(region: Region) {
+        if (region?.nameAr) {
+            this.locationForm.patchValue({ area: region.nameAr });
+        }
+    }
 
     cancel(): void {
         this.router.navigate(['/location/list']);
@@ -166,8 +189,18 @@ export class LocationViewComponent extends BaseComponent implements OnInit {
         this.subscriptions.unsubscribe();
     }
 
-    searchProvince(event: any = { query: '' }): void {
-        const criteria = new CriteriaModel({ searchTerm: event.query });
+    searchRelatedRegionProvince(regionId: number): void {
+        const criteria = new CriteriaModel({
+            filters: [
+                {
+                    propertyName: 'regionId',
+                    values: [`${regionId}`],
+                    operator: 'And',
+                    type: 'Equals',
+                },
+            ],
+        });
+
         this.provinceService.getPagedList(criteria).subscribe((response) => {
             this.filteredProvinces = response.data.items;
         });
@@ -177,6 +210,13 @@ export class LocationViewComponent extends BaseComponent implements OnInit {
         const criteria = new CriteriaModel({ searchTerm: event.query });
         this.organizationService.getPagedList(criteria).subscribe((response) => {
             this.filteredOrganizations = response.data.items;
+        });
+    }
+
+    searchRegion(event: any = { query: '' }): void {
+        const criteria = new CriteriaModel({ searchTerm: event.query });
+        this.regionService.getPagedList(criteria).subscribe((response) => {
+            this.filteredRegions = response.data.items;
         });
     }
 

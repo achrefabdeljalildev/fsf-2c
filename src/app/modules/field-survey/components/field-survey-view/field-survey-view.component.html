@@ -9,204 +9,116 @@
 />
 
 <div class="mt-6">
-    <div class="mb-5 flex items-center justify-between">
-        <div class="flex gap-2">
-            <button type="button" class="btn btn-outline-danger" (click)="cancel()">
-                <i class="pi pi-times ml-2"></i>
-                إلغاء
-            </button>
-            <button type="button" class="btn btn-primary" (click)="submit()" [disabled]="isLoading">
-                <i class="pi pi-save ml-2"></i>
-                حفظ
-            </button>
-        </div>
-    </div>
     <form [formGroup]="fieldSurveyForm" (ngSubmit)="submit()" class="space-y-6 flex flex-col">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <!-- Main Information Grid -->
-            <div class="panel border-t pt-4 col-span-2">
-                <p-tabs value="0">
-                    <p-tablist>
-                        <p-tab value="0">اسم الموقع</p-tab>
-                        <p-tab value="1">التجريبات في نقطة الفرز المتقدمة</p-tab>
-                        <p-tab value="2">التجربيات في موقع الرصاص</p-tab>
-                        <p-tab value="3">طرق الدوريات</p-tab>
-                        <p-tab value="4">بوابات الموقع</p-tab>
-                        <p-tab value="5">سياج الموقع</p-tab>
-                    </p-tablist>
-                    <p-tabpanels>
-                        <p-tabpanel value="0">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <!-- رمز الموقع - Survey Code -->
-                                <div class="form-group">
-                                    <label for="surveyCode" class="block text-sm font-medium mb-2">
-                                        رمز الموقع
-                                        <span class="text-red-500">*</span>
-                                    </label>
-                                    <input
-                                        id="surveyCode"
-                                        type="text"
-                                        formControlName="surveyCode"
-                                        pInputText
-                                        class="w-full"
-                                        placeholder="AZ-6543 09"
-                                    />
-                                </div>
+            <div class="panel gap-4 col-span-2 flex flex-col">
+                <!-- Form Actions -->
+                <div class="flex gap-2">
+                    <button
+                        type="button"
+                        class="btn bg-gray-50 hover:bg-gray-100 text-gray-700"
+                        (click)="cancel()"
+                        [disabled]="isLoading"
+                    >
+                        إلغاء
+                    </button>
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                        [disabled]="fieldSurveyForm.invalid || isLoading"
+                    >
+                        {{ isEditMode ? 'حفظ' : 'إضافة' }}
+                    </button>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <!-- رمز الموقع - Survey Code -->
+                    <div class="form-group col-span-2">
+                        <label for="surveyCode" class="block text-sm font-medium mb-2">
+                            رمز الموقع
+                            <span class="text-red-500">*</span>
+                        </label>
+                        <div class="flex gap-2">
+                            <input
+                                id="surveyCode"
+                                type="text"
+                                formControlName="surveyCode"
+                                pInputText
+                                class="w-full"
+                                placeholder="AZ-6543 09"
+                                (keyup.enter)="searchByCode()"
+                            />
+                            <button
+                                type="button"
+                                class="btn btn-primary"
+                                (click)="searchByCode()"
+                                [disabled]="isLoading"
+                            >
+                                <i class="pi pi-search"></i>
+                            </button>
+                        </div>
+                    </div>
 
-                                <!-- اسم الموقع - Location Name -->
-                                <div class="form-group">
-                                    <label for="nameAr" class="block text-sm font-medium mb-2">
-                                        اسم الموقع
-                                        <span class="text-red-500">*</span>
-                                    </label>
-                                    <p-autocomplete
-                                        formControlName="locationId"
-                                        [dropdown]="true"
-                                        [suggestions]="[]"
-                                        (completeMethod)="search($event)"
-                                        placeholder="اسم الموقع"
-                                        [style]="{ width: '100%' }"
-                                    />
-                                </div>
+                    <!-- اسم الموقع - Location Name -->
+                    <div class="form-group">
+                        <label for="nameAr" class="block text-sm font-medium mb-2">
+                            اسم الموقع
+                            <span class="text-red-500">*</span>
+                        </label>
+                        <input
+                            id="nameAr"
+                            type="text"
+                            formControlName="nameAr"
+                            pInputText
+                            class="w-full"
+                            placeholder="اسم الموقع"
+                        />
+                    </div>
 
-                                <!-- الجهة - Entity -->
-                                <div class="form-group">
-                                    <label for="nameAr" class="block text-sm font-medium mb-2">
-                                        الجهة
-                                    </label>
-                                    <p-autocomplete
-                                        [dropdown]="true"
-                                        [suggestions]="[]"
-                                        (completeMethod)="search($event)"
-                                        placeholder="الجهة"
-                                        [style]="{ width: '100%' }"
-                                    />
-                                </div>
+                    <!-- الجهة - Entity -->
+                    <div class="form-group">
+                        <label for="organization" class="block text-sm font-medium mb-2"
+                            >الجهة</label
+                        >
+                        <input
+                            id="organization"
+                            type="text"
+                            formControlName="organization"
+                            pInputText
+                            class="w-full"
+                            placeholder="الجهة"
+                        />
+                    </div>
 
-                                <!-- المنطقة - Region -->
-                                <div class="form-group">
-                                    <label for="area" class="block text-sm font-medium mb-2"
-                                        >المنطقة</label
-                                    >
-                                    <p-autocomplete
-                                        formControlName="area"
-                                        [dropdown]="true"
-                                        [suggestions]="[]"
-                                        (completeMethod)="search($event)"
-                                        placeholder="المنطقة"
-                                        [style]="{ width: '100%' }"
-                                    />
-                                </div>
+                    <!-- المنطقة - Region -->
+                    <div class="form-group">
+                        <label for="region" class="block text-sm font-medium mb-2">المنطقة</label>
+                        <input
+                            id="region"
+                            type="text"
+                            formControlName="region"
+                            pInputText
+                            class="w-full"
+                            placeholder="المنطقة"
+                        />
+                    </div>
 
-                                <!-- المحافظة - Province -->
-                                <div class="form-group">
-                                    <label for="province" class="block text-sm font-medium mb-2">
-                                        المحافظة
-                                    </label>
-                                    <p-autocomplete
-                                        [dropdown]="true"
-                                        [suggestions]="[]"
-                                        (completeMethod)="search($event)"
-                                        placeholder="المحافظة"
-                                        [style]="{ width: '100%' }"
-                                    />
-                                </div>
-
-                                <!-- تاريخ افتتاح - Opening Date -->
-                                <div class="form-group col-span-2">
-                                    <label for="openingDate" class="block text-sm font-medium mb-2">
-                                        تاريخ افتتاح
-                                    </label>
-                                    <input
-                                        id="openingDate"
-                                        type="text"
-                                        pInputText
-                                        class="w-full"
-                                        placeholder="يوم 5 نوفمبر 2025"
-                                        disabled
-                                    />
-                                </div>
-                            </div>
-                        </p-tabpanel>
-
-                        <p-tabpanel value="1">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <!-- غرفة حراسة - Guard Room -->
-                                <div class="form-group">
-                                    <label for="roomType" class="block text-sm font-medium mb-2">
-                                        غرفة حراسة
-                                    </label>
-                                    <p-autocomplete
-                                        formControlName="roomType"
-                                        [dropdown]="true"
-                                        [suggestions]="['نوعها', 'نوع آخر']"
-                                        placeholder="نوعها"
-                                        [style]="{ width: '100%' }"
-                                    />
-                                </div>
-
-                                <!-- مساحتها - Area -->
-                                <div class="form-group">
-                                    <label for="area" class="block text-sm font-medium mb-2">
-                                        مساحتها
-                                    </label>
-                                    <input
-                                        id="area"
-                                        type="text"
-                                        formControlName="area"
-                                        pInputText
-                                        class="w-full"
-                                        placeholder="مساحتها"
-                                    />
-                                </div>
-
-                                <!-- تجربات أخرى - Other Experiments -->
-                                <div class="form-group col-span-2">
-                                    <label
-                                        for="otherExperiments"
-                                        class="block text-sm font-medium mb-2"
-                                    >
-                                        تجربات أخرى
-                                    </label>
-                                    <textarea
-                                        id="otherExperiments"
-                                        formControlName="otherExperiments"
-                                        pInputTextarea
-                                        rows="4"
-                                        class="w-full"
-                                        placeholder="تجربات أخرى"
-                                    ></textarea>
-                                </div>
-                            </div>
-                        </p-tabpanel>
-
-                        <p-tabpanel value="2">
-                            <div class="p-4">
-                                <p class="text-gray-600">محتوى التجربيات في موقع الرصاص</p>
-                            </div>
-                        </p-tabpanel>
-
-                        <p-tabpanel value="3">
-                            <div class="p-4">
-                                <p class="text-gray-600">محتوى طرق الدوريات</p>
-                            </div>
-                        </p-tabpanel>
-
-                        <p-tabpanel value="4">
-                            <div class="p-4">
-                                <p class="text-gray-600">محتوى بوابات الموقع</p>
-                            </div>
-                        </p-tabpanel>
-
-                        <p-tabpanel value="5">
-                            <div class="p-4">
-                                <p class="text-gray-600">محتوى سياج الموقع</p>
-                            </div>
-                        </p-tabpanel>
-                    </p-tabpanels>
-                </p-tabs>
+                    <!-- المحافظة - Province -->
+                    <div class="form-group">
+                        <label for="province" class="block text-sm font-medium mb-2">
+                            المحافظة
+                        </label>
+                        <input
+                            id="province"
+                            type="text"
+                            formControlName="province"
+                            pInputText
+                            class="w-full"
+                            placeholder="المحافظة"
+                        />
+                    </div>
+                </div>
             </div>
-
             <div class="col-span-1">
                 <div class="panel rounded-md p-4 mb-4">
                     <h6 class="text-md font-semibold text-lg">سجل الإجراءات</h6>
@@ -243,5 +155,88 @@
                 </div>
             </div>
         </div>
+        <!-- Details Tabs (similar placement to Location view) -->
+        <p-tabs value="0">
+            <p-tablist>
+                <p-tab value="4">سياج الموقع</p-tab>
+                <p-tab value="3">بوابات الموقع</p-tab>
+                <p-tab value="2">طرق الدوريات</p-tab>
+                <p-tab value="1">التجربيات في موقع الرصاص</p-tab>
+                <p-tab value="0">التجريبات في نقطة الفرز المتقدمة</p-tab>
+            </p-tablist>
+            <p-tabpanels>
+                <p-tabpanel value="0">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- غرفة حراسة - Guard Room -->
+                        <div class="form-group">
+                            <label for="roomType" class="block text-sm font-medium mb-2">
+                                غرفة حراسة
+                            </label>
+                            <p-autocomplete
+                                formControlName="roomType"
+                                [dropdown]="true"
+                                [suggestions]="['نوعها', 'نوع آخر']"
+                                placeholder="نوعها"
+                                [style]="{ width: '100%' }"
+                            />
+                        </div>
+
+                        <!-- مساحتها - Area -->
+                        <div class="form-group">
+                            <label for="area" class="block text-sm font-medium mb-2">
+                                مساحتها
+                            </label>
+                            <input
+                                id="area"
+                                type="text"
+                                formControlName="area"
+                                pInputText
+                                class="w-full"
+                                placeholder="مساحتها"
+                            />
+                        </div>
+
+                        <!-- تجربات أخرى - Other Experiments -->
+                        <div class="form-group col-span-2">
+                            <label for="otherExperiments" class="block text-sm font-medium mb-2">
+                                تجربات أخرى
+                            </label>
+                            <textarea
+                                id="otherExperiments"
+                                formControlName="otherExperiments"
+                                pInputTextarea
+                                rows="4"
+                                class="w-full"
+                                placeholder="تجربات أخرى"
+                            ></textarea>
+                        </div>
+                    </div>
+                </p-tabpanel>
+
+                <p-tabpanel value="1">
+                    <div class="p-4">
+                        <p class="text-gray-600">محتوى التجربيات في موقع الرصاص</p>
+                    </div>
+                </p-tabpanel>
+
+                <p-tabpanel value="2">
+                    <div class="p-4">
+                        <p class="text-gray-600">محتوى طرق الدوريات</p>
+                    </div>
+                </p-tabpanel>
+
+                <p-tabpanel value="3">
+                    <div class="p-4">
+                        <p class="text-gray-600">محتوى بوابات الموقع</p>
+                    </div>
+                </p-tabpanel>
+
+                <p-tabpanel value="4">
+                    <div class="p-4">
+                        <p class="text-gray-600">محتوى سياج الموقع</p>
+                    </div>
+                </p-tabpanel>
+            </p-tabpanels>
+        </p-tabs>
     </form>
 </div>

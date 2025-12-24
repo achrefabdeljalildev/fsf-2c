@@ -27,6 +27,7 @@
         "@ngx-translate/core": "^15.0.0",
         "@ngx-translate/http-loader": "^8.0.0",
         "@primeng/themes": "^20.4.0",
+        "@primeuix/themes": "^2.0.2",
         "@types/luxon": "^3.4.2",
         "luxon": "^3.5.0",
         "moment": "^2.30.1",

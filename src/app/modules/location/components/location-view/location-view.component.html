@@ -65,6 +65,40 @@
                         />
                     </div>
 
+                    <!-- المنطقة - Region (like province) -->
+                    <div class="form-group">
+                        <label for="regionId" class="block text-sm font-medium mb-2">المنطقة</label>
+                        <p-autocomplete
+                            formControlName="regionId"
+                            [dropdown]="true"
+                            [delay]="1000"
+                            [suggestions]="filteredRegions"
+                            (completeMethod)="searchRegion($event)"
+                            optionLabel="nameAr"
+                            optionValue="id"
+                            field="nameAr"
+                            placeholder="المنطقة"
+                            [style]="{ width: '100%' }"
+                        />
+                    </div>
+
+                    <!-- المحافظة - Province -->
+                    <div class="form-group">
+                        <label for="provinceId" class="block text-sm font-medium mb-2">
+                            المحافظة
+                            <span class="text-red-500">*</span>
+                        </label>
+                        <p-select
+                            formControlName="provinceId"
+                            [options]="filteredProvinces"
+                            optionLabel="nameAr"
+                            optionValue="id"
+                            placeholder="المحافظة"
+                            [style]="{ width: '100%' }"
+                            [disabled]="filteredProvinces.length == 0"
+                        ></p-select>
+                    </div>
+
                     <!-- الجهة التابعة لها - Affiliated Entity -->
                     <div class="form-group">
                         <label for="organizationId" class="block text-sm font-medium mb-2">
@@ -80,38 +114,6 @@
                             optionValue="id"
                             field="nameAr"
                             placeholder="الجهة التابعة لها"
-                            [style]="{ width: '100%' }"
-                        />
-                    </div>
-
-                    <!-- المنطقة - Region -->
-                    <div class="form-group">
-                        <label for="area" class="block text-sm font-medium mb-2">المنطقة</label>
-                        <input
-                            id="area"
-                            type="text"
-                            formControlName="area"
-                            pInputText
-                            class="w-full"
-                            placeholder="المنطقة"
-                        />
-                    </div>
-
-                    <!-- المحافظة - Province -->
-                    <div class="form-group">
-                        <label for="provinceId" class="block text-sm font-medium mb-2">
-                            المحافظة
-                            <span class="text-red-500">*</span>
-                        </label>
-                        <p-autocomplete
-                            formControlName="provinceId"
-                            [dropdown]="true"
-                            [delay]="1000"
-                            [suggestions]="filteredProvinces"
-                            (completeMethod)="searchProvince($event)"
-                            optionLabel="nameAr"
-                            optionValue="id"
-                            placeholder="المحافظة"
                             [style]="{ width: '100%' }"
                         />
                     </div>
@@ -165,26 +167,10 @@
                 </div>
             </div>
             <div class="col-span-1">
-                <div class="panel rounded-md p-4 mb-4">
-                    <h6 class="text-md font-semibold text-lg">سجل الإجراءات</h6>
-                    <div class="flex gap-4 items-center py-4 flex-col">
-                        <div class="flex flex-col w-full bg-lightBlue p-4 gap-2 rounded-md">
-                            <div class="flex gap-2 items-center">
-                                <i class="pi pi-check-circle"></i>
-                                <div class="font-bold">
-                                    الفريق 150 <p-tag rounded="true">نشط</p-tag>
-                                </div>
-                            </div>
-                            <div class="font-semibold ps-4">
-                                وصف سريع يتناسب مع هذه الجزئية بشكل مبسط وسلسل...
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <!-- المرفقات - Attachments Section -->
-                <div class="panel rounded-md p-2">
+                <div class="panel rounded-md p-4 h-[100%]">
                     <div class="flex justify-between w-full items-center">
-                        <h6 class="text-md font-semibold text-lg">
+                        <h6 class="text-md font-semibold text-lg p-2 gap-2 flex items-center">
                             <i class="pi pi-file-plus"></i>
                             المرفقات
                         </h6>
@@ -237,13 +223,33 @@
         <!-- Tabs Section -->
         <p-tabs value="0">
             <p-tablist>
-                <p-tab value="1">إضافة ملاحظة</p-tab>
-                <p-tab value="0">حدود الموقع</p-tab>
+                <p-tab value="0">إضافة ملاحظة</p-tab>
+                <p-tab value="1">حدود الموقع</p-tab>
                 <p-tab value="2">المقر الإداري أو الموقع</p-tab>
+                <p-tab value="3">سجل الإجراءات</p-tab>
             </p-tablist>
             <p-tabpanels>
-                <!-- حدود الموقع - Location Boundaries -->
+                <!-- إضافة ملاحظة - Add Note -->
                 <p-tabpanel value="0">
+                    <div class="mt-4">
+                        <div class="form-group">
+                            <label for="descriptionAr" class="block text-sm font-medium mb-2">
+                                الملاحظات
+                            </label>
+                            <textarea
+                                id="descriptionAr"
+                                formControlName="descriptionAr"
+                                pInputTextarea
+                                rows="5"
+                                class="w-full"
+                                placeholder="أدخل الملاحظات"
+                            ></textarea>
+                        </div>
+                    </div>
+                </p-tabpanel>
+
+                <!-- حدود الموقع - Location Boundaries -->
+                <p-tabpanel value="1">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                         <!-- الحد الشمالي - North Boundary -->
                         <div class="form-group">
@@ -347,25 +353,6 @@
                                 pInputText
                                 class="w-full"
                             />
-                        </div>
-                    </div>
-                </p-tabpanel>
-
-                <!-- إضافة ملاحظة - Add Note -->
-                <p-tabpanel value="1">
-                    <div class="mt-4">
-                        <div class="form-group">
-                            <label for="descriptionAr" class="block text-sm font-medium mb-2">
-                                الملاحظات
-                            </label>
-                            <textarea
-                                id="descriptionAr"
-                                formControlName="descriptionAr"
-                                pInputTextarea
-                                rows="5"
-                                class="w-full"
-                                placeholder="أدخل الملاحظات"
-                            ></textarea>
                         </div>
                     </div>
                 </p-tabpanel>
@@ -590,6 +577,22 @@
                                     pInputText
                                     class="w-full"
                                 />
+                            </div>
+                        </div>
+                    </div>
+                </p-tabpanel>
+
+                <p-tabpanel value="3">
+                    <div class="flex gap-4 items-center py-4 flex-col">
+                        <div class="flex flex-col w-full bg-lightBlue p-4 gap-2 rounded-md">
+                            <div class="flex gap-2 items-center">
+                                <i class="pi pi-check-circle"></i>
+                                <div class="font-bold">
+                                    الفريق 150 <p-tag rounded="true">نشط</p-tag>
+                                </div>
+                            </div>
+                            <div class="font-semibold ps-4">
+                                وصف سريع يتناسب مع هذه الجزئية بشكل مبسط وسلسل...
                             </div>
                         </div>
                     </div>
