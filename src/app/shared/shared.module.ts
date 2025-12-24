@@ -33,6 +33,8 @@ import { SafePipe } from './pipes/safe.pipe';
 import { PdfViewerComponent } from 'src/app/shared/components/pdf-viewer/pdf-viewer.component';
 import { BaseFormHeaderComponent } from 'src/app/shared/components/base-form-header/base-form-header.component';
 import { ListHeaderComponent } from 'src/app/shared/components/list-header/list-header.component';
+import { ConfirmDeleteComponent } from 'src/app/shared/components/confirm-delete/confirm-delete.component';
+import { FileAttachmentsComponent } from 'src/app/shared/components/file-attachments/file-attachments.component';
 
 @NgModule({
     imports: [
@@ -62,6 +64,8 @@ import { ListHeaderComponent } from 'src/app/shared/components/list-header/list-
         PdfViewerComponent,
         BaseFormHeaderComponent,
         ListHeaderComponent,
+        ConfirmDeleteComponent,
+        FileAttachmentsComponent,
     ],
     exports: [
         // pipes
@@ -88,6 +92,8 @@ import { ListHeaderComponent } from 'src/app/shared/components/list-header/list-
         DataTableModule,
         ListHeaderComponent,
         DialogModule,
+        ConfirmDeleteComponent,
+        FileAttachmentsComponent,
     ],
 })
 export class SharedModule {

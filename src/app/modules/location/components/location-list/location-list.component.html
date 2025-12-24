@@ -7,33 +7,43 @@
     ]"
 />
 
-<list-header
-    addNewRecordLabel="{{ 'location.addNewLocation' | translate }}"
-    tableTitle="{{ 'location.locationList' | translate }}"
-    [paginationInfo]="paginationInfo"
-    (search)="onSearch($event)"
-    (addNewRecord)="openCreateDialog()"
-/>
+<div class="panel h-[calc(100vh-150px)]">
+    <list-header
+        addNewRecordLabel="{{ 'location.addNewLocation' | translate }}"
+        tableTitle="{{ 'location.locationList' | translate }}"
+        [paginationInfo]="paginationInfo"
+        (search)="onSearch($event)"
+        (addNewRecord)="openCreateDialog()"
+    />
 
-<ng-datatable
-    [rows]="rows"
-    [columns]="cols"
-    [hasCheckbox]="true"
-    [sortable]="false"
-    [loading]="isLoading"
-    [pagination]="true"
-    [pageSize]="criteria.pageSize"
-    rowClass="cursor-pointer"
-    noDataContent="{{ 'common.noDataOnList' | translate }}"
->
-    <ng-template slot="actions" let-value="data">
-        <div class="flex gap-2">
-            <div (click)="openEditDialog(value.id)" class="cursor-pointer">
-                <i class="pi pi-pencil"></i>
+    <ng-datatable
+        [rows]="rows"
+        [columns]="cols"
+        [hasCheckbox]="true"
+        [sortable]="false"
+        [loading]="isLoading"
+        [pagination]="true"
+        [pageSize]="criteria.pageSize"
+        rowClass="cursor-pointer"
+        noDataContent="{{ 'common.noDataOnList' | translate }}"
+    >
+        <ng-template slot="actions" let-value="data">
+            <div class="flex gap-2">
+                <div (click)="openEditDialog(value.id)" class="cursor-pointer">
+                    <i class="pi pi-pencil"></i>
+                </div>
+                <div (click)="removeLocation(value.id)" class="cursor-pointer">
+                    <i class="pi pi-trash"></i>
+                </div>
             </div>
-            <div (click)="removeLocation(value.id)" class="cursor-pointer">
-                <i class="pi pi-trash"></i>
-            </div>
-        </div>
-    </ng-template>
-</ng-datatable>
+        </ng-template>
+    </ng-datatable>
+</div>
+
+<app-confirm-delete
+    [(visible)]="showDeleteDialog"
+    [title]="'تأكيد الحذف'"
+    [message]="'هل أنت متأكد من حذف هذا الموقع؟'"
+    (onConfirm)="confirmDelete()"
+    (onCancel)="showDeleteDialog = false"
+/>

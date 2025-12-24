@@ -1,0 +1,31 @@
+<p-dialog
+    [(visible)]="visible"
+    [header]="title"
+    [modal]="true"
+    [style]="{ width: '450px' }"
+    [breakpoints]="{ '960px': '75vw', '640px': '90vw' }"
+    (onHide)="closeDialog()"
+>
+    <div class="flex items-center gap-3 mb-6">
+        <i class="pi pi-exclamation-triangle text-red-500 text-4xl"></i>
+        <span class="text-lg">{{ message }}</span>
+    </div>
+
+    <ng-template pTemplate="footer">
+        <div class="flex justify-end gap-2">
+            <button
+                type="button"
+                class="btn bg-gray-50 hover:bg-gray-100 text-gray-700"
+                (click)="cancel()"
+                [disabled]="isLoading"
+            >
+                {{ cancelLabel }}
+            </button>
+            <button type="button" class="btn btn-danger" (click)="confirm()" [disabled]="isLoading">
+                <i class="pi pi-trash ml-2" *ngIf="!isLoading"></i>
+                <i class="pi pi-spin pi-spinner ml-2" *ngIf="isLoading"></i>
+                {{ confirmLabel }}
+            </button>
+        </div>
+    </ng-template>
+</p-dialog>

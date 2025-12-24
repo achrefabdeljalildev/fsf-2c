@@ -14,6 +14,8 @@ import { ApiResponseModel, PagedResponse } from 'src/app/shared/models/base/page
 export class RegionListComponent extends BaseListComponent<Region> {
     showDialog: boolean = false;
     selectedRegionId: number | null = null;
+    showDeleteDialog: boolean = false;
+    itemToDelete: number | null = null;
 
     constructor(private regionService: RegionService) {
         super();
@@ -51,9 +53,16 @@ export class RegionListComponent extends BaseListComponent<Region> {
     }
 
     removeRegion(id: number) {
-        if (confirm('هل أنت متأكد من حذف هذه المنطقة؟')) {
-            this.regionService.deleteById(id).subscribe(() => {
+        this.itemToDelete = id;
+        this.showDeleteDialog = true;
+    }
+
+    confirmDelete() {
+        if (this.itemToDelete) {
+            this.regionService.deleteById(this.itemToDelete).subscribe(() => {
                 this.showSuccessMessage('تم حذف المنطقة بنجاح');
+                this.showDeleteDialog = false;
+                this.itemToDelete = null;
                 this.loadData();
             });
         }

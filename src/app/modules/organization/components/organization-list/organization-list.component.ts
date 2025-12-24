@@ -14,6 +14,8 @@ import { ApiResponseModel, PagedResponse } from 'src/app/shared/models/base/page
 export class OrganizationListComponent extends BaseListComponent<Organization> {
     showDialog: boolean = false;
     selectedOrganizationId: number | null = null;
+    showDeleteDialog: boolean = false;
+    itemToDelete: number | null = null;
 
     constructor(private organizationService: OrganizationService) {
         super();
@@ -51,9 +53,16 @@ export class OrganizationListComponent extends BaseListComponent<Organization> {
     }
 
     removeOrganization(id: number) {
-        if (confirm('هل أنت متأكد من حذف هذه الجهة؟')) {
-            this.organizationService.deleteById(id).subscribe(() => {
+        this.itemToDelete = id;
+        this.showDeleteDialog = true;
+    }
+
+    confirmDelete() {
+        if (this.itemToDelete) {
+            this.organizationService.deleteById(this.itemToDelete).subscribe(() => {
                 this.showSuccessMessage('تم حذف الجهة بنجاح');
+                this.showDeleteDialog = false;
+                this.itemToDelete = null;
                 this.loadData();
             });
         }

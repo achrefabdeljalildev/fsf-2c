@@ -3,6 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import {
+    API_URL_AUTH_LOGIN,
+    API_URL_AUTH_REFRESH,
+    API_URL_AUTH_VERIFY,
+} from 'src/app/shared/consts/api.urls';
 
 export interface LoginRequest {
     emailOrPhone: string;
@@ -41,9 +46,7 @@ export class AuthService {
     private readonly TOKEN_KEY = 'authToken';
     private readonly REFRESH_TOKEN_KEY = 'refreshToken';
 
-    private authStateSubject = new BehaviorSubject<AuthState>(
-        this.getInitialState(),
-    );
+    private authStateSubject = new BehaviorSubject<AuthState>(this.getInitialState());
 
     public authState$ = this.authStateSubject.asObservable();
 
@@ -87,7 +90,7 @@ export class AuthService {
         return this.http
             .post<{
                 data: LoginResponse;
-            }>('/Authentication/AdminLogin', credentials)
+            }>(API_URL_AUTH_LOGIN, credentials)
             .pipe(
                 map((response) => {
                     this.storeAuthData(response.data);
@@ -162,7 +165,7 @@ export class AuthService {
         }
 
         return this.http
-            .post<LoginResponse>('/api/Authentication/Refresh', {
+            .post<LoginResponse>(API_URL_AUTH_REFRESH, {
                 refreshToken,
             })
             .pipe(
@@ -182,12 +185,9 @@ export class AuthService {
      * Verify token validity
      */
     verifyToken(): Observable<{ valid: boolean }> {
-        return this.http.post<{ valid: boolean }>(
-            '/api/Authentication/Verify',
-            {
-                token: this.getToken(),
-            },
-        );
+        return this.http.post<{ valid: boolean }>(API_URL_AUTH_VERIFY, {
+            token: this.getToken(),
+        });
     }
 
     /**
@@ -195,10 +195,7 @@ export class AuthService {
      */
     private storeAuthData(response: LoginResponse): void {
         localStorage.setItem(this.TOKEN_KEY, response.accessToken);
-        localStorage.setItem(
-            this.REFRESH_TOKEN_KEY,
-            response.refreshToken.tokenString,
-        );
+        localStorage.setItem(this.REFRESH_TOKEN_KEY, response.refreshToken.tokenString);
         if (response.user) {
             localStorage.setItem('currentUser', JSON.stringify(response.user));
         }
@@ -209,9 +206,7 @@ export class AuthService {
      */
     private getStoredToken(): string | null {
         return (
-            localStorage.getItem(this.TOKEN_KEY) ||
-            sessionStorage.getItem(this.TOKEN_KEY) ||
-            null
+            localStorage.getItem(this.TOKEN_KEY) || sessionStorage.getItem(this.TOKEN_KEY) || null
         );
     }
 

@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BaseComponent } from 'src/app/shared/components/base-component/base-component';
 import { FieldSurveyService } from '../../services/field-survey.service';
 import { FieldSurvey } from '../../models/field-survey.model';
+import { LocationService } from 'src/app/modules/location/services/location.service';
+import { CriteriaModel } from 'src/app/shared/models/base/criteria.model';
 
 @Component({
     selector: 'app-field-survey-view',
@@ -18,6 +20,7 @@ export class FieldSurveyViewComponent extends BaseComponent implements OnInit {
     constructor(
         private fb: FormBuilder,
         private fieldSurveyService: FieldSurveyService,
+        private locationService: LocationService,
     ) {
         super();
     }
@@ -36,12 +39,15 @@ export class FieldSurveyViewComponent extends BaseComponent implements OnInit {
     initForm(): void {
         this.fieldSurveyForm = this.fb.group({
             surveyCode: ['', [Validators.required]],
-            locationId: [0, [Validators.required]],
+            locationId: [0],
+            nameAr: ['', [Validators.required]],
+            organization: [''],
+            region: [''],
+            province: [''],
             surveyType: [''],
             roomType: [''],
             area: [''],
             otherExperiments: [''],
-            nameAr: ['', [Validators.required]],
             descriptionAr: [''],
         });
     }
@@ -112,5 +118,46 @@ export class FieldSurveyViewComponent extends BaseComponent implements OnInit {
 
     search(event: any) {
         // Implement search logic here
+    }
+
+    searchByCode(): void {
+        const code = this.fieldSurveyForm.get('surveyCode')?.value;
+        if (!code || code.trim() === '') {
+            this.showErrorMessage('يرجى إدخال رمز الموقع');
+            return;
+        }
+
+        this.isLoading = true;
+        // Create a filter criteria to search by code
+        const criteria: CriteriaModel = new CriteriaModel();
+        criteria.filters = [
+            { propertyName: 'code', operator: 'And', values: [code], type: 'Equals' },
+        ];
+
+        const subscription = this.locationService.getPagedList(criteria).subscribe({
+            next: (response) => {
+                this.isLoading = false;
+                if (response.data.items && response.data.items.length > 0) {
+                    const location = response.data.items[0];
+                    // Populate form fields with location data
+                    this.fieldSurveyForm.patchValue({
+                        locationId: location.id,
+                        nameAr: location.nameAr,
+                        organization: location.organizationNameAr || '',
+                        region: location.area || '',
+                        province: location.provinceNameAr || '',
+                    });
+                    this.showSuccessMessage('تم العثور على الموقع بنجاح');
+                } else {
+                    this.showErrorMessage('لم يتم العثور على موقع بهذا الرمز');
+                }
+            },
+            error: (error) => {
+                this.isLoading = false;
+                this.showErrorMessage('حدث خطأ أثناء البحث عن الموقع');
+            },
+        });
+
+        this.subscriptions.add(subscription);
     }
 }

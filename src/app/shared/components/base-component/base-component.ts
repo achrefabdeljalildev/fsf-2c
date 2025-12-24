@@ -60,12 +60,8 @@ export abstract class BaseComponent {
         this.router.navigate([url], { queryParams: params });
     }
 
-    protected getTranslatedEnum(
-        enumListName: string,
-    ): { value: string; label: string }[] {
-        const translatedObj = this.translateService.instant(
-            enumListName,
-        ) as Record<string, string>;
+    protected getTranslatedEnum(enumListName: string): { value: string; label: string }[] {
+        const translatedObj = this.translateService.instant(enumListName) as Record<string, string>;
         return Object.keys(translatedObj).map((key) => ({
             value: key,
             label: translatedObj[key],

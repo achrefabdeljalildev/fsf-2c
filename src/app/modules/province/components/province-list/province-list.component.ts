@@ -14,6 +14,8 @@ import { ApiResponseModel, PagedResponse } from 'src/app/shared/models/base/page
 export class ProvinceListComponent extends BaseListComponent<Province> {
     showDialog: boolean = false;
     selectedProvinceId: number | null = null;
+    showDeleteDialog: boolean = false;
+    itemToDelete: number | null = null;
 
     constructor(private provinceService: ProvinceService) {
         super();
@@ -52,9 +54,16 @@ export class ProvinceListComponent extends BaseListComponent<Province> {
     }
 
     removeProvince(id: number) {
-        if (confirm('هل أنت متأكد من حذف هذه المحافظة؟')) {
-            this.provinceService.deleteById(id).subscribe(() => {
+        this.itemToDelete = id;
+        this.showDeleteDialog = true;
+    }
+
+    confirmDelete() {
+        if (this.itemToDelete) {
+            this.provinceService.deleteById(this.itemToDelete).subscribe(() => {
                 this.showSuccessMessage('تم حذف المحافظة بنجاح');
+                this.showDeleteDialog = false;
+                this.itemToDelete = null;
                 this.loadData();
             });
         }

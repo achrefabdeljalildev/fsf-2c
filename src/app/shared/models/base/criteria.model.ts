@@ -12,9 +12,14 @@ export class SortModel {
 
 export class CriteriaModel {
     pageNumber: number = 1;
-    pageSize: number = 10;
+    pageSize: number = 20;
     filters: FilterCriteriaModel[] = [];
     sorts: SortModel[] = [];
     searchTerm: string = '';
     totalCount?: number = 0;
+
+    // add constructor to initialize with default searchTerm
+    constructor(init?: Partial<CriteriaModel>) {
+        Object.assign(this, init);
+    }
 }
