@@ -1,4 +1,4 @@
-<p-breadcrumb
+﻿<p-breadcrumb
     [model]="[
         { label: 'الأنظمة الأمنية' },
         { label: 'الإدارة العامة لحماية المنشآت' },
@@ -68,18 +68,14 @@
                     <!-- المنطقة - Region (like province) -->
                     <div class="form-group">
                         <label for="regionId" class="block text-sm font-medium mb-2">المنطقة</label>
-                        <p-autocomplete
+                        <p-select
                             formControlName="regionId"
-                            [dropdown]="true"
-                            [delay]="1000"
-                            [suggestions]="filteredRegions"
-                            (completeMethod)="searchRegion($event)"
+                            [options]="filteredRegions"
                             optionLabel="nameAr"
                             optionValue="id"
-                            field="nameAr"
                             placeholder="المنطقة"
                             [style]="{ width: '100%' }"
-                        />
+                        ></p-select>
                     </div>
 
                     <!-- المحافظة - Province -->
@@ -95,8 +91,7 @@
                             optionValue="id"
                             placeholder="المحافظة"
                             [style]="{ width: '100%' }"
-                            [disabled]="filteredProvinces.length == 0"
-                        ></p-select>
+                        />
                     </div>
 
                     <!-- الجهة التابعة لها - Affiliated Entity -->
@@ -104,18 +99,14 @@
                         <label for="organizationId" class="block text-sm font-medium mb-2">
                             الجهة التابعة لها
                         </label>
-                        <p-autocomplete
+                        <p-select
                             formControlName="organizationId"
-                            [dropdown]="true"
-                            [delay]="1000"
-                            [suggestions]="filteredOrganizations"
-                            (completeMethod)="searchOrganization($event)"
+                            [options]="filteredOrganizations"
                             optionLabel="nameAr"
                             optionValue="id"
-                            field="nameAr"
                             placeholder="الجهة التابعة لها"
                             [style]="{ width: '100%' }"
-                        />
+                        ></p-select>
                     </div>
 
                     <!-- تصنيف الموقع - Location Classification -->
@@ -123,14 +114,11 @@
                         <label for="siteType" class="block text-sm font-medium mb-2">
                             تصنيف الموقع
                         </label>
-                        <p-autocomplete
+                        <p-select
                             formControlName="siteType"
-                            [dropdown]="true"
-                            [suggestions]="filteredSiteTypes"
-                            (completeMethod)="searchSiteType($event)"
+                            [options]="filteredSiteTypes"
                             optionLabel="label"
-                            optionValue="value"
-                            field="label"
+                            optionValue="id"
                             placeholder="تصنيف الموقع"
                             [style]="{ width: '100%' }"
                         />
@@ -143,9 +131,13 @@
                         </label>
                         <input
                             id="openingDate"
-                            type="date"
+                            type="text"
                             formControlName="openingDate"
+                            mwlFlatpickr
+                            [options]="dateBasic"
                             pInputText
+                            [altInput]="true"
+                            [convertModelValue]="true"
                             class="w-full"
                         />
                     </div>
@@ -167,56 +159,19 @@
                 </div>
             </div>
             <div class="col-span-1">
-                <!-- المرفقات - Attachments Section -->
-                <div class="panel rounded-md p-4 h-[100%]">
-                    <div class="flex justify-between w-full items-center">
-                        <h6 class="text-md font-semibold text-lg p-2 gap-2 flex items-center">
-                            <i class="pi pi-file-plus"></i>
-                            المرفقات
-                        </h6>
-                        <button type="button" class="btn btn-sm btn-success">
-                            <i class="pi pi-file-plus"></i>
-                        </button>
-                    </div>
-                    <div class="flex gap-4 items-center py-4 flex-col">
-                        <div
-                            class="flex justify-between w-full items-center bg-lightBlue p-4 rounded-md"
-                        >
-                            <div class="flex gap-2">
-                                <i class="pi pi-file-pdf"></i>
-                                <div>اسم_الملف.pdf</div>
-                            </div>
-                            <div class="flex gap-2">
-                                <i class="pi pi-download cursor-pointer"></i>
-                                <i class="pi pi-trash cursor-pointer"></i>
-                            </div>
-                        </div>
-                        <div
-                            class="flex justify-between w-full items-center bg-lightBlue p-4 rounded-md"
-                        >
-                            <div class="flex gap-2">
-                                <i class="pi pi-file-pdf"></i>
-                                <div>اسم_الملف.pdf</div>
-                            </div>
-                            <div class="flex gap-2">
-                                <i class="pi pi-download cursor-pointer"></i>
-                                <i class="pi pi-trash cursor-pointer"></i>
-                            </div>
-                        </div>
-                        <div
-                            class="flex justify-between w-full items-center bg-lightBlue p-4 rounded-md"
-                        >
-                            <div class="flex gap-2">
-                                <i class="pi pi-file-pdf"></i>
-                                <div>اسم_الملف.pdf</div>
-                            </div>
-                            <div class="flex gap-2">
-                                <i class="pi pi-download cursor-pointer"></i>
-                                <i class="pi pi-trash cursor-pointer"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <app-file-attachments
+                    [attachments]="attachments"
+                    helperText="الحد الأقصى لحجم الملف هو 2 ميجابايت والصيغ المدعومة: jpg, png, pdf."
+                    [entityName]="'Location'"
+                    [entityKey]="locationId ? locationId.toString() : ''"
+                    [path]="'Promotions'"
+                    [category]="'Documents'"
+                    (fileAdded)="onFileAdded($event)"
+                    (download)="onAttachmentDownload($event)"
+                    (remove)="onAttachmentRemove($event)"
+                    (uploadSuccess)="onUploadSuccess($event)"
+                    (uploadError)="onUploadError($event)"
+                />
             </div>
         </div>
 
@@ -558,9 +513,12 @@
                                 </label>
                                 <input
                                     id="siteReceiptDate"
-                                    type="date"
                                     formControlName="siteReceiptDate"
+                                    mwlFlatpickr
+                                    [options]="dateBasic"
                                     pInputText
+                                    [altInput]="true"
+                                    [convertModelValue]="true"
                                     class="w-full"
                                 />
                             </div>

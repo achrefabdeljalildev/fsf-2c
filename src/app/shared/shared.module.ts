@@ -34,6 +34,7 @@ import { PdfViewerComponent } from 'src/app/shared/components/pdf-viewer/pdf-vie
 import { BaseFormHeaderComponent } from 'src/app/shared/components/base-form-header/base-form-header.component';
 import { ListHeaderComponent } from 'src/app/shared/components/list-header/list-header.component';
 import { ConfirmDeleteComponent } from 'src/app/shared/components/confirm-delete/confirm-delete.component';
+import { FileAttachmentsComponent } from 'src/app/shared/components/file-attachments/file-attachments.component';
 
 @NgModule({
     imports: [
@@ -64,6 +65,7 @@ import { ConfirmDeleteComponent } from 'src/app/shared/components/confirm-delete
         BaseFormHeaderComponent,
         ListHeaderComponent,
         ConfirmDeleteComponent,
+        FileAttachmentsComponent,
     ],
     exports: [
         // pipes
@@ -91,6 +93,7 @@ import { ConfirmDeleteComponent } from 'src/app/shared/components/confirm-delete
         ListHeaderComponent,
         DialogModule,
         ConfirmDeleteComponent,
+        FileAttachmentsComponent,
     ],
 })
 export class SharedModule {

@@ -35,6 +35,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { providePrimeNG } from 'primeng/config';
 import { InterceptService } from 'src/app/shared/services/intercept.service';
 import Aura from '@primeuix/themes/aura';
+import { provideFlatpickrDefaults } from 'angularx-flatpickr';
 
 // AOT compilation support
 export function HttpLoaderFactory(httpHandler: HttpBackend): TranslateHttpLoader {
@@ -87,6 +88,7 @@ export class AppConfigModule {}
             useClass: InterceptService,
             multi: true,
         },
+        provideFlatpickrDefaults(),
         MessageService,
         {
             provide: LOCALE_ID,

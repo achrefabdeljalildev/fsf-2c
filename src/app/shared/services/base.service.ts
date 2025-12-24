@@ -25,12 +25,12 @@ export class BaseService<T> {
         return this.http.get<ApiResponseModel<T>>(`${this.baseUrl}/${id}`);
     }
 
-    create(item: T): Observable<T> {
-        return this.http.post<T>(`${this.baseUrl}/Create`, item);
+    create(item: T): Observable<ApiResponseModel<T>> {
+        return this.http.post<ApiResponseModel<T>>(`${this.baseUrl}/Create`, item);
     }
 
-    update(item: T): Observable<T> {
-        return this.http.put<T>(`${this.baseUrl}/Edit`, item);
+    update(item: T): Observable<ApiResponseModel<T>> {
+        return this.http.put<ApiResponseModel<T>>(`${this.baseUrl}/Edit`, item);
     }
 
     deleteById(id: number): Observable<void> {

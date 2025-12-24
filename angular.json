@@ -35,8 +35,10 @@
                         "styles": [
                             "src/assets/css/app.css",
                             "node_modules/primeicons/primeicons.css",
+                            "node_modules/flatpickr/dist/flatpickr.css",
                             "node_modules/ngx-spinner/animations/ball-clip-rotate.css"
                         ],
+                        "scripts": ["src/assets/js/flatpickr-hijri-calendar.min.js"],
                         "allowedCommonJsDependencies": [],
                         "browser": "src/main.ts"
                     },

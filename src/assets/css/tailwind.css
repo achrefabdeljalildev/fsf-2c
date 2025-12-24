@@ -6,6 +6,10 @@
 
 @import 'dragndrop.css';
 
+@import 'flatpickr.css';
+
+@import 'flatpickr-hijri-calendar.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -127,8 +131,9 @@
     .btn-danger {
         @apply border-danger bg-danger text-white shadow-danger/60;
     }
+
     .btn-outline-danger {
-        @apply border-danger text-danger shadow-none hover:bg-danger hover:text-white;
+        @apply border-danger text-danger shadow-none hover:bg-danger hover:text-white !important;
     }
 
     .btn-warning {

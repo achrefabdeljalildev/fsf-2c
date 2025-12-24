@@ -14,6 +14,7 @@ import { LocationViewComponent } from 'src/app/modules/location/components/locat
 import { TabsModule } from 'primeng/tabs';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { SelectModule } from 'primeng/select';
+import { FlatpickrDirective } from 'angularx-flatpickr';
 
 const routes: Routes = [
     {
@@ -47,6 +48,7 @@ const routes: Routes = [
         AutoCompleteModule,
         SharedModule,
         SelectModule,
+        FlatpickrDirective,
     ],
     declarations: [LocationDashboardComponent, LocationListComponent, LocationViewComponent],
 })
