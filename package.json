@@ -1,6 +1,6 @@
 {
     "name": "fsf-2c-front",
-    "version": "v1.144.0-dev",
+    "version": "v0.0.1-dev",
     "engines": {
         "node": "^20"
     },
