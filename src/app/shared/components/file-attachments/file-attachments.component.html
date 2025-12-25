@@ -1,8 +1,11 @@
-<div class="panel rounded-md p-4 h-full">
-    <div class="flex justify-between w-full items-center">
+<div class="panel rounded-md p-4 h-full flex flex-col">
+    <div class="flex justify-between w-full items-center flex-shrink-0">
         <h6 class="text-md font-semibold text-lg p-2 gap-2 flex items-center">
             <i class="pi pi-file"></i>
             المرفقات
+            <span class="text-sm text-gray-500" *ngIf="attachments.length > 0">
+                ({{ attachments.length }})
+            </span>
         </h6>
         <div class="flex items-center gap-2">
             <button
@@ -23,11 +26,14 @@
         </div>
     </div>
 
-    <p class="text-sm text-gray-500 mt-2" *ngIf="helperText">{{ helperText }}</p>
+    <p class="text-sm text-gray-500 mt-2 flex-shrink-0" *ngIf="helperText">{{ helperText }}</p>
 
-    <div *ngIf="attachments.length; else emptyState" class="flex gap-4 items-center py-4 flex-col">
+    <div
+        *ngIf="attachments.length; else emptyState"
+        class="flex gap-4 items-center py-4 flex-col overflow-y-auto flex-1"
+    >
         <div
-            *ngFor="let file of attachments; trackBy: trackByAttachment"
+            *ngFor="let file of paginatedAttachments; trackBy: trackByAttachment"
             class="flex justify-between w-full items-center bg-lightBlue p-4 rounded-md"
         >
             <div class="flex gap-3 items-center w-full">
@@ -71,6 +77,16 @@
                     <i class="pi pi-trash"></i>
                 </button>
             </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="w-full flex-shrink-0 mt-4" *ngIf="totalPages > 1">
+            <p-paginator
+                [rows]="itemsPerPage"
+                [totalRecords]="attachments.length"
+                [showFirstLastIcon]="false"
+                (onPageChange)="onPageChange($event)"
+            />
         </div>
     </div>
 

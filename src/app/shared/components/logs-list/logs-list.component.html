@@ -1,0 +1,84 @@
+<div class="w-full">
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="flex items-center justify-center py-8">
+        <i class="pi pi-spin pi-spinner text-2xl text-blue-500"></i>
+    </div>
+
+    <!-- Error State -->
+    <div
+        *ngIf="errorMessage && !isLoading"
+        class="bg-red-50 border border-red-200 rounded-md p-4 mb-4"
+    >
+        <div class="flex items-center gap-2 text-red-700">
+            <i class="pi pi-exclamation-circle"></i>
+            <span>{{ errorMessage }}</span>
+        </div>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="!isLoading && logs.length === 0 && !errorMessage" class="text-center py-8">
+        <i class="pi pi-inbox text-gray-400 text-4xl mb-2 block"></i>
+        <p class="text-gray-500">لا توجد سجلات تدقيق</p>
+    </div>
+
+    <!-- Logs List -->
+    <div *ngIf="logs.length > 0" class="space-y-3">
+        <div
+            *ngFor="let log of logs"
+            class="flex gap-4 items-start py-3 px-4 bg-gray-50 rounded-lg border border-gray-200 hover:bg-gray-100 transition"
+        >
+            <!-- Action Icon -->
+            <div class="pt-1">
+                <i
+                    [class]="'pi ' + getActionIcon(log.action)"
+                    [ngStyle]="{ color: getActionColor(log.action), 'font-size': '1.25rem' }"
+                ></i>
+            </div>
+
+            <!-- Log Details -->
+            <div class="flex-1 min-w-0">
+                <!-- User and Action -->
+                <div class="flex items-center gap-2 mb-1">
+                    <span class="font-semibold text-gray-800">{{
+                        log.userName || log.userEmail
+                    }}</span>
+                    <p-tag
+                        [value]="getActionLabel(log.action)"
+                        [severity]="
+                            getActionColor(log.action) === 'green'
+                                ? 'success'
+                                : getActionColor(log.action) === 'blue'
+                                  ? 'info'
+                                  : getActionColor(log.action) === 'red'
+                                    ? 'danger'
+                                    : 'secondary'
+                        "
+                    >
+                    </p-tag>
+                </div>
+
+                <!-- Description -->
+                <p class="text-sm text-gray-600 mb-1" *ngIf="log.description">
+                    {{ log.description }}
+                </p>
+
+                <!-- Table Info -->
+                <div class="text-xs text-gray-500 space-y-1" *ngIf="log.tableName || log.tableKey">
+                    <div *ngIf="log.tableName">
+                        <span class="font-medium">جدول:</span> {{ log.tableName }}
+                    </div>
+                    <div *ngIf="log.tableKey">
+                        <span class="font-medium">معرف:</span> {{ log.tableKey }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Timestamp -->
+            <div class="text-right pt-1">
+                <div class="text-sm text-gray-500 whitespace-nowrap">
+                    {{ formatTimestamp(log.timestamp) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

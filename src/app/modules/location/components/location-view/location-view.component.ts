@@ -25,7 +25,7 @@ export class LocationViewComponent extends BaseComponent implements OnInit {
     locationForm!: FormGroup;
     isLoading: boolean = false;
     isEditMode: boolean = false;
-    currentTabIndex: number = 0;
+    currentTabIndex: string = '0';
 
     filteredProvinces: Province[] = [];
     filteredOrganizations: Organization[] = [];

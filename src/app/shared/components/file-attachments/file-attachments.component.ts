@@ -1,4 +1,14 @@
-import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import {
+    Component,
+    ElementRef,
+    EventEmitter,
+    Input,
+    OnChanges,
+    OnDestroy,
+    OnInit,
+    Output,
+    ViewChild,
+} from '@angular/core';
 import { FileAttachmentService, FileUploadResponse } from '../../services/file-attachment.service';
 
 export interface AttachmentItem {
@@ -17,7 +27,7 @@ export interface AttachmentItem {
     templateUrl: './file-attachments.component.html',
     standalone: false,
 })
-export class FileAttachmentsComponent {
+export class FileAttachmentsComponent implements OnInit, OnChanges, OnDestroy {
     @Input() attachments: AttachmentItem[] = [];
     @Input() helperText: string = '';
     @Input() allowMultiple: boolean = true;
@@ -26,6 +36,7 @@ export class FileAttachmentsComponent {
     @Input() entityKey: string = '';
     @Input() path: string = '';
     @Input() category: string = '';
+    @Input() itemsPerPage: number = 3;
 
     @Output() fileAdded = new EventEmitter<File>();
     @Output() download = new EventEmitter<AttachmentItem>();
@@ -35,7 +46,37 @@ export class FileAttachmentsComponent {
 
     @ViewChild('fileInput') private fileInput?: ElementRef<HTMLInputElement>;
 
+    currentPage: number = 0;
+    paginatedAttachments: AttachmentItem[] = [];
+
     constructor(private fileService: FileAttachmentService) {}
+    ngOnDestroy(): void {
+        throw new Error('Method not implemented.');
+    }
+
+    ngOnInit(): void {
+        this.updatePaginatedAttachments();
+    }
+
+    ngOnChanges(): void {
+        this.currentPage = 0;
+        this.updatePaginatedAttachments();
+    }
+
+    private updatePaginatedAttachments(): void {
+        const start = this.currentPage * this.itemsPerPage;
+        const end = start + this.itemsPerPage;
+        this.paginatedAttachments = this.attachments.slice(start, end);
+    }
+
+    onPageChange(event: any): void {
+        this.currentPage = event.page;
+        this.updatePaginatedAttachments();
+    }
+
+    get totalPages(): number {
+        return Math.ceil(this.attachments.length / this.itemsPerPage);
+    }
 
     triggerFileInput(): void {
         if (this.disableActions) return;
