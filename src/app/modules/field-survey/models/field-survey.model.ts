@@ -1,3 +1,5 @@
+import { LocationModel } from 'src/app/modules/location/models/location.model';
+
 export interface FieldSurvey {
     id?: number;
     surveyCode: string;
@@ -8,4 +10,5 @@ export interface FieldSurvey {
     otherExperiments: string;
     nameAr: string;
     descriptionAr: string;
+    filedSurvyLocation: LocationModel;
 }

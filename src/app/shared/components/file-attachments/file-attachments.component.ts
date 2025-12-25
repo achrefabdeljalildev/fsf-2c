@@ -4,7 +4,6 @@ import {
     EventEmitter,
     Input,
     OnChanges,
-    OnDestroy,
     OnInit,
     Output,
     ViewChild,
@@ -27,7 +26,7 @@ export interface AttachmentItem {
     templateUrl: './file-attachments.component.html',
     standalone: false,
 })
-export class FileAttachmentsComponent implements OnInit, OnChanges, OnDestroy {
+export class FileAttachmentsComponent implements OnInit, OnChanges {
     @Input() attachments: AttachmentItem[] = [];
     @Input() helperText: string = '';
     @Input() allowMultiple: boolean = true;
@@ -50,9 +49,6 @@ export class FileAttachmentsComponent implements OnInit, OnChanges, OnDestroy {
     paginatedAttachments: AttachmentItem[] = [];
 
     constructor(private fileService: FileAttachmentService) {}
-    ngOnDestroy(): void {
-        throw new Error('Method not implemented.');
-    }
 
     ngOnInit(): void {
         this.updatePaginatedAttachments();
