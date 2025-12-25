@@ -6,6 +6,7 @@ interface Card {
     title: string;
     description: string;
     icon: string;
+    iconActive: string;
     subcards?: SubCard[];
 }
 
@@ -25,7 +26,8 @@ export class DashboardComponent extends BaseComponent {
             id: 1,
             title: 'مركز القيادة و التحكم',
             description: 'command_and_control_desc',
-            icon: 'pi pi-sitemap',
+            icon: 'assets/images/icons/command-control-center-logo hover.svg',
+            iconActive: 'assets/images/icons/command-control-center-logo.svg',
             subcards: [
                 {
                     id: 11,
@@ -41,7 +43,8 @@ export class DashboardComponent extends BaseComponent {
             id: 2,
             title: 'الإدارة العامة لحماية المنشآت',
             description: 'field_survey_desc',
-            icon: 'pi pi-video',
+            icon: 'assets/images/icons/camera-hover.svg',
+            iconActive: 'assets/images/icons/camera.svg',
             subcards: [
                 {
                     id: 21,
@@ -57,7 +60,8 @@ export class DashboardComponent extends BaseComponent {
             id: 3,
             title: 'الإدارة العامة للسلامة و الأمن الذاتي للمنشآت',
             description: 'security_support_desc',
-            icon: 'pi pi-shield',
+            icon: 'assets/images/icons/general-directorate-safety-security-logo hover.svg',
+            iconActive: 'assets/images/icons/general-directorate-safety-security-logo.svg',
             subcards: [
                 {
                     id: 31,

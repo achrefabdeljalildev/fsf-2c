@@ -5,11 +5,7 @@
             class="max-w-md w-full space-y-6 bg-white/80 backdrop-blur-xs p-6 rounded-xl shadow-lg"
         >
             <div class="flex justify-center">
-                <img
-                    src="assets/images/logo.png"
-                    alt="Logo"
-                    style="height: 111px; width: 109px"
-                />
+                <img src="assets/images/logo.png" alt="Logo" style="height: 111px; width: 109px" />
             </div>
 
             <div class="flex justify-center">
@@ -20,11 +16,7 @@
                 </h2>
             </div>
 
-            <form
-                [formGroup]="loginForm"
-                (ngSubmit)="submit()"
-                class="space-y-4"
-            >
+            <form [formGroup]="loginForm" (ngSubmit)="submit()" class="space-y-4">
                 <!-- add input for username -->
                 <div class="relative flex items-center">
                     <input
@@ -44,13 +36,7 @@
                         "
                         class="text-red-500 text-sm mt-1"
                     >
-                        <span
-                            *ngIf="
-                                loginForm.get('emailOrPhone')?.errors?.[
-                                    'required'
-                                ]
-                            "
-                        >
+                        <span *ngIf="loginForm.get('emailOrPhone')?.errors?.['required']">
                             {{ 'common.required' | translate }}
                         </span>
                     </div>
@@ -69,17 +55,13 @@
                     <i
                         class="absolute h-fit end-3 cursor-pointer"
                         (click)="togglePasswordVisibility()"
-                        [ngClass]="
-                            showPassword ? 'pi pi-eye' : 'pi pi-eye-slash'
-                        "
+                        [ngClass]="showPassword ? 'pi pi-eye' : 'pi pi-eye-slash'"
                     ></i>
                 </div>
 
                 <div class="flex justify-between">
                     <!-- checkbox still logged in -->
-                    <label
-                        class="inline-flex gap-2 items-center font-ibmPlexSansArabic"
-                    >
+                    <label class="inline-flex gap-2 items-center font-ibmPlexSansArabic">
                         <input
                             type="checkbox"
                             formControlName="rememberMe"
@@ -133,9 +115,7 @@
         </div>
     </div>
 
-    <div
-        class="flex justify-end items-center absolute top-4 left-4 right-4 z-10"
-    >
+    <div class="flex justify-end items-center absolute top-4 left-4 right-4 z-10">
         <button
             (click)="toggleLanguage()"
             class="text-sm text-gray-700 hover:underline font-ibmPlexSansArabic"

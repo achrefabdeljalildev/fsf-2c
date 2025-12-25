@@ -15,10 +15,9 @@
     >
         <p-card *ngFor="let s of stats" class="rounded-2xl shadow-sm">
             <div class="flex flex-col items-center gap-3 py-2">
-                <div
-                    class="flex h-14 w-14 items-center justify-center rounded-full bg-teal-600/10"
-                >
-                    <i class="{{ s.icon }} text-teal-700 text-2xl"></i>
+                <div class="flex h-14 w-14 items-center justify-center rounded-full bg-teal-600/10">
+                    <!-- <i class="{{ s.icon }} text-teal-700 text-2xl"></i> -->
+                    <img [src]="s.icon" alt="" />
                 </div>
 
                 <div class="text-4xl font-extrabold text-teal-800 leading-none">
@@ -36,9 +35,7 @@
         <!-- Action log -->
         <p-card class="rounded-2xl shadow-sm">
             <div class="flex items-center justify-between">
-                <div class="text-slate-900 font-extrabold text-xl">
-                    سجل الإجراءات
-                </div>
+                <div class="text-slate-900 font-extrabold text-xl">سجل الإجراءات</div>
                 <button
                     pButton
                     type="button"
@@ -55,9 +52,7 @@
                 >
                     <div class="flex items-center justify-between gap-3">
                         <div class="flex items-center gap-2">
-                            <span class="text-slate-900 font-extrabold">{{
-                                a.team
-                            }}</span>
+                            <span class="text-slate-900 font-extrabold">{{ a.team }}</span>
                             <p-tag
                                 [value]="a.statusLabel"
                                 [severity]="a.severity"
@@ -69,14 +64,10 @@
                         <div
                             class="flex h-7 w-7 items-center justify-center rounded-full border"
                             [ngClass]="{
-                                'border-emerald-200 text-emerald-600':
-                                    a.severity === 'success',
-                                'border-sky-200 text-sky-600':
-                                    a.severity === 'info',
-                                'border-amber-200 text-amber-600':
-                                    a.severity === 'warn',
-                                'border-rose-200 text-rose-600':
-                                    a.severity === 'danger',
+                                'border-emerald-200 text-emerald-600': a.severity === 'success',
+                                'border-sky-200 text-sky-600': a.severity === 'info',
+                                'border-amber-200 text-amber-600': a.severity === 'warn',
+                                'border-rose-200 text-rose-600': a.severity === 'danger',
                             }"
                         >
                             <i
@@ -84,8 +75,7 @@
                                 [ngClass]="{
                                     'pi-check': a.severity === 'success',
                                     'pi-info-circle': a.severity === 'info',
-                                    'pi-exclamation-triangle':
-                                        a.severity === 'warn',
+                                    'pi-exclamation-triangle': a.severity === 'warn',
                                     'pi-times': a.severity === 'danger',
                                 }"
                             >
@@ -107,10 +97,7 @@
             </div>
 
             <div class="mt-4 divide-y divide-slate-100">
-                <div
-                    *ngFor="let r of ranking"
-                    class="flex items-center justify-between gap-4 py-4"
-                >
+                <div *ngFor="let r of ranking" class="flex items-center justify-between gap-4 py-4">
                     <div>
                         <div class="font-extrabold text-slate-900">
                             {{ r.title }}
@@ -135,19 +122,13 @@
 
     <!-- Table -->
     <p-card styleClass="rounded-2xl shadow-sm mt-6">
-        <div
-            class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between"
-        >
-            <div class="text-slate-900 font-extrabold text-xl">
-                الخطة التشغيلية بالموقع
-            </div>
+        <div class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+            <div class="text-slate-900 font-extrabold text-xl">الخطة التشغيلية بالموقع</div>
 
             <div class="flex gap-2">
                 <div class="relative w-full max-w-md">
                     <!-- Search Icon -->
-                    <span
-                        class="absolute inset-y-0 right-3 flex items-center text-gray-400"
-                    >
+                    <span class="absolute inset-y-0 right-3 flex items-center text-gray-400">
                         <!-- Heroicons Search -->
                         <svg
                             xmlns="http://www.w3.org/2000/svg"

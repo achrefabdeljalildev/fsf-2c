@@ -38,14 +38,14 @@ interface SiteRow {
 export class LocationDashboardComponent extends BaseComponent {
     // Top stats
     stats: StatCard[] = [
-        { icon: 'pi pi-map-marker', value: '15', label: 'عدد مواقع المنطقة' },
+        { icon: 'assets/images/icons/location-logo.svg', value: '15', label: 'عدد مواقع المنطقة' },
         {
-            icon: 'pi pi-percentage',
+            icon: 'assets/images/icons/location-important-logo.svg',
             value: '25%',
             label: 'نسبة المواقع المرممة',
         },
-        { icon: 'pi pi-home', value: '10', label: 'المواقع بإنتظار التنشيط' },
-        { icon: 'pi pi-id-card', value: '08', label: 'بإنتظار التحقق' },
+        { icon: 'assets/images/icons/location-whait-active-logo.svg', value: '10', label: 'المواقع بإنتظار التنشيط' },
+        { icon: 'assets/images/icons/pending-verification-logo.svg', value: '08', label: 'بإنتظار التحقق' },
     ];
 
     // Action log
