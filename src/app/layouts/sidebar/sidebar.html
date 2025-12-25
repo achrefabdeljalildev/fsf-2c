@@ -63,7 +63,7 @@
                 class="flex flex-col flex-1 rounded-2.5 pb-6 border border-[#C3CAD980] bg-white dark:bg-[#0e1726] overflow-y-auto"
             >
                 <h2 class="p-3 w-full flex justify-center gap-2 font-bold">
-                    <i class="pi pi-home"></i>
+                    <img src="assets/images/icons/home-image.svg" alt="" />
                     الإدارة العامة لحماية المنشآت
                 </h2>
                 <div class="menu-list">
@@ -74,7 +74,8 @@
                             (click)="toggleMenuItem(item.key!)"
                         >
                             <div class="flex items-center gap-3 py-2">
-                                <i [class]="item.icon" class="text-primary text-lg"></i>
+                                <!-- <i [class]="item.icon" class="text-primary text-lg"></i> -->
+                                <img [src]="item.icon" alt="" />
                                 <span class="font-medium text-gray-700 dark:text-white-dark">
                                     {{ item.label }}
                                 </span>

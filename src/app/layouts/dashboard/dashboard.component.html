@@ -33,11 +33,11 @@
                     "
                     class="px-5 py-4 rounded-full mb-4"
                 >
-                    <i [class]="card.icon"></i>
+                    <img [src]="card === selectedCard ? card.iconActive : card.icon" alt="" />
                 </div>
                 <h3
                     class="text-xl font-bold text-gray-800 mb-3"
-                    [ngClass]="card === selectedCard ? 'text-white' : 'text-gray-800'"
+                    [ngClass]="card === selectedCard ? 'text-white' : 'text-garay-800'"
                 >
                     {{ card.title }}
                 </h3>

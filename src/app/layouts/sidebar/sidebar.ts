@@ -22,7 +22,7 @@ export class SidebarComponent implements OnInit {
             key: '1',
             label: ' المواقع',
             data: 'command and control',
-            icon: 'pi pi-sitemap',
+            icon: 'assets/images/icons/location-sidebar.svg',
             children: [
                 {
                     key: '11',
@@ -44,7 +44,7 @@ export class SidebarComponent implements OnInit {
             key: '2',
             label: 'المسح الميداني',
             data: 'Field Survey',
-            icon: 'pi pi-video',
+            icon: 'assets/images/icons/field-survey-sidebar.svg',
             children: [
                 {
                     key: '20',
@@ -66,7 +66,7 @@ export class SidebarComponent implements OnInit {
             key: '3',
             label: 'التقارير',
             data: 'Security Support',
-            icon: 'pi pi-shield',
+            icon: 'assets/images/icons/reborts-sidebar-logo.svg',
             children: [
                 {
                     key: '3َ1',
@@ -81,7 +81,7 @@ export class SidebarComponent implements OnInit {
             key: '4',
             label: 'الإعدادات',
             data: 'Security Support',
-            icon: 'pi pi-cog',
+            icon: 'assets/images/icons/settings-sidebar-logo.svg',
             children: [
                 {
                     key: '41',
