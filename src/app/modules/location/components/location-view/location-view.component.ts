@@ -25,6 +25,7 @@ export class LocationViewComponent extends BaseComponent implements OnInit {
     locationForm!: FormGroup;
     isLoading: boolean = false;
     isEditMode: boolean = false;
+    currentTabIndex: number = 0;
 
     filteredProvinces: Province[] = [];
     filteredOrganizations: Organization[] = [];
@@ -185,7 +186,7 @@ export class LocationViewComponent extends BaseComponent implements OnInit {
                 console.log(response);
 
                 // if the location is created successfully, create the attachments relationhip
-                if (response.data.id) {
+                if (response.data.id && !this.isEditMode) {
                     // Filter out attachments that don't have a file object (already uploaded ones)
                     const pendingUploads = this.attachments.filter((attachment) => attachment.file);
 
@@ -203,6 +204,7 @@ export class LocationViewComponent extends BaseComponent implements OnInit {
                             )
                             .subscribe({
                                 next: () => {
+                                    this.router.navigate(['/location/list']);
                                     console.log('Attachments associated successfully');
                                 },
                                 error: (error) => {
@@ -211,8 +213,6 @@ export class LocationViewComponent extends BaseComponent implements OnInit {
                             });
                     }
                 }
-
-                // this.router.navigate(['/location/list']);
             },
             error: (error) => {
                 this.isLoading = false;
