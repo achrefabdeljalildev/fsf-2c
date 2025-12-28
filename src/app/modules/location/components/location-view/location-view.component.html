@@ -164,7 +164,7 @@
                     helperText="الحد الأقصى لحجم الملف هو 2 ميجابايت والصيغ المدعومة: jpg, png, pdf."
                     [entityName]="'Location'"
                     [entityKey]="locationId ? locationId.toString() : ''"
-                    [path]="'Promotions'"
+                    [path]="'Location'"
                     [category]="'Documents'"
                     (fileAdded)="onFileAdded($event)"
                     (download)="onAttachmentDownload($event)"
@@ -541,18 +541,13 @@
                 </p-tabpanel>
 
                 <p-tabpanel value="3">
-                    <div class="flex gap-4 items-center py-4 flex-col">
-                        <div class="flex flex-col w-full bg-lightBlue p-4 gap-2 rounded-md">
-                            <div class="flex gap-2 items-center">
-                                <i class="pi pi-check-circle"></i>
-                                <div class="font-bold">
-                                    الفريق 150 <p-tag rounded="true">نشط</p-tag>
-                                </div>
-                            </div>
-                            <div class="font-semibold ps-4">
-                                وصف سريع يتناسب مع هذه الجزئية بشكل مبسط وسلسل...
-                            </div>
-                        </div>
+                    <div class="flex gap-4 w-full mt-4">
+                        <!-- Logs List Component -->
+                        <app-logs-list
+                            tableName="Locations"
+                            [tableKey]="locationId"
+                            class="w-full"
+                        />
                     </div>
                 </p-tabpanel>
             </p-tabpanels>

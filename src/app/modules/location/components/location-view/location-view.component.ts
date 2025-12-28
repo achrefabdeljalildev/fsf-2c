@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BaseComponent } from 'src/app/shared/components/base-component/base-component';
 import { LocationService } from '../../services/location.service';
-import { Location } from '../../models/location.model';
+import { LocationModel } from '../../models/location.model';
 import { ProvinceService } from 'src/app/modules/province/services/province.service';
 import { Province } from 'src/app/modules/province/models/province.model';
 import { OrganizationService } from 'src/app/modules/organization/services/organization.service';
@@ -25,7 +25,7 @@ export class LocationViewComponent extends BaseComponent implements OnInit {
     locationForm!: FormGroup;
     isLoading: boolean = false;
     isEditMode: boolean = false;
-    currentTabIndex: number = 0;
+    currentTabIndex: string = '0';
 
     filteredProvinces: Province[] = [];
     filteredOrganizations: Organization[] = [];
@@ -160,7 +160,7 @@ export class LocationViewComponent extends BaseComponent implements OnInit {
         }
 
         this.isLoading = true;
-        const locationData: Location = { ...this.locationForm.value } as Location;
+        const locationData: LocationModel = { ...this.locationForm.value } as LocationModel;
         // regionId is used for UI only; backend expects area (string)
         // Avoid sending regionId if backend model doesn't support it
         delete (locationData as any).regionId;
@@ -198,7 +198,7 @@ export class LocationViewComponent extends BaseComponent implements OnInit {
                                     file: attachment.file!,
                                     entityName: 'Location',
                                     entityKey: response.data.id!.toString(),
-                                    path: 'Promotions',
+                                    path: 'Location',
                                     category: 'Images',
                                 })),
                             )

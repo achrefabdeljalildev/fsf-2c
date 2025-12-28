@@ -3,16 +3,10 @@ import { colDef } from '@bhplugin/ng-datatable';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/components/base-component/base-component';
 import { CriteriaModel } from 'src/app/shared/models/base/criteria.model';
-import {
-    ApiResponseModel,
-    PagedResponse,
-} from 'src/app/shared/models/base/paged-response.model';
+import { ApiResponseModel, PagedResponse } from 'src/app/shared/models/base/paged-response.model';
 
 @Directive()
-export abstract class BaseListComponent<T>
-    extends BaseComponent
-    implements OnInit, OnDestroy
-{
+export abstract class BaseListComponent<T> extends BaseComponent implements OnInit, OnDestroy {
     cols: colDef[] = [];
     rows: T[] = [];
     isLoading = false;
@@ -22,9 +16,7 @@ export abstract class BaseListComponent<T>
     protected subscription = new Subscription();
 
     protected abstract getColumns(): colDef[];
-    protected abstract fetchPage(): Observable<
-        ApiResponseModel<PagedResponse<T>>
-    >;
+    protected abstract fetchPage(): Observable<ApiResponseModel<PagedResponse<T>>>;
 
     /** Hook: child components can react after data is loaded */
     protected afterLoad(_rows: T[]): void {}
@@ -45,7 +37,10 @@ export abstract class BaseListComponent<T>
     }
 
     protected initializeCols(): void {
-        this.cols = this.getColumns();
+        this.cols = this.getColumns().map((col) => ({
+            ...col,
+            title: this.translate(col.title || '') || col.title || '',
+        }));
     }
 
     protected loadData(): void {
@@ -68,8 +63,7 @@ export abstract class BaseListComponent<T>
                 this.rows = [];
                 this.criteria.totalCount = 0;
                 this.showErrorMessage(
-                    this.translate('common.errorLoadingData') ||
-                        'Error loading data',
+                    this.translate('common.errorLoadingData') || 'Error loading data',
                 );
                 this.isLoading = false;
             },

@@ -18,9 +18,8 @@ export class FieldSurveyListComponent extends BaseListComponent<FieldSurvey> {
 
     protected override getColumns(): colDef[] {
         return [
-            { field: 'surveyCode', title: 'رمز المسح' },
-            { field: 'nameAr', title: 'الاسم' },
-            { field: 'surveyType', title: 'نوع المسح' },
+            { field: 'nameAr', title: 'fieldSurvey.surveyName' },
+            { field: 'fieldSurveyLocation.nameAr', title: 'location.locationName' },
             { field: 'actions', title: 'الاجراءات', width: '150px' },
         ];
     }

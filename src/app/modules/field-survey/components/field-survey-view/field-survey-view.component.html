@@ -32,17 +32,33 @@
                     </button>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <!-- add field survey name -->
+                    <div class="form-group col-span-2">
+                        <label for="nameAr" class="block text-sm font-medium mb-2">
+                            اسم المسح
+                            <span class="text-red-500">*</span>
+                        </label>
+                        <input
+                            id="nameAr"
+                            type="text"
+                            formControlName="nameAr"
+                            pInputText
+                            class="w-full"
+                            placeholder="اسم المسح"
+                        />
+                    </div>
+
                     <!-- رمز الموقع - Survey Code -->
                     <div class="form-group col-span-2">
-                        <label for="surveyCode" class="block text-sm font-medium mb-2">
+                        <label for="locationCode" class="block text-sm font-medium mb-2">
                             رمز الموقع
                             <span class="text-red-500">*</span>
                         </label>
                         <div class="flex gap-2">
                             <input
-                                id="surveyCode"
+                                id="locationCode"
                                 type="text"
-                                formControlName="surveyCode"
+                                formControlName="locationCode"
                                 pInputText
                                 class="w-full"
                                 placeholder="AZ-6543 09"
@@ -61,14 +77,14 @@
 
                     <!-- اسم الموقع - Location Name -->
                     <div class="form-group">
-                        <label for="nameAr" class="block text-sm font-medium mb-2">
+                        <label for="locationNameAr" class="block text-sm font-medium mb-2">
                             اسم الموقع
                             <span class="text-red-500">*</span>
                         </label>
                         <input
-                            id="nameAr"
+                            id="locationNameAr"
                             type="text"
-                            formControlName="nameAr"
+                            formControlName="locationNameAr"
                             pInputText
                             class="w-full"
                             placeholder="اسم الموقع"
@@ -119,40 +135,21 @@
                     </div>
                 </div>
             </div>
-            <div class="col-span-1">
-                <div class="panel rounded-md p-4 mb-4">
-                    <h6 class="text-md font-semibold text-lg">سجل الإجراءات</h6>
-                    <div class="flex gap-4 items-center py-4 flex-col">
-                        <div class="flex flex-col w-full bg-lightBlue p-4 gap-2 rounded-md">
-                            <div class="flex gap-2 items-center">
-                                <i class="pi pi-check-circle"></i>
-                                <div class="font-bold">
-                                    الفريق 150 <p-tag rounded="true">نشط</p-tag>
-                                </div>
-                            </div>
-                            <div class="font-semibold ps-4">
-                                وصف سريع يتناسب مع هذه الجزئية بشكل مبسط وسلسل...
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- المرفقات - Attachments Section -->
-                <div class="panel rounded-md p-2">
-                    <div class="flex justify-between w-full items-center">
-                        <h6 class="text-md font-semibold text-lg">
-                            <i class="pi pi-file-plus"></i>
-                            رفع المرفقات
-                        </h6>
-                        <button type="button" class="btn btn-sm btn-primary">
-                            <i class="pi pi-upload"></i>
-                            إضافة مرفق
-                        </button>
-                    </div>
-                    <p class="text-sm text-gray-500 mt-2">
-                        الحد الاقصى لحجم الملف المسموح به هو 2 ميجابايت، وتشمل الصيغ المدعومة: jpg,
-                        png, pdf.
-                    </p>
-                </div>
+            <div class="col-span-1 flex flex-col gap-4">
+                <app-file-attachments
+                    [attachments]="attachments"
+                    helperText="الحد الأقصى لحجم الملف هو 2 ميجابايت والصيغ المدعومة: jpg, png, pdf."
+                    [entityName]="'FieldSurvey'"
+                    [entityKey]="fieldSurveyId ? fieldSurveyId.toString() : ''"
+                    [path]="'FieldSurvey'"
+                    [category]="'Documents'"
+                    [itemsPerPage]="5"
+                    (fileAdded)="onFileAdded($event)"
+                    (download)="onAttachmentDownload($event)"
+                    (remove)="onAttachmentRemove($event)"
+                    (uploadSuccess)="onUploadSuccess($event)"
+                    (uploadError)="onUploadError($event)"
+                ></app-file-attachments>
             </div>
         </div>
         <!-- Details Tabs (similar placement to Location view) -->
@@ -163,6 +160,7 @@
                 <p-tab value="2">طرق الدوريات</p-tab>
                 <p-tab value="1">التجربيات في موقع الرصاص</p-tab>
                 <p-tab value="0">التجريبات في نقطة الفرز المتقدمة</p-tab>
+                <p-tab value="5">سجل الإجراءات</p-tab>
             </p-tablist>
             <p-tabpanels>
                 <p-tabpanel value="0">
@@ -234,6 +232,20 @@
                 <p-tabpanel value="4">
                     <div class="p-4">
                         <p class="text-gray-600">محتوى سياج الموقع</p>
+                    </div>
+                </p-tabpanel>
+
+                <p-tabpanel value="5">
+                    <div class="p-4">
+                        <app-logs-list
+                            *ngIf="fieldSurveyId"
+                            tableName="FieldSurveys"
+                            [tableKey]="fieldSurveyId"
+                            class="w-full"
+                        ></app-logs-list>
+                        <div *ngIf="!fieldSurveyId" class="text-sm text-gray-500">
+                            سيتم عرض السجل بعد حفظ المسح.
+                        </div>
                     </div>
                 </p-tabpanel>
             </p-tabpanels>

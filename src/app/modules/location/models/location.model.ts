@@ -1,5 +1,6 @@
 import { Organization } from 'src/app/modules/organization/models/organization.model';
 import { Province } from 'src/app/modules/province/models/province.model';
+import { Region } from 'src/app/modules/regions/models/region.model';
 
 export enum SiteType {
     None = 1,
@@ -8,7 +9,7 @@ export enum SiteType {
     Outside = 4,
 }
 
-export interface Location {
+export interface LocationModel {
     id?: number;
     nameAr: string;
     descriptionAr: string;
@@ -18,6 +19,8 @@ export interface Location {
     provinceNameAr?: string;
     organizationId: number;
     organizationNameAr?: string;
+    regionId: number;
+    regionNameAr?: string;
     opearationCenter: string;
     openingDate: string;
     siteLocation: string;
@@ -45,4 +48,5 @@ export interface Location {
     staff: number;
     province?: Province;
     organization?: Organization;
+    region?: Region;
 }

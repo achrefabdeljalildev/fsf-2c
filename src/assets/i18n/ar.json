@@ -24,7 +24,8 @@
     },
     "location": {
         "addNewLocation": "إضافة موقع",
-        "locationList": "قائمة المواقع"
+        "locationList": "قائمة المواقع",
+        "locationName": "اسم الموقع"
     },
     "province": {
         "addNewProvince": "إضافة محافظة",
@@ -33,5 +34,11 @@
     "organization": {
         "addNewOrganization": "إضافة جهة",
         "organizationList": "قائمة الجهات"
+    },
+    "fieldSurvey": {
+        "addNewFieldSurvey": "إضافة مسح ميداني",
+        "fieldSurveyList": "قائمة المسوح الميدانية",
+        "surveyName": "اسم المسح",
+        "surveyType": "نوع المسح"
     }
 }

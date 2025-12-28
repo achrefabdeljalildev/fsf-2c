@@ -18,6 +18,7 @@ import { TextareaModule } from 'primeng/textarea';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { DataTableModule } from '@bhplugin/ng-datatable';
+import { TagModule } from 'primeng/tag';
 
 // App - services
 import { AppService } from 'src/app/shared/services/app.service';
@@ -35,6 +36,7 @@ import { BaseFormHeaderComponent } from 'src/app/shared/components/base-form-hea
 import { ListHeaderComponent } from 'src/app/shared/components/list-header/list-header.component';
 import { ConfirmDeleteComponent } from 'src/app/shared/components/confirm-delete/confirm-delete.component';
 import { FileAttachmentsComponent } from 'src/app/shared/components/file-attachments/file-attachments.component';
+import { LogsListComponent } from 'src/app/shared/components/logs-list/logs-list.component';
 
 @NgModule({
     imports: [
@@ -53,6 +55,7 @@ import { FileAttachmentsComponent } from 'src/app/shared/components/file-attachm
         ButtonModule,
         DataTableModule,
         DialogModule,
+        TagModule,
     ],
     declarations: [
         // pipes
@@ -66,6 +69,7 @@ import { FileAttachmentsComponent } from 'src/app/shared/components/file-attachm
         ListHeaderComponent,
         ConfirmDeleteComponent,
         FileAttachmentsComponent,
+        LogsListComponent,
     ],
     exports: [
         // pipes
@@ -85,12 +89,14 @@ import { FileAttachmentsComponent } from 'src/app/shared/components/file-attachm
         InputTextModule,
         TextareaModule,
         ButtonModule,
+        TagModule,
 
         // components
         PdfViewerComponent,
         BaseFormHeaderComponent,
         DataTableModule,
         ListHeaderComponent,
+        LogsListComponent,
         DialogModule,
         ConfirmDeleteComponent,
         FileAttachmentsComponent,
