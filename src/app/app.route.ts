@@ -29,6 +29,30 @@ export const routes: Routes = [
             import('./modules/location/location.module').then((m) => m.LocationModule),
     },
     {
+        path: 'location-classification',
+        canActivate: [AuthGuard],
+        component: AppLayout,
+        loadChildren: () =>
+            import('./modules/location-classification/location-classification.module').then(
+                (m) => m.LocationClassificationModule,
+            ),
+    },
+    {
+        path: 'entity-classification',
+        canActivate: [AuthGuard],
+        component: AppLayout,
+        loadChildren: () =>
+            import('./modules/entity-classfications/entity-classfications.module').then(
+                (m) => m.EntityClassficationsModule,
+            ),
+    },
+    {
+        path: 'users',
+        canActivate: [AuthGuard],
+        component: AppLayout,
+        loadChildren: () => import('./modules/users/users.module').then((m) => m.UsersModule),
+    },
+    {
         path: 'field-survey',
         canActivate: [AuthGuard],
         component: AppLayout,
@@ -54,5 +78,12 @@ export const routes: Routes = [
         component: AppLayout,
         loadChildren: () =>
             import('./modules/organization/organization.module').then((m) => m.OrganizationModule),
+    },
+    {
+        path: 'saudi-map',
+        canActivate: [AuthGuard],
+        component: AppLayout,
+        loadChildren: () =>
+            import('./modules/saudi-maps/saudi-maps.module').then((m) => m.SaudiMapsModule),
     },
 ];

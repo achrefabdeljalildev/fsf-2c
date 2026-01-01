@@ -23,8 +23,8 @@ export class OrganizationListComponent extends BaseListComponent<Organization> {
 
     protected override getColumns(): colDef[] {
         return [
-            { field: 'nameAr', title: 'الاسم' },
-            { field: 'actions', title: 'الاجراءات', width: '150px' },
+            { field: 'nameAr', title: 'formLabels.name' },
+            { field: 'actions', title: 'dataTable.actions', width: '150px' },
         ];
     }
 
@@ -60,7 +60,9 @@ export class OrganizationListComponent extends BaseListComponent<Organization> {
     confirmDelete() {
         if (this.itemToDelete) {
             this.organizationService.deleteById(this.itemToDelete).subscribe(() => {
-                this.showSuccessMessage('تم حذف الجهة بنجاح');
+                this.showSuccessMessage(
+                    this.translate('validationMessages.organizationDeletedSuccess'),
+                );
                 this.showDeleteDialog = false;
                 this.itemToDelete = null;
                 this.loadData();

@@ -104,14 +104,16 @@ export class ProvinceViewComponent extends BaseComponent implements OnInit {
             next: (response) => {
                 this.isLoading = false;
                 this.showSuccessMessage(
-                    this.isEditMode ? 'تم تحديث المحافظة بنجاح' : 'تم إضافة المحافظة بنجاح',
+                    this.isEditMode
+                        ? this.translate('validationMessages.provinceUpdatedSuccess')
+                        : this.translate('validationMessages.provinceAddedSuccess'),
                 );
                 this.onSave.emit();
                 this.closeDialog();
             },
             error: (error) => {
                 this.isLoading = false;
-                this.showErrorMessage('حدث خطأ أثناء حفظ المحافظة');
+                this.showErrorMessage(this.translate('validationMessages.provinceErrorSave'));
             },
         });
 
@@ -136,13 +138,15 @@ export class ProvinceViewComponent extends BaseComponent implements OnInit {
         const subscription = this.provinceService.deleteById(this.provinceId).subscribe({
             next: () => {
                 this.isLoading = false;
-                this.showSuccessMessage('تم حذف المحافظة بنجاح');
+                this.showSuccessMessage(
+                    this.translate('validationMessages.provinceDeletedSuccess'),
+                );
                 this.onSave.emit();
                 this.closeDialog();
             },
             error: () => {
                 this.isLoading = false;
-                this.showErrorMessage('حدث خطأ أثناء حذف المحافظة');
+                this.showErrorMessage(this.translate('validationMessages.provinceErrorDelete'));
             },
         });
 

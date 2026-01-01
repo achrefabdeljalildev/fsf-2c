@@ -80,14 +80,16 @@ export class OrganizationViewComponent extends BaseComponent implements OnInit {
             next: (response) => {
                 this.isLoading = false;
                 this.showSuccessMessage(
-                    this.isEditMode ? 'تم تحديث الجهة بنجاح' : 'تم إضافة الجهة بنجاح',
+                    this.isEditMode
+                        ? this.translate('validationMessages.organizationUpdatedSuccess')
+                        : this.translate('validationMessages.organizationAddedSuccess'),
                 );
                 this.onSave.emit();
                 this.closeDialog();
             },
             error: (error) => {
                 this.isLoading = false;
-                this.showErrorMessage('حدث خطأ أثناء حفظ الجهة');
+                this.showErrorMessage(this.translate('validationMessages.organizationErrorSave'));
             },
         });
 
@@ -112,13 +114,15 @@ export class OrganizationViewComponent extends BaseComponent implements OnInit {
         const subscription = this.organizationService.deleteById(this.organizationId).subscribe({
             next: () => {
                 this.isLoading = false;
-                this.showSuccessMessage('تم حذف الجهة بنجاح');
+                this.showSuccessMessage(
+                    this.translate('validationMessages.organizationDeletedSuccess'),
+                );
                 this.onSave.emit();
                 this.closeDialog();
             },
             error: () => {
                 this.isLoading = false;
-                this.showErrorMessage('حدث خطأ أثناء حذف الجهة');
+                this.showErrorMessage(this.translate('validationMessages.organizationErrorDelete'));
             },
         });
 

@@ -21,25 +21,28 @@
                 <div class="flex flex-col">
                     <div class="relative flex justify-center items-center">
                         <input
-                            id="emailOrPhone"
-                            type="text"
-                            formControlName="emailOrPhone"
+                            id="identityNumber"
+                            type="number"
+                            formControlName="identityNumber"
                             class="block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 font-ibmPlexSansArabic"
-                            [placeholder]="'auth.username' | translate"
+                            [placeholder]="'users.identityNumber' | translate"
                         />
 
-                        <i class="pi pi-user absolute end-3"></i>
+                        <i class="pi pi-id-card absolute end-3"></i>
                     </div>
                     <div
                         *ngIf="
-                            loginForm.get('emailOrPhone')?.invalid &&
-                            (loginForm.get('emailOrPhone')?.dirty ||
-                                loginForm.get('emailOrPhone')?.touched)
+                            loginForm.get('identityNumber')?.invalid &&
+                            (loginForm.get('identityNumber')?.dirty ||
+                                loginForm.get('identityNumber')?.touched)
                         "
                         class="text-red-500 text-sm mt-1"
                     >
-                        <span *ngIf="loginForm.get('emailOrPhone')?.errors?.['required']">
+                        <span *ngIf="loginForm.get('identityNumber')?.errors?.['required']">
                             {{ 'common.required' | translate }}
+                        </span>
+                        <span *ngIf="loginForm.get('identityNumber')?.errors?.['pattern']">
+                            {{ 'users.identityNumberMustBe10Digits' | translate }}
                         </span>
                     </div>
                 </div>

@@ -1,6 +1,4 @@
-<div
-    class="flex justify-between items-center bg-white border-b p-2 mb-2 rounded-t-lg"
->
+<div class="flex justify-between items-center bg-white border-b p-2 mb-2 rounded-t-lg">
     <a
         class="btn btn-outline-primary btn-sm p-2 flex items-center gap-2 cursor-pointer"
         (click)="onAddNewRecord()"
@@ -10,6 +8,16 @@
     </a>
 
     <div class="flex gap-2">
+        <button *ngIf="showMapsButton" class="btn btn-secondary btn-sm" (click)="onClickMaps()">
+            <i class="pi pi-map"></i>
+        </button>
+        <button
+            *ngIf="showFilterButton"
+            class="btn btn-secondary btn-sm"
+            (click)="onSearch(searchTerm)"
+        >
+            <i class="pi pi-filter"></i>
+        </button>
         <div class="relative w-full max-w-md flex items-center">
             <!-- Search Icon -->
             <i class="pi pi-search absolute start-2"></i>
@@ -29,9 +37,7 @@
                 (click)="onSearch('')"
             ></i>
         </div>
-        <button class="btn btn-secondary btn-sm" (click)="onSearch(searchTerm)">
-            بحث
-        </button>
+        <button class="btn btn-secondary btn-sm" (click)="onSearch(searchTerm)">بحث</button>
     </div>
 </div>
 

@@ -29,7 +29,10 @@ export class LoginComponent extends BaseComponent implements OnInit {
 
     ngOnInit(): void {
         this.loginForm = this.fb.group({
-            emailOrPhone: ['', Validators.compose([Validators.required])],
+            identityNumber: [
+                '',
+                Validators.compose([Validators.required, Validators.pattern(/^[0-9]{10}$/)]),
+            ],
             password: ['', Validators.compose([Validators.required])],
             rememberMe: [false],
         });
@@ -44,19 +47,17 @@ export class LoginComponent extends BaseComponent implements OnInit {
             return;
         }
 
-        const subscription = this.authService
-            .login(this.loginForm.value)
-            .subscribe({
-                next: (response) => {
-                    this.isLoading = false;
-                    this.router.navigate(['/']);
-                },
-                error: (error: any) => {
-                    this.isLoading = false;
-                    this.hasError = true;
-                    this.showErrorMessage('usernameOrEmailIsNotCorrect');
-                },
-            });
+        const subscription = this.authService.login(this.loginForm.value).subscribe({
+            next: (response) => {
+                this.isLoading = false;
+                this.router.navigate(['/']);
+            },
+            error: (error: any) => {
+                this.isLoading = false;
+                this.hasError = true;
+                this.showErrorMessage('auth.usernameOrEmailIsNotCorrect');
+            },
+        });
 
         this.subscriptions.add(subscription);
     }

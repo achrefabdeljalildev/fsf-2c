@@ -1,0 +1,84 @@
+<p-dialog
+    [(visible)]="visible"
+    [header]="'users.manageRoles' | translate"
+    [modal]="true"
+    [style]="{ width: '40vw' }"
+    [breakpoints]="{ '960px': '60vw', '640px': '90vw' }"
+    (onHide)="closeDialog()"
+>
+    <div class="space-y-6">
+        <!-- Assigned Roles Section -->
+        <div>
+            <h3 class="text-sm font-semibold mb-3 text-gray-700">
+                {{ 'users.assignedRoles' | translate }}
+            </h3>
+            <div
+                class="flex flex-wrap gap-2 min-h-[60px] p-3 bg-blue-50 border border-blue-200 rounded-lg"
+            >
+                <span
+                    *ngFor="let role of selectedRoles"
+                    class="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-600 text-white rounded-full text-sm font-medium cursor-pointer hover:bg-blue-700 transition"
+                >
+                    <i class="pi pi-check-circle text-xs"></i>
+                    {{ role.name }}
+                    <i
+                        class="pi pi-times text-xs hover:text-red-300 cursor-pointer"
+                        (click)="removeRole(role.id)"
+                    ></i>
+                </span>
+                <span *ngIf="selectedRoles.length === 0" class="text-gray-400 text-sm self-center">
+                    {{ 'users.noRolesAssigned' | translate }}
+                </span>
+            </div>
+        </div>
+
+        <!-- Separator -->
+        <div class="border-t border-gray-300"></div>
+
+        <!-- Available Roles Section -->
+        <div>
+            <h3 class="text-sm font-semibold mb-3 text-gray-700">
+                {{ 'users.availableRoles' | translate }}
+            </h3>
+            <div
+                class="flex flex-wrap gap-2 min-h-[60px] p-3 bg-gray-50 border border-gray-200 rounded-lg"
+            >
+                <span
+                    *ngFor="let role of availableRoles"
+                    class="inline-flex items-center gap-2 px-3 py-1.5 bg-gray-200 text-gray-700 rounded-full text-sm font-medium cursor-pointer hover:bg-gray-300 transition"
+                    (click)="addRole(role)"
+                >
+                    <i class="pi pi-plus-circle text-xs"></i>
+                    {{ role.name }}
+                </span>
+                <span *ngIf="availableRoles.length === 0" class="text-gray-400 text-sm self-center">
+                    {{ 'users.allRolesAssigned' | translate }}
+                </span>
+            </div>
+        </div>
+
+        <!-- No Roles Available -->
+        <div
+            *ngIf="availableRoles.length === 0 && selectedRoles.length === 0"
+            class="text-center py-8 text-gray-500"
+        >
+            <i class="pi pi-info-circle text-3xl mb-2"></i>
+            <p>{{ 'users.noRolesAvailable' | translate }}</p>
+        </div>
+    </div>
+
+    <ng-template pTemplate="footer">
+        <div class="flex justify-end gap-2">
+            <button
+                type="button"
+                class="btn bg-gray-50 hover:bg-gray-100 text-gray-700"
+                (click)="closeDialog()"
+            >
+                {{ 'buttons.cancel' | translate }}
+            </button>
+            <button type="button" class="btn btn-primary" (click)="saveRoles()">
+                {{ 'buttons.save' | translate }}
+            </button>
+        </div>
+    </ng-template>
+</p-dialog>

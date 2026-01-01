@@ -17,7 +17,7 @@ export class SidebarComponent implements OnInit {
     isCollapsed: boolean = false;
     expandedItems: { [key: string]: boolean } = {};
 
-    files: any[] = [
+    treeNodes: any[] = [
         {
             key: '1',
             label: ' المواقع',
@@ -78,6 +78,35 @@ export class SidebarComponent implements OnInit {
             ],
         },
         {
+            key: '5',
+            label: 'المستخدمين',
+            data: 'Security Support',
+            icon: 'assets/images/icons/settings-sidebar-logo.svg',
+            children: [
+                {
+                    key: '51',
+                    label: 'قائمة المستخدمين',
+                    data: 'Sub Survey 2',
+                    icon: 'pi pi-list',
+                    routerLink: '/users/list',
+                },
+                {
+                    key: '52',
+                    label: 'الادوار',
+                    data: 'Sub Survey 2',
+                    icon: 'pi pi-list',
+                    routerLink: '/roles',
+                },
+                {
+                    key: '53',
+                    label: 'الصلاحيات',
+                    data: 'Sub Survey 2',
+                    icon: 'pi pi-list',
+                    routerLink: '/permissions',
+                },
+            ],
+        },
+        {
             key: '4',
             label: 'الإعدادات',
             data: 'Security Support',
@@ -88,28 +117,35 @@ export class SidebarComponent implements OnInit {
                     label: 'الجهات',
                     data: 'Sub Survey 2',
                     icon: 'pi pi-list',
-                    routerLink: '/organization',
+                    routerLink: '/organization/list',
                 },
                 {
                     key: '42',
                     label: 'المناطق',
                     data: 'Sub Survey 2',
                     icon: 'pi pi-list',
-                    routerLink: '/regions',
+                    routerLink: '/regions/list',
                 },
                 {
                     key: '43',
                     label: 'المحافظات',
                     data: 'Sub Survey 2',
                     icon: 'pi pi-list',
-                    routerLink: '/province',
+                    routerLink: '/province/list',
                 },
                 {
                     key: '44',
                     label: 'التصنيفات',
                     data: 'Sub Survey 2',
                     icon: 'pi pi-list',
-                    routerLink: '/settings/categories',
+                    routerLink: '/location-classification/list',
+                },
+                {
+                    key: '45',
+                    label: 'معايير المسح الميداني',
+                    data: 'Sub Survey 2',
+                    icon: 'pi pi-list',
+                    routerLink: '/entity-classification/list',
                 },
             ],
         },
@@ -138,7 +174,7 @@ export class SidebarComponent implements OnInit {
         const currentUrl = this.router.url;
 
         // Find the parent item that contains the current route
-        for (const item of this.files) {
+        for (const item of this.treeNodes) {
             if (item.children) {
                 const hasActiveChild = item.children.some(
                     (child: any) => child.routerLink && currentUrl.startsWith(child.routerLink),

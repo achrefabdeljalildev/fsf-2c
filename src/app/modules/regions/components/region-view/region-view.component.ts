@@ -77,14 +77,16 @@ export class RegionViewComponent extends BaseComponent implements OnInit {
             next: (response) => {
                 this.isLoading = false;
                 this.showSuccessMessage(
-                    this.isEditMode ? 'تم تحديث المنطقة بنجاح' : 'تم إضافة المنطقة بنجاح',
+                    this.isEditMode
+                        ? this.translate('validationMessages.regionUpdatedSuccess')
+                        : this.translate('validationMessages.regionAddedSuccess'),
                 );
                 this.onSave.emit();
                 this.closeDialog();
             },
             error: (error) => {
                 this.isLoading = false;
-                this.showErrorMessage('حدث خطأ أثناء حفظ المنطقة');
+                this.showErrorMessage(this.translate('validationMessages.regionErrorSave'));
             },
         });
 
@@ -109,13 +111,13 @@ export class RegionViewComponent extends BaseComponent implements OnInit {
         const subscription = this.regionService.deleteById(this.regionId).subscribe({
             next: () => {
                 this.isLoading = false;
-                this.showSuccessMessage('تم حذف المنطقة بنجاح');
+                this.showSuccessMessage(this.translate('validationMessages.regionDeletedSuccess'));
                 this.onSave.emit();
                 this.closeDialog();
             },
             error: () => {
                 this.isLoading = false;
-                this.showErrorMessage('حدث خطأ أثناء حذف المنطقة');
+                this.showErrorMessage(this.translate('validationMessages.regionErrorDelete'));
             },
         });
 

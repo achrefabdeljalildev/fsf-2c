@@ -17,3 +17,11 @@ export const API_URL_LOCATIONS = '/Locations';
 
 // Field Surveys
 export const API_URL_FIELD_SURVEYS = '/FieldSurveys';
+
+// Entity Classifications
+export const API_URL_ENTITY_CLASSIFICATIONS = '/EntityClassfications';
+// Location Classifications
+export const API_URL_LOCATION_CLASSIFICATIONS = '/LocationClassifications';
+
+// Users
+export const API_URL_USERS = '/Users';

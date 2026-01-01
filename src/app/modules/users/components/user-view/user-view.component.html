@@ -1,0 +1,172 @@
+<p-dialog
+    [(visible)]="visible"
+    [header]="isEditMode ? ('actions.editUser' | translate) : ('actions.addNewUser' | translate)"
+    [modal]="true"
+    [style]="{ width: '50vw' }"
+    [breakpoints]="{ '960px': '75vw', '640px': '90vw' }"
+    (onHide)="closeDialog()"
+>
+    <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-6">
+        <!-- Full Name -->
+        <div class="form-group">
+            <label for="fullName" class="block text-sm font-medium mb-2">
+                {{ 'users.fullName' | translate }}
+                <span class="text-red-500">*</span>
+            </label>
+            <input
+                id="fullName"
+                type="text"
+                formControlName="fullName"
+                pInputText
+                class="w-full"
+                [placeholder]="'users.enterFullName' | translate"
+            />
+            <small
+                *ngIf="
+                    form.get('fullName')?.invalid &&
+                    (form.get('fullName')?.dirty || form.get('fullName')?.touched)
+                "
+                class="text-red-500"
+            >
+                <span *ngIf="form.get('fullName')?.errors?.['required']">{{
+                    'messages.requiredField' | translate
+                }}</span>
+            </small>
+        </div>
+
+        <!-- Identity Number -->
+        <div class="form-group">
+            <label for="identityNumber" class="block text-sm font-medium mb-2">
+                {{ 'users.identityNumber' | translate }}
+                <span class="text-red-500">*</span>
+            </label>
+            <input
+                id="identityNumber"
+                type="number"
+                formControlName="identityNumber"
+                pInputText
+                class="w-full"
+                [placeholder]="'users.enterIdentityNumber' | translate"
+            />
+            <small
+                *ngIf="
+                    form.get('identityNumber')?.invalid &&
+                    (form.get('identityNumber')?.dirty || form.get('identityNumber')?.touched)
+                "
+                class="text-red-500"
+            >
+                <span *ngIf="form.get('identityNumber')?.errors?.['required']">{{
+                    'messages.requiredField' | translate
+                }}</span>
+                <span *ngIf="form.get('identityNumber')?.errors?.['pattern']">{{
+                    'users.identityNumberMustBe10Digits' | translate
+                }}</span>
+            </small>
+        </div>
+
+        <!-- Job Name -->
+        <div class="form-group">
+            <label for="jobName" class="block text-sm font-medium mb-2">
+                {{ 'users.jobName' | translate }}
+                <span class="text-red-500">*</span>
+            </label>
+            <input
+                id="jobName"
+                type="text"
+                formControlName="jobName"
+                pInputText
+                class="w-full"
+                [placeholder]="'users.enterJobName' | translate"
+            />
+            <small
+                *ngIf="
+                    form.get('jobName')?.invalid &&
+                    (form.get('jobName')?.dirty || form.get('jobName')?.touched)
+                "
+                class="text-red-500"
+            >
+                <span *ngIf="form.get('jobName')?.errors?.['required']">{{
+                    'messages.requiredField' | translate
+                }}</span>
+            </small>
+        </div>
+
+        <!-- Rank Name -->
+        <div class="form-group">
+            <label for="rankName" class="block text-sm font-medium mb-2">
+                {{ 'users.rankName' | translate }}
+                <span class="text-red-500">*</span>
+            </label>
+            <input
+                id="rankName"
+                type="text"
+                formControlName="rankName"
+                pInputText
+                class="w-full"
+                [placeholder]="'users.enterRankName' | translate"
+            />
+            <small
+                *ngIf="
+                    form.get('rankName')?.invalid &&
+                    (form.get('rankName')?.dirty || form.get('rankName')?.touched)
+                "
+                class="text-red-500"
+            >
+                <span *ngIf="form.get('rankName')?.errors?.['required']">{{
+                    'messages.requiredField' | translate
+                }}</span>
+            </small>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+            <label for="password" class="block text-sm font-medium mb-2">
+                {{ 'users.password' | translate }}
+                <span class="text-red-500">*</span>
+            </label>
+            <input
+                id="password"
+                type="password"
+                formControlName="password"
+                pInputText
+                class="w-full"
+                [placeholder]="'users.enterPassword' | translate"
+            />
+            <small
+                *ngIf="
+                    form.get('password')?.invalid &&
+                    (form.get('password')?.dirty || form.get('password')?.touched)
+                "
+                class="text-red-500"
+            >
+                <span *ngIf="form.get('password')?.errors?.['required']">{{
+                    'messages.requiredField' | translate
+                }}</span>
+                <span *ngIf="form.get('password')?.errors?.['minlength']">{{
+                    'users.passwordMinLength' | translate
+                }}</span>
+            </small>
+        </div>
+    </form>
+
+    <ng-template pTemplate="footer">
+        <div class="flex justify-end gap-2">
+            <button
+                type="button"
+                class="btn bg-gray-50 hover:bg-gray-100 text-gray-700"
+                (click)="closeDialog()"
+                [disabled]="isLoading"
+            >
+                {{ 'buttons.cancel' | translate }}
+            </button>
+            <button
+                type="button"
+                class="btn btn-primary"
+                (click)="submit()"
+                [disabled]="form.invalid || isLoading"
+            >
+                {{ isEditMode ? ('buttons.save' | translate) : ('buttons.add' | translate) }}
+            </button>
+        </div>
+    </ng-template>
+</p-dialog>

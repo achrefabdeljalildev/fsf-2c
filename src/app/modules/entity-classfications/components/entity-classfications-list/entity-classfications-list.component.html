@@ -1,0 +1,49 @@
+<p-breadcrumb
+    [model]="[
+        { label: ('breadcrumbs.securitySystems' | translate) },
+        { label: ('breadcrumbs.generalAdministration' | translate) },
+        { label: ('breadcrumbs.fieldSurveyAdmin' | translate) },
+        { label: ('entityClassification.entityClassificationList' | translate) },
+    ]"
+/>
+
+<main-content>
+    <list-header
+        addNewRecordLabel="{{ 'entityClassification.addNewEntityClassification' | translate }}"
+        tableTitle="{{ 'entityClassification.entityClassificationList' | translate }}"
+        [paginationInfo]="paginationInfo"
+        (search)="onSearch($event)"
+        (addNewRecord)="openCreateDialog()"
+    />
+
+    <ng-datatable
+        [rows]="rows"
+        [columns]="cols"
+        [hasCheckbox]="true"
+        [sortable]="false"
+        [loading]="isLoading"
+        [pagination]="true"
+        [pageSize]="criteria.pageSize"
+        rowClass="cursor-pointer"
+        noDataContent="{{ 'common.noDataOnList' | translate }}"
+    >
+        <ng-template slot="actions" let-value="data">
+            <div class="flex gap-2">
+                <div (click)="openEditDialog(value.id)" class="cursor-pointer">
+                    <i class="pi pi-pencil"></i>
+                </div>
+                <div (click)="removeEntityClassification(value.id)" class="cursor-pointer">
+                    <i class="pi pi-trash"></i>
+                </div>
+            </div>
+        </ng-template>
+    </ng-datatable>
+</main-content>
+
+<app-confirm-delete
+    [(visible)]="showDeleteDialog"
+    [title]="'messages.confirmDelete' | translate"
+    [message]="'messages.confirmDeleteClassification' | translate"
+    (onConfirm)="confirmDelete()"
+    (onCancel)="showDeleteDialog = false"
+/>

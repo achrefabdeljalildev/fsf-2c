@@ -7,38 +7,44 @@
     ]"
 />
 
-<div class="panel h-[calc(100vh-150px)] max-h-[calc(100vh-150px)] overflow-y-auto">
+<main-content>
     <list-header
         addNewRecordLabel="{{ 'location.addNewLocation' | translate }}"
         tableTitle="{{ 'location.locationList' | translate }}"
         [paginationInfo]="paginationInfo"
+        [showMapsButton]="true"
         (search)="onSearch($event)"
+        (clickMaps)="showMapsView = !showMapsView"
         (addNewRecord)="openCreateDialog()"
     />
 
-    <ng-datatable
-        [rows]="rows"
-        [columns]="cols"
-        [hasCheckbox]="true"
-        [sortable]="false"
-        [loading]="isLoading"
-        [pagination]="true"
-        [pageSize]="criteria.pageSize"
-        rowClass="cursor-pointer"
-        noDataContent="{{ 'common.noDataOnList' | translate }}"
-    >
-        <ng-template slot="actions" let-value="data">
-            <div class="flex gap-2">
-                <div (click)="openEditDialog(value.id)" class="cursor-pointer">
-                    <i class="pi pi-pencil"></i>
+    @if (showMapsView) {
+        <app-saudi-map />
+    } @else {
+        <ng-datatable
+            [rows]="rows"
+            [columns]="cols"
+            [hasCheckbox]="true"
+            [sortable]="false"
+            [loading]="isLoading"
+            [pagination]="true"
+            [pageSize]="criteria.pageSize"
+            rowClass="cursor-pointer"
+            noDataContent="{{ 'common.noDataOnList' | translate }}"
+        >
+            <ng-template slot="actions" let-value="data">
+                <div class="flex gap-2">
+                    <div (click)="openEditDialog(value.id)" class="cursor-pointer">
+                        <i class="pi pi-pencil"></i>
+                    </div>
+                    <div (click)="removeLocation(value.id)" class="cursor-pointer">
+                        <i class="pi pi-trash"></i>
+                    </div>
                 </div>
-                <div (click)="removeLocation(value.id)" class="cursor-pointer">
-                    <i class="pi pi-trash"></i>
-                </div>
-            </div>
-        </ng-template>
-    </ng-datatable>
-</div>
+            </ng-template>
+        </ng-datatable>
+    }
+</main-content>
 
 <app-confirm-delete
     [(visible)]="showDeleteDialog"

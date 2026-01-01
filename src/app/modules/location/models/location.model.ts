@@ -1,3 +1,4 @@
+import { LocationClassification } from 'src/app/modules/location-classification/models/location-classification.model';
 import { Organization } from 'src/app/modules/organization/models/organization.model';
 import { Province } from 'src/app/modules/province/models/province.model';
 import { Region } from 'src/app/modules/regions/models/region.model';
@@ -49,4 +50,5 @@ export interface LocationModel {
     province?: Province;
     organization?: Organization;
     region?: Region;
+    locationClassification?: LocationClassification;
 }

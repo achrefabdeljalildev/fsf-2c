@@ -1,6 +1,8 @@
 <p-dialog
     [(visible)]="visible"
-    [header]="isEditMode ? 'تعديل منطقة' : 'إضافة منطقة جديدة'"
+    [header]="
+        isEditMode ? ('actions.editRegion' | translate) : ('actions.addNewRegion' | translate)
+    "
     [modal]="true"
     [style]="{ width: '50vw' }"
     [breakpoints]="{ '960px': '75vw', '640px': '90vw' }"
@@ -10,7 +12,7 @@
         <!-- Name in Arabic -->
         <div class="form-group">
             <label for="nameAr" class="block text-sm font-medium mb-2">
-                الاسم
+                {{ 'formLabels.name' | translate }}
                 <span class="text-red-500">*</span>
             </label>
             <input
@@ -19,7 +21,7 @@
                 formControlName="nameAr"
                 pInputText
                 class="w-full"
-                placeholder="أدخل اسم المنطقة "
+                [placeholder]="'formLabels.enterName' | translate"
             />
             <small
                 *ngIf="
@@ -29,21 +31,23 @@
                 class="text-red-500"
             >
                 <span *ngIf="regionForm.get('nameAr')?.errors?.['required']">
-                    هذا الحقل مطلوب
+                    {{ 'messages.requiredField' | translate }}
                 </span>
             </small>
         </div>
 
         <!-- Description in Arabic -->
         <div class="form-group">
-            <label for="descriptionAr" class="block text-sm font-medium mb-2"> الوصف </label>
+            <label for="descriptionAr" class="block text-sm font-medium mb-2">
+                {{ 'formLabels.description' | translate }}
+            </label>
             <textarea
                 id="descriptionAr"
                 formControlName="descriptionAr"
                 pInputTextarea
                 rows="5"
                 class="w-full"
-                placeholder="أدخل وصف المنطقة "
+                [placeholder]="'formLabels.enterDescription' | translate"
             ></textarea>
             <small
                 *ngIf="
@@ -54,7 +58,7 @@
                 class="text-red-500"
             >
                 <span *ngIf="regionForm.get('descriptionAr')?.errors?.['required']">
-                    هذا الحقل مطلوب
+                    {{ 'messages.requiredField' | translate }}
                 </span>
             </small>
         </div>
@@ -68,7 +72,7 @@
                 (click)="closeDialog()"
                 [disabled]="isLoading"
             >
-                إلغاء
+                {{ 'buttons.cancel' | translate }}
             </button>
             <button
                 type="button"
@@ -76,7 +80,7 @@
                 (click)="submit()"
                 [disabled]="regionForm.invalid || isLoading"
             >
-                {{ isEditMode ? 'حفظ ' : 'إضافة' }}
+                {{ isEditMode ? ('buttons.save' | translate) : ('buttons.add' | translate) }}
             </button>
         </div>
     </ng-template>

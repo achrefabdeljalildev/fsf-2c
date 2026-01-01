@@ -12,9 +12,12 @@ export class ListHeaderComponent {
     @Input() addNewRecordLabel: string = 'جديد';
     @Input() addNewRecordLink: string = '';
     @Input() paginationInfo: string = '';
+    @Input() showFilterButton: boolean = false;
+    @Input() showMapsButton: boolean = false;
 
     @Output() search = new EventEmitter<string>();
     @Output() addNewRecord = new EventEmitter<void>();
+    @Output() clickMaps = new EventEmitter<void>();
 
     searchTerm: string = '';
 
@@ -22,6 +25,10 @@ export class ListHeaderComponent {
 
     onSearch(term: string) {
         this.search.emit(term);
+    }
+
+    onClickMaps() {
+        this.clickMaps.emit();
     }
 
     onAddNewRecord() {

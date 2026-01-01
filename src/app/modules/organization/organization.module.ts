@@ -8,7 +8,7 @@ import { OrganizationViewComponent } from './components/organization-view/organi
 
 const routes: Routes = [
     {
-        path: '',
+        path: 'list',
         component: OrganizationListComponent,
     },
     {

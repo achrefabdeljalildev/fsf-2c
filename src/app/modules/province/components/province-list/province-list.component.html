@@ -1,13 +1,13 @@
 <p-breadcrumb
     [model]="[
-        { label: 'الأنظمة الأمنية' },
-        { label: 'الإدارة العامة لحماية المنشآت' },
-        { label: 'إدارة المسح الميداني' },
-        { label: 'المحافظات' },
+        { label: ('breadcrumbs.securitySystems' | translate) },
+        { label: ('breadcrumbs.generalAdministration' | translate) },
+        { label: ('breadcrumbs.fieldSurveyAdmin' | translate) },
+        { label: ('breadcrumbs.provinces' | translate) },
     ]"
 />
 
-<div class="panel h-[calc(100vh-150px)] max-h-[calc(100vh-150px)] overflow-y-auto">
+<main-content>
     <list-header
         addNewRecordLabel="{{ 'province.addNewProvince' | translate }}"
         tableTitle="{{ 'province.provinceList' | translate }}"
@@ -38,7 +38,7 @@
             </div>
         </ng-template>
     </ng-datatable>
-</div>
+</main-content>
 
 <app-province-view
     [(visible)]="showDialog"
@@ -48,8 +48,8 @@
 
 <app-confirm-delete
     [(visible)]="showDeleteDialog"
-    [title]="'تأكيد الحذف'"
-    [message]="'هل أنت متأكد من حذف هذه المحافظة؟'"
+    [title]="'messages.confirmDelete' | translate"
+    [message]="'messages.confirmDeleteProvince' | translate"
     (onConfirm)="confirmDelete()"
     (onCancel)="showDeleteDialog = false"
 />

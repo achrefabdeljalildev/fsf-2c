@@ -1,13 +1,13 @@
 <p-breadcrumb
     [model]="[
-        { label: 'الأنظمة الأمنية' },
-        { label: 'الإدارة العامة لحماية المنشآت' },
-        { label: ' إدارة المسح الميداني' },
+        { label: ('breadcrumbs.securitySystems' | translate) },
+        { label: ('breadcrumbs.generalAdministration' | translate) },
+        { label: ('breadcrumbs.fieldSurveyAdmin' | translate) },
         { label: 'الجهات' },
     ]"
 />
 
-<div class="panel h-[calc(100vh-150px)] max-h-[calc(100vh-150px)] overflow-y-auto">
+<main-content>
     <list-header
         addNewRecordLabel="{{ 'organization.addNewOrganization' | translate }}"
         tableTitle="{{ 'organization.organizationList' | translate }}"
@@ -38,7 +38,7 @@
             </div>
         </ng-template>
     </ng-datatable>
-</div>
+</main-content>
 
 <app-organization-view
     [(visible)]="showDialog"
@@ -48,8 +48,8 @@
 
 <app-confirm-delete
     [(visible)]="showDeleteDialog"
-    [title]="'تأكيد الحذف'"
-    [message]="'هل أنت متأكد من حذف هذه الجهة؟'"
+    [title]="'messages.confirmDelete' | translate"
+    [message]="'messages.confirmDeleteOrganization' | translate"
     (onConfirm)="confirmDelete()"
     (onCancel)="showDeleteDialog = false"
 />

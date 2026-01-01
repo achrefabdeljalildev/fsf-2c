@@ -1,42 +1,49 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-maintenance',
-    template: `<div class="relative flex min-h-screen items-center justify-center overflow-hidden">
+    template: `
         <div
-            class="px-6 py-16 text-center font-semibold before:container before:absolute before:left-1/2 before:aspect-square before:-translate-x-1/2 before:rounded-full before:bg-[linear-gradient(180deg,#4361EE_0%,rgba(67,97,238,0)_50.73%)] before:opacity-10 md:py-20"
+            class="panel h-[calc(100vh-170px)] max-h-[calc(100vh-170px)] overflow-y-auto bg-lightBlue flex flex-col items-center justify-center"
         >
-            <div class="relative">
-                <img
-                    [src]="
-                        store.theme === 'dark' || store.isDarkMode
-                            ? '/assets/images/error/maintenence-dark.svg'
-                            : '/assets/images/error/maintenence-light.svg'
-                    "
-                    alt="maintenence"
-                    class="mx-auto -mt-10 w-full max-w-xs object-cover md:-mt-20 md:max-w-lg"
-                />
-                <div class="-mt-8 font-semibold dark:text-white">
-                    <h2 class="mb-5 text-3xl font-bold text-primary md:text-5xl">
-                        Under Maintenance
-                    </h2>
-                    <h4 class="mb-7 text-xl sm:text-2xl">Thank you for visiting us.</h4>
-                    <p class="text-base">
-                        We are currently working on making some improvements
-                        <br class="hidden sm:block" />to give you better user experience. <br />
-                        <br />Please visit us again shortly.
+            <div class="text-center p-2 ">
+                <div class="flex items-center justify-center mb-4">
+                    <i class="pi pi-wrench text-primary text-6xl"></i>
+                </div>
+
+                <h2 class="text-4xl font-bold text-primary dark:text-white mb-4">
+                    {{ 'maintenance.title' | translate }}
+                </h2>
+
+                <h4 class="text-2xl font-semibold text-gray-700 dark:text-gray-300 mb-6">
+                    {{ 'maintenance.thankYou' | translate }}
+                </h4>
+
+                <div class="bg-blue-50 dark:bg-gray-700 rounded-lg p-6 mb-6">
+                    <p class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                        {{ 'maintenance.message' | translate }}
+                    </p>
+                    <p class="text-base text-gray-600 dark:text-gray-300 mt-4">
+                        {{ 'maintenance.pleaseVisit' | translate }}
                     </p>
                 </div>
-                <a
-                    routerLink="/"
-                    class="btn btn-gradient mx-auto !mt-7 w-max border-0 uppercase shadow-none"
-                    >Home</a
-                >
+
+                <div class="flex justify-center gap-4 mt-8">
+                    <button
+                        type="button"
+                        class="btn btn-primary flex items-center gap-2"
+                        (click)="goToHome()"
+                    >
+                        <i class="pi pi-home"></i>
+                        <span>{{ 'maintenance.goHome' | translate }}</span>
+                    </button>
+                </div>
             </div>
         </div>
-    </div>`,
+    `,
     standalone: false,
 })
 export class MaintenenceComponent {
@@ -45,6 +52,7 @@ export class MaintenenceComponent {
     constructor(
         public router: Router,
         public storeData: Store<any>,
+        public translate: TranslateService,
     ) {
         this.initStore();
     }
@@ -60,5 +68,9 @@ export class MaintenenceComponent {
                     console.error('Error selecting store state:', err);
                 },
             });
+    }
+
+    goToHome() {
+        this.router.navigate(['/']);
     }
 }

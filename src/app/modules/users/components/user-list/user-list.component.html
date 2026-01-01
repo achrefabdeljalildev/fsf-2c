@@ -1,0 +1,55 @@
+<p-breadcrumb
+    [model]="[
+        { label: ('breadcrumbs.securitySystems' | translate) },
+        { label: ('breadcrumbs.generalAdministration' | translate) },
+        { label: ('users.userList' | translate) },
+    ]"
+/>
+
+<main-content>
+    <list-header
+        addNewRecordLabel="{{ 'users.addNewUser' | translate }}"
+        tableTitle="{{ 'users.userList' | translate }}"
+        [paginationInfo]="paginationInfo"
+        (search)="onSearch($event)"
+        (addNewRecord)="openCreateDialog()"
+    />
+
+    <ng-datatable
+        [rows]="rows"
+        [columns]="cols"
+        [hasCheckbox]="true"
+        [sortable]="false"
+        [loading]="isLoading"
+        [pagination]="true"
+        [pageSize]="criteria.pageSize"
+        rowClass="cursor-pointer"
+        noDataContent="{{ 'common.noDataOnList' | translate }}"
+    >
+        <ng-template slot="actions" let-value="data">
+            <div class="flex gap-2 items-center">
+                <!-- <div
+                    (click)="openEditDialog(value.id)"
+                    class="cursor-pointer btn btn-primary btn-sm"
+                >
+                    <i class="pi pi-pencil !text-white"></i>
+                </div> -->
+
+                <div
+                    (click)="openRoleDialog(value.id)"
+                    class="cursor-pointer flex items-center gap-2 btn btn-primary btn-sm truncate"
+                >
+                    <i class="pi pi-list-check"></i> الادوار
+                </div>
+            </div>
+        </ng-template>
+    </ng-datatable>
+</main-content>
+
+<app-user-view [(visible)]="showDialog" [userId]="selectedUserId" (onSave)="onDialogSave()" />
+
+<app-user-roles-dialog
+    [(visible)]="showRolesDialog"
+    [userId]="selectedUserIdForRoles"
+    (onSave)="onRolesSave($event)"
+/>

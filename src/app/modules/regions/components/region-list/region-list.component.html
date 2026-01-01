@@ -1,13 +1,13 @@
 <p-breadcrumb
     [model]="[
-        { label: 'الأنظمة الأمنية' },
-        { label: 'الإدارة العامة لحماية المنشآت' },
-        { label: ' إدارة المسح الميداني' },
-        { label: 'المناطق' },
+        { label: ('breadcrumbs.securitySystems' | translate) },
+        { label: ('breadcrumbs.generalAdministration' | translate) },
+        { label: ('breadcrumbs.fieldSurveyAdmin' | translate) },
+        { label: ('breadcrumbs.regions' | translate) },
     ]"
 />
 
-<div class="panel h-[calc(100vh-150px)] max-h-[calc(100vh-150px)] overflow-y-auto">
+<main-content>
     <list-header
         addNewRecordLabel="{{ 'region.addNewRegion' | translate }}"
         tableTitle="{{ 'region.regionList' | translate }}"
@@ -38,14 +38,14 @@
             </div>
         </ng-template>
     </ng-datatable>
-</div>
+</main-content>
 
 <app-region-view [(visible)]="showDialog" [regionId]="selectedRegionId" (onSave)="onDialogSave()" />
 
 <app-confirm-delete
     [(visible)]="showDeleteDialog"
-    [title]="'تأكيد الحذف'"
-    [message]="'هل أنت متأكد من حذف هذه المنطقة؟'"
+    [title]="'messages.confirmDelete' | translate"
+    [message]="'messages.confirmDeleteRegion' | translate"
     (onConfirm)="confirmDelete()"
     (onCancel)="showDeleteDialog = false"
 />

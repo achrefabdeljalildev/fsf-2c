@@ -8,7 +8,7 @@ import { RegionViewComponent } from './components/region-view/region-view.compon
 
 const routes: Routes = [
     {
-        path: '',
+        path: 'list',
         component: RegionListComponent,
     },
     {

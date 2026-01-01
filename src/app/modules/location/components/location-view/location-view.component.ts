@@ -9,6 +9,8 @@ import { OrganizationService } from 'src/app/modules/organization/services/organ
 import { Organization } from 'src/app/modules/organization/models/organization.model';
 import { RegionService } from 'src/app/modules/regions/services/region.service';
 import { Region } from 'src/app/modules/regions/models/region.model';
+import { LocationClassificationService } from 'src/app/modules/location-classification/services/location-classification.service';
+import { LocationClassification } from 'src/app/modules/location-classification/models/location-classification.model';
 import { CriteriaModel } from 'src/app/shared/models/base/criteria.model';
 import { FlatpickrDefaultsInterface } from 'angularx-flatpickr';
 import { AttachmentItem } from 'src/app/shared/components/file-attachments/file-attachments.component';
@@ -30,6 +32,7 @@ export class LocationViewComponent extends BaseComponent implements OnInit {
     filteredProvinces: Province[] = [];
     filteredOrganizations: Organization[] = [];
     filteredRegions: Region[] = [];
+    filteredLocationClassifications: LocationClassification[] = [];
     attachments: AttachmentItem[] = [];
 
     dateBasic: FlatpickrDefaultsInterface = HijriDateConfig;
@@ -48,6 +51,7 @@ export class LocationViewComponent extends BaseComponent implements OnInit {
         private provinceService: ProvinceService,
         private organizationService: OrganizationService,
         private regionService: RegionService,
+        private locationClassificationService: LocationClassificationService,
         private fileAttachmentService: FileAttachmentService,
     ) {
         super();
@@ -57,6 +61,7 @@ export class LocationViewComponent extends BaseComponent implements OnInit {
         this.initForm();
         this.searchOrganization();
         this.searchRegion();
+        this.searchLocationClassifications();
         this.route.params.subscribe((params) => {
             if (params['id']) {
                 this.locationId = +params['id'];
@@ -83,7 +88,6 @@ export class LocationViewComponent extends BaseComponent implements OnInit {
             nameAr: ['', [Validators.required]],
             descriptionAr: [''],
             code: ['', [Validators.required]],
-            area: [''],
             regionId: [null],
             provinceId: [{ value: null, disabled: true }, [Validators.required]],
             organizationId: [0],
@@ -100,6 +104,7 @@ export class LocationViewComponent extends BaseComponent implements OnInit {
             westBoundar: [''],
             eastBoundar: [''],
             siteType: ['None'],
+            locationClassificationId: [null],
             administrativeSite: [''],
             administrativeSiteDistance: [''],
             administrativeSiteType: [''],
@@ -123,6 +128,7 @@ export class LocationViewComponent extends BaseComponent implements OnInit {
                 organizationId: response?.data?.organization?.id ?? null,
                 regionId: response?.data?.province?.region?.id ?? null,
                 provinceId: response?.data?.province?.id ?? null,
+                locationClassificationId: response?.data?.locationClassification?.id ?? null,
             });
 
             // Load attachments for this location
@@ -131,9 +137,6 @@ export class LocationViewComponent extends BaseComponent implements OnInit {
         });
     }
 
-    /**
-     * Load attachments for the current location
-     */
     private loadLocationAttachments(locationId: number): void {
         this.fileAttachmentService.getFilesByEntity(locationId, 'Location').subscribe({
             next: (response) => {
@@ -327,6 +330,13 @@ export class LocationViewComponent extends BaseComponent implements OnInit {
         const criteria = new CriteriaModel({ searchTerm: event.query });
         this.regionService.getPagedList(criteria).subscribe((response) => {
             this.filteredRegions = response.data.items;
+        });
+    }
+
+    searchLocationClassifications(event: any = { query: '' }): void {
+        const criteria = new CriteriaModel({ searchTerm: event.query });
+        this.locationClassificationService.getPagedList(criteria).subscribe((response) => {
+            this.filteredLocationClassifications = response.data.items;
         });
     }
 

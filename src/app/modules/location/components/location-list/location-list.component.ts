@@ -15,6 +15,7 @@ import { ApiResponseModel, PagedResponse } from 'src/app/shared/models/base/page
 export class LocationListComponent extends BaseListComponent<LocationModel> {
     showDeleteDialog: boolean = false;
     itemToDelete: number | null = null;
+    showMapsView: boolean = false;
 
     constructor(private locationService: LocationService) {
         super();
@@ -22,17 +23,17 @@ export class LocationListComponent extends BaseListComponent<LocationModel> {
 
     protected override getColumns(): colDef[] {
         return [
-            { field: 'code', title: 'رمز الموقع' },
-            { field: 'nameAr', title: 'الاسم' },
-            { field: 'provinceNameAr', title: 'المحافظة' },
-            { field: 'organizationNameAr', title: 'الجهة التابعة لها' },
+            { field: 'code', title: 'formLabels.locationCode' },
+            { field: 'nameAr', title: 'formLabels.name' },
+            { field: 'provinceNameAr', title: 'formLabels.province' },
+            { field: 'organizationNameAr', title: 'formLabels.affiliatedEntity' },
             {
                 field: 'siteReceiptDate',
-                title: 'تاريخ الاستلام',
+                title: 'formLabels.receiptDate',
                 cellRenderer: (d: LocationModel) =>
                     new Date(d.siteReceiptDate).toLocaleDateString('fr-EG'),
             },
-            { field: 'actions', title: 'الاجراءات', width: '150px' },
+            { field: 'actions', title: 'common.actions', width: '150px' },
         ];
     }
 
@@ -62,7 +63,9 @@ export class LocationListComponent extends BaseListComponent<LocationModel> {
     confirmDelete() {
         if (this.itemToDelete) {
             this.locationService.deleteById(this.itemToDelete).subscribe(() => {
-                this.showSuccessMessage('تم حذف الموقع بنجاح');
+                this.showSuccessMessage(
+                    this.translate('validationMessages.locationDeletedSuccess'),
+                );
                 this.showDeleteDialog = false;
                 this.itemToDelete = null;
                 this.loadData();

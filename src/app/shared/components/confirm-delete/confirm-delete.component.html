@@ -21,9 +21,12 @@
             >
                 {{ cancelLabel }}
             </button>
-            <button type="button" class="btn btn-danger" (click)="confirm()" [disabled]="isLoading">
-                <i class="pi pi-trash ml-2" *ngIf="!isLoading"></i>
-                <i class="pi pi-spin pi-spinner ml-2" *ngIf="isLoading"></i>
+            <button
+                type="button"
+                class="btn bg-red-500 hover:bg-red-600 text-white"
+                (click)="confirm()"
+            >
+                <i class="pi pi-trash !text-white me-2"></i>
                 {{ confirmLabel }}
             </button>
         </div>

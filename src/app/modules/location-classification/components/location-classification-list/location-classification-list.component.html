@@ -1,0 +1,61 @@
+<p-breadcrumb
+    [model]="[
+        { label: 'الإعدادات' },
+        { label: 'التصنيفات' },
+        { label: ('locationClassification.list' | translate) },
+    ]"
+/>
+
+<main-content>
+    <list-header
+        addNewRecordLabel="{{ 'locationClassification.add' | translate }}"
+        tableTitle="{{ 'locationClassification.list' | translate }}"
+        [paginationInfo]="paginationInfo"
+        (search)="onSearch($event)"
+        (addNewRecord)="openCreateDialog()"
+    />
+
+    <ng-datatable
+        [rows]="rows"
+        [columns]="cols"
+        [hasCheckbox]="true"
+        [sortable]="false"
+        [loading]="isLoading"
+        [pagination]="true"
+        [pageSize]="criteria.pageSize"
+        rowClass="cursor-pointer"
+        noDataContent="{{ 'common.noDataOnList' | translate }}"
+    >
+        <ng-template slot="color" let-value="data">
+            <!--  add shadow -->
+            <div
+                class="w-6 h-6 rounded border shadow"
+                [ngStyle]="{ 'background-color': value.color || '#ffffff' }"
+            ></div>
+        </ng-template>
+        <ng-template slot="actions" let-value="data">
+            <div class="flex gap-2">
+                <div (click)="openEditDialog(value.id)" class="cursor-pointer">
+                    <i class="pi pi-pencil"></i>
+                </div>
+                <div (click)="removeLocationClassification(value.id)" class="cursor-pointer">
+                    <i class="pi pi-trash"></i>
+                </div>
+            </div>
+        </ng-template>
+    </ng-datatable>
+</main-content>
+
+<app-location-classification-view
+    [(visible)]="showDialog"
+    [classificationId]="selectedClassificationId"
+    (onSave)="onDialogSave()"
+/>
+
+<app-confirm-delete
+    [(visible)]="showDeleteDialog"
+    [title]="'messages.confirmDelete' | translate"
+    [message]="'messages.confirmDeleteClassification' | translate"
+    (onConfirm)="confirmDelete()"
+    (onCancel)="showDeleteDialog = false"
+/>

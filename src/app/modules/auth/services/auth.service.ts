@@ -8,9 +8,18 @@ import {
     API_URL_AUTH_REFRESH,
     API_URL_AUTH_VERIFY,
 } from 'src/app/shared/consts/api.urls';
+import { ApiResponseModel } from 'src/app/shared/models/base/paged-response.model';
 
 export interface LoginRequest {
-    emailOrPhone: string;
+    identityNumber: number;
+    password: string;
+}
+
+export interface RegisterRequest {
+    fullName: string;
+    identityNumber: number;
+    jobName: string;
+    rankName: string;
     password: string;
 }
 
@@ -103,6 +112,13 @@ export class AuthService {
                     return response;
                 }),
             );
+    }
+
+    /**
+     * Register a new user
+     */
+    register(userData: RegisterRequest): Observable<ApiResponseModel<any>> {
+        return this.http.post<ApiResponseModel<any>>('/Authentication/Register', userData);
     }
 
     /**

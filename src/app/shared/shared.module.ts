@@ -37,6 +37,7 @@ import { ListHeaderComponent } from 'src/app/shared/components/list-header/list-
 import { ConfirmDeleteComponent } from 'src/app/shared/components/confirm-delete/confirm-delete.component';
 import { FileAttachmentsComponent } from 'src/app/shared/components/file-attachments/file-attachments.component';
 import { LogsListComponent } from 'src/app/shared/components/logs-list/logs-list.component';
+import { MainContentComponent } from 'src/app/shared/components/main-content/main-content.component';
 
 @NgModule({
     imports: [
@@ -70,6 +71,7 @@ import { LogsListComponent } from 'src/app/shared/components/logs-list/logs-list
         ConfirmDeleteComponent,
         FileAttachmentsComponent,
         LogsListComponent,
+        MainContentComponent,
     ],
     exports: [
         // pipes
@@ -100,6 +102,7 @@ import { LogsListComponent } from 'src/app/shared/components/logs-list/logs-list
         DialogModule,
         ConfirmDeleteComponent,
         FileAttachmentsComponent,
+        MainContentComponent,
     ],
 })
 export class SharedModule {

@@ -23,8 +23,8 @@ export class RegionListComponent extends BaseListComponent<Region> {
 
     protected override getColumns(): colDef[] {
         return [
-            { field: 'nameAr', title: 'الاسم' },
-            { field: 'actions', title: 'الاجراءات', width: '150px' },
+            { field: 'nameAr', title: 'formLabels.name' },
+            { field: 'actions', title: 'dataTable.actions', width: '150px' },
         ];
     }
 
@@ -60,7 +60,7 @@ export class RegionListComponent extends BaseListComponent<Region> {
     confirmDelete() {
         if (this.itemToDelete) {
             this.regionService.deleteById(this.itemToDelete).subscribe(() => {
-                this.showSuccessMessage('تم حذف المنطقة بنجاح');
+                this.showSuccessMessage(this.translate('validationMessages.regionDeletedSuccess'));
                 this.showDeleteDialog = false;
                 this.itemToDelete = null;
                 this.loadData();
