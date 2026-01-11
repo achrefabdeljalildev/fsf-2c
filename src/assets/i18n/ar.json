@@ -84,7 +84,8 @@
         "availableRoles": "الصلاحيات المتاحة",
         "noRolesAvailable": "لا توجد صلاحيات متاحة",
         "noRolesAssigned": "لم يتم تعيين أي صلاحيات",
-        "allRolesAssigned": "تم تعيين جميع الصلاحيات"
+        "allRolesAssigned": "تم تعيين جميع الصلاحيات",
+        "details": "تفاصيل المستخدم"
     },
     "fileAttachments": {
         "attachments": "المرفقات",
@@ -128,7 +129,11 @@
         "addNewOrganization": "إضافة جهة جديدة",
         "editOrganization": "تعديل جهة",
         "addNewUser": "إضافة مستخدم جديد",
-        "editUser": "تعديل مستخدم"
+        "editUser": "تعديل مستخدم",
+        "save": "حفظ",
+        "cancel": "إلغاء",
+        "edit": "تعديل",
+        "addNew": "إضافة جديد"
     },
     "breadcrumbs": {
         "securitySystems": "الأنظمة الأمنية",
@@ -138,7 +143,12 @@
         "regions": "المناطق",
         "locations": "المواقع",
         "classifications": "التصنيفات",
-        "surveys": "المسوح"
+        "surveys": "المسوح",
+        "riskRegisterSettings": "إعدادات سجل المخاطر",
+        "classificationOfRiskType": "تصنيف نوع الخطر",
+        "fallingLoadClassification": "تصنيف احتمال الوقوع",
+        "classificationOfRiskImpact": "تصنيف أثر الخطر",
+        "classificationOfRiskSituations": "تصنيف حالات الخطر"
     },
     "validationMessages": {
         "savedSuccessfully": "تم الحفظ بنجاح",
@@ -195,6 +205,7 @@
         "enterName": "أدخل الاسم",
         "description": "الوصف",
         "enterDescription": "أدخل الوصف",
+        "color": "اللون",
         "locationCode": "رمز الموقع",
         "province": "المحافظة",
         "affiliatedEntity": "الجهة التابعة لها",
@@ -235,5 +246,28 @@
         "loadingMarkers": "جاري تحميل المواقع...",
         "noMarkers": "لا توجد مواقع على الخريطة",
         "markerLoaded": "تم تحميل {{count}} موقع بنجاح"
+    },
+    "riskRegisterSettings": {
+        "title": "إعدادات سجل المخاطر"
+    },
+    "classificationOfRiskType": {
+        "title": "تصنيف نوع الخطر",
+        "list": "قائمة تصنيفات نوع الخطر",
+        "addNew": "إضافة تصنيف نوع خطر جديد"
+    },
+    "fallingLoadClassification": {
+        "title": "تصنيف احتمال الوقوع",
+        "list": "قائمة تصنيفات احتمال الوقوع",
+        "addNew": "إضافة تصنيف احتمال وقوع جديد"
+    },
+    "classificationOfRiskImpact": {
+        "title": "تصنيف أثر الخطر",
+        "list": "قائمة تصنيفات أثر الخطر",
+        "addNew": "إضافة تصنيف أثر خطر جديد"
+    },
+    "classificationOfRiskSituations": {
+        "title": "تصنيف حالات الخطر",
+        "list": "قائمة تصنيفات حالات الخطر",
+        "addNew": "إضافة تصنيف حالة خطر جديد"
     }
 }

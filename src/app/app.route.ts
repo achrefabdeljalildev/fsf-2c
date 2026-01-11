@@ -86,4 +86,40 @@ export const routes: Routes = [
         loadChildren: () =>
             import('./modules/saudi-maps/saudi-maps.module').then((m) => m.SaudiMapsModule),
     },
+    {
+        path: 'risk-register-settings/classification-of-risk-type',
+        canActivate: [AuthGuard],
+        component: AppLayout,
+        loadChildren: () =>
+            import('./modules/risk-register-settings/classification-of-risk-type/classification-of-risk-type.module').then(
+                (m) => m.ClassificationOfRiskTypeModule,
+            ),
+    },
+    {
+        path: 'risk-register-settings/falling-load-classification',
+        canActivate: [AuthGuard],
+        component: AppLayout,
+        loadChildren: () =>
+            import('./modules/risk-register-settings/falling-load-classification/falling-load-classification.module').then(
+                (m) => m.FallingLoadClassificationModule,
+            ),
+    },
+    {
+        path: 'risk-register-settings/classification-of-risk-impact',
+        canActivate: [AuthGuard],
+        component: AppLayout,
+        loadChildren: () =>
+            import('./modules/risk-register-settings/classification-of-risk-impact/classification-of-risk-impact.module').then(
+                (m) => m.ClassificationOfRiskImpactModule,
+            ),
+    },
+    {
+        path: 'risk-register-settings/classification-of-risk-situations',
+        canActivate: [AuthGuard],
+        component: AppLayout,
+        loadChildren: () =>
+            import('./modules/risk-register-settings/classification-of-risk-situations/classification-of-risk-situations.module').then(
+                (m) => m.ClassificationOfRiskSituationsModule,
+            ),
+    },
 ];

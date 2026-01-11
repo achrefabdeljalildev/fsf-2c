@@ -59,6 +59,12 @@ export class UserService extends BaseService<UserModel> {
         );
     }
 
+    getUserDetails(userId: number): Observable<ApiResponseModel<UserModel>> {
+        return this.http.get<ApiResponseModel<UserModel>>(
+            `/AuthorizationRouting/Role/UserById/${userId}`,
+        );
+    }
+
     updateUserRoles(userId: number, roles: string[]): Observable<ApiResponseModel<void>> {
         return this.http.put<ApiResponseModel<void>>(
             '/AuthorizationRouting/Role/Update-User-Roles',

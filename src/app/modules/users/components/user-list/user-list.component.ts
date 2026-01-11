@@ -45,7 +45,7 @@ export class UserListComponent extends BaseListComponent<UserModel> {
         this.showDialog = true;
     }
 
-    openEditDialog(id: number) {
+    openDetailsDialog(id: number) {
         this.selectedUserId = id;
         this.showDialog = true;
     }

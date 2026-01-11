@@ -1,0 +1,61 @@
+<p-breadcrumb
+    [model]="[
+        { label: ('breadcrumbs.securitySystems' | translate) },
+        { label: ('breadcrumbs.riskRegisterSettings' | translate) },
+        { label: ('breadcrumbs.fallingLoadClassification' | translate) },
+    ]"
+/>
+
+<main-content>
+    <list-header
+        addNewRecordLabel="{{ 'fallingLoadClassification.addNew' | translate }}"
+        tableTitle="{{ 'fallingLoadClassification.list' | translate }}"
+        [paginationInfo]="paginationInfo"
+        (search)="onSearch($event)"
+        (addNewRecord)="openCreateDialog()"
+    />
+
+    <ng-datatable
+        [rows]="rows"
+        [columns]="cols"
+        [hasCheckbox]="true"
+        [sortable]="false"
+        [loading]="isLoading"
+        [pagination]="true"
+        [pageSize]="criteria.pageSize"
+        rowClass="cursor-pointer"
+        noDataContent="{{ 'common.noDataOnList' | translate }}"
+    >
+        <ng-template slot="actions" let-value="data">
+            <div class="flex gap-2">
+                <div (click)="openEditDialog(value.id)" class="cursor-pointer">
+                    <i class="pi pi-pencil"></i>
+                </div>
+                <div (click)="removeItem(value.id)" class="cursor-pointer">
+                    <i class="pi pi-trash"></i>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template slot="color" let-value="data">
+            <div
+                [style.backgroundColor]="value.color"
+                class="w-6 h-6 rounded border border-gray-300"
+                [title]="value.color"
+            ></div>
+        </ng-template>
+    </ng-datatable>
+</main-content>
+
+<app-classification-view
+    [(visible)]="showDialog"
+    [itemId]="selectedItemId"
+    (onSave)="onDialogSave()"
+/>
+
+<app-confirm-delete
+    [(visible)]="showDeleteDialog"
+    [title]="'messages.confirmDelete' | translate"
+    [message]="'messages.confirmDelete' | translate"
+    (onConfirm)="confirmDelete()"
+    (onCancel)="showDeleteDialog = false"
+/>

@@ -94,7 +94,11 @@
         "addNewOrganization": "Add New Organization",
         "editOrganization": "Edit Organization",
         "addNewUser": "Add New User",
-        "editUser": "Edit User"
+        "editUser": "Edit User",
+        "save": "Save",
+        "cancel": "Cancel",
+        "edit": "Edit",
+        "addNew": "Add New"
     },
     "breadcrumbs": {
         "securitySystems": "Security Systems",
@@ -104,7 +108,12 @@
         "regions": "Regions",
         "locations": "Locations",
         "classifications": "Classifications",
-        "surveys": "Surveys"
+        "surveys": "Surveys",
+        "riskRegisterSettings": "Risk Register Settings",
+        "classificationOfRiskType": "Risk Type Classification",
+        "fallingLoadClassification": "Falling Load Classification",
+        "classificationOfRiskImpact": "Risk Impact Classification",
+        "classificationOfRiskSituations": "Risk Situations Classification"
     },
     "validationMessages": {
         "provinceUpdatedSuccess": "Province updated successfully",
@@ -160,6 +169,7 @@
         "enterName": "Enter Name",
         "description": "Description",
         "enterDescription": "Enter Description",
+        "color": "Color",
         "locationCode": "Location Code",
         "province": "Province",
         "affiliatedEntity": "Affiliated Entity",
@@ -199,5 +209,28 @@
         "loadingMarkers": "Loading locations...",
         "noMarkers": "No locations on the map",
         "markerLoaded": "Successfully loaded {{count}} locations"
+    },
+    "riskRegisterSettings": {
+        "title": "Risk Register Settings"
+    },
+    "classificationOfRiskType": {
+        "title": "Risk Type Classification",
+        "list": "Risk Type Classifications List",
+        "addNew": "Add New Risk Type Classification"
+    },
+    "fallingLoadClassification": {
+        "title": "Falling Load Classification",
+        "list": "Falling Load Classifications List",
+        "addNew": "Add New Falling Load Classification"
+    },
+    "classificationOfRiskImpact": {
+        "title": "Risk Impact Classification",
+        "list": "Risk Impact Classifications List",
+        "addNew": "Add New Risk Impact Classification"
+    },
+    "classificationOfRiskSituations": {
+        "title": "Risk Situations Classification",
+        "list": "Risk Situations Classifications List",
+        "addNew": "Add New Risk Situations Classification"
     }
 }

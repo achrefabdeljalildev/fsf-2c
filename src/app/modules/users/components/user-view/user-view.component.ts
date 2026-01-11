@@ -54,7 +54,9 @@ export class UserViewComponent extends BaseComponent implements OnInit {
 
     loadUser(id: number): void {
         this.isLoading = true;
-        this.userService.getFakeById(id).subscribe((user) => {
+        this.userService.getUserDetails(id).subscribe((response) => {
+            const user = response.data as UserModel;
+
             if (user) {
                 this.form.patchValue({
                     fullName: user.fullName,

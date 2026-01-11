@@ -149,6 +149,43 @@ export class SidebarComponent implements OnInit {
                 },
             ],
         },
+        {
+            key: '46',
+            label: 'اعدادات سجل المخاطر',
+            data: 'Sub Survey 2',
+            icon: 'pi pi-list',
+            routerLink: '/risk-register-settings',
+            children: [
+                {
+                    key: '461',
+                    label: 'تصنيف نوع الخطر',
+                    data: 'Sub Survey 3',
+                    icon: 'pi pi-list',
+                    routerLink: '/risk-register-settings/classification-of-risk-type/list',
+                },
+                {
+                    key: '462',
+                    label: 'تصنيف احتمال الوقوع',
+                    data: 'Sub Survey 3',
+                    icon: 'pi pi-list',
+                    routerLink: '/risk-register-settings/falling-load-classification/list',
+                },
+                {
+                    key: '463',
+                    label: 'تصنيف أثر الخطر',
+                    data: 'Sub Survey 3',
+                    icon: 'pi pi-list',
+                    routerLink: '/risk-register-settings/classification-of-risk-impact/list',
+                },
+                {
+                    key: '464',
+                    label: 'تصنيف حالات الخطر',
+                    data: 'Sub Survey 3',
+                    icon: 'pi pi-list',
+                    routerLink: '/risk-register-settings/classification-of-risk-situations/list',
+                },
+            ],
+        },
     ];
 
     constructor(

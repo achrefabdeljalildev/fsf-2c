@@ -6,6 +6,21 @@ export const API_URL_AUTH_VERIFY = '/api/Authentication/Verify';
 // Regions
 export const API_URL_REGIONS = '/Regions';
 
+// Risk Register Settings
+export const API_URL_RISK_REGISTER_SITTINGS = '/risk-register-settings';
+
+// Classification of Risk Impact
+export const API_URL_CLASSIFICATION_OF_RISK_IMPACT = '/RiskImpacts';
+
+// Classification of Risk Situation
+export const API_URL_CLASSIFICATION_OF_RISK_SITUATION = '/RiskStatus';
+
+// Classification of Risk Type
+export const API_URL_CLASSIFICATION_OF_RISK_TYPE = '/RiskTypes';
+
+// Falling Load Classification
+export const API_URL_FALLING_LOAD_CLASSIFICATION = '/RiskLikeliHoods';
+
 // Provinces
 export const API_URL_PROVINCES = '/Provinces';
 
@@ -20,6 +35,7 @@ export const API_URL_FIELD_SURVEYS = '/FieldSurveys';
 
 // Entity Classifications
 export const API_URL_ENTITY_CLASSIFICATIONS = '/EntityClassfications';
+
 // Location Classifications
 export const API_URL_LOCATION_CLASSIFICATIONS = '/LocationClassifications';
 
