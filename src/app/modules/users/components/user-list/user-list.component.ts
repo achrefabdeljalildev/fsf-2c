@@ -11,8 +11,6 @@ import { BaseListComponent } from 'src/app/shared/components/base-list-component
 export class UserListComponent extends BaseListComponent<UserModel> {
     showDialog: boolean = false;
     selectedUserId: number | null = null;
-    showDeleteDialog: boolean = false;
-    itemToDelete: number | null = null;
     showRolesDialog: boolean = false;
     selectedUserIdForRoles: number | null = null;
 
@@ -22,8 +20,8 @@ export class UserListComponent extends BaseListComponent<UserModel> {
 
     protected override getColumns() {
         return [
-            { field: 'fullName', title: 'users.fullName' },
             { field: 'identityNumber', title: 'users.identityNumber' },
+            { field: 'fullName', title: 'users.fullName' },
             { field: 'jobName', title: 'users.jobName' },
             { field: 'rankName', title: 'users.rankName' },
             { field: 'actions', title: 'dataTable.actions', width: '150px' },
@@ -45,7 +43,7 @@ export class UserListComponent extends BaseListComponent<UserModel> {
         this.showDialog = true;
     }
 
-    openDetailsDialog(id: number) {
+    openEditDialog(id: number) {
         this.selectedUserId = id;
         this.showDialog = true;
     }
@@ -55,18 +53,11 @@ export class UserListComponent extends BaseListComponent<UserModel> {
     }
 
     removeUser(id: number) {
-        this.itemToDelete = id;
-        this.showDeleteDialog = true;
-    }
-
-    confirmDelete() {
-        if (this.itemToDelete) {
-            this.userService.deleteFakeUser(this.itemToDelete);
+        this.confirmDelete('User', () => {
+            this.userService.deleteFakeUser(id);
             this.showSuccessMessage(this.translate('validationMessages.userDeletedSuccess'));
-            this.showDeleteDialog = false;
-            this.itemToDelete = null;
             this.loadData();
-        }
+        });
     }
 
     openRoleDialog(userId: number) {
@@ -75,7 +66,6 @@ export class UserListComponent extends BaseListComponent<UserModel> {
     }
 
     onRolesSave(roles: string[]) {
-        console.log('User roles updated:', roles);
         this.showSuccessMessage(this.translate('validationMessages.userUpdatedSuccess'));
         this.loadData();
     }

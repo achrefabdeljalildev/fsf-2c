@@ -135,7 +135,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-span-1 flex flex-col gap-4">
+            <div class="col-span-1">
                 <app-file-attachments
                     [attachments]="attachments"
                     helperText="الحد الأقصى لحجم الملف هو 2 ميجابايت والصيغ المدعومة: jpg, png, pdf."
@@ -143,7 +143,7 @@
                     [entityKey]="fieldSurveyId ? fieldSurveyId.toString() : ''"
                     [path]="'FieldSurvey'"
                     [category]="'Documents'"
-                    [itemsPerPage]="5"
+                    [itemsPerPage]="3"
                     (fileAdded)="onFileAdded($event)"
                     (download)="onAttachmentDownload($event)"
                     (remove)="onAttachmentRemove($event)"
@@ -155,87 +155,92 @@
         <!-- Details Tabs (similar placement to Location view) -->
         <p-tabs value="0">
             <p-tablist>
-                <p-tab value="4">سياج الموقع</p-tab>
-                <p-tab value="3">بوابات الموقع</p-tab>
-                <p-tab value="2">طرق الدوريات</p-tab>
-                <p-tab value="1">التجربيات في موقع الرصاص</p-tab>
-                <p-tab value="0">التجريبات في نقطة الفرز المتقدمة</p-tab>
-                <p-tab value="5">سجل الإجراءات</p-tab>
+                <p-tab *ngFor="let tab of classificationTabs; let i = index" [value]="i.toString()">
+                    {{ tab.nameAr }}
+                </p-tab>
+                <p-tab [value]="classificationTabs.length.toString()">سجل الإجراءات</p-tab>
             </p-tablist>
             <p-tabpanels>
-                <p-tabpanel value="0">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <!-- غرفة حراسة - Guard Room -->
-                        <div class="form-group">
-                            <label for="roomType" class="block text-sm font-medium mb-2">
-                                غرفة حراسة
-                            </label>
-                            <p-autocomplete
-                                formControlName="roomType"
-                                [dropdown]="true"
-                                [suggestions]="['نوعها', 'نوع آخر']"
-                                placeholder="نوعها"
-                                [style]="{ width: '100%' }"
-                            />
+                <p-tabpanel
+                    *ngFor="let tab of classificationTabs; let i = index"
+                    [value]="i.toString()"
+                >
+                    <div class="p-4">
+                        <ng-container *ngIf="tab.children && tab.children.length > 0">
+                            <div class="space-y-6">
+                                <div *ngFor="let child of tab.children" class="panel p-4">
+                                    <h4
+                                        class="font-semibold text-gray-900 mb-4 text-lg border-b pb-2"
+                                    >
+                                        {{ child.nameAr }}
+                                    </h4>
+
+                                    <ng-container
+                                        *ngIf="
+                                            child.entityClassficationForms &&
+                                            child.entityClassficationForms.length > 0
+                                        "
+                                    >
+                                        <div class="space-y-4">
+                                            <div
+                                                *ngFor="let form of child.entityClassficationForms"
+                                                class="form-group"
+                                            >
+                                                <div class="flex items-start gap-3">
+                                                    <!-- Checkbox if isCheckBox is true -->
+                                                    <div
+                                                        *ngIf="form.isCheckBox"
+                                                        class="flex items-center pt-1"
+                                                    >
+                                                        <p-checkbox [binary]="true" />
+                                                    </div>
+
+                                                    <!-- Form Label/Text -->
+                                                    <div class="flex-1">
+                                                        <label
+                                                            class="block text-sm font-medium mb-1"
+                                                        >
+                                                            {{ form.nameAr }}
+                                                        </label>
+
+                                                        <!-- Text Input if isText is true -->
+                                                        <input
+                                                            *ngIf="form.isText"
+                                                            type="text"
+                                                            pInputText
+                                                            class="w-full"
+                                                            [placeholder]="form.nameAr"
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-container>
+
+                                    <div
+                                        *ngIf="
+                                            !child.entityClassficationForms ||
+                                            child.entityClassficationForms.length === 0
+                                        "
+                                        class="text-sm text-gray-500 italic"
+                                    >
+                                        لا توجد نماذج لهذا التصنيف
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+
+                        <div
+                            *ngIf="!tab.children || tab.children.length === 0"
+                            class="text-center py-8 text-gray-500"
+                        >
+                            <i class="pi pi-info-circle text-3xl mb-2"></i>
+                            <p>لا توجد عناصر فرعية لـ {{ tab.nameAr }}</p>
                         </div>
-
-                        <!-- مساحتها - Area -->
-                        <div class="form-group">
-                            <label for="area" class="block text-sm font-medium mb-2">
-                                مساحتها
-                            </label>
-                            <input
-                                id="area"
-                                type="text"
-                                formControlName="area"
-                                pInputText
-                                class="w-full"
-                                placeholder="مساحتها"
-                            />
-                        </div>
-
-                        <!-- تجربات أخرى - Other Experiments -->
-                        <div class="form-group col-span-2">
-                            <label for="otherExperiments" class="block text-sm font-medium mb-2">
-                                تجربات أخرى
-                            </label>
-                            <textarea
-                                id="otherExperiments"
-                                formControlName="otherExperiments"
-                                pInputTextarea
-                                rows="4"
-                                class="w-full"
-                                placeholder="تجربات أخرى"
-                            ></textarea>
-                        </div>
                     </div>
                 </p-tabpanel>
 
-                <p-tabpanel value="1">
-                    <div class="p-4">
-                        <p class="text-gray-600">محتوى التجربيات في موقع الرصاص</p>
-                    </div>
-                </p-tabpanel>
-
-                <p-tabpanel value="2">
-                    <div class="p-4">
-                        <p class="text-gray-600">محتوى طرق الدوريات</p>
-                    </div>
-                </p-tabpanel>
-
-                <p-tabpanel value="3">
-                    <div class="p-4">
-                        <p class="text-gray-600">محتوى بوابات الموقع</p>
-                    </div>
-                </p-tabpanel>
-
-                <p-tabpanel value="4">
-                    <div class="p-4">
-                        <p class="text-gray-600">محتوى سياج الموقع</p>
-                    </div>
-                </p-tabpanel>
-
-                <p-tabpanel value="5">
+                <p-tabpanel [value]="classificationTabs.length.toString()">
                     <div class="p-4">
                         <app-logs-list
                             *ngIf="fieldSurveyId"

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { BaseStore } from 'src/app/store/base.store';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -47,28 +47,14 @@ import { TranslateService } from '@ngx-translate/core';
     standalone: false,
 })
 export class MaintenenceComponent {
-    store: any = { theme: 'light', isDarkMode: false }; // Default fallback values
+    theme = this.ui.theme;
+    isDarkMode = this.ui.isDarkMode;
 
     constructor(
         public router: Router,
-        public storeData: Store<any>,
+        private ui: BaseStore,
         public translate: TranslateService,
-    ) {
-        this.initStore();
-    }
-
-    initStore() {
-        this.storeData
-            .select((state) => state.index)
-            .subscribe({
-                next: (indexState) => {
-                    this.store = indexState || this.store;
-                },
-                error: (err) => {
-                    console.error('Error selecting store state:', err);
-                },
-            });
-    }
+    ) {}
 
     goToHome() {
         this.router.navigate(['/']);

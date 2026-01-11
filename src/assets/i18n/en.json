@@ -1,14 +1,30 @@
 {
     "common": {
         "loading": "Loading...",
-        "required": "This field is required!"
+        "required": "This field is required!",
+        "notAvailable": "Not Available",
+        "noDataOnList": "No data to display",
+        "errorLoadingData": "An error occurred while loading data.",
+        "actions": "Actions",
+        "zoomIn": "Zoom In",
+        "zoomOut": "Zoom Out",
+        "resetZoom": "Reset Zoom",
+        "yes": "Yes",
+        "no": "No",
+        "languageArabic": "Arabic",
+        "languageEnglish": "English"
     },
     "auth": {
         "login": "Login",
         "username": "Username",
         "password": "Password",
         "forgetPassword": "Forgot Password?",
-        "rememberMe": "Remember Me"
+        "rememberMe": "Remember Me",
+        "otp": {
+            "title": "Please Enter Verification Code",
+            "resend": "Resend",
+            "submit": "Submit"
+        }
     },
     "entityClassification": {
         "addNewEntityClassification": "Add Survey Criterion",
@@ -20,7 +36,16 @@
         "hierarchySubtitle": "See parent and child classifications in an organization chart",
         "switchToTable": "Table View",
         "switchToChart": "Chart View",
-        "addChild": "Add Child"
+        "addChild": "Add Child",
+        "addClassificationForm": "Add Classification Form",
+        "isCheckBox": "Is Checkbox",
+        "isText": "Is Text Field",
+        "cantAddChildToForm": "Cannot add child to a form node",
+        "cantAddChildWithForm": "Cannot add child when form exists",
+        "alreadyHasForm": "This node already has a form",
+        "cantAddFormWithChildren": "Cannot add form when children exist",
+        "classificationForm": "Classification Form",
+        "classification": "Classification"
     },
     "locationClassification": {
         "add": "Add Classification",
@@ -28,6 +53,29 @@
         "name": "Name",
         "color": "Color",
         "description": "Description"
+    },
+    "fallingLoadClassification": {
+        "addNew": "Add New Falling Load Classification",
+        "list": "Falling Load Classification List"
+    },
+    "classificationOfRiskSituations": {
+        "addNew": "Add New Risk Situation Classification",
+        "list": "Risk Situation Classification List"
+    },
+    "classificationOfRiskImpact": {
+        "addNew": "Add New Risk Impact Classification",
+        "list": "Risk Impact Classification List"
+    },
+    "classificationOfRiskType": {
+        "addNew": "Add New Risk Type Classification",
+        "list": "Risk Type Classification List"
+    },
+    "map": {
+        "showRegions": "Show Regions",
+        "hideRegions": "Hide Regions",
+        "selectRegion": "Select Region",
+        "allRegions": "All Regions",
+        "none": "None"
     },
     "users": {
         "addNewUser": "Add New User",
@@ -44,14 +92,23 @@
         "enterPassword": "Enter password",
         "identityNumberMustBe10Digits": "Identity number must be 10 digits",
         "passwordMinLength": "Password must be at least 6 characters",
+        "passwordRequireDigit": "Password must contain at least one digit",
+        "passwordRequireLowercase": "Password must contain at least one lowercase letter",
+        "passwordRequireUppercase": "Password must contain at least one uppercase letter",
+        "passwordRequireSpecialChar": "Password must contain at least one special character",
         "pageSubtitle": "Manage users information",
         "roles": "Roles",
+        "addNewRole": "Add New Role",
+        "editRole": "Edit Role",
+        "roleName": "Role Name",
+        "enterRoleName": "Enter role name",
         "manageRoles": "Manage Roles",
         "assignedRoles": "Assigned Roles",
         "availableRoles": "Available Roles",
         "noRolesAvailable": "No roles available",
         "noRolesAssigned": "No roles assigned yet",
-        "allRolesAssigned": "All roles have been assigned"
+        "allRolesAssigned": "All roles have been assigned",
+        "managePermissions": "Manage Permissions"
     },
     "fileAttachments": {
         "attachments": "Attachments",
@@ -64,11 +121,14 @@
         "cancel": "Cancel",
         "edit": "Edit",
         "search": "Search",
-        "done": "Done"
+        "done": "Done",
+        "close": "Close"
     },
     "messages": {
         "requiredField": "This field is required",
-        "confirmDelete": "Confirm Delete",
+        "error": "An error occurred",
+        "confirmDelete": "Are you sure you want to delete {{item}}?",
+        "deleteConfirmation": "Delete Confirmation",
         "confirmDeleteItem": "Are you sure you want to delete this item?",
         "confirmDeleteProvince": "Are you sure you want to delete this province?",
         "confirmDeleteRegion": "Are you sure you want to delete this region?",
@@ -95,10 +155,7 @@
         "editOrganization": "Edit Organization",
         "addNewUser": "Add New User",
         "editUser": "Edit User",
-        "save": "Save",
-        "cancel": "Cancel",
-        "edit": "Edit",
-        "addNew": "Add New"
+        "addNewClassificationForm": "Add New Classification Form"
     },
     "breadcrumbs": {
         "securitySystems": "Security Systems",
@@ -110,12 +167,13 @@
         "classifications": "Classifications",
         "surveys": "Surveys",
         "riskRegisterSettings": "Risk Register Settings",
-        "classificationOfRiskType": "Risk Type Classification",
         "fallingLoadClassification": "Falling Load Classification",
+        "classificationOfRiskSituations": "Risk Situation Classification",
         "classificationOfRiskImpact": "Risk Impact Classification",
-        "classificationOfRiskSituations": "Risk Situations Classification"
+        "classificationOfRiskType": "Risk Type Classification"
     },
     "validationMessages": {
+        "savedSuccessfully": "Saved successfully",
         "provinceUpdatedSuccess": "Province updated successfully",
         "provinceAddedSuccess": "Province added successfully",
         "provinceErrorSave": "An error occurred while saving the province",
@@ -151,6 +209,10 @@
         "userErrorSave": "An error occurred while saving the user",
         "userDeletedSuccess": "User deleted successfully",
         "userErrorDelete": "An error occurred while deleting the user",
+        "roleAddedSuccess": "Role added successfully",
+        "roleUpdatedSuccess": "Role updated successfully",
+        "roleErrorSave": "An error occurred while saving the role",
+        "roleErrorUpdate": "An error occurred while updating the role",
         "userRolesUpdatedSuccess": "User roles updated successfully",
         "attachmentDeletedSuccess": "Attachment deleted successfully",
         "attachmentErrorDelete": "Failed to delete attachment",
@@ -169,10 +231,10 @@
         "enterName": "Enter Name",
         "description": "Description",
         "enterDescription": "Enter Description",
-        "color": "Color",
         "locationCode": "Location Code",
         "province": "Province",
         "affiliatedEntity": "Affiliated Entity",
+        "parent": "Parent",
         "receiptDate": "Receipt Date",
         "addNote": "Add Note",
         "siteType": "Site Type",
@@ -209,28 +271,5 @@
         "loadingMarkers": "Loading locations...",
         "noMarkers": "No locations on the map",
         "markerLoaded": "Successfully loaded {{count}} locations"
-    },
-    "riskRegisterSettings": {
-        "title": "Risk Register Settings"
-    },
-    "classificationOfRiskType": {
-        "title": "Risk Type Classification",
-        "list": "Risk Type Classifications List",
-        "addNew": "Add New Risk Type Classification"
-    },
-    "fallingLoadClassification": {
-        "title": "Falling Load Classification",
-        "list": "Falling Load Classifications List",
-        "addNew": "Add New Falling Load Classification"
-    },
-    "classificationOfRiskImpact": {
-        "title": "Risk Impact Classification",
-        "list": "Risk Impact Classifications List",
-        "addNew": "Add New Risk Impact Classification"
-    },
-    "classificationOfRiskSituations": {
-        "title": "Risk Situations Classification",
-        "list": "Risk Situations Classifications List",
-        "addNew": "Add New Risk Situations Classification"
     }
 }

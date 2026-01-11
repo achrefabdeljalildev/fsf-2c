@@ -28,13 +28,20 @@
                 id="datatable-container-search"
                 type="text"
                 placeholder="بحث..."
+                (keyup.enter)="onSearch(searchTerm)"
                 class="w-full rounded-lg border border-gray-300 bg-white py-2 pr-10 pl-10 text-sm text-gray-700 placeholder-gray-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
 
             <!-- Heroicons X -->
             <i
+                *ngIf="searchTerm.trim()"
                 class="pi pi-times text-lg absolute end-2 cursor-pointer hover:text-red-600"
-                (click)="onSearch('')"
+                (click)="searchTerm = ''; onSearch('')"
+            ></i>
+            <i
+                *ngIf="!searchTerm.trim()"
+                class="pi pi-refresh text-lg absolute end-2 cursor-pointer hover:text-teal-600 rotate-45"
+                (click)="onSearch(searchTerm)"
             ></i>
         </div>
         <button class="btn btn-secondary btn-sm" (click)="onSearch(searchTerm)">بحث</button>

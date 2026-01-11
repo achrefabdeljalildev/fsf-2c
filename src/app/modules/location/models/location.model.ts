@@ -1,7 +1,7 @@
-import { LocationClassification } from 'src/app/modules/location-classification/models/location-classification.model';
-import { Organization } from 'src/app/modules/organization/models/organization.model';
-import { Province } from 'src/app/modules/province/models/province.model';
-import { Region } from 'src/app/modules/regions/models/region.model';
+import { LocationClassification } from 'src/app/modules/settings/location-classification/models/location-classification.model';
+import { Organization } from 'src/app/modules/settings/organization/models/organization.model';
+import { Province } from 'src/app/modules/settings/province/models/province.model';
+import { Region } from 'src/app/modules/settings/regions/models/region.model';
 
 export enum SiteType {
     None = 1,
@@ -41,6 +41,7 @@ export interface LocationModel {
     administrativeOfficeNumber?: number;
     administrativeWCNumber?: number;
     administrativeServiceNumber?: number;
+    locationClassificationColor?: string;
     weaponsWarehouse: boolean;
     warhouseArea: string;
     maintainceWorkShop: boolean;

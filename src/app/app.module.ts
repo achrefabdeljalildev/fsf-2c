@@ -13,8 +13,7 @@ import { routes } from './app.route';
 import { AppComponent } from './app.component';
 
 // store
-import { StoreModule } from '@ngrx/store';
-import { indexReducer } from './store/index.reducer';
+// NgRx removed; using signal-based BaseStore
 
 // shared module
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -74,7 +73,6 @@ export class AppConfigModule {}
                 deps: [HttpBackend],
             },
         }),
-        StoreModule.forRoot({ index: indexReducer }),
         SharedModule.forRoot(),
         Tree,
         AppLayoutsModule,

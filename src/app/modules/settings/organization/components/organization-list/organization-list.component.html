@@ -1,0 +1,49 @@
+<p-confirmDialog></p-confirmDialog>
+
+<p-breadcrumb
+    [model]="[
+        { label: ('breadcrumbs.securitySystems' | translate) },
+        { label: ('breadcrumbs.generalAdministration' | translate) },
+        { label: ('breadcrumbs.fieldSurveyAdmin' | translate) },
+        { label: 'الجهات' },
+    ]"
+/>
+
+<main-content>
+    <list-header
+        addNewRecordLabel="{{ 'organization.addNewOrganization' | translate }}"
+        tableTitle="{{ 'organization.organizationList' | translate }}"
+        [paginationInfo]="paginationInfo"
+        (search)="onSearch($event)"
+        (addNewRecord)="openCreateDialog()"
+    />
+
+    <ng-datatable
+        [rows]="rows"
+        [columns]="cols"
+        [hasCheckbox]="true"
+        [sortable]="false"
+        [loading]="isLoading"
+        [pagination]="true"
+        [pageSize]="criteria.pageSize"
+        rowClass="cursor-pointer"
+        noDataContent="{{ 'common.noDataOnList' | translate }}"
+    >
+        <ng-template slot="actions" let-value="data">
+            <div class="flex gap-2">
+                <div (click)="openEditDialog(value.id)" class="cursor-pointer">
+                    <i class="pi pi-pencil"></i>
+                </div>
+                <div (click)="removeOrganization(value.id, value.nameAr)" class="cursor-pointer">
+                    <i class="pi pi-trash"></i>
+                </div>
+            </div>
+        </ng-template>
+    </ng-datatable>
+</main-content>
+
+<app-organization-view
+    [(visible)]="showDialog"
+    [organizationId]="selectedOrganizationId"
+    (onSave)="onDialogSave()"
+/>

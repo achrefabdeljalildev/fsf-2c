@@ -1,0 +1,45 @@
+<div class="saudi-map-container">
+    <!-- Loading indicator -->
+    <div *ngIf="isLoading" class="loading-overlay">
+        <div class="spinner">
+            <i class="pi pi-spin pi-spinner text-primary text-4xl"></i>
+            <p class="mt-3">{{ 'common.loading' | translate }}</p>
+        </div>
+    </div>
+
+    <!-- Error message -->
+    <div *ngIf="errorMessage && !isLoading" class="error-message">
+        <div class="alert alert-error">
+            <i class="pi pi-exclamation-triangle"></i>
+            <span>{{ errorMessage }}</span>
+        </div>
+    </div>
+
+    <!-- Region toggle button -->
+    <div class="map-controls">
+        <div class="control-group">
+            <label class="control-label">{{ 'map.selectRegion' | translate }}</label>
+            <select class="form-select" [(ngModel)]="selectedRegionId" (change)="onRegionChange()">
+                <option value="none">{{ 'map.none' | translate }}</option>
+                <option value="all">{{ 'map.allRegions' | translate }}</option>
+                <option *ngFor="let region of availableRegions" [value]="region.id">
+                    {{ region.nameAr }}
+                </option>
+            </select>
+        </div>
+
+        <button
+            type="button"
+            class="btn btn-sm"
+            [ngClass]="showRegions ? 'btn-primary' : 'btn-outline-primary'"
+            (click)="toggleRegions()"
+            title="{{ (showRegions ? 'map.hideRegions' : 'map.showRegions') | translate }}"
+        >
+            <i class="pi pi-map-marker me-2"></i>
+            {{ (showRegions ? 'map.hideRegions' : 'map.showRegions') | translate }}
+        </button>
+    </div>
+
+    <!-- Map container -->
+    <div id="saudiMap" class="map-container"></div>
+</div>

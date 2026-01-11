@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
+import { DashboardComponent } from 'src/app/layouts/dashboard/dashboard.component';
 import { AuthGuard } from 'src/app/shared/services/guard.service';
 import { AppLayout } from './layouts/app-layout/app-layout';
 import { AuthLayout } from './layouts/auth-layout/auth-layout';
-import { DashboardComponent } from 'src/app/layouts/dashboard/dashboard.component';
 
 export const routes: Routes = [
     {
@@ -33,7 +33,7 @@ export const routes: Routes = [
         canActivate: [AuthGuard],
         component: AppLayout,
         loadChildren: () =>
-            import('./modules/location-classification/location-classification.module').then(
+            import('./modules/settings/location-classification/location-classification.module').then(
                 (m) => m.LocationClassificationModule,
             ),
     },
@@ -42,7 +42,7 @@ export const routes: Routes = [
         canActivate: [AuthGuard],
         component: AppLayout,
         loadChildren: () =>
-            import('./modules/entity-classfications/entity-classfications.module').then(
+            import('./modules/settings/entity-classfications/entity-classfications.module').then(
                 (m) => m.EntityClassficationsModule,
             ),
     },
@@ -63,35 +63,31 @@ export const routes: Routes = [
         path: 'regions',
         canActivate: [AuthGuard],
         component: AppLayout,
-        loadChildren: () => import('./modules/regions/region.module').then((m) => m.RegionModule),
+        loadChildren: () =>
+            import('./modules/settings/regions/region.module').then((m) => m.RegionModule),
     },
     {
         path: 'province',
         canActivate: [AuthGuard],
         component: AppLayout,
         loadChildren: () =>
-            import('./modules/province/province.module').then((m) => m.ProvinceModule),
+            import('./modules/settings/province/province.module').then((m) => m.ProvinceModule),
     },
     {
         path: 'organization',
         canActivate: [AuthGuard],
         component: AppLayout,
         loadChildren: () =>
-            import('./modules/organization/organization.module').then((m) => m.OrganizationModule),
-    },
-    {
-        path: 'saudi-map',
-        canActivate: [AuthGuard],
-        component: AppLayout,
-        loadChildren: () =>
-            import('./modules/saudi-maps/saudi-maps.module').then((m) => m.SaudiMapsModule),
+            import('./modules/settings/organization/organization.module').then(
+                (m) => m.OrganizationModule,
+            ),
     },
     {
         path: 'risk-register-settings/classification-of-risk-type',
         canActivate: [AuthGuard],
         component: AppLayout,
         loadChildren: () =>
-            import('./modules/risk-register-settings/classification-of-risk-type/classification-of-risk-type.module').then(
+            import('./modules/settings/risk-register-settings/classification-of-risk-type/classification-of-risk-type.module').then(
                 (m) => m.ClassificationOfRiskTypeModule,
             ),
     },
@@ -100,7 +96,7 @@ export const routes: Routes = [
         canActivate: [AuthGuard],
         component: AppLayout,
         loadChildren: () =>
-            import('./modules/risk-register-settings/falling-load-classification/falling-load-classification.module').then(
+            import('./modules/settings/risk-register-settings/falling-load-classification/falling-load-classification.module').then(
                 (m) => m.FallingLoadClassificationModule,
             ),
     },
@@ -109,7 +105,7 @@ export const routes: Routes = [
         canActivate: [AuthGuard],
         component: AppLayout,
         loadChildren: () =>
-            import('./modules/risk-register-settings/classification-of-risk-impact/classification-of-risk-impact.module').then(
+            import('./modules/settings/risk-register-settings/classification-of-risk-impact/classification-of-risk-impact.module').then(
                 (m) => m.ClassificationOfRiskImpactModule,
             ),
     },
@@ -118,7 +114,7 @@ export const routes: Routes = [
         canActivate: [AuthGuard],
         component: AppLayout,
         loadChildren: () =>
-            import('./modules/risk-register-settings/classification-of-risk-situations/classification-of-risk-situations.module').then(
+            import('./modules/settings/risk-register-settings/classification-of-risk-situations/classification-of-risk-situations.module').then(
                 (m) => m.ClassificationOfRiskSituationsModule,
             ),
     },

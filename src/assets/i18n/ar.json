@@ -5,7 +5,16 @@
         "notAvailable": "غير متوفر",
         "noDataOnList": "لا توجد بيانات للعرض",
         "errorLoadingData": "حدث خطأ أثناء تحميل البيانات.",
-        "actions": "الإجراءات"
+        "actions": "الإجراءات",
+        "zoomIn": "تكبير",
+        "zoomOut": "تصغير",
+        "resetZoom": "إعادة تعيين التكبير",
+        "yes": "نعم",
+        "no": "لا",
+        "details": "التفاصيل",
+        "languageArabic": "عربي",
+        "languageEnglish": "إنجليزي",
+        "color": "اللون"
     },
     "auth": {
         "login": "تسجيل الدخول",
@@ -14,7 +23,12 @@
         "forgetPassword": "نسيت كلمة المرور؟",
         "rememberMe": "تذكرني",
         "getforgotPassword": "استعادة كلمة المرور",
-        "usernameOrEmailIsNotCorrect": "اسم المستخدم أو البريد الإلكتروني غير صحيح"
+        "usernameOrEmailIsNotCorrect": "اسم المستخدم أو البريد الإلكتروني غير صحيح",
+        "otp": {
+            "title": "الرجاء إدخال رمز التحقق",
+            "resend": "إعادة الإرسال",
+            "submit": "إرسال"
+        }
     },
     "region": {
         "addNewRegion": "إضافة منطقة",
@@ -27,7 +41,8 @@
     "location": {
         "addNewLocation": "إضافة موقع",
         "locationList": "قائمة المواقع",
-        "locationName": "اسم الموقع"
+        "locationName": "اسم الموقع",
+        "selectLocationFromMap": "اختر الموقع من الخريطة"
     },
     "province": {
         "addNewProvince": "إضافة محافظة",
@@ -46,6 +61,7 @@
     "entityClassification": {
         "addNewEntityClassification": "إضافة معيار مسح ميداني",
         "entityClassificationList": "قائمة معايير المسح الميدانية",
+        "noChildrenClassification": "لا توجد تصنيفات فرعية للعرض.",
         "name": "الاسم",
         "description": "الوصف",
         "entityName": "اسم المجال",
@@ -53,7 +69,25 @@
         "hierarchySubtitle": "عرض التصنيفات الأبناء والأحفاد على شكل مخطط تنظيمي",
         "switchToTable": "عرض جدول",
         "switchToChart": "عرض مخطط",
-        "addChild": "إضافة ابن"
+        "addChild": "إضافة ابن",
+        "addClassificationForm": "إضافة نموذج التصنيف",
+        "isCheckBox": "خانة اختيار",
+        "isText": "حقل نص",
+        "cantAddChildToForm": "لا يمكن إضافة عنصر فرعي إلى عقدة نموذج",
+        "cantAddChildWithForm": "لا يمكن إضافة عنصر فرعي عند وجود نموذج",
+        "alreadyHasForm": "هذه العقدة تحتوي بالفعل على نموذج",
+        "cantAddFormWithChildren": "لا يمكن إضافة نموذج عند وجود عناصر فرعية",
+        "classificationForm": "نموذج التصنيف",
+        "classification": "التصنيف",
+        "classificationDetails": "تفاصيل التصنيف",
+        "classificationForms": "نماذج التصنيف",
+        "formDetails": "تفاصيل النموذج",
+        "formTypes": {
+            "label": "نوع النموذج",
+            "checkbox": "خانة اختيار",
+            "text": "نص",
+            "checkboxAndText": "خانة اختيار ونص"
+        }
     },
     "locationClassification": {
         "add": "إضافة تصنيف",
@@ -61,6 +95,29 @@
         "name": "اسم التصنيف",
         "color": "اللون",
         "description": "الوصف"
+    },
+    "fallingLoadClassification": {
+        "addNew": "إضافة تصنيف حمل ساقط جديد",
+        "list": "قائمة تصنيفات الحمل الساقط"
+    },
+    "classificationOfRiskSituations": {
+        "addNew": "إضافة تصنيف حالة مخاطر جديد",
+        "list": "قائمة تصنيفات حالات المخاطر"
+    },
+    "classificationOfRiskImpact": {
+        "addNew": "إضافة تصنيف تأثير مخاطر جديد",
+        "list": "قائمة تصنيفات تأثير المخاطر"
+    },
+    "classificationOfRiskType": {
+        "addNew": "إضافة تصنيف نوع مخاطر جديد",
+        "list": "قائمة تصنيفات أنواع المخاطر"
+    },
+    "map": {
+        "showRegions": "عرض المناطق",
+        "hideRegions": "إخفاء المناطق",
+        "selectRegion": "اختر المنطقة",
+        "allRegions": "جميع المناطق",
+        "none": "بلا"
     },
     "users": {
         "addNewUser": "إضافة مستخدم جديد",
@@ -77,15 +134,23 @@
         "enterPassword": "أدخل كلمة المرور",
         "identityNumberMustBe10Digits": "يجب أن يكون رقم الهوية مكون من 10 أرقام",
         "passwordMinLength": "يجب أن تكون كلمة المرور 6 أحرف على الأقل",
+        "passwordRequireDigit": "يجب أن تحتوي كلمة المرور على رقم واحد على الأقل",
+        "passwordRequireLowercase": "يجب أن تحتوي كلمة المرور على حرف صغير واحد على الأقل",
+        "passwordRequireUppercase": "يجب أن تحتوي كلمة المرور على حرف كبير واحد على الأقل",
+        "passwordRequireSpecialChar": "يجب أن تحتوي كلمة المرور على رمز خاص واحد على الأقل",
         "pageSubtitle": "إدارة معلومات المستخدمين",
         "roles": "الصلاحيات",
+        "addNewRole": "إضافة صلاحية جديدة",
+        "editRole": "تعديل صلاحية",
+        "roleName": "اسم الصلاحية",
+        "enterRoleName": "أدخل اسم الصلاحية",
         "manageRoles": "إدارة الصلاحيات",
         "assignedRoles": "الصلاحيات المعينة",
         "availableRoles": "الصلاحيات المتاحة",
         "noRolesAvailable": "لا توجد صلاحيات متاحة",
         "noRolesAssigned": "لم يتم تعيين أي صلاحيات",
         "allRolesAssigned": "تم تعيين جميع الصلاحيات",
-        "details": "تفاصيل المستخدم"
+        "managePermissions": "إدارة الصلاحيات"
     },
     "fileAttachments": {
         "attachments": "المرفقات",
@@ -98,11 +163,13 @@
         "cancel": "إلغاء",
         "edit": "تعديل",
         "search": "بحث",
-        "done": "تم"
+        "done": "تم",
+        "close": "إغلاق"
     },
     "messages": {
         "requiredField": "هذا الحقل مطلوب",
-        "confirmDelete": "تأكيد الحذف",
+        "confirmDelete": "هل أنت متأكد من حذف {{item}}؟",
+        "deleteConfirmation": "تأكيد الحذف",
         "confirmDeleteItem": "هل أنت متأكد من حذف هذا العنصر؟",
         "confirmDeleteProvince": "هل أنت متأكد من حذف هذه المحافظة؟",
         "confirmDeleteRegion": "هل أنت متأكد من حذف هذه المنطقة؟",
@@ -122,18 +189,16 @@
         "editRegion": "تعديل منطقة",
         "addNewLocation": "إضافة موقع جديد",
         "editLocation": "تعديل موقع",
-        "addNewClassification": "إضافة تصنيف جديد",
+        "addNewClassification": "إضافة معيار فرعي ",
         "editClassification": "تعديل تصنيف",
+        "edit": "تعديل",
         "addNewSurvey": "إضافة مسح جديد",
         "editSurvey": "تعديل مسح",
         "addNewOrganization": "إضافة جهة جديدة",
         "editOrganization": "تعديل جهة",
         "addNewUser": "إضافة مستخدم جديد",
         "editUser": "تعديل مستخدم",
-        "save": "حفظ",
-        "cancel": "إلغاء",
-        "edit": "تعديل",
-        "addNew": "إضافة جديد"
+        "addNewClassificationForm": "إضافة نموذج تصنيف جديد"
     },
     "breadcrumbs": {
         "securitySystems": "الأنظمة الأمنية",
@@ -145,10 +210,10 @@
         "classifications": "التصنيفات",
         "surveys": "المسوح",
         "riskRegisterSettings": "إعدادات سجل المخاطر",
-        "classificationOfRiskType": "تصنيف نوع الخطر",
-        "fallingLoadClassification": "تصنيف احتمال الوقوع",
-        "classificationOfRiskImpact": "تصنيف أثر الخطر",
-        "classificationOfRiskSituations": "تصنيف حالات الخطر"
+        "fallingLoadClassification": "تصنيفات الحمل الساقط",
+        "classificationOfRiskSituations": "تصنيفات حالات المخاطر",
+        "classificationOfRiskImpact": "تصنيفات تأثير المخاطر",
+        "classificationOfRiskType": "تصنيفات أنواع المخاطر"
     },
     "validationMessages": {
         "savedSuccessfully": "تم الحفظ بنجاح",
@@ -187,6 +252,10 @@
         "userErrorSave": "حدث خطأ أثناء حفظ المستخدم",
         "userDeletedSuccess": "تم حذف المستخدم بنجاح",
         "userErrorDelete": "حدث خطأ أثناء حذف المستخدم",
+        "roleAddedSuccess": "تم إضافة الصلاحية بنجاح",
+        "roleUpdatedSuccess": "تم تحديث الصلاحية بنجاح",
+        "roleErrorSave": "حدث خطأ أثناء حفظ الصلاحية",
+        "roleErrorUpdate": "حدث خطأ أثناء تحديث الصلاحية",
         "userRolesUpdatedSuccess": "تم تحديث صلاحيات المستخدم بنجاح",
         "attachmentDeletedSuccess": "تم حذف المرفق بنجاح",
         "attachmentErrorDelete": "فشل حذف المرفق",
@@ -205,7 +274,6 @@
         "enterName": "أدخل الاسم",
         "description": "الوصف",
         "enterDescription": "أدخل الوصف",
-        "color": "اللون",
         "locationCode": "رمز الموقع",
         "province": "المحافظة",
         "affiliatedEntity": "الجهة التابعة لها",
@@ -246,28 +314,5 @@
         "loadingMarkers": "جاري تحميل المواقع...",
         "noMarkers": "لا توجد مواقع على الخريطة",
         "markerLoaded": "تم تحميل {{count}} موقع بنجاح"
-    },
-    "riskRegisterSettings": {
-        "title": "إعدادات سجل المخاطر"
-    },
-    "classificationOfRiskType": {
-        "title": "تصنيف نوع الخطر",
-        "list": "قائمة تصنيفات نوع الخطر",
-        "addNew": "إضافة تصنيف نوع خطر جديد"
-    },
-    "fallingLoadClassification": {
-        "title": "تصنيف احتمال الوقوع",
-        "list": "قائمة تصنيفات احتمال الوقوع",
-        "addNew": "إضافة تصنيف احتمال وقوع جديد"
-    },
-    "classificationOfRiskImpact": {
-        "title": "تصنيف أثر الخطر",
-        "list": "قائمة تصنيفات أثر الخطر",
-        "addNew": "إضافة تصنيف أثر خطر جديد"
-    },
-    "classificationOfRiskSituations": {
-        "title": "تصنيف حالات الخطر",
-        "list": "قائمة تصنيفات حالات الخطر",
-        "addNew": "إضافة تصنيف حالة خطر جديد"
     }
 }

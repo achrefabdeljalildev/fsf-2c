@@ -190,14 +190,24 @@
                         <label for="siteCoordinates" class="block text-sm font-medium mb-2">
                             {{ 'formLabels.coordinates' | translate }}
                         </label>
-                        <input
-                            id="siteCoordinates"
-                            type="text"
-                            formControlName="siteCoordinates"
-                            pInputText
-                            class="w-full"
-                            [placeholder]="'formLabels.coordinates' | translate"
-                        />
+                        <div class="flex gap-2">
+                            <input
+                                id="siteCoordinates"
+                                type="text"
+                                formControlName="siteCoordinates"
+                                pInputText
+                                class="w-full"
+                                [placeholder]="'formLabels.coordinates' | translate"
+                            />
+                            <button
+                                type="button"
+                                class="btn btn-sm btn-outline-primary"
+                                (click)="openMapDialog()"
+                                title="Select from map"
+                            >
+                                <i class="pi pi-map-marker"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -597,3 +607,39 @@
         </p-tabs>
     </form>
 </div>
+
+<!-- Map Selection Dialog -->
+<p-dialog
+    [(visible)]="showMapDialog"
+    [header]="'location.selectLocationFromMap' | translate"
+    [modal]="true"
+    [style]="{ width: '90vw' }"
+    [maximizable]="true"
+    [closeOnEscape]="true"
+    (onShow)="onMapDialogShow()"
+>
+    <div class="h-full flex flex-col justify-between">
+        <app-saudi-map
+            *ngIf="showMapDialog"
+            [initializeOnLoad]="false"
+            (markerSelected)="onMapMarkerSelected($event)"
+            class="flex-1"
+        />
+    </div>
+    <!-- the actions should be in footer -->
+    <ng-template #footer>
+        <div class="flex gap-2 mt-4 justify-end">
+            <button type="button" class="btn btn-outline" (click)="closeMapDialog()">
+                {{ 'buttons.cancel' | translate }}
+            </button>
+            <button
+                type="button"
+                class="btn btn-primary"
+                (click)="confirmMapSelection()"
+                [disabled]="!selectedMarkerCoordinates"
+            >
+                {{ 'dataTable.confirm' | translate }}
+            </button>
+        </div>
+    </ng-template>
+</p-dialog>

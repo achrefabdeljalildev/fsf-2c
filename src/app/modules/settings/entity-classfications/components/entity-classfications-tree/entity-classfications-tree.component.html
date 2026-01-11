@@ -1,0 +1,444 @@
+<p-confirmDialog></p-confirmDialog>
+
+<p-breadcrumb
+    class="mb-4"
+    [model]="[
+        { label: ('breadcrumbs.securitySystems' | translate) },
+        { label: ('breadcrumbs.generalAdministration' | translate) },
+        { label: ('breadcrumbs.fieldSurveyAdmin' | translate) },
+        {
+            label: ('entityClassification.entityClassificationList' | translate),
+            routerLink: '/entity-classification/list',
+        },
+        { label: ('entityClassification.viewHierarchy' | translate) },
+    ]"
+/>
+
+<div class="flex items-center justify-between mt-6 mb-4">
+    <div>
+        <h2 class="text-xl font-semibold text-gray-900">
+            {{ rootEntity?.label }}
+        </h2>
+    </div>
+    <div class="flex gap-1">
+        <button
+            *ngIf="!(rootEntity?.children?.length > 0)"
+            type="button"
+            class="btn btn-primary btn-sm"
+            (click)="viewDetails(rootEntity)"
+        >
+            <i class="pi pi-list-check"></i>
+        </button>
+        <button
+            type="button"
+            class="btn btn-primary btn-sm"
+            (click)="editClassificationEntity(rootEntity, true)"
+        >
+            <i class="pi pi-pencil !text-white"></i>
+        </button>
+        <button type="button" class="btn btn-primary btn-sm" (click)="addChild(rootEntity)">
+            <i class="pi pi-plus me-2"></i>
+            {{ 'actions.addNewClassification' | translate }}
+        </button>
+        <!-- details -->
+    </div>
+</div>
+
+<div class="relative panel h-[calc(100vh-220px)] max-h-[calc(100vh-220px)] overflow-auto">
+    <div class="relative min-h-[300px]">
+        <ng-container *ngIf="isLoading">
+            <div class="loading-overlay">
+                <i class="pi pi-spin pi-spinner text-2xl text-primary"></i>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="!isLoading && errorMessage">
+            <div class="alert alert-error mb-4">
+                <i class="pi pi-exclamation-triangle mr-2"></i>
+                <span>{{ errorMessage }}</span>
+            </div>
+        </ng-container>
+
+        <!-- no data -->
+        <ng-container *ngIf="!isLoading && !errorMessage && nodes.length === 0">
+            <div class="text-center py-10">
+                <i class="pi pi-info-circle text-3xl text-gray-400 mb-4"></i>
+                <p class="text-gray-600">
+                    {{ 'entityClassification.noChildrenClassification' | translate }}
+                </p>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="!isLoading && !errorMessage && nodes.length > 0">
+            <p-treeTable [value]="nodes" class="entity-tree-table">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 300px">{{ 'formLabels.name' | translate }}</th>
+                        <th>عدد الخيارات</th>
+                        <th>عدد الأبناء</th>
+                        <th style="width: 150px">{{ 'common.actions' | translate }}</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
+                    <tr>
+                        <td>
+                            <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+                            <span class="font-medium">
+                                {{ rowData?.label }}
+                            </span>
+                        </td>
+                        <td>{{ rowData?.forms?.length || 0 }}</td>
+                        <td>{{ rowData?.children?.length || 0 }}</td>
+                        <td>
+                            <div class="flex items-center gap-2">
+                                <button
+                                    type="button"
+                                    class="btn-icon text-purple-600 hover:text-purple-800"
+                                    title="View Details"
+                                    (click)="viewDetails(rowData)"
+                                >
+                                    <i class="pi pi-list-check"></i>
+                                </button>
+                                <button
+                                    type="button"
+                                    class="btn-icon text-blue-600 hover:text-blue-800"
+                                    title="Edit"
+                                    (click)="editClassificationEntity(rowData)"
+                                >
+                                    <i class="pi pi-pencil"></i>
+                                </button>
+                                <button
+                                    type="button"
+                                    class="btn-icon text-red-600 hover:text-red-800"
+                                    (click)="deleteNode(rowData)"
+                                >
+                                    <i class="pi pi-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-treeTable>
+        </ng-container>
+    </div>
+
+    <p-dialog
+        [(visible)]="addChildDialogVisible"
+        [modal]="true"
+        [header]="'actions.addNewClassification' | translate"
+        [style]="{ width: '420px' }"
+        (onHide)="closeAddChildDialog()"
+    >
+        <form [formGroup]="childForm" (ngSubmit)="saveChild()" class="space-y-4">
+            <div class="form-group">
+                <label class="block text-sm font-medium mb-2">
+                    {{ 'formLabels.parent' | translate }}
+                </label>
+                <div class="text-sm text-gray-700 font-semibold">
+                    {{ selectedParent?.label || ('common.notAvailable' | translate) }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="block text-sm font-medium mb-2">
+                    {{ 'formLabels.name' | translate }}
+                    <span class="text-red-500">*</span>
+                </label>
+                <input type="text" formControlName="nameAr" pInputText class="w-full" />
+                <small
+                    *ngIf="
+                        childForm.get('nameAr')?.invalid &&
+                        (childForm.get('nameAr')?.dirty || childForm.get('nameAr')?.touched)
+                    "
+                    class="text-red-500"
+                >
+                    {{ 'messages.requiredField' | translate }}
+                </small>
+            </div>
+
+            <div class="form-group">
+                <label class="block text-sm font-medium mb-2">
+                    {{ 'formLabels.description' | translate }}
+                </label>
+                <textarea
+                    rows="3"
+                    formControlName="descriptionAr"
+                    pInputTextarea
+                    class="w-full"
+                ></textarea>
+            </div>
+
+            <div class="flex justify-end gap-2 pt-2">
+                <button
+                    type="button"
+                    class="btn bg-gray-50 hover:bg-gray-100 text-gray-700"
+                    (click)="closeAddChildDialog()"
+                >
+                    {{ 'buttons.cancel' | translate }}
+                </button>
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                    [disabled]="childForm.invalid || isLoading"
+                >
+                    {{ 'buttons.save' | translate }}
+                </button>
+            </div>
+        </form>
+    </p-dialog>
+
+    <p-dialog
+        [(visible)]="addFormDialogVisible"
+        [modal]="true"
+        [header]="'entityClassification.addClassificationForm' | translate"
+        [style]="{ width: '420px' }"
+        (onHide)="closeAddFormDialog()"
+    >
+        <form [formGroup]="formNodeForm" (ngSubmit)="saveClassificationForm()" class="space-y-4">
+            <div class="form-group">
+                <label class="block text-sm font-medium mb-2">
+                    {{ 'formLabels.parent' | translate }}
+                </label>
+                <div class="text-sm text-gray-700 font-semibold">
+                    {{ selectedParent?.label || ('common.notAvailable' | translate) }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="block text-sm font-medium mb-2">
+                    {{ 'formLabels.name' | translate }}
+                    <span class="text-red-500">*</span>
+                </label>
+                <input type="text" formControlName="nameAr" pInputText class="w-full" />
+                <small
+                    *ngIf="
+                        formNodeForm.get('nameAr')?.invalid &&
+                        (formNodeForm.get('nameAr')?.dirty || formNodeForm.get('nameAr')?.touched)
+                    "
+                    class="text-red-500"
+                >
+                    {{ 'messages.requiredField' | translate }}
+                </small>
+            </div>
+
+            <div class="form-group">
+                <label class="block text-sm font-medium mb-2">
+                    {{ 'formLabels.description' | translate }}
+                </label>
+                <textarea
+                    rows="3"
+                    formControlName="descriptionAr"
+                    pInputTextarea
+                    class="w-full"
+                ></textarea>
+            </div>
+
+            <div class="form-group">
+                <label class="block text-sm font-medium mb-2">
+                    {{ 'entityClassification.isCheckBox' | translate }}
+                </label>
+                <p-checkbox formControlName="isCheckBox" [binary]="true" />
+            </div>
+
+            <div class="form-group">
+                <label class="block text-sm font-medium mb-2">
+                    {{ 'entityClassification.isText' | translate }}
+                </label>
+                <p-checkbox formControlName="isText" [binary]="true" />
+            </div>
+
+            <div class="flex justify-end gap-2 pt-2">
+                <button
+                    type="button"
+                    class="btn bg-gray-50 hover:bg-gray-100 text-gray-700"
+                    (click)="closeAddFormDialog()"
+                >
+                    {{ 'buttons.cancel' | translate }}
+                </button>
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                    [disabled]="formNodeForm.invalid || isLoading"
+                >
+                    {{ 'buttons.save' | translate }}
+                </button>
+            </div>
+        </form>
+    </p-dialog>
+</div>
+
+<p-dialog
+    [(visible)]="viewDetailsDialogVisible"
+    [modal]="true"
+    [header]="
+        ('entityClassification.classificationDetails' | translate) +
+        ' - ' +
+        (selectedNode?.label || '')
+    "
+    [style]="{ width: '500px' }"
+    (onHide)="closeViewDetailsDialog()"
+>
+    <!-- separator -->
+    <hr class="mb-2 border-gray-300" />
+    <div class="space-y-4" *ngIf="selectedNode">
+        <!-- Classification Forms Table -->
+        <div class="mt-4">
+            <div class="flex justify-between mb-2">
+                <h4 class="text-sm font-semibold text-gray-900 mb-3">
+                    {{ 'entityClassification.classificationForms' | translate }}
+                </h4>
+                <button
+                    type="button"
+                    class="btn btn-success btn-sm"
+                    (click)="addClassificationForm(selectedNode); closeViewDetailsDialog()"
+                >
+                    <i class="pi pi-plus"></i>
+                    {{ 'entityClassification.addClassificationForm' | translate }}
+                </button>
+            </div>
+            <ng-container *ngIf="selectedNodeForms.length > 0">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full border-collapse border border-gray-300">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th
+                                    class="border border-gray-300 px-4 py-2 text-xs font-semibold text-gray-900"
+                                >
+                                    {{ 'formLabels.name' | translate }}
+                                </th>
+                                <th
+                                    class="border border-gray-300 px-4 py-2 text-xs font-semibold text-gray-900"
+                                >
+                                    {{ 'formLabels.description' | translate }}
+                                </th>
+                                <th
+                                    class="border border-gray-300 px-4 py-2 text-xs font-semibold text-gray-900"
+                                >
+                                    {{ 'entityClassification.formTypes.label' | translate }}
+                                </th>
+                                <th
+                                    class="border border-gray-300 px-4 py-2 text-xs font-semibold text-gray-900"
+                                    style="width: 80px"
+                                >
+                                    {{ 'common.actions' | translate }}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let form of selectedNodeForms" class="hover:bg-gray-50">
+                                <td class="border border-gray-300 px-4 py-2 text-sm text-gray-900">
+                                    {{ form.nameAr }}
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2 text-sm text-gray-700">
+                                    {{ form.descriptionAr || ('-' | translate) }}
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2 text-sm text-gray-700">
+                                    <div class="flex flex-wrap gap-2">
+                                        <span
+                                            *ngIf="form.isCheckBox"
+                                            class="inline-flex items-center gap-1 bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs"
+                                        >
+                                            <i class="pi pi-check-square"></i>
+                                            {{
+                                                'entityClassification.formTypes.checkbox'
+                                                    | translate
+                                            }}
+                                        </span>
+                                        <span
+                                            *ngIf="form.isText"
+                                            class="inline-flex items-center gap-1 bg-green-100 text-green-800 px-2 py-1 rounded text-xs"
+                                        >
+                                            <i class="pi pi-pencil"></i>
+                                            {{ 'entityClassification.formTypes.text' | translate }}
+                                        </span>
+                                    </div>
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2 text-center">
+                                    <button
+                                        type="button"
+                                        class="btn-icon text-red-600 hover:text-red-800"
+                                        (click)="deleteClassificationForm(form)"
+                                    >
+                                        <i class="pi pi-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </ng-container>
+            <div *ngIf="selectedNodeForms.length === 0" class="text-sm text-gray-600 italic">
+                {{ 'common.noDataOnList' | translate }}
+            </div>
+        </div>
+    </div>
+
+    <ng-template pTemplate="footer">
+        <div class="flex justify-between items-center gap-2">
+            <button
+                type="button"
+                class="btn bg-gray-50 hover:bg-gray-100 text-gray-700 btn-sm"
+                (click)="closeViewDetailsDialog()"
+            >
+                {{ 'buttons.close' | translate }}
+            </button>
+        </div>
+    </ng-template>
+</p-dialog>
+
+<!-- Edit Dialog -->
+<p-dialog
+    [(visible)]="editDialogVisible"
+    [modal]="true"
+    [header]="'actions.edit' | translate"
+    [style]="{ width: '420px' }"
+    (onHide)="closeEditDialog()"
+>
+    <form [formGroup]="editForm" (ngSubmit)="saveEdit()" class="space-y-4">
+        <div class="form-group">
+            <label class="block text-sm font-medium mb-2">
+                {{ 'formLabels.name' | translate }}
+                <span class="text-red-500">*</span>
+            </label>
+            <input type="text" formControlName="nameAr" pInputText class="w-full" />
+            <small
+                *ngIf="
+                    editForm.get('nameAr')?.invalid &&
+                    (editForm.get('nameAr')?.dirty || editForm.get('nameAr')?.touched)
+                "
+                class="text-red-500"
+            >
+                {{ 'messages.requiredField' | translate }}
+            </small>
+        </div>
+
+        <div class="form-group">
+            <label class="block text-sm font-medium mb-2">
+                {{ 'formLabels.description' | translate }}
+            </label>
+            <textarea
+                rows="3"
+                formControlName="descriptionAr"
+                pInputTextarea
+                class="w-full"
+            ></textarea>
+        </div>
+
+        <div class="flex justify-end gap-2 pt-2">
+            <button
+                type="button"
+                class="btn bg-gray-50 hover:bg-gray-100 text-gray-700"
+                (click)="closeEditDialog()"
+            >
+                {{ 'buttons.cancel' | translate }}
+            </button>
+            <button
+                type="submit"
+                class="btn btn-primary"
+                [disabled]="editForm.invalid || isLoading"
+            >
+                {{ 'buttons.save' | translate }}
+            </button>
+        </div>
+    </form>
+</p-dialog>

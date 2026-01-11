@@ -1,27 +1,23 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { BaseStore } from 'src/app/store/base.store';
 
 @Component({
-    template: `<div
-        class="relative flex min-h-screen items-center justify-center overflow-hidden"
-    >
+    template: `<div class="relative flex min-h-screen items-center justify-center overflow-hidden">
         <div
             class="ppx-6 py-16 text-center font-semibold before:container before:absolute before:left-1/2 before:aspect-square before:-translate-x-1/2 before:rounded-full before:bg-[linear-gradient(180deg,#4361EE_0%,rgba(67,97,238,0)_50.73%)] before:opacity-10 md:py-20"
         >
             <div class="relative">
                 <img
                     [src]="
-                        store.theme === 'dark' || store.isDarkMode
+                        theme() === 'dark' || isDarkMode()
                             ? '/assets/images/error/500-dark.svg'
                             : '/assets/images/error/500-light.svg'
                     "
                     alt="500"
                     class="mx-auto -mt-10 w-full max-w-xs object-cover md:-mt-14 md:max-w-xl"
                 />
-                <p class="mt-5 text-base dark:text-white">
-                    Internal server error!
-                </p>
+                <p class="mt-5 text-base dark:text-white">Internal server error!</p>
                 <a
                     routerLink="/"
                     class="btn btn-gradient mx-auto !mt-7 w-max border-0 uppercase shadow-none"
@@ -33,25 +29,11 @@ import { Store } from '@ngrx/store';
     standalone: false,
 })
 export class Error500Component {
-    store: any = { theme: 'light', isDarkMode: false }; // Default fallback values
+    theme = this.ui.theme;
+    isDarkMode = this.ui.isDarkMode;
 
     constructor(
         public router: Router,
-        public storeData: Store<any>,
-    ) {
-        this.initStore();
-    }
-
-    initStore() {
-        this.storeData
-            .select((state) => state.index)
-            .subscribe({
-                next: (indexState) => {
-                    this.store = indexState || this.store;
-                },
-                error: (err) => {
-                    console.error('Error selecting store state:', err);
-                },
-            });
-    }
+        private ui: BaseStore,
+    ) {}
 }

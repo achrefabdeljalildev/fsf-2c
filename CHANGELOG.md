@@ -1,3 +1,0 @@
-# Changelog
-
-### Bug Fixes

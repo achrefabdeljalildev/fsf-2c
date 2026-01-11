@@ -44,8 +44,16 @@ export class LocationDashboardComponent extends BaseComponent {
             value: '25%',
             label: 'نسبة المواقع المرممة',
         },
-        { icon: 'assets/images/icons/location-whait-active-logo.svg', value: '10', label: 'المواقع بإنتظار التنشيط' },
-        { icon: 'assets/images/icons/pending-verification-logo.svg', value: '08', label: 'بإنتظار التحقق' },
+        {
+            icon: 'assets/images/icons/location-whait-active-logo.svg',
+            value: '10',
+            label: 'المواقع بإنتظار التنشيط',
+        },
+        {
+            icon: 'assets/images/icons/pending-verification-logo.svg',
+            value: '08',
+            label: 'بإنتظار التحقق',
+        },
     ];
 
     // Action log

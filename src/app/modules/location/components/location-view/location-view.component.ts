@@ -1,21 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BaseComponent } from 'src/app/shared/components/base-component/base-component';
 import { LocationService } from '../../services/location.service';
 import { LocationModel } from '../../models/location.model';
-import { ProvinceService } from 'src/app/modules/province/services/province.service';
-import { Province } from 'src/app/modules/province/models/province.model';
-import { OrganizationService } from 'src/app/modules/organization/services/organization.service';
-import { Organization } from 'src/app/modules/organization/models/organization.model';
-import { RegionService } from 'src/app/modules/regions/services/region.service';
-import { Region } from 'src/app/modules/regions/models/region.model';
-import { LocationClassificationService } from 'src/app/modules/location-classification/services/location-classification.service';
-import { LocationClassification } from 'src/app/modules/location-classification/models/location-classification.model';
 import { CriteriaModel } from 'src/app/shared/models/base/criteria.model';
 import { FlatpickrDefaultsInterface } from 'angularx-flatpickr';
 import { AttachmentItem } from 'src/app/shared/components/file-attachments/file-attachments.component';
 import { FileAttachmentService } from 'src/app/shared/services/file-attachment.service';
 import HijriDateConfig from 'src/app/shared/util/hijri-date-config';
+import { LocationClassification } from 'src/app/modules/settings/location-classification/models/location-classification.model';
+import { LocationClassificationService } from 'src/app/modules/settings/location-classification/services/location-classification.service';
+import { Organization } from 'src/app/modules/settings/organization/models/organization.model';
+import { OrganizationService } from 'src/app/modules/settings/organization/services/organization.service';
+import { Province } from 'src/app/modules/settings/province/models/province.model';
+import { ProvinceService } from 'src/app/modules/settings/province/services/province.service';
+import { Region } from 'src/app/modules/settings/regions/models/region.model';
+import { RegionService } from 'src/app/modules/settings/regions/services/region.service';
+import { SaudiMapComponent } from '../saudi-map/saudi-map.component';
 
 @Component({
     selector: 'app-location-view',
@@ -23,11 +24,16 @@ import HijriDateConfig from 'src/app/shared/util/hijri-date-config';
     standalone: false,
 })
 export class LocationViewComponent extends BaseComponent implements OnInit {
+    @ViewChild(SaudiMapComponent) mapComponent?: SaudiMapComponent;
+
     locationId: number | null = null;
     locationForm!: FormGroup;
     isLoading: boolean = false;
     isEditMode: boolean = false;
     currentTabIndex: string = '0';
+
+    showMapDialog: boolean = false;
+    selectedMarkerCoordinates: string = '';
 
     filteredProvinces: Province[] = [];
     filteredOrganizations: Organization[] = [];
@@ -186,7 +192,6 @@ export class LocationViewComponent extends BaseComponent implements OnInit {
                 this.showSuccessMessage(
                     this.isEditMode ? 'تم تحديث الموقع بنجاح' : 'تم إضافة الموقع بنجاح',
                 );
-                console.log(response);
 
                 // if the location is created successfully, create the attachments relationhip
                 if (response.data.id && !this.isEditMode) {
@@ -208,7 +213,6 @@ export class LocationViewComponent extends BaseComponent implements OnInit {
                             .subscribe({
                                 next: () => {
                                     this.router.navigate(['/location/list']);
-                                    console.log('Attachments associated successfully');
                                 },
                                 error: (error) => {
                                     console.error('Failed to associate attachments', error);
@@ -282,20 +286,23 @@ export class LocationViewComponent extends BaseComponent implements OnInit {
 
     remove(): void {
         if (!this.locationId) return;
-        this.isLoading = true;
-        const subscription = this.locationService.deleteById(this.locationId).subscribe({
-            next: () => {
-                this.isLoading = false;
-                this.showSuccessMessage('تم حذف الموقع بنجاح');
-                this.router.navigate(['/location/list']);
-            },
-            error: () => {
-                this.isLoading = false;
-                this.showErrorMessage('حدث خطأ أثناء حذف الموقع');
-            },
-        });
 
-        this.subscriptions.add(subscription);
+        this.confirmDelete(this.locationForm?.get('nameAr')?.value || 'Location', () => {
+            this.isLoading = true;
+            const subscription = this.locationService.deleteById(this.locationId!).subscribe({
+                next: () => {
+                    this.isLoading = false;
+                    this.showSuccessMessage('تم حذف الموقع بنجاح');
+                    this.router.navigate(['/location/list']);
+                },
+                error: () => {
+                    this.isLoading = false;
+                    this.showErrorMessage('حدث خطأ أثناء حذف الموقع');
+                },
+            });
+
+            this.subscriptions.add(subscription);
+        });
     }
 
     ngOnDestroy(): void {
@@ -349,5 +356,51 @@ export class LocationViewComponent extends BaseComponent implements OnInit {
         this.filteredSiteTypes = this.siteTypeOptions.filter((option) =>
             option.label.toLowerCase().includes(query),
         );
+    }
+
+    /**
+     * Open map selection dialog
+     */
+    openMapDialog(): void {
+        this.showMapDialog = true;
+        this.selectedMarkerCoordinates = '';
+    }
+
+    /**
+     * Close map selection dialog
+     */
+    closeMapDialog(): void {
+        this.showMapDialog = false;
+        this.selectedMarkerCoordinates = '';
+    }
+
+    /**
+     * Confirm map selection and update coordinates
+     */
+    confirmMapSelection(): void {
+        if (this.selectedMarkerCoordinates) {
+            this.locationForm.patchValue({ siteCoordinates: this.selectedMarkerCoordinates });
+            this.closeMapDialog();
+        }
+    }
+
+    /**
+     * Handle marker selection from map
+     * This method will be called when a user clicks on the map
+     */
+    onMapMarkerSelected(coordinates: string): void {
+        this.selectedMarkerCoordinates = coordinates;
+    }
+
+    /**
+     * Handle map dialog show event
+     */
+    onMapDialogShow(): void {
+        // Trigger map initialization after dialog is shown
+        setTimeout(() => {
+            if (this.mapComponent) {
+                this.mapComponent.initializeMap();
+            }
+        }, 100);
     }
 }

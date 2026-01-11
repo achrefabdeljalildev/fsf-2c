@@ -1,10 +1,10 @@
-﻿import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
-import { Store } from '@ngrx/store';
+﻿import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { slideDownUp } from '../../shared/util/animations';
-import { AuthService } from 'src/app/modules/auth/services/auth.service';
 import { filter } from 'rxjs/operators';
+import { AuthService } from 'src/app/modules/auth/services/auth.service';
+import { BaseStore } from 'src/app/store/base.store';
+import { slideDownUp } from '../../shared/util/animations';
 
 @Component({
     selector: 'sidebar',
@@ -13,9 +13,10 @@ import { filter } from 'rxjs/operators';
     standalone: false,
 })
 export class SidebarComponent implements OnInit {
-    store: any;
-    isCollapsed: boolean = false;
+    isCollapsed: boolean = true;
     expandedItems: { [key: string]: boolean } = {};
+    // Signals from the UI store
+    semidark = this.baseStore.semidark;
 
     treeNodes: any[] = [
         {
@@ -95,14 +96,7 @@ export class SidebarComponent implements OnInit {
                     label: 'الادوار',
                     data: 'Sub Survey 2',
                     icon: 'pi pi-list',
-                    routerLink: '/roles',
-                },
-                {
-                    key: '53',
-                    label: 'الصلاحيات',
-                    data: 'Sub Survey 2',
-                    icon: 'pi pi-list',
-                    routerLink: '/permissions',
+                    routerLink: '/users/roles',
                 },
             ],
         },
@@ -153,7 +147,7 @@ export class SidebarComponent implements OnInit {
             key: '46',
             label: 'اعدادات سجل المخاطر',
             data: 'Sub Survey 2',
-            icon: 'pi pi-list',
+            icon: 'assets/images/icons/settings-sidebar-logo.svg',
             routerLink: '/risk-register-settings',
             children: [
                 {
@@ -190,12 +184,10 @@ export class SidebarComponent implements OnInit {
 
     constructor(
         public translate: TranslateService,
-        public storeData: Store<any>,
         public router: Router,
         private authService: AuthService,
-    ) {
-        this.initStore();
-    }
+        private baseStore: BaseStore,
+    ) {}
 
     ngOnInit() {
         // Expand current route on init
@@ -224,13 +216,7 @@ export class SidebarComponent implements OnInit {
         }
     }
 
-    async initStore() {
-        this.storeData
-            .select((d) => d.index)
-            .subscribe((d) => {
-                this.store = d;
-            });
-    }
+    // Using signal store; no NgRx subscription needed
 
     logout() {
         this.authService.logout();

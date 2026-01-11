@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { BaseStore } from 'src/app/store/base.store';
 import { TranslateService } from '@ngx-translate/core';
 import { AppService } from '../../shared/services/app.service';
 
@@ -10,26 +10,29 @@ import { AppService } from '../../shared/services/app.service';
     standalone: false,
 })
 export class AppLayout {
-    store: any;
     showTopButton = false;
+
+    // Signals from UI store
+    sidebar = this.ui.sidebar;
+    menu = this.ui.menu;
+    layout = this.ui.layout;
+    rtlClass = this.ui.rtlClass;
+    navbar = this.ui.navbar;
+    isShowMainLoader = this.ui.select('isShowMainLoader');
+
     constructor(
         public translate: TranslateService,
-        public storeData: Store<any>,
         private service: AppService,
         private router: Router,
-    ) {
-        this.initStore();
-    }
+        private ui: BaseStore,
+    ) {}
     headerClass = '';
     ngOnInit() {
         this.initAnimation();
         this.toggleLoader();
 
         window.addEventListener('scroll', () => {
-            if (
-                document.body.scrollTop > 50 ||
-                document.documentElement.scrollTop > 50
-            ) {
+            if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
                 this.showTopButton = true;
             } else {
                 this.showTopButton = false;
@@ -56,25 +59,20 @@ export class AppLayout {
     }
 
     toggleLoader() {
-        this.storeData.dispatch({ type: 'toggleMainLoader', payload: true });
+        this.ui.toggleMainLoader(true);
         setTimeout(() => {
-            this.storeData.dispatch({
-                type: 'toggleMainLoader',
-                payload: false,
-            });
+            this.ui.toggleMainLoader(false);
         }, 500);
     }
 
-    async initStore() {
-        this.storeData
-            .select((d) => d.index)
-            .subscribe((d) => {
-                this.store = d;
-            });
-    }
+    // Using signal store; no NgRx subscription needed
 
     goToTop() {
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
+    }
+
+    toggleSidebar() {
+        this.ui.toggleSidebar();
     }
 }

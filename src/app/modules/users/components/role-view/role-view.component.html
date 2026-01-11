@@ -1,0 +1,51 @@
+<p-dialog
+    [(visible)]="visible"
+    [modal]="true"
+    [header]="(isEditMode ? 'users.editRole' : 'users.addNewRole') | translate"
+    [style]="{ width: '420px' }"
+    (onHide)="closeDialog()"
+>
+    <form [formGroup]="form" class="space-y-4" (ngSubmit)="submit()">
+        <div class="form-group">
+            <label class="block text-sm font-medium mb-2">
+                {{ 'users.roleName' | translate }}
+                <span class="text-red-500">*</span>
+            </label>
+            <input
+                type="text"
+                formControlName="roleName"
+                pInputText
+                class="w-full"
+                [placeholder]="'users.enterRoleName' | translate"
+            />
+            <small
+                *ngIf="
+                    form.get('roleName')?.invalid &&
+                    (form.get('roleName')?.dirty || form.get('roleName')?.touched)
+                "
+                class="text-red-500"
+            >
+                <span *ngIf="form.get('roleName')?.errors?.['required']">{{
+                    'messages.requiredField' | translate
+                }}</span>
+                <span *ngIf="form.get('roleName')?.errors?.['minlength']">{{
+                    'messages.minLength' | translate: { length: 2 }
+                }}</span>
+            </small>
+        </div>
+
+        <div class="flex justify-end gap-2 pt-2">
+            <button
+                type="button"
+                class="btn bg-gray-50 hover:bg-gray-100 text-gray-700"
+                (click)="closeDialog()"
+                [disabled]="isLoading"
+            >
+                {{ 'buttons.cancel' | translate }}
+            </button>
+            <button type="submit" class="btn btn-primary" [disabled]="form.invalid || isLoading">
+                {{ 'buttons.save' | translate }}
+            </button>
+        </div>
+    </form>
+</p-dialog>

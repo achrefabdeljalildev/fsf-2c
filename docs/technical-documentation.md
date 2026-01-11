@@ -420,7 +420,7 @@ export class UserListComponent extends BaseListComponent<UserModel> {
 
     // Optional: Custom behavior after data loads
     protected override afterLoad(rows: UserModel[]): void {
-        console.log(`Loaded ${rows.length} users`);
+        console.info(`Loaded ${rows.length} users`);
     }
 
     // Custom methods
@@ -533,27 +533,7 @@ Currently used in 9 list components across the application:
 
 ---
 
-### 6. ConfirmDeleteComponent
-
-**Purpose**: Reusable confirmation dialog for delete operations.
-
-**Location**: `src/app/shared/components/confirm-delete/`
-
-**Example**:
-
-```html
-<app-confirm-delete
-    [(visible)]="showDeleteDialog"
-    [title]="'messages.confirmDelete' | translate"
-    [message]="'messages.confirmDeleteUser' | translate"
-    (onConfirm)="confirmDelete()"
-    (onCancel)="showDeleteDialog = false"
-/>
-```
-
----
-
-### 7. FileAttachmentsComponent
+### 6. FileAttachmentsComponent
 
 **Purpose**: Handle file uploads and attachments.
 
@@ -561,7 +541,7 @@ Currently used in 9 list components across the application:
 
 ---
 
-### 8. LogsListComponent
+### 7. LogsListComponent
 
 **Purpose**: Display activity logs and audit trails.
 
@@ -569,7 +549,7 @@ Currently used in 9 list components across the application:
 
 ---
 
-### 9. PdfViewerComponent
+### 8. PdfViewerComponent
 
 **Purpose**: Display PDF documents inline.
 
@@ -748,11 +728,43 @@ export class MyComponent {
     constructor(private store: Store<any>) {
         // Subscribe to state changes
         this.store.subscribe((state) => {
-            console.log('Current user:', state.user);
+            console.info('Current user:', state.user);
         });
     }
 }
 ```
+
+---
+
+### Signals Store (Alternative)
+
+In addition to NgRx, a lightweight signal-based store is available for local UI state using Angular Signals.
+
+**Location**: `src/app/store/ui.signal.store.ts`
+
+**API Overview**:
+
+```typescript
+import { UiSignalStore } from 'src/app/store/ui.signal.store';
+
+export class HeaderComponent {
+    constructor(private ui: UiSignalStore) {}
+
+    readonly theme = this.ui.theme; // computed signal
+    readonly sidebar = this.ui.sidebar; // computed signal
+
+    toggleDark() {
+        this.ui.toggleTheme('dark');
+    }
+    toggleSidebar() {
+        this.ui.toggleSidebar();
+    }
+}
+```
+
+The signal store mirrors the reducer actions: `toggleTheme`, `toggleMenu`, `toggleLayout`, `toggleRTL`, `toggleNavbar`, `toggleLocale`, `toggleSidebar`, `toggleSemidark`, `toggleAnimation`, and `toggleDirection`. It also persists relevant values to `localStorage` and updates the DOM (`html[dir]`, `body.dark`) to match existing behavior.
+
+Use the signals store for component-local or UI-centric state where NgRx may be too heavy, while keeping NgRx for app-wide data and effects.
 
 ---
 

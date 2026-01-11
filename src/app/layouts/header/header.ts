@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
 
-import { Store } from '@ngrx/store';
+import { BaseStore } from 'src/app/store/base.store';
 import { toggleAnimation } from 'src/app/shared/util/animations';
 import { BaseComponent } from 'src/app/shared/components/base-component/base-component';
 import { AuthService } from 'src/app/modules/auth/services/auth.service';
@@ -17,7 +17,7 @@ export class HeaderComponent extends BaseComponent implements OnInit {
     currentLocation: string = 'الرياض';
 
     constructor(
-        public storeData: Store<any>,
+        private ui: BaseStore,
         private authService: AuthService,
     ) {
         super();
@@ -42,5 +42,9 @@ export class HeaderComponent extends BaseComponent implements OnInit {
     logout() {
         this.authService.logout();
         this.router.navigate(['/auth/login']);
+    }
+
+    toggleSidebar() {
+        this.ui.toggleSidebar();
     }
 }

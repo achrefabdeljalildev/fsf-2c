@@ -49,8 +49,30 @@ export class LoginComponent extends BaseComponent implements OnInit {
 
         const subscription = this.authService.login(this.loginForm.value).subscribe({
             next: (response) => {
-                this.isLoading = false;
-                this.router.navigate(['/']);
+                // After successful login, request OTP
+                const otpRequest = {
+                    identityNumber: this.loginForm.value.identityNumber,
+                };
+
+                const otpSubscription = this.authService.requestOtp(otpRequest).subscribe({
+                    next: () => {
+                        this.isLoading = false;
+                        // Store identity number for OTP validation
+                        sessionStorage.setItem(
+                            'pendingOtpIdentity',
+                            this.loginForm.value.identityNumber,
+                        );
+                        // Navigate to verification page
+                        this.router.navigate(['/auth/verification']);
+                    },
+                    error: (error: any) => {
+                        this.isLoading = false;
+                        this.hasError = true;
+                        this.showErrorMessage('Failed to send OTP. Please try again.');
+                    },
+                });
+
+                this.subscriptions.add(otpSubscription);
             },
             error: (error: any) => {
                 this.isLoading = false;

@@ -4,7 +4,10 @@
     "compilerOptions": {
         "outDir": "./out-tsc/app",
         "types": ["node"],
-        "typeRoots": ["./node_modules/@types"]
+        "typeRoots": ["./node_modules/@types"],
+        "paths": {
+            "@shared/*": ["src/app/shared/*"]
+        }
     },
     "files": ["src/main.ts", "src/polyfills.ts"],
     "include": ["src/**/*.d.ts"]

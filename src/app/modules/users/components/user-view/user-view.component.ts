@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormGroup, Validators } from '@angular/forms';
+import { FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { BaseComponent } from 'src/app/shared/components/base-component/base-component';
 import { UserService } from '../../services/user.service';
 import { UserModel } from '../../models/user.model';
@@ -48,15 +48,49 @@ export class UserViewComponent extends BaseComponent implements OnInit {
             identityNumber: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
             jobName: ['', [Validators.required]],
             rankName: ['', [Validators.required]],
-            password: ['', [Validators.required, Validators.minLength(6)]],
+            password: ['', [Validators.required, this.passwordValidator]],
         });
+    }
+
+    passwordValidator(control: AbstractControl): ValidationErrors | null {
+        const value = control.value;
+        if (!value) {
+            return null;
+        }
+
+        const errors: ValidationErrors = {};
+
+        // RequiredLength = 6
+        if (value.length < 6) {
+            errors['minlength'] = { requiredLength: 6, actualLength: value.length };
+        }
+
+        // RequireDigit = true
+        if (!/\d/.test(value)) {
+            errors['requireDigit'] = true;
+        }
+
+        // RequireLowercase = true
+        if (!/[a-z]/.test(value)) {
+            errors['requireLowercase'] = true;
+        }
+
+        // RequireUppercase = true
+        if (!/[A-Z]/.test(value)) {
+            errors['requireUppercase'] = true;
+        }
+
+        // RequireNonAlphanumeric = true
+        if (!/[^a-zA-Z0-9]/.test(value)) {
+            errors['requireNonAlphanumeric'] = true;
+        }
+
+        return Object.keys(errors).length > 0 ? errors : null;
     }
 
     loadUser(id: number): void {
         this.isLoading = true;
-        this.userService.getUserDetails(id).subscribe((response) => {
-            const user = response.data as UserModel;
-
+        this.userService.getFakeById(id).subscribe((user) => {
             if (user) {
                 this.form.patchValue({
                     fullName: user.fullName,

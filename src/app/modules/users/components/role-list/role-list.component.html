@@ -1,0 +1,99 @@
+<p-confirmDialog></p-confirmDialog>
+
+<p-breadcrumb
+    [model]="[
+        { label: ('breadcrumbs.securitySystems' | translate) },
+        { label: ('breadcrumbs.generalAdministration' | translate) },
+        { label: ('breadcrumbs.fieldSurveyAdmin' | translate) },
+        { label: ('users.roles' | translate) },
+    ]"
+/>
+
+<main-content>
+    <list-header
+        tableTitle="{{ 'users.roles' | translate }}"
+        [paginationInfo]="paginationInfo"
+        (addNewRecord)="openCreateDialog()"
+        (search)="onSearch($event)"
+    />
+
+    <ng-datatable
+        [rows]="rows"
+        [columns]="cols"
+        [hasCheckbox]="true"
+        [sortable]="false"
+        [loading]="isLoading"
+        [pagination]="true"
+        [pageSize]="criteria.pageSize"
+        rowClass="cursor-pointer"
+        noDataContent="{{ 'common.noDataOnList' | translate }}"
+    >
+        <ng-template slot="actions" let-value="data">
+            <div class="flex gap-2">
+                <div
+                    (click)="openEditDialog(value); $event.stopPropagation()"
+                    class="cursor-pointer"
+                    title="{{ 'buttons.edit' | translate }}"
+                >
+                    <i class="pi pi-pencil"></i>
+                </div>
+                <div
+                    (click)="openPermissionsDialog(value)"
+                    class="cursor-pointer"
+                    title="{{ 'users.managePermissions' | translate }}"
+                >
+                    <i class="pi pi-shield"></i>
+                </div>
+            </div>
+        </ng-template>
+    </ng-datatable>
+</main-content>
+
+<app-role-view [(visible)]="showDialog" [role]="selectedRole" (onSave)="onDialogSave()" />
+
+<p-dialog
+    [(visible)]="showPermissionsDialog"
+    [modal]="true"
+    [draggable]="false"
+    [resizable]="false"
+    [style]="{ width: '700px' }"
+    header="{{ 'users.managePermissions' | translate }} - {{ selectedRole?.name }}"
+>
+    <div class="py-2">
+        <div *ngIf="loadingPermissions" class="flex items-center flex-col justify-center py-8">
+            <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton>
+            <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton>
+            <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton>
+            <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton>
+            <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton>
+            <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton>
+            <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton>
+        </div>
+        <p-tree
+            *ngIf="!loadingPermissions"
+            [value]="treeNodes"
+            selectionMode="checkbox"
+            class="w-full md:w-[30rem]"
+            [(selection)]="selectedNodes"
+        />
+    </div>
+    <ng-template pTemplate="footer">
+        <button
+            class="btn btn-secondary"
+            type="button"
+            (click)="showPermissionsDialog = false"
+            [disabled]="saveLoadingPermissions"
+        >
+            {{ 'buttons.close' | translate }}
+        </button>
+        <button
+            class="btn btn-primary ms-2"
+            type="button"
+            (click)="savePermissions()"
+            [disabled]="saveLoadingPermissions"
+        >
+            <span *ngIf="!saveLoadingPermissions">{{ 'buttons.save' | translate }}</span>
+            <span *ngIf="saveLoadingPermissions">{{ 'common.loading' | translate }}</span>
+        </button>
+    </ng-template>
+</p-dialog>

@@ -15,7 +15,7 @@ import { TabsModule } from 'primeng/tabs';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { SelectModule } from 'primeng/select';
 import { FlatpickrDirective } from 'angularx-flatpickr';
-import { SaudiMapsModule } from 'src/app/modules/saudi-maps/saudi-maps.module';
+import { SaudiMapComponent } from 'src/app/modules/location/components/saudi-map/saudi-map.component';
 
 const routes: Routes = [
     {
@@ -50,8 +50,12 @@ const routes: Routes = [
         SharedModule,
         SelectModule,
         FlatpickrDirective,
-        SaudiMapsModule,
     ],
-    declarations: [LocationDashboardComponent, LocationListComponent, LocationViewComponent],
+    declarations: [
+        LocationDashboardComponent,
+        LocationListComponent,
+        LocationViewComponent,
+        SaudiMapComponent,
+    ],
 })
 export class LocationModule {}

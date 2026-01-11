@@ -25,7 +25,7 @@ export class UserRolesDialogComponent extends BaseComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.loadRoles();
+        // this.loadRoles();
     }
 
     ngOnChanges(): void {

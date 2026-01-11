@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { BaseStore } from 'src/app/store/base.store';
 import { AppService } from '../../shared/services/app.service';
 
 @Component({
@@ -8,24 +8,25 @@ import { AppService } from '../../shared/services/app.service';
     standalone: false,
 })
 export class AuthLayout {
-    store: any;
     showTopButton = false;
     headerClass = '';
 
+    // Signals
+    sidebar = this.ui.sidebar;
+    menu = this.ui.menu;
+    layout = this.ui.layout;
+    rtlClass = this.ui.rtlClass;
+    isShowMainLoader = this.ui.select('isShowMainLoader');
+
     constructor(
-        public storeData: Store<any>,
         private service: AppService,
-    ) {
-        this.initStore();
-    }
+        private ui: BaseStore,
+    ) {}
 
     ngOnInit() {
         this.toggleLoader();
         window.addEventListener('scroll', () => {
-            if (
-                document.body.scrollTop > 50 ||
-                document.documentElement.scrollTop > 50
-            ) {
+            if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
                 this.showTopButton = true;
             } else {
                 this.showTopButton = false;
@@ -34,12 +35,9 @@ export class AuthLayout {
     }
 
     toggleLoader() {
-        this.storeData.dispatch({ type: 'toggleMainLoader', payload: true });
+        this.ui.toggleMainLoader(true);
         setTimeout(() => {
-            this.storeData.dispatch({
-                type: 'toggleMainLoader',
-                payload: false,
-            });
+            this.ui.toggleMainLoader(false);
         }, 500);
     }
 
@@ -47,13 +45,7 @@ export class AuthLayout {
         window.removeEventListener('scroll', () => {});
     }
 
-    async initStore() {
-        this.storeData
-            .select((d) => d.index)
-            .subscribe((d) => {
-                this.store = d;
-            });
-    }
+    // Using signals; no NgRx subscription needed
 
     goToTop() {
         document.body.scrollTop = 0;

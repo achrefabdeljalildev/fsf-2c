@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { inject } from '@angular/core';
 import { Location } from '@angular/common';
 import { Subscription } from 'rxjs';
-import { ToasterService } from 'src/app/shared/services/toaster.service';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 export abstract class BaseComponent {
     protected translateService: TranslateService;
@@ -12,7 +12,8 @@ export abstract class BaseComponent {
     protected route: ActivatedRoute;
     protected formBuilder: FormBuilder;
     protected location: Location;
-    protected toasterService: ToasterService;
+    protected confirmationService: ConfirmationService;
+    protected messageService: MessageService;
 
     subscriptions: Subscription = new Subscription();
 
@@ -22,22 +23,41 @@ export abstract class BaseComponent {
         this.route = inject(ActivatedRoute);
         this.formBuilder = inject(FormBuilder);
         this.location = inject(Location);
-        this.toasterService = inject(ToasterService);
+        this.confirmationService = inject(ConfirmationService);
+        this.messageService = inject(MessageService);
     }
 
     // -----------------------
     // Message utilities
     // -----------------------
     protected showMessage(message: string, title: string = 'success'): void {
-        this.toasterService.showMessage(message, title);
+        this.messageService.add({ severity: title, summary: 'إشعار', detail: message });
     }
 
     protected showSuccessMessage(message: string): void {
-        this.toasterService.showSuccessMessage(message);
+        this.messageService.add({ severity: 'success', summary: 'إشعار', detail: message });
     }
 
     protected showErrorMessage(message: string, title = 'error'): void {
-        this.toasterService.showErrorMessage(message);
+        this.messageService.add({ severity: 'error', summary: 'إشعار', detail: message });
+    }
+
+    protected confirmDelete(
+        itemName: string,
+        onConfirm: () => void,
+        header: string = 'messages.deleteConfirmation',
+    ): void {
+        this.confirmationService.confirm({
+            message: this.translateService.instant('messages.confirmDelete', { item: itemName }),
+            header: this.translateService.instant(header),
+            icon: 'pi pi-exclamation-triangle',
+            acceptLabel: this.translateService.instant('common.yes'),
+            rejectLabel: this.translateService.instant('common.no'),
+            acceptButtonStyleClass: 'p-button-danger',
+            accept: () => {
+                onConfirm();
+            },
+        });
     }
 
     protected navigateTo(url: string): void {

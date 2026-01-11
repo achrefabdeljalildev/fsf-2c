@@ -7,12 +7,23 @@ import {
     API_URL_AUTH_LOGIN,
     API_URL_AUTH_REFRESH,
     API_URL_AUTH_VERIFY,
+    API_URL_AUTH_REQUEST_OTP,
+    API_URL_AUTH_VALIDATE_OTP,
 } from 'src/app/shared/consts/api.urls';
 import { ApiResponseModel } from 'src/app/shared/models/base/paged-response.model';
 
 export interface LoginRequest {
     identityNumber: number;
     password: string;
+}
+
+export interface OtpRequest {
+    identityNumber: number;
+}
+
+export interface OtpValidationRequest {
+    identityNumber: number;
+    otpCode: string;
 }
 
 export interface RegisterRequest {
@@ -119,6 +130,37 @@ export class AuthService {
      */
     register(userData: RegisterRequest): Observable<ApiResponseModel<any>> {
         return this.http.post<ApiResponseModel<any>>('/Authentication/Register', userData);
+    }
+
+    /**
+     * Request OTP for login
+     */
+    requestOtp(data: OtpRequest): Observable<ApiResponseModel<any>> {
+        return this.http.post<ApiResponseModel<any>>(API_URL_AUTH_REQUEST_OTP, data);
+    }
+
+    /**
+     * Validate OTP and complete login
+     */
+    validateOtp(data: OtpValidationRequest): Observable<{
+        data: LoginResponse;
+    }> {
+        return this.http
+            .post<{
+                data: LoginResponse;
+            }>(API_URL_AUTH_VALIDATE_OTP, data)
+            .pipe(
+                map((response) => {
+                    this.storeAuthData(response.data);
+                    this.authStateSubject.next({
+                        isAuthenticated: true,
+                        user: response.data.user || null,
+                        token: response.data.accessToken,
+                    });
+
+                    return response;
+                }),
+            );
     }
 
     /**

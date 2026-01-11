@@ -139,12 +139,24 @@
                 "
                 class="text-red-500"
             >
-                <span *ngIf="form.get('password')?.errors?.['required']">{{
-                    'messages.requiredField' | translate
-                }}</span>
-                <span *ngIf="form.get('password')?.errors?.['minlength']">{{
-                    'users.passwordMinLength' | translate
-                }}</span>
+                <div *ngIf="form.get('password')?.errors?.['required']">
+                    {{ 'messages.requiredField' | translate }}
+                </div>
+                <div *ngIf="form.get('password')?.errors?.['minlength']">
+                    {{ 'users.passwordMinLength' | translate }}
+                </div>
+                <div *ngIf="form.get('password')?.errors?.['requireDigit']">
+                    {{ 'users.passwordRequireDigit' | translate }}
+                </div>
+                <div *ngIf="form.get('password')?.errors?.['requireLowercase']">
+                    {{ 'users.passwordRequireLowercase' | translate }}
+                </div>
+                <div *ngIf="form.get('password')?.errors?.['requireUppercase']">
+                    {{ 'users.passwordRequireUppercase' | translate }}
+                </div>
+                <div *ngIf="form.get('password')?.errors?.['requireNonAlphanumeric']">
+                    {{ 'users.passwordRequireSpecialChar' | translate }}
+                </div>
             </small>
         </div>
     </form>

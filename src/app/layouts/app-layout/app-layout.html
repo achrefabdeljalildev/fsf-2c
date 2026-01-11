@@ -1,19 +1,19 @@
 <div
     class="main-section relative font-ibmPlexSansArabic text-sm font-normal antialiased"
-    [ngClass]="[store.sidebar ? 'toggle-sidebar' : '', store.menu, store.layout, store.rtlClass]"
+    [ngClass]="[sidebar() ? 'toggle-sidebar' : '', menu(), layout(), rtlClass()]"
 >
     <!--  BEGIN MAIN CONTAINER  -->
     <div class="relative">
         <!-- sidebar menu overlay -->
         <div
             class="fixed inset-0 z-50 bg-[black]/60 lg:hidden"
-            [ngClass]="{ hidden: !store.sidebar }"
-            (click)="storeData.dispatch({ type: 'toggleSidebar' })"
+            [ngClass]="{ hidden: !sidebar() }"
+            (click)="toggleSidebar()"
         ></div>
 
         <!-- screen loader -->
         <div
-            *ngIf="store.isShowMainLoader"
+            *ngIf="isShowMainLoader()"
             class="screen_loader animate__animated fixed inset-0 z-[60] grid place-content-center bg-[#fafafa] dark:bg-[#060818]"
         >
             <svg
@@ -81,7 +81,7 @@
 
         <div
             class="main-container min-h-screen text-black dark:text-white-dark"
-            [ngClass]="[store.navbar]"
+            [ngClass]="[navbar()]"
         >
             <!--  BEGIN TOP NAVBAR  -->
             <app-header></app-header>

@@ -42,8 +42,4 @@ export class FieldSurveyListComponent extends BaseListComponent<FieldSurvey> {
             });
         }
     }
-
-    onRowClick(event: any) {
-        console.log('Row clicked:', event);
-    }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
+import { BaseStore } from 'src/app/store/base.store';
 import { TranslateService } from '@ngx-translate/core';
 import { saudiNationalIdNumberValidator } from 'src/app/shared/validators/saudi-arabia-id.validator';
 import { AppService } from 'src/app/shared/services/app.service';
@@ -23,7 +23,7 @@ export class ForgotPasswordComponent implements OnInit {
         private translate: TranslateService,
 
         private appSetting: AppService,
-        public storeData: Store<any>,
+        private ui: BaseStore,
     ) {
         this.isArabic = this.translateService.currentLang === 'ar';
     }
@@ -34,10 +34,7 @@ export class ForgotPasswordComponent implements OnInit {
 
     private initForm(): void {
         this.forgotPasswordForm = this.fb.group({
-            nationalId: [
-                '',
-                [Validators.required, saudiNationalIdNumberValidator()],
-            ],
+            nationalId: ['', [Validators.required, saudiNationalIdNumberValidator()]],
         });
     }
 
@@ -64,10 +61,10 @@ export class ForgotPasswordComponent implements OnInit {
         this.translate.use(newLang);
         this.appSetting.toggleLanguage(newLang);
         if (newLang === 'ar') {
-            this.storeData.dispatch({ type: 'toggleRTL', payload: 'rtl' });
+            this.ui.toggleRTL('rtl');
             localStorage.setItem('i18n_locale', 'ar');
         } else {
-            this.storeData.dispatch({ type: 'toggleRTL', payload: 'ltr' });
+            this.ui.toggleRTL('ltr');
             localStorage.setItem('i18n_locale', 'en');
         }
         window.location.reload();

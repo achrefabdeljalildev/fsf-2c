@@ -13,12 +13,14 @@ import { ApiResponseModel, PagedResponse } from 'src/app/shared/models/base/page
     standalone: false,
 })
 export class LocationListComponent extends BaseListComponent<LocationModel> {
-    showDeleteDialog: boolean = false;
-    itemToDelete: number | null = null;
     showMapsView: boolean = false;
 
     constructor(private locationService: LocationService) {
         super();
+    }
+
+    get searchTerm(): string {
+        return this.criteria.searchTerm;
     }
 
     protected override getColumns(): colDef[] {
@@ -55,25 +57,14 @@ export class LocationListComponent extends BaseListComponent<LocationModel> {
         this.router.navigate(['/location/edit', id]);
     }
 
-    removeLocation(id: number) {
-        this.itemToDelete = id;
-        this.showDeleteDialog = true;
-    }
-
-    confirmDelete() {
-        if (this.itemToDelete) {
-            this.locationService.deleteById(this.itemToDelete).subscribe(() => {
+    removeLocation(id: number, locationName: string) {
+        this.confirmDelete(locationName, () => {
+            this.locationService.deleteById(id).subscribe(() => {
                 this.showSuccessMessage(
                     this.translate('validationMessages.locationDeletedSuccess'),
                 );
-                this.showDeleteDialog = false;
-                this.itemToDelete = null;
                 this.loadData();
             });
-        }
-    }
-
-    onRowClick(event: any) {
-        console.log('Row clicked:', event);
+        });
     }
 }

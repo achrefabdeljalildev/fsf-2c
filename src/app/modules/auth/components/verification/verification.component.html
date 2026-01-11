@@ -1,7 +1,4 @@
-<div
-    class="h-screen w-screen flex overflow-hidden relative"
-    [dir]="isArabic ? 'rtl' : 'ltr'"
->
+<div class="h-screen w-screen flex overflow-hidden relative" [dir]="isArabic ? 'rtl' : 'ltr'">
     <!-- Background Image -->
     <div
         class="absolute inset-0 bg-cover bg-center"
@@ -11,72 +8,107 @@
     <!-- Overlay for dimming -->
     <div class="absolute inset-0 bg-black bg-opacity-50"></div>
 
-    <!-- Activation Code Form -->
-    <div class="relative z-10 w-full md:w-1/5 lg:w-1/5 p-8 m-auto">
-        <h2
-            class="text-3xl font-extrabold text-center text-white mb-6 font-ibmPlexSansArabic"
-        >
-            {{ 'auth.activate.label.title' | translate }}
-        </h2>
-        <p class="text-center text-md text-yellow mb-4 font-ibmPlexSansArabic">
-            {{ 'auth.activate.label.subtitle' | translate }}
-        </p>
+    <!-- OTP Verification Form -->
+    <div class="relative z-10 w-full md:w-auto p-8 m-auto">
+        <div class="bg-teal-700 bg-opacity-80 rounded-3xl p-8 md:p-12 max-w-md mx-auto shadow-2xl">
+            <h2 class="text-2xl font-bold text-center text-white mb-2 font-ibmPlexSansArabic">
+                {{ 'auth.otp.title' | translate }}
+            </h2>
 
-        <form
-            class="space-y-6"
-            [formGroup]="activationForm"
-            (ngSubmit)="onSubmit()"
-        >
-            <!-- Activation Code Input -->
-            <div>
-                <input
-                    id="activation-code"
-                    formControlName="activationCode"
-                    type="text"
-                    required
-                    class="mt-1 block w-full px-4 py-3 rounded-md shadow-sm text-center tracking-widest uppercase"
-                    placeholder=""
-                />
-
-                <!-- Error Message -->
-                <div
-                    *ngIf="
-                        activationForm.get('activationCode')?.invalid &&
-                        activationForm.get('activationCode')?.touched
-                    "
-                    class="text-red-500 text-sm mt-2"
-                >
-                    {{ 'auth.activate.error.invalidNumber' | translate }}
-                </div>
+            <!-- Timer -->
+            <div class="text-center mb-6">
+                <span class="text-yellow-400 text-sm font-mono">{{ getFormattedTime() }}</span>
             </div>
 
-            <!-- Submit Button -->
-            <div class="flex justify-center">
-                <button
-                    type="submit"
-                    class="w-40 bg-green-dark hover:bg-green-900 text-white py-3 px-4 rounded-full font-medium shadow-sm border border-transparent transition duration-300 font-ibmPlexSansArabic flex items-center justify-center"
-                >
-                    <!-- Logo inside the button -->
-                    <img
-                        src="assets/images/left-c.png"
-                        alt="Icon"
-                        class="h-10 w-10 object-contain me-8"
+            <form [formGroup]="activationForm" (ngSubmit)="onSubmit()">
+                <!-- OTP Input Boxes -->
+                <div class="flex justify-center gap-3 mb-4" [dir]="'ltr'">
+                    <input
+                        #otpInput
+                        type="text"
+                        maxlength="1"
+                        formControlName="digit1"
+                        autofocus
+                        (input)="onOtpInput($event, 0)"
+                        (keydown)="onOtpKeydown($event, 0)"
+                        class="w-14 h-14 text-center text-2xl font-bold bg-gray-800 text-white border-2 border-gray-600 rounded-lg focus:border-yellow-400 focus:outline-none transition-colors"
+                        pattern="[0-9]"
+                        inputmode="numeric"
                     />
+                    <input
+                        #otpInput
+                        type="text"
+                        maxlength="1"
+                        formControlName="digit2"
+                        (input)="onOtpInput($event, 1)"
+                        (keydown)="onOtpKeydown($event, 1)"
+                        class="w-14 h-14 text-center text-2xl font-bold bg-gray-800 text-white border-2 border-gray-600 rounded-lg focus:border-yellow-400 focus:outline-none transition-colors"
+                        pattern="[0-9]"
+                        inputmode="numeric"
+                    />
+                    <input
+                        #otpInput
+                        type="text"
+                        maxlength="1"
+                        formControlName="digit3"
+                        (input)="onOtpInput($event, 2)"
+                        (keydown)="onOtpKeydown($event, 2)"
+                        class="w-14 h-14 text-center text-2xl font-bold bg-gray-800 text-white border-2 border-gray-600 rounded-lg focus:border-yellow-400 focus:outline-none transition-colors"
+                        pattern="[0-9]"
+                        inputmode="numeric"
+                    />
+                    <input
+                        #otpInput
+                        type="text"
+                        maxlength="1"
+                        formControlName="digit4"
+                        (input)="onOtpInput($event, 3)"
+                        (keydown)="onOtpKeydown($event, 3)"
+                        class="w-14 h-14 text-center text-2xl font-bold bg-gray-800 text-white border-2 border-gray-600 rounded-lg focus:border-yellow-400 focus:outline-none transition-colors"
+                        pattern="[0-9]"
+                        inputmode="numeric"
+                    />
+                </div>
 
-                    {{ 'auth.activate.button.activate' | translate }}
-                </button>
-            </div>
-        </form>
+                <!-- Resend Link -->
+                <div class="text-center mb-6">
+                    <button
+                        type="button"
+                        (click)="resendCode()"
+                        [disabled]="!canResend"
+                        [class.opacity-50]="!canResend"
+                        [class.cursor-not-allowed]="!canResend"
+                        class="text-white text-sm hover:text-yellow-400 transition-colors font-ibmPlexSansArabic"
+                    >
+                        {{ 'auth.otp.resend' | translate }}
+                    </button>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="flex justify-center">
+                    <button
+                        type="submit"
+                        [disabled]="activationForm.invalid || isLoading"
+                        class="w-full bg-yellow-500 hover:bg-yellow-600 text-gray-900 py-3 px-8 rounded-lg font-bold shadow-lg transition-colors duration-300 font-ibmPlexSansArabic disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                    >
+                        <i *ngIf="isLoading" class="pi pi-spin pi-spinner mr-2"></i>
+                        {{ 'auth.otp.submit' | translate }}
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 
-    <div
-        class="flex justify-end items-center absolute top-4 left-4 right-4 z-10"
-    >
+    <div class="flex justify-end items-center absolute top-4 left-4 right-4 z-10">
         <button
             (click)="toggleLanguage()"
             class="text-sm text-gray-700 hover:underline font-ibmPlexSansArabic"
         >
-            {{ isArabic ? 'English' : 'عربي' }}
+            {{
+                isArabic
+                    ? ('common.languageEnglish' | translate)
+                    : ('common.languageArabic' | translate)
+            }}
         </button>
     </div>
 </div>

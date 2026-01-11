@@ -7,6 +7,8 @@ import { LocationService } from 'src/app/modules/location/services/location.serv
 import { CriteriaModel } from 'src/app/shared/models/base/criteria.model';
 import { AttachmentItem } from 'src/app/shared/components/file-attachments/file-attachments.component';
 import { FileAttachmentService } from 'src/app/shared/services/file-attachment.service';
+import { EntityClassficationsService } from 'src/app/modules/settings/entity-classfications/services/entity-classfications.service';
+import { EntityClassificationModel } from 'src/app/modules/settings/entity-classfications/models/entity-classification.model';
 
 @Component({
     selector: 'app-field-survey-view',
@@ -18,6 +20,7 @@ export class FieldSurveyViewComponent extends BaseComponent implements OnInit {
     fieldSurveyForm!: FormGroup;
     isLoading: boolean = false;
     isEditMode: boolean = false;
+    classificationTabs: EntityClassificationModel[] = [];
 
     attachments: AttachmentItem[] = [];
 
@@ -26,12 +29,14 @@ export class FieldSurveyViewComponent extends BaseComponent implements OnInit {
         private fieldSurveyService: FieldSurveyService,
         private locationService: LocationService,
         private fileAttachmentService: FileAttachmentService,
+        private entityClassificationsService: EntityClassficationsService,
     ) {
         super();
     }
 
     ngOnInit(): void {
         this.initForm();
+        this.loadEntityClassifications();
         this.route.params.subscribe((params) => {
             if (params['id']) {
                 this.fieldSurveyId = +params['id'];
@@ -95,6 +100,36 @@ export class FieldSurveyViewComponent extends BaseComponent implements OnInit {
             },
             error: (error) => {
                 console.error('Failed to load attachments', error);
+            },
+        });
+    }
+
+    loadEntityClassifications(): void {
+        const criteria: CriteriaModel = new CriteriaModel({ pageSize: 10, pageNumber: 1 });
+        this.entityClassificationsService.getPagedList(criteria).subscribe({
+            next: (response) => {
+                if (response?.data?.items && response.data.items.length > 0) {
+                    const firstClassification = response.data.items[1];
+                    if (firstClassification.id) {
+                        this.loadClassificationChildren(firstClassification.id);
+                    }
+                }
+            },
+            error: (error) => {
+                console.error('Failed to load entity classifications', error);
+            },
+        });
+    }
+
+    loadClassificationChildren(id: number): void {
+        this.entityClassificationsService.getById(id).subscribe({
+            next: (response) => {
+                if (response?.data?.children) {
+                    this.classificationTabs = response.data.children;
+                }
+            },
+            error: (error) => {
+                console.error('Failed to load classification children', error);
             },
         });
     }
@@ -164,20 +199,23 @@ export class FieldSurveyViewComponent extends BaseComponent implements OnInit {
 
     remove(): void {
         if (!this.fieldSurveyId) return;
-        this.isLoading = true;
-        const subscription = this.fieldSurveyService.deleteById(this.fieldSurveyId).subscribe({
-            next: () => {
-                this.isLoading = false;
-                this.showSuccessMessage('تم حذف المسح بنجاح');
-                this.router.navigate(['/field-survey/list']);
-            },
-            error: () => {
-                this.isLoading = false;
-                this.showErrorMessage('حدث خطأ أثناء حذف المسح');
-            },
-        });
 
-        this.subscriptions.add(subscription);
+        this.confirmDelete(this.fieldSurveyForm?.get('nameAr')?.value || 'Survey', () => {
+            this.isLoading = true;
+            const subscription = this.fieldSurveyService.deleteById(this.fieldSurveyId!).subscribe({
+                next: () => {
+                    this.isLoading = false;
+                    this.showSuccessMessage('تم حذف المسح بنجاح');
+                    this.router.navigate(['/field-survey/list']);
+                },
+                error: () => {
+                    this.isLoading = false;
+                    this.showErrorMessage('حدث خطأ أثناء حذف المسح');
+                },
+            });
+
+            this.subscriptions.add(subscription);
+        });
     }
 
     onFileAdded(file: File): void {

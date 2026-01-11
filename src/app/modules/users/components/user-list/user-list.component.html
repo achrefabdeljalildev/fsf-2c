@@ -41,22 +41,15 @@
                 >
                     <i class="pi pi-list-check"></i> الادوار
                 </div>
-                <div
-                    (click)="openDetailsDialog(value.id)"
-                    class="cursor-pointer flex items-center gap-2 btn btn-primary btn-sm truncate"
-                >
-                    <i class="pi pi-list-check"></i> التفاصيل
-                </div>
             </div>
         </ng-template>
     </ng-datatable>
 </main-content>
-<!-- 
-<app-user-view [(visible)]="showDialog" [userId]="selectedUserId" (onSave)="onDialogSave()" /> -->
+
+<app-user-view [(visible)]="showDialog" [userId]="selectedUserId" (onSave)="onDialogSave()" />
 
 <app-user-roles-dialog
     [(visible)]="showRolesDialog"
     [userId]="selectedUserIdForRoles"
     (onSave)="onRolesSave($event)"
 />
-<app-user-details [(visible)]="showDialog" [userId]="selectedUserId" (onSave)="onDialogSave()" />
