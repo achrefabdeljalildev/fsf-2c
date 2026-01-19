@@ -1,6 +1,8 @@
 <p-dialog
     [(visible)]="visible"
-    [header]="isEditMode ? ('actions.edit' | translate) : ('actions.addNew' | translate)"
+    [header]="
+        isEditMode ? ('GeneralSettings.edit' | translate) : ('GeneralSettings.addNew' | translate)
+    "
     [modal]="true"
     [style]="{ width: '50vw' }"
     [breakpoints]="{ '960px': '75vw', '640px': '90vw' }"
@@ -9,51 +11,51 @@
     <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-6">
         <!-- Name in Arabic -->
         <div class="form-group">
-            <label for="nameAr" class="block text-sm font-medium mb-2">
-                {{ 'formLabels.name' | translate }}
+            <label for="key" class="block text-sm font-medium mb-2">
+                {{ 'GeneralSettings.key' | translate }}
                 <span class="text-red-500">*</span>
             </label>
             <input
-                id="nameAr"
+                id="key"
                 type="text"
-                formControlName="nameAr"
+                formControlName="key"
                 pInputText
                 class="w-full"
-                [placeholder]="'formLabels.enterName' | translate"
+                [placeholder]="'GeneralSettings.enterKey' | translate"
+                [disabled]="isEditMode"
             />
             <small
                 *ngIf="
-                    form.get('nameAr')?.invalid &&
-                    (form.get('nameAr')?.dirty || form.get('nameAr')?.touched)
+                    form.get('key')?.invalid && (form.get('key')?.dirty || form.get('key')?.touched)
                 "
                 class="text-red-500"
             >
-                <span *ngIf="form.get('nameAr')?.errors?.['required']">
+                <span *ngIf="form.get('key')?.errors?.['required']">
                     {{ 'messages.requiredField' | translate }}
                 </span>
             </small>
         </div>
 
-        <!-- Description in Arabic -->
+        <!-- value in Arabic -->
         <div class="form-group">
-            <label for="descriptionAr" class="block text-sm font-medium mb-2">
-                {{ 'formLabels.description' | translate }}
+            <label for="value" class="block text-sm font-medium mb-2">
+                {{ 'GeneralSettings.Procedure' | translate }}
             </label>
-            <textarea
-                id="descriptionAr"
-                formControlName="descriptionAr"
-                pInputTextarea
-                rows="5"
+            <input
+                id="Value"
+                type="text"
+                formControlName="value"
+                pInputText
                 class="w-full"
-                [placeholder]="'formLabels.enterDescription' | translate"
-            ></textarea>
+                [placeholder]="'GeneralSettings.enterProcedure' | translate"
+            />
         </div>
 
         <button
             type="button"
             pButton
             pRipple
-            [label]="'classificationOfRiskType.cancel' | translate"
+            [label]="'GeneralSettings.cancel' | translate"
             icon="pi pi-times"
             class="p-button-text"
             (click)="closeDialog()"
@@ -62,7 +64,7 @@
             type="submit"
             pButton
             pRipple
-            [label]="'classificationOfRiskType.save' | translate"
+            [label]="'GeneralSettings.save' | translate"
             icon="pi pi-check"
             [loading]="isLoading"
             [disabled]="form.invalid || isLoading"

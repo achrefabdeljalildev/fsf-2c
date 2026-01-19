@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BaseComponent } from 'src/app/shared/components/base-component/base-component';
 import { ClassificationOfRiskImpactService } from '../../services/classification-of-risk-impact.service';
-import { ClassificationOfRiskImpact } from '../../models/classification-of-risk-impact';
 
 @Component({
     selector: 'app-impact-view',

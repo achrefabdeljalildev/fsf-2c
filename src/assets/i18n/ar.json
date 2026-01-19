@@ -98,19 +98,44 @@
     },
     "fallingLoadClassification": {
         "addNew": "إضافة تصنيف حمل ساقط جديد",
-        "list": "قائمة تصنيفات الحمل الساقط"
+        "list": "قائمة تصنيفات الحمل الساقط",
+        "save":"حفظ",
+        "cancel":"إلغاء"
     },
     "classificationOfRiskSituations": {
         "addNew": "إضافة تصنيف حالة مخاطر جديد",
-        "list": "قائمة تصنيفات حالات المخاطر"
+        "list": "قائمة تصنيفات حالات المخاطر",
+        "save":"حفظ",
+        "cancel":"إلغاء"
     },
     "classificationOfRiskImpact": {
         "addNew": "إضافة تصنيف تأثير مخاطر جديد",
-        "list": "قائمة تصنيفات تأثير المخاطر"
+        "list": "قائمة تصنيفات تأثير المخاطر",
+        "save":"حفظ",
+        "cancel":"إلغاء"
     },
     "classificationOfRiskType": {
         "addNew": "إضافة تصنيف نوع مخاطر جديد",
-        "list": "قائمة تصنيفات أنواع المخاطر"
+        "list": "قائمة تصنيفات أنواع المخاطر",
+        "save":"حفظ",
+        "cancel":"إلغاء"
+    },
+     "GeneralSettings":{
+        "generalSettings": "الإعدادات العامة",
+        "settings": "الإعدادات",
+        "key": "العنصر",
+        "keys": "العناصر",
+        "value": "القيمة",
+        "enterKey": "ادخل العنصر",
+        "procedures": "الإجراءات",
+        "Procedure": "الاجراء",
+        "enterProcedure": "أدخل الإجراء",
+        "securitySystems": "الأنظمة الأمنية",
+        "addNew": "إضافة عنصر جديد",
+        "edit": "تعديل",
+        "new.list": "قائمة الإعدادات العامة",
+        "save":"حفظ",
+        "cancel":"إلغاء"
     },
     "map": {
         "showRegions": "عرض المناطق",

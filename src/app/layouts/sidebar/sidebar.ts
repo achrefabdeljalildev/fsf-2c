@@ -180,6 +180,22 @@ export class SidebarComponent implements OnInit {
                 },
             ],
         },
+        {
+            key: '47',
+            label: 'الاعدادات العامة',
+            data: 'Sub Survey 2',
+            icon: 'assets/images/icons/settings-sidebar-logo.svg',
+            routerLink: '/general-settings',
+            children: [
+                {
+                    key: '471',
+                    label: 'إعدادات عامة',
+                    data: 'Sub Survey 3',
+                    icon: 'pi pi-list',
+                    routerLink: '/general-settings/list',
+                },
+            ],
+        },
     ];
 
     constructor(

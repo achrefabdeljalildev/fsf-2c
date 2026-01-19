@@ -118,4 +118,13 @@ export const routes: Routes = [
                 (m) => m.ClassificationOfRiskSituationsModule,
             ),
     },
+    {
+        path: 'general-settings',
+        canActivate: [AuthGuard],
+        component: AppLayout,
+        loadChildren: () =>
+            import('./modules/settings/general-settings/general-settings.module').then(
+                (m) => m.GeneralSettingsModule,
+            ),
+    },
 ];

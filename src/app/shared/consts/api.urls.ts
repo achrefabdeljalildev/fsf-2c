@@ -38,6 +38,9 @@ export const API_URL_RISK_REGISTER_SITTINGS = '/risk-register-settings';
 // Classification of Risk Impact
 export const API_URL_CLASSIFICATION_OF_RISK_IMPACT = '/RiskImpacts';
 
+// General Settings
+export const API_URL_GENERAL_SETTINGS = '/GeneralSettings';
+
 // Classification of Risk Situation
 export const API_URL_CLASSIFICATION_OF_RISK_SITUATION = '/RiskStatus';
 

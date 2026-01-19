@@ -1,14 +1,14 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BaseComponent } from 'src/app/shared/components/base-component/base-component';
-import { ClassificationOfRiskSituationsService } from '../../services/classification-of-risk-situations.service';
+import { GeneralSettingsService } from '../../services/general-settings.service';
 
 @Component({
-    selector: 'app-situation-view',
-    templateUrl: './situation-view.component.html',
+    selector: 'app-general-settings-view',
+    templateUrl: './general-settings-view.component.html',
     standalone: false,
 })
-export class ClassificationOfRiskSituationsViewComponent extends BaseComponent implements OnInit {
+export class GeneralSettingsViewComponent extends BaseComponent implements OnInit {
     @Input() visible: boolean = false;
     @Input() itemId: number | null = null;
 
@@ -18,10 +18,9 @@ export class ClassificationOfRiskSituationsViewComponent extends BaseComponent i
     form!: FormGroup;
     isLoading: boolean = false;
     isEditMode: boolean = false;
-
     constructor(
         private fb: FormBuilder,
-        private service: ClassificationOfRiskSituationsService,
+        private service: GeneralSettingsService,
     ) {
         super();
     }
@@ -34,27 +33,42 @@ export class ClassificationOfRiskSituationsViewComponent extends BaseComponent i
         if (this.visible && this.itemId) {
             this.isEditMode = true;
             this.loadItem(this.itemId);
+            this.disableKeyField();
         } else if (this.visible && !this.itemId) {
             this.isEditMode = false;
             this.form?.reset();
+            this.enableKeyField();
+        }
+    }
+
+    disableKeyField(): void {
+        const keyControl = this.form.get('key');
+        if (keyControl) {
+            keyControl.disable();
+        }
+    }
+
+    enableKeyField(): void {
+        const keyControl = this.form.get('key');
+        if (keyControl) {
+            keyControl.enable();
         }
     }
 
     initForm(): void {
         this.form = this.fb.group({
-            nameAr: ['', [Validators.required]],
-            descriptionAr: [''],
+            key: ['', [Validators.required]],
+            value: [''],
         });
     }
-
     loadItem(id: number): void {
         this.isLoading = true;
         this.service.getById(id).subscribe(
             (response: any) => {
                 const item = response.data;
                 this.form.patchValue({
-                    nameAr: item.nameAr,
-                    descriptionAr: item.descriptionAr,
+                    key: item.key,
+                    value: item.value,
                 });
                 this.isLoading = false;
             },
@@ -71,7 +85,7 @@ export class ClassificationOfRiskSituationsViewComponent extends BaseComponent i
         }
 
         this.isLoading = true;
-        const formValue = this.form.value;
+        const formValue = this.form.getRawValue();
 
         if (this.isEditMode && this.itemId) {
             const itemToUpdate = { ...formValue, id: this.itemId };
