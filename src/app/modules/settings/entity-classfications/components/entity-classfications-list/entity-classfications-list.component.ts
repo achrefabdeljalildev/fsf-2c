@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { EntityClassficationsService } from '../../services/entity-classfications.service';
-import { EntityClassificationModel } from '../../models/entity-classification.model';
 import { BaseListComponent } from 'src/app/shared/components/base-list-component/base-list-component';
+import { EntityClassificationModel } from '../../models/entity-classification.model';
+import { EntityClassficationsService } from '../../services/entity-classfications.service';
 
 @Component({
     selector: 'app-entity-classfications-list',
@@ -12,6 +12,9 @@ export class EntityClassficationsListComponent
     extends BaseListComponent<EntityClassificationModel>
     implements OnInit
 {
+    showDialog: boolean = false;
+    selectedEntityId: number | null = null;
+
     constructor(private svc: EntityClassficationsService) {
         super();
     }
@@ -50,20 +53,21 @@ export class EntityClassficationsListComponent
     }
 
     openCreateDialog() {
-        this.router.navigate(['/entity-classification/create']);
+        this.selectedEntityId = null;
+        this.showDialog = true;
     }
 
     openEditDialog(id: number) {
-        this.router.navigate([`/entity-classification/tree/${id}`]);
+        this.selectedEntityId = id;
+        this.showDialog = true;
     }
 
-    openTree() {
-        const root =
-            (this.rows as any)?.find((r: any) => r.parentId === 0) ?? (this.rows as any)?.[0];
-        if (!root || !root.id) {
-            this.showErrorMessage(this.translate('common.noDataOnList') || 'لا توجد بيانات');
-            return;
-        }
-        this.router.navigate([`/entity-classification/tree/${root.id}`]);
+    onDialogSaved() {
+        this.showDialog = false;
+        this.loadData();
+    }
+
+    openTree(id: number) {
+        this.router.navigate([`/entity-classification/tree/${id}`]);
     }
 }

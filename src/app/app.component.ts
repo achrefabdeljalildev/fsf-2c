@@ -6,6 +6,7 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Settings } from 'luxon';
 import { filter, map, switchMap, tap } from 'rxjs/operators';
+import { AuthService } from 'src/app/modules/auth/services/auth.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -19,10 +20,13 @@ export class AppComponent {
         private activatedRoute: ActivatedRoute,
         private titleService: Title,
         private translateService: TranslateService,
+        private authService: AuthService,
     ) {
         this.setDefaultLang();
         this.changeTitle();
-        console.info('App Version: ', environment.appVersion);
+        this.verifyToken();
+
+        console.info('➡️ App Version: ', environment.appVersion);
     }
 
     ngOnInit(): void {}
@@ -37,6 +41,7 @@ export class AppComponent {
         let currentLang = localStorage.getItem('i18n_locale') || 'ar';
         Settings.defaultLocale = currentLang;
         this.translateService.use(currentLang);
+        document.documentElement.lang = currentLang;
     }
 
     changeTitle() {
@@ -64,5 +69,18 @@ export class AppComponent {
                 }),
             )
             .subscribe();
+    }
+
+    verifyToken() {
+        if (this.authService.isAuthenticated()) {
+            this.authService.verifyToken().subscribe({
+                next: (response) => {
+                    if (!response.isSuccess) {
+                        this.authService.logout();
+                        this.router.navigate(['/auth/login']);
+                    }
+                },
+            });
+        }
     }
 }

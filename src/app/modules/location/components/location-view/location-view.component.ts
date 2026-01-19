@@ -1,13 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BaseComponent } from 'src/app/shared/components/base-component/base-component';
-import { LocationService } from '../../services/location.service';
-import { LocationModel } from '../../models/location.model';
-import { CriteriaModel } from 'src/app/shared/models/base/criteria.model';
 import { FlatpickrDefaultsInterface } from 'angularx-flatpickr';
-import { AttachmentItem } from 'src/app/shared/components/file-attachments/file-attachments.component';
-import { FileAttachmentService } from 'src/app/shared/services/file-attachment.service';
-import HijriDateConfig from 'src/app/shared/util/hijri-date-config';
 import { LocationClassification } from 'src/app/modules/settings/location-classification/models/location-classification.model';
 import { LocationClassificationService } from 'src/app/modules/settings/location-classification/services/location-classification.service';
 import { Organization } from 'src/app/modules/settings/organization/models/organization.model';
@@ -16,6 +9,13 @@ import { Province } from 'src/app/modules/settings/province/models/province.mode
 import { ProvinceService } from 'src/app/modules/settings/province/services/province.service';
 import { Region } from 'src/app/modules/settings/regions/models/region.model';
 import { RegionService } from 'src/app/modules/settings/regions/services/region.service';
+import { BaseComponent } from 'src/app/shared/components/base-component/base-component';
+import { AttachmentItem } from 'src/app/shared/components/file-attachments/file-attachments.component';
+import { CriteriaModel } from 'src/app/shared/models/base/criteria.model';
+import { FileAttachmentService } from 'src/app/shared/services/file-attachment.service';
+import HijriDateConfig from 'src/app/shared/util/hijri-date-config';
+import { LocationModel } from '../../models/location.model';
+import { LocationService } from '../../services/location.service';
 import { SaudiMapComponent } from '../saudi-map/saudi-map.component';
 
 @Component({
@@ -34,6 +34,7 @@ export class LocationViewComponent extends BaseComponent implements OnInit {
 
     showMapDialog: boolean = false;
     selectedMarkerCoordinates: string = '';
+    showLocationCode: boolean = false;
 
     filteredProvinces: Province[] = [];
     filteredOrganizations: Organization[] = [];

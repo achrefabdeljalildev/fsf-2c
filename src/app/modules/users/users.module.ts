@@ -1,14 +1,14 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { Skeleton } from 'primeng/skeleton';
+import { Tree } from 'primeng/tree';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { UserListComponent } from './components/user-list/user-list.component';
-import { UserViewComponent } from './components/user-view/user-view.component';
-import { UserRolesDialogComponent } from './components/user-roles-dialog/user-roles-dialog.component';
 import { RoleListComponent } from './components/role-list/role-list.component';
 import { RoleViewComponent } from './components/role-view/role-view.component';
-import { Tree } from 'primeng/tree';
-import { Skeleton } from 'primeng/skeleton';
+import { UserListComponent } from './components/user-list/user-list.component';
+import { UserRolesDialogComponent } from './components/user-roles-dialog/user-roles-dialog.component';
+import { UserViewComponent } from './components/user-view/user-view.component';
 
 const routes: Routes = [
     { path: 'list', component: UserListComponent },

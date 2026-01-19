@@ -1,0 +1,62 @@
+<p-dialog
+    [(visible)]="visible"
+    [modal]="true"
+    [draggable]="false"
+    [resizable]="false"
+    [style]="{ width: '500px' }"
+    [header]="
+        isEditMode
+            ? ('globalSettings.editGlobalSetting' | translate)
+            : ('globalSettings.addNewGlobalSetting' | translate)
+    "
+    [closable]="false"
+>
+    <form [formGroup]="settingForm" (ngSubmit)="submit()" class="space-y-4">
+        <div class="form-group">
+            <label for="key" class="block text-sm font-medium mb-2">
+                {{ 'formLabels.key' | translate }}
+                <span class="text-red-500">*</span>
+            </label>
+            <input
+                id="key"
+                type="text"
+                formControlName="key"
+                pInputText
+                class="w-full"
+                [placeholder]="'formLabels.key' | translate"
+            />
+        </div>
+
+        <div class="form-group">
+            <label for="value" class="block text-sm font-medium mb-2">
+                {{ 'formLabels.value' | translate }}
+                <span class="text-red-500">*</span>
+            </label>
+            <textarea
+                id="value"
+                formControlName="value"
+                pInputTextarea
+                class="w-full"
+                rows="4"
+                [placeholder]="'formLabels.value' | translate"
+            ></textarea>
+        </div>
+    </form>
+
+    <ng-template pTemplate="footer">
+        <button class="btn btn-secondary" type="button" (click)="cancel()" [disabled]="isLoading">
+            {{ 'buttons.cancel' | translate }}
+        </button>
+        <button
+            class="btn btn-primary ms-2"
+            type="button"
+            (click)="submit()"
+            [disabled]="settingForm.invalid || isLoading"
+        >
+            <span *ngIf="!isLoading">{{
+                isEditMode ? ('buttons.save' | translate) : ('buttons.add' | translate)
+            }}</span>
+            <span *ngIf="isLoading">{{ 'common.loading' | translate }}</span>
+        </button>
+    </ng-template>
+</p-dialog>

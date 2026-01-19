@@ -1,7 +1,7 @@
 // Authentication
 export const API_URL_AUTH_LOGIN = '/Authentication/AdminLogin';
-export const API_URL_AUTH_REFRESH = '/api/Authentication/Refresh';
-export const API_URL_AUTH_VERIFY = '/api/Authentication/Verify';
+export const API_URL_AUTH_REFRESH = '/Authentication/Refresh';
+export const API_URL_AUTH_VERIFY = '/Authentication/ValidateToken';
 export const API_URL_AUTH_REQUEST_OTP = '/Authentication/RequestOtp';
 export const API_URL_AUTH_VALIDATE_OTP = '/Authentication/ValidateOtp';
 
@@ -38,9 +38,6 @@ export const API_URL_RISK_REGISTER_SITTINGS = '/risk-register-settings';
 // Classification of Risk Impact
 export const API_URL_CLASSIFICATION_OF_RISK_IMPACT = '/RiskImpacts';
 
-// General Settings
-export const API_URL_GENERAL_SETTINGS = '/GeneralSettings';
-
 // Classification of Risk Situation
 export const API_URL_CLASSIFICATION_OF_RISK_SITUATION = '/RiskStatus';
 
@@ -49,3 +46,6 @@ export const API_URL_CLASSIFICATION_OF_RISK_TYPE = '/RiskTypes';
 
 // Falling Load Classification
 export const API_URL_FALLING_LOAD_CLASSIFICATION = '/RiskLikeliHoods';
+
+// Location Risks
+export const API_URL_LOCATION_RISKS = '/LocationRisks';

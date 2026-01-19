@@ -1,59 +1,71 @@
-<div class="flex justify-between items-center bg-white border-b p-2 mb-2 rounded-t-lg">
-    <a
-        class="btn btn-outline-primary btn-sm p-2 flex items-center gap-2 cursor-pointer"
-        (click)="onAddNewRecord()"
-    >
-        <i class="pi pi-plus"></i>
-        {{ addNewRecordLabel }}
-    </a>
-
-    <div class="flex gap-2">
-        <button *ngIf="showMapsButton" class="btn btn-secondary btn-sm" (click)="onClickMaps()">
-            <i class="pi pi-map"></i>
-        </button>
-        <button
-            *ngIf="showFilterButton"
-            class="btn btn-secondary btn-sm"
-            (click)="onSearch(searchTerm)"
+<div class="flex flex-col h-full">
+    <div class="flex justify-between items-center bg-white border-b p-2 mb-2 rounded-t-lg">
+        <a
+            class="btn btn-outline-primary btn-sm p-2 flex items-center gap-2 cursor-pointer"
+            (click)="onAddNewRecord()"
         >
-            <i class="pi pi-filter"></i>
-        </button>
-        <div class="relative w-full max-w-md flex items-center">
-            <!-- Search Icon -->
-            <i class="pi pi-search absolute start-2"></i>
+            <i class="pi pi-plus"></i>
+            {{ addNewRecordLabel }}
+        </a>
 
-            <!-- Input -->
-            <input
-                [(ngModel)]="searchTerm"
-                id="datatable-container-search"
-                type="text"
-                placeholder="بحث..."
-                (keyup.enter)="onSearch(searchTerm)"
-                class="w-full rounded-lg border border-gray-300 bg-white py-2 pr-10 pl-10 text-sm text-gray-700 placeholder-gray-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-            />
-
-            <!-- Heroicons X -->
-            <i
-                *ngIf="searchTerm.trim()"
-                class="pi pi-times text-lg absolute end-2 cursor-pointer hover:text-red-600"
-                (click)="searchTerm = ''; onSearch('')"
-            ></i>
-            <i
-                *ngIf="!searchTerm.trim()"
-                class="pi pi-refresh text-lg absolute end-2 cursor-pointer hover:text-teal-600 rotate-45"
+        <div class="flex gap-2">
+            <button *ngIf="showMapsButton" class="btn btn-primary btn-sm" (click)="onClickMaps()">
+                <i class="pi pi-map"></i>
+            </button>
+            <button
+                *ngIf="showFilterButton"
+                class="btn btn-primary btn-sm"
                 (click)="onSearch(searchTerm)"
-            ></i>
-        </div>
-        <button class="btn btn-secondary btn-sm" (click)="onSearch(searchTerm)">بحث</button>
-    </div>
-</div>
+            >
+                <i class="pi pi-filter"></i>
+            </button>
+            <div class="relative w-full max-w-md flex items-center">
+                <!-- Search Icon -->
+                <i class="pi pi-search absolute start-2"></i>
 
-<div class="flex items-center w-full justify-between p-6 px-4 bg-white">
-    <!-- add title here -->
-    <h4 class="text-lg font-semibold flex-grow">
-        {{ tableTitle | translate }}
-    </h4>
-    <div class="text-sm text-gray-600">
-        {{ paginationInfo }}
+                <!-- Input -->
+                <input
+                    [(ngModel)]="searchTerm"
+                    id="datatable-container-search"
+                    type="text"
+                    placeholder="بحث..."
+                    (keyup.enter)="onSearch(searchTerm)"
+                    class="w-full rounded-lg border border-gray-300 bg-white py-2 pr-10 pl-10 text-sm text-gray-700 placeholder-gray-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                />
+
+                <!-- Heroicons X -->
+                <i
+                    *ngIf="searchTerm.trim()"
+                    class="pi pi-times text-lg absolute end-2 cursor-pointer hover:text-red-600"
+                    (click)="searchTerm = ''; onSearch('')"
+                ></i>
+                <i
+                    *ngIf="!searchTerm.trim()"
+                    class="pi pi-refresh text-lg absolute end-2 cursor-pointer hover:text-teal-600 rotate-45"
+                    (click)="onSearch(searchTerm)"
+                ></i>
+            </div>
+            <button class="btn btn-primary btn-sm" (click)="onSearch(searchTerm)">بحث</button>
+        </div>
     </div>
+
+    <div class="flex items-center w-full justify-between p-6 px-4 bg-white">
+        <!-- add title here -->
+        <h4 class="text-lg font-semibold flex-grow">
+            {{ tableTitle | translate }}
+        </h4>
+        <div class="text-sm text-gray-600">
+            {{ paginationInfo }}
+        </div>
+    </div>
+
+    <ng-content />
+
+    <p-paginator
+        class="mt-auto"
+        *ngIf="pagination"
+        [rows]="pageSize"
+        [totalRecords]="totalCount"
+        (onPageChange)="onPageChange($event)"
+    />
 </div>

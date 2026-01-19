@@ -1,10 +1,11 @@
-import { FormBuilder } from '@angular/forms';
-import { TranslateService } from '@ngx-translate/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { inject } from '@angular/core';
 import { Location } from '@angular/common';
-import { Subscription } from 'rxjs';
+import { inject } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { AppService } from '@shared/services/app.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
 
 export abstract class BaseComponent {
     protected translateService: TranslateService;
@@ -14,6 +15,7 @@ export abstract class BaseComponent {
     protected location: Location;
     protected confirmationService: ConfirmationService;
     protected messageService: MessageService;
+    protected appService = inject(AppService);
 
     subscriptions: Subscription = new Subscription();
 
@@ -25,21 +27,34 @@ export abstract class BaseComponent {
         this.location = inject(Location);
         this.confirmationService = inject(ConfirmationService);
         this.messageService = inject(MessageService);
+        this.appService = inject(AppService);
     }
 
     // -----------------------
     // Message utilities
     // -----------------------
     protected showMessage(message: string, title: string = 'success'): void {
-        this.messageService.add({ severity: title, summary: 'إشعار', detail: message });
+        this.messageService.add({
+            severity: title,
+            summary: 'إشعار',
+            detail: this.translate(message),
+        });
     }
 
     protected showSuccessMessage(message: string): void {
-        this.messageService.add({ severity: 'success', summary: 'إشعار', detail: message });
+        this.messageService.add({
+            severity: 'success',
+            summary: 'إشعار',
+            detail: this.translate(message),
+        });
     }
 
     protected showErrorMessage(message: string, title = 'error'): void {
-        this.messageService.add({ severity: 'error', summary: 'إشعار', detail: message });
+        this.messageService.add({
+            severity: 'error',
+            summary: 'إشعار',
+            detail: this.translate(message),
+        });
     }
 
     protected confirmDelete(
@@ -98,8 +113,7 @@ export abstract class BaseComponent {
 
     toggleLanguage() {
         const newLang = this.isArabeMode() ? 'en' : 'ar';
-        this.translateService.use(newLang);
-        localStorage.setItem('i18n_locale', newLang);
+        this.appService.toggleLanguage({ code: newLang });
 
         window.location.reload();
     }

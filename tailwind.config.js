@@ -22,7 +22,7 @@ module.exports = {
                     'dark-light': 'rgba(67,97,238,.15)',
                 },
                 secondary: {
-                    DEFAULT: '#0E8A8A',
+                    DEFAULT: '#F5FAFA',
                     light: '#0E8A8A',
                     'dark-light': 'rgb(128 93 202 / 15%)',
                 },
@@ -122,8 +122,7 @@ module.exports = {
             typography: ({ theme }) => ({
                 DEFAULT: {
                     css: {
-                        '--tw-prose-invert-headings':
-                            theme('colors.white.dark'),
+                        '--tw-prose-invert-headings': theme('colors.white.dark'),
                         '--tw-prose-invert-links': theme('colors.white.dark'),
                         h1: {
                             fontSize: '40px',

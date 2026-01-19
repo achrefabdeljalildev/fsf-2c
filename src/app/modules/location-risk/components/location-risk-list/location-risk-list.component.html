@@ -1,0 +1,46 @@
+<p-breadcrumb
+    [model]="[
+        { label: ('breadcrumbs.securitySystems' | translate), routerLink: '/' },
+        { label: ('breadcrumbs.generalAdministration' | translate), routerLink: '/' },
+        { label: ('breadcrumbs.locationRisks' | translate) },
+    ]"
+/>
+
+<main-content>
+    <list-header
+        [addNewRecordLabel]="'locationRisk.addNew' | translate"
+        [tableTitle]="'locationRisk.list' | translate"
+        [paginationInfo]="paginationInfo"
+        [pageNumber]="criteria.pageNumber"
+        [pageSize]="criteria.pageSize"
+        [totalCount]="criteria.totalCount ?? 0"
+        (search)="onSearch($event)"
+        (addNewRecord)="router.navigate(['/location-risk/create'])"
+        (pageChange)="onPageChange($event)"
+    >
+        <ng-datatable
+            [rows]="rows"
+            [columns]="cols"
+            [hasCheckbox]="true"
+            [sortable]="false"
+            [loading]="isLoading"
+            [pagination]="true"
+            [pageSize]="criteria.pageSize"
+            [noDataContent]="'common.noDataOnList' | translate"
+        >
+            <ng-template slot="actions" let-value="data">
+                <div class="flex gap-2">
+                    <div
+                        (click)="router.navigate(['/location-risk/edit', value.id])"
+                        class="cursor-pointer"
+                    >
+                        <i class="pi pi-pencil"></i>
+                    </div>
+                    <div (click)="removeLocationRisk(value.id)" class="cursor-pointer">
+                        <i class="pi pi-trash"></i>
+                    </div>
+                </div>
+            </ng-template>
+        </ng-datatable>
+    </list-header>
+</main-content>

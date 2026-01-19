@@ -1,6 +1,6 @@
 import { Directive, OnDestroy, OnInit } from '@angular/core';
 import { colDef } from '@bhplugin/ng-datatable';
-import { Observable, Subject, Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/components/base-component/base-component';
 import { CriteriaModel } from 'src/app/shared/models/base/criteria.model';
 import { ApiResponseModel, PagedResponse } from 'src/app/shared/models/base/paged-response.model';
@@ -50,7 +50,7 @@ export abstract class BaseListComponent<T> extends BaseComponent implements OnIn
             next: (response) => {
                 if (response && response.isSuccess) {
                     this.rows = response.data.items ?? [];
-                    this.criteria.totalCount = response.meta.total;
+                    this.criteria.totalCount = response.meta?.total;
                     this.afterLoad(this.rows);
                 } else {
                     this.rows = [];

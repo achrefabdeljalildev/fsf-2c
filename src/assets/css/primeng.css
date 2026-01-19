@@ -31,5 +31,9 @@ html[dir='rtl'] .p-breadcrumb-separator {
 }
 
 .p-paginator-page {
-    background-color: #eaf3fa !important;
+    background-color: transparent !important;
+}
+
+.p-paginator-page.p-paginator-page-selected {
+    @apply !bg-lightBlue;
 }

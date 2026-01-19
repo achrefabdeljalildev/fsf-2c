@@ -1,10 +1,9 @@
-<p-confirmDialog></p-confirmDialog>
+<p-confirmDialog />
 
 <p-breadcrumb
     [model]="[
-        { label: ('breadcrumbs.securitySystems' | translate) },
-        { label: ('breadcrumbs.generalAdministration' | translate) },
-        { label: ('breadcrumbs.fieldSurveyAdmin' | translate) },
+        { label: ('breadcrumbs.securitySystems' | translate), routerLink: '/' },
+        { label: ('globalSettings.globalSettings' | translate), routerLink: '/' },
         { label: ('users.roles' | translate) },
     ]"
 />
@@ -13,40 +12,44 @@
     <list-header
         tableTitle="{{ 'users.roles' | translate }}"
         [paginationInfo]="paginationInfo"
+        [pageNumber]="criteria.pageNumber"
+        [pageSize]="criteria.pageSize"
+        [totalCount]="criteria.totalCount ?? 0"
         (addNewRecord)="openCreateDialog()"
         (search)="onSearch($event)"
-    />
-
-    <ng-datatable
-        [rows]="rows"
-        [columns]="cols"
-        [hasCheckbox]="true"
-        [sortable]="false"
-        [loading]="isLoading"
-        [pagination]="true"
-        [pageSize]="criteria.pageSize"
-        rowClass="cursor-pointer"
-        noDataContent="{{ 'common.noDataOnList' | translate }}"
+        (pageChange)="onPageChange($event)"
     >
-        <ng-template slot="actions" let-value="data">
-            <div class="flex gap-2">
-                <div
-                    (click)="openEditDialog(value); $event.stopPropagation()"
-                    class="cursor-pointer"
-                    title="{{ 'buttons.edit' | translate }}"
-                >
-                    <i class="pi pi-pencil"></i>
+        <ng-datatable
+            [rows]="rows"
+            [columns]="cols"
+            [hasCheckbox]="true"
+            [sortable]="false"
+            [loading]="isLoading"
+            [pagination]="true"
+            [pageSize]="criteria.pageSize"
+            rowClass="cursor-pointer"
+            noDataContent="{{ 'common.noDataOnList' | translate }}"
+        >
+            <ng-template slot="actions" let-value="data">
+                <div class="flex gap-2">
+                    <div
+                        (click)="openEditDialog(value); $event.stopPropagation()"
+                        class="cursor-pointer"
+                        title="{{ 'buttons.edit' | translate }}"
+                    >
+                        <i class="pi pi-pencil"></i>
+                    </div>
+                    <div
+                        (click)="openPermissionsDialog(value)"
+                        class="cursor-pointer"
+                        title="{{ 'users.managePermissions' | translate }}"
+                    >
+                        <i class="pi pi-shield"></i>
+                    </div>
                 </div>
-                <div
-                    (click)="openPermissionsDialog(value)"
-                    class="cursor-pointer"
-                    title="{{ 'users.managePermissions' | translate }}"
-                >
-                    <i class="pi pi-shield"></i>
-                </div>
-            </div>
-        </ng-template>
-    </ng-datatable>
+            </ng-template>
+        </ng-datatable>
+    </list-header>
 </main-content>
 
 <app-role-view [(visible)]="showDialog" [role]="selectedRole" (onSave)="onDialogSave()" />
@@ -75,7 +78,32 @@
             selectionMode="checkbox"
             class="w-full md:w-[30rem]"
             [(selection)]="selectedNodes"
-        />
+        >
+            <ng-template let-node pTemplate="default">
+                <div class="flex items-center gap-2">
+                    <!-- <i
+                        *ngIf="node.data?.type === 'menu'"
+                        class="pi pi-folder"
+                        [ngClass]="{
+                            'text-primary': node.data.isAllowed,
+                            'text-gray-400': !node.data.isAllowed,
+                        }"
+                    ></i>
+                    <i
+                        *ngIf="node.data?.type === 'form'"
+                        class="pi pi-file"
+                        [ngClass]="{
+                            'text-blue-500': node.data.isAllowed,
+                            'text-gray-400': !node.data.isAllowed,
+                        }"
+                    ></i> -->
+                    <span>{{ node.label }}</span>
+                    <span *ngIf="node.data?.code" class="text-xs text-gray-500 ml-2"
+                        >({{ node.data.code }})</span
+                    >
+                </div>
+            </ng-template>
+        </p-tree>
     </div>
     <ng-template pTemplate="footer">
         <button

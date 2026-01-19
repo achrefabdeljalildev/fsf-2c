@@ -1,11 +1,10 @@
-<p-confirmDialog></p-confirmDialog>
+<p-confirmDialog />
 
 <p-breadcrumb
     class="mb-4"
     [model]="[
-        { label: ('breadcrumbs.securitySystems' | translate) },
-        { label: ('breadcrumbs.generalAdministration' | translate) },
-        { label: ('breadcrumbs.fieldSurveyAdmin' | translate) },
+        { label: ('breadcrumbs.securitySystems' | translate), routerLink: '/' },
+        { label: ('breadcrumbs.generalAdministration' | translate), routerLink: '/' },
         {
             label: ('entityClassification.entityClassificationList' | translate),
             routerLink: '/entity-classification/list',

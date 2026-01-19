@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { colDef } from '@bhplugin/ng-datatable';
 import { Observable } from 'rxjs';
-import { LocationModel } from '../../models/location.model';
-import { LocationService } from '../../services/location.service';
 import { BaseListComponent } from 'src/app/shared/components/base-list-component/base-list-component';
 import { ApiResponseModel, PagedResponse } from 'src/app/shared/models/base/paged-response.model';
+import { LocationModel } from '../../models/location.model';
+import { LocationService } from '../../services/location.service';
 
 @Component({
     selector: 'app-location-list',
@@ -25,7 +24,11 @@ export class LocationListComponent extends BaseListComponent<LocationModel> {
 
     protected override getColumns(): colDef[] {
         return [
-            { field: 'code', title: 'formLabels.locationCode' },
+            {
+                field: 'code',
+                title: 'formLabels.locationCode',
+                cellRenderer: (d: LocationModel) => this.maskLocationCode(d.code),
+            },
             { field: 'nameAr', title: 'formLabels.name' },
             { field: 'provinceNameAr', title: 'formLabels.province' },
             { field: 'organizationNameAr', title: 'formLabels.affiliatedEntity' },
@@ -66,5 +69,20 @@ export class LocationListComponent extends BaseListComponent<LocationModel> {
                 this.loadData();
             });
         });
+    }
+
+    createFieldSurvey(location: LocationModel) {
+        this.router.navigate(['/field-survey/create'], {
+            queryParams: { locationCode: location.code },
+        });
+    }
+
+    maskLocationCode(code: string): string {
+        if (!code || code.length <= 2) {
+            return code;
+        }
+        const lastTwo = code.substring(code.length - 2);
+        const masked = '*'.repeat(code.length - 2) + lastTwo;
+        return masked;
     }
 }

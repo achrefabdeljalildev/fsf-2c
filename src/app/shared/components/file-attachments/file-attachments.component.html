@@ -30,11 +30,11 @@
 
     <div
         *ngIf="attachments.length; else emptyState"
-        class="flex gap-4 justify-between py-4 flex-col overflow-y-auto flex-1"
+        class="flex gap-4 py-4 flex-col overflow-y-auto flex-1"
     >
         <div
             *ngFor="let file of paginatedAttachments; trackBy: trackByAttachment"
-            class="flex justify-between w-full items-center bg-lightBlue p-4 rounded-md"
+            class="flex w-full items-center bg-lightBlue p-4 rounded-md"
         >
             <div class="flex gap-3 items-center w-full">
                 <div *ngIf="!file.isUploading" class="flex items-center gap-3 w-full">
@@ -86,7 +86,7 @@
         </div>
 
         <!-- Pagination -->
-        <div class="w-full flex-shrink-0 mt-4" *ngIf="totalPages > 1">
+        <div class="w-full flex-shrink-0 mt-auto" *ngIf="totalPages > 1">
             <p-paginator
                 [rows]="itemsPerPage"
                 [totalRecords]="attachments.length"

@@ -9,6 +9,7 @@
         "build": "ng build",
         "build-prod": "ng build --configuration production",
         "build-staging": "ng build --configuration staging",
+        "start-prod": "http-server dist\\browser -p 4200 --proxy http://localhost:4200",
         "reinstall": "rmdir /s /q node_modules 2>nul & del package-lock.json 2>nul & npm install"
     },
     "private": true,

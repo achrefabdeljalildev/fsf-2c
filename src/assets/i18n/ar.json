@@ -34,6 +34,12 @@
         "addNewRegion": "إضافة منطقة",
         "regionList": "قائمة المناطق"
     },
+    "globalSettings": {
+        "globalSettings": "الإعدادات العامة",
+        "addNewGlobalSetting": "إضافة إعداد عام",
+        "globalSettingsList": "قائمة الإعدادات العامة",
+        "editGlobalSetting": "تعديل إعداد عام"
+    },
     "country": {
         "addNewCountry": "إضافة دولة",
         "countryList": "قائمة الدول"
@@ -42,7 +48,8 @@
         "addNewLocation": "إضافة موقع",
         "locationList": "قائمة المواقع",
         "locationName": "اسم الموقع",
-        "selectLocationFromMap": "اختر الموقع من الخريطة"
+        "selectLocationFromMap": "اختر الموقع من الخريطة",
+        "editLocation": "تعديل موقع"
     },
     "province": {
         "addNewProvince": "إضافة محافظة",
@@ -56,11 +63,16 @@
         "addNewFieldSurvey": "إضافة مسح ميداني",
         "fieldSurveyList": "قائمة المسوح الميدانية",
         "surveyName": "اسم المسح",
-        "surveyType": "نوع المسح"
+        "surveyType": "نوع المسح",
+        "fieldSurvey": "المسح الميداني",
+        "dashboard": "لوحة القيادة",
+        "fieldSurveyListShort": "قائمة المسح الميداني",
+        "editSurvey": "تعديل مسح",
+        "addNewSurvey": "إضافة مسح جديد"
     },
     "entityClassification": {
         "addNewEntityClassification": "إضافة معيار مسح ميداني",
-        "entityClassificationList": "قائمة معايير المسح الميدانية",
+        "entityClassificationList": "قائمة معايير المسح الميداني",
         "noChildrenClassification": "لا توجد تصنيفات فرعية للعرض.",
         "name": "الاسم",
         "description": "الوصف",
@@ -97,45 +109,35 @@
         "description": "الوصف"
     },
     "fallingLoadClassification": {
-        "addNew": "إضافة تصنيف حمل ساقط جديد",
-        "list": "قائمة تصنيفات الحمل الساقط",
-        "save":"حفظ",
-        "cancel":"إلغاء"
+        "addNew": "إضافة إحتمال خطر جديد",
+        "list": "قائمة إحتمال الخطر"
     },
     "classificationOfRiskSituations": {
-        "addNew": "إضافة تصنيف حالة مخاطر جديد",
-        "list": "قائمة تصنيفات حالات المخاطر",
-        "save":"حفظ",
-        "cancel":"إلغاء"
+        "addNew": "إضافة حالة مخاطر جديدة",
+        "list": "قائمة حالات المخاطر"
     },
     "classificationOfRiskImpact": {
-        "addNew": "إضافة تصنيف تأثير مخاطر جديد",
-        "list": "قائمة تصنيفات تأثير المخاطر",
-        "save":"حفظ",
-        "cancel":"إلغاء"
+        "addNew": "إضافة تأثير مخاطر جديد",
+        "list": "قائمة تأثير المخاطر"
     },
     "classificationOfRiskType": {
-        "addNew": "إضافة تصنيف نوع مخاطر جديد",
-        "list": "قائمة تصنيفات أنواع المخاطر",
-        "save":"حفظ",
-        "cancel":"إلغاء"
+        "addNew": "إضافة نوع مخاطر جديد",
+        "list": "قائمة أنواع المخاطر"
     },
-     "GeneralSettings":{
-        "generalSettings": "الإعدادات العامة",
-        "settings": "الإعدادات",
-        "key": "العنصر",
-        "keys": "العناصر",
-        "value": "القيمة",
-        "enterKey": "ادخل العنصر",
-        "procedures": "الإجراءات",
-        "Procedure": "الاجراء",
-        "enterProcedure": "أدخل الإجراء",
-        "securitySystems": "الأنظمة الأمنية",
-        "addNew": "إضافة عنصر جديد",
-        "edit": "تعديل",
-        "new.list": "قائمة الإعدادات العامة",
-        "save":"حفظ",
-        "cancel":"إلغاء"
+    "locationRisk": {
+        "addNew": "إضافة خطر جديد",
+        "list": "قائمة مخاطر المواقع",
+        "name": "اسم الخطر",
+        "riskType": "نوع الخطر",
+        "riskImpact": "تأثير الخطر",
+        "riskProbability": "احتمالية الخطر",
+        "riskLikelihood": "احتمالية الخطر",
+        "riskStatus": "حالة الخطر",
+        "selectRiskType": "اختر نوع الخطر",
+        "selectRiskImpact": "اختر تأثير الخطر",
+        "selectRiskProbability": "اختر احتمالية الخطر",
+        "selectRiskLikelihood": "اختر احتمالية الخطر",
+        "selectRiskStatus": "اختر حالة الخطر"
     },
     "map": {
         "showRegions": "عرض المناطق",
@@ -164,18 +166,18 @@
         "passwordRequireUppercase": "يجب أن تحتوي كلمة المرور على حرف كبير واحد على الأقل",
         "passwordRequireSpecialChar": "يجب أن تحتوي كلمة المرور على رمز خاص واحد على الأقل",
         "pageSubtitle": "إدارة معلومات المستخدمين",
-        "roles": "الصلاحيات",
-        "addNewRole": "إضافة صلاحية جديدة",
-        "editRole": "تعديل صلاحية",
-        "roleName": "اسم الصلاحية",
-        "enterRoleName": "أدخل اسم الصلاحية",
-        "manageRoles": "إدارة الصلاحيات",
-        "assignedRoles": "الصلاحيات المعينة",
-        "availableRoles": "الصلاحيات المتاحة",
-        "noRolesAvailable": "لا توجد صلاحيات متاحة",
-        "noRolesAssigned": "لم يتم تعيين أي صلاحيات",
-        "allRolesAssigned": "تم تعيين جميع الصلاحيات",
-        "managePermissions": "إدارة الصلاحيات"
+        "roles": "الأدوار",
+        "addNewRole": "إضافة دور جديد",
+        "editRole": "تعديل دور",
+        "roleName": "اسم الدور",
+        "enterRoleName": "أدخل اسم الدور",
+        "manageRoles": "إدارة الأدوار",
+        "assignedRoles": "الأدوار المعينة",
+        "availableRoles": "الأدوار المتاحة",
+        "noRolesAvailable": "لا توجد أدوار متاحة",
+        "noRolesAssigned": "لم يتم تعيين أي أدوار",
+        "allRolesAssigned": "تم تعيين جميع الأدوار",
+        "managePermissions": "إدارة الأدوار"
     },
     "fileAttachments": {
         "attachments": "المرفقات",
@@ -215,7 +217,7 @@
         "addNewLocation": "إضافة موقع جديد",
         "editLocation": "تعديل موقع",
         "addNewClassification": "إضافة معيار فرعي ",
-        "editClassification": "تعديل تصنيف",
+        "editClassification": "تعديل",
         "edit": "تعديل",
         "addNewSurvey": "إضافة مسح جديد",
         "editSurvey": "تعديل مسح",
@@ -235,10 +237,12 @@
         "classifications": "التصنيفات",
         "surveys": "المسوح",
         "riskRegisterSettings": "إعدادات سجل المخاطر",
-        "fallingLoadClassification": "تصنيفات الحمل الساقط",
-        "classificationOfRiskSituations": "تصنيفات حالات المخاطر",
-        "classificationOfRiskImpact": "تصنيفات تأثير المخاطر",
-        "classificationOfRiskType": "تصنيفات أنواع المخاطر"
+        "fallingLoadClassification": "إحتمال الخطر",
+        "classificationOfRiskSituations": "حالات المخاطر",
+        "classificationOfRiskImpact": "تأثير المخاطر",
+        "classificationOfRiskType": "أنواع المخاطر",
+        "locationRisks": "مخاطر المواقع",
+        "settings": "الإعدادات"
     },
     "validationMessages": {
         "savedSuccessfully": "تم الحفظ بنجاح",
@@ -277,11 +281,11 @@
         "userErrorSave": "حدث خطأ أثناء حفظ المستخدم",
         "userDeletedSuccess": "تم حذف المستخدم بنجاح",
         "userErrorDelete": "حدث خطأ أثناء حذف المستخدم",
-        "roleAddedSuccess": "تم إضافة الصلاحية بنجاح",
-        "roleUpdatedSuccess": "تم تحديث الصلاحية بنجاح",
-        "roleErrorSave": "حدث خطأ أثناء حفظ الصلاحية",
-        "roleErrorUpdate": "حدث خطأ أثناء تحديث الصلاحية",
-        "userRolesUpdatedSuccess": "تم تحديث صلاحيات المستخدم بنجاح",
+        "roleAddedSuccess": "تم إضافة الدور بنجاح",
+        "roleUpdatedSuccess": "تم تحديث الدور بنجاح",
+        "roleErrorSave": "حدث خطأ أثناء حفظ الدور",
+        "roleErrorUpdate": "حدث خطأ أثناء تحديث الدور",
+        "userRolesUpdatedSuccess": "تم تحديث أدوار المستخدم بنجاح",
         "attachmentDeletedSuccess": "تم حذف المرفق بنجاح",
         "attachmentErrorDelete": "فشل حذف المرفق",
         "fileUploadSuccess": "تم تحميل الملف بنجاح",
@@ -290,6 +294,11 @@
         "locationFoundSuccess": "تم العثور على الموقع بنجاح",
         "locationNotFound": "لم يتم العثور على موقع بهذا الرمز",
         "locationSearchError": "حدث خطأ أثناء البحث عن الموقع",
+        "globalSettingUpdatedSuccess": "تم تحديث الإعداد العام بنجاح",
+        "globalSettingAddedSuccess": "تم إضافة الإعداد العام بنجاح",
+        "globalSettingErrorSave": "حدث خطأ أثناء حفظ الإعداد العام",
+        "globalSettingDeletedSuccess": "تم حذف الإعداد العام بنجاح",
+        "globalSettingErrorDelete": "حدث خطأ أثناء حذف الإعداد العام",
         "recordWillBeDisplayedAfterSave": "سيتم عرض السجل بعد حفظ المسح."
     },
     "formLabels": {
@@ -300,14 +309,27 @@
         "description": "الوصف",
         "enterDescription": "أدخل الوصف",
         "locationCode": "رمز الموقع",
+        "locationName": "اسم الموقع",
+        "organization": "المنظمة",
+        "riskCode": "رمز الخطر",
+        "enterRiskCode": "أدخل رمز الخطر",
         "province": "المحافظة",
         "affiliatedEntity": "الجهة التابعة لها",
         "parent": "التصنيف الأب",
         "receiptDate": "تاريخ الاستلام",
+        "openingDate": "تاريخ افتتاح الموقع",
         "addNote": "إضافة ملاحظة",
-        "siteType": "نوع الموقع",
+        "siteType": "يوجد مقر بالموقع",
         "coordinates": "الإحداثيات",
-        "administrator": "المسؤول"
+        "administrator": "المسؤول",
+        "location": "الموقع",
+        "selectLocation": "اختر الموقع",
+        "value": "القيمة",
+        "key": "المفتاح"
+    },
+    "labels": {
+        "relatedDetails": "بيانات ذات الصلة",
+        "notes": "الاجراءات"
     },
     "siteTypes": {
         "none": "لا يوجد",

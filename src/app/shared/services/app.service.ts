@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { BaseStore } from 'src/app/store/base.store';
 import { $themeConfig } from '../util/theme.config';
-import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
 export class AppService {
@@ -75,7 +75,7 @@ export class AppService {
             lang = list.find((d: any) => d.code === 'en');
         }
 
-        this.translate.use(lang.code); // set language
+        this.translate.use(lang.code);
         this.ui.toggleLocale(lang.code);
         return lang;
     }

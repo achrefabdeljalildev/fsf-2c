@@ -62,29 +62,20 @@ export class RoleListComponent extends BaseListComponent<RoleModel> {
         this.loadingPermissions = true;
         this.selectedNodes = [];
 
-        // Load full menus, then role-allowed items to preselect
-        this.menuService.getMenusTree().subscribe({
-            next: (res) => {
-                this.treeNodes = res.data.items.map((m) => this.mapMenuToNode(m));
-                // Fetch allowed permissions for the role and preselect
-                this.menuService.getRoleAllowedMenus(role.id).subscribe({
-                    next: (allowedRes) => {
-                        this.selectedNodes = this.extractAllowedNodesFromRole(
-                            allowedRes.data.items,
-                        );
-
-                        this.loadingPermissions = false;
-                    },
-                    error: (err) => {
-                        console.error('Error loading role allowed menus:', err);
-                        // Fall back to no preselection on error
-                        this.selectedNodes = [];
-                        this.loadingPermissions = false;
-                    },
-                });
+        // Load role-specific permissions (already filtered by backend)
+        this.menuService.getRoleAllowedMenus(role.id).subscribe({
+            next: (allowedRes) => {
+                // Transform the role's allowed menus to tree nodes
+                this.treeNodes = allowedRes.data.items.map((m) => this.mapMenuToNode(m));
+                // Pre-select all allowed items
+                this.selectedNodes = this.extractAllowedNodes(this.treeNodes);
+                // Expand parents if any descendant is selected
+                this.expandSelectedPaths(this.treeNodes);
+                this.loadingPermissions = false;
             },
             error: (err) => {
-                console.error('Error loading menus:', err);
+                console.error('Error loading role allowed menus:', err);
+                this.selectedNodes = [];
                 this.loadingPermissions = false;
             },
         });
@@ -96,10 +87,7 @@ export class RoleListComponent extends BaseListComponent<RoleModel> {
             label: f.formName,
             data: {
                 type: 'form',
-                id: f.menuFormId,
-                code: f.formCode,
-                url: f.url,
-                isAllowed: f.isAllowed,
+                ...f, // Store complete form data
             },
             selectable: true,
         }));
@@ -111,62 +99,54 @@ export class RoleListComponent extends BaseListComponent<RoleModel> {
             label: menu.menuName,
             data: {
                 type: 'menu',
-                id: menu.menuId,
-                icon: menu.menuIcon,
-                url: menu.url,
-                isAllowed: menu.isAllowed,
+                ...menu, // Store complete menu data
+                forms: undefined, // Remove forms from data to avoid duplication
+                children: undefined, // Remove children from data to avoid duplication
             },
             selectable: true,
             children: [...formChildren, ...menuChildren],
         };
     }
 
-    private extractAllowedNodes(menus: MenuDto[]): any[] {
+    private extractAllowedNodes(treeNodes: any[]): any[] {
         const allowed: any[] = [];
-        const collect = (nodes: MenuDto[]) => {
+        const collect = (nodes: any[]) => {
             nodes.forEach((node) => {
-                if (node.isAllowed) {
-                    allowed.push(`menu-${node.menuId}`);
+                // Check if this node is allowed based on its data
+                if (node.data?.isAllowed) {
+                    allowed.push(node);
                 }
-                if (node.forms) {
-                    node.forms.forEach((f) => {
-                        if (f.isAllowed) {
-                            allowed.push(`form-${f.menuFormId}`);
-                        }
-                    });
-                }
+                // Recursively collect from children
                 if (node.children && node.children.length > 0) {
                     collect(node.children);
                 }
             });
         };
-        collect(menus);
+        collect(treeNodes);
         return allowed;
     }
 
-    private extractAllowedNodesFromRole(menus: MenuDto[]): any[] {
-        // In /Menus/{roleId}, any element present is allowed
-        const allowedKeys: any[] = [];
-        const traverse = (nodes: MenuDto[]) => {
-            nodes.forEach((node) => {
-                allowedKeys.push(`menu-${node.menuId}`);
+    private expandSelectedPaths(nodes: any[]): boolean {
+        let hasSelectedDescendant = false;
 
-                if (node.forms) {
-                    node.forms.forEach((f) => {
-                        allowedKeys.push(`form-${f.menuFormId}`);
-                    });
-                }
+        nodes.forEach((node) => {
+            // Check if current node is selected
+            const isNodeSelected = this.selectedNodes.some((s) => s.key === node.key);
 
-                if (node.children && node.children.length > 0) {
-                    traverse(node.children);
-                }
-            });
-        };
+            // Recurse into children
+            const childHasSelection = node.children?.length
+                ? this.expandSelectedPaths(node.children)
+                : false;
 
-        traverse(menus);
-        console.log(allowedKeys);
+            // Expand node if selected or any child is selected
+            node.expanded = isNodeSelected || childHasSelection;
 
-        return allowedKeys;
+            if (node.expanded) {
+                hasSelectedDescendant = true;
+            }
+        });
+
+        return hasSelectedDescendant;
     }
 
     savePermissions() {
@@ -194,45 +174,54 @@ export class RoleListComponent extends BaseListComponent<RoleModel> {
         const menus: any[] = [];
 
         const processMenuNode = (node: any) => {
-            if (!node || !node.data || node.data.type !== 'menu') return;
+            if (!node || !node.data || node.data.type !== 'menu') return null;
 
-            const isMenuSelected = this.selectedNodes.some((s) => {
-                return typeof s === 'object' && s.key === node.key;
-            });
+            const isMenuSelected = this.selectedNodes.some((s) => s.key === node.key);
 
             const forms: any[] = [];
+            const childMenus: any[] = [];
 
             if (node.children && node.children.length) {
                 node.children.forEach((child: any) => {
                     if (child.data?.type === 'form') {
-                        const isFormSelected = this.selectedNodes.some((s) => {
-                            return typeof s === 'object' && s.key === child.key;
+                        const isFormSelected = this.selectedNodes.some((s) => s.key === child.key);
+                        forms.push({
+                            menuFormId: child.data.menuFormId,
+                            isAllowed: isFormSelected,
                         });
-
-                        if (isFormSelected) {
-                            forms.push({
-                                menuFormId: child.data.id,
-                                isAllowed: true,
-                            });
-                        }
                     } else if (child.data?.type === 'menu') {
-                        // Recursively process nested menus; they will be added separately
-                        processMenuNode(child);
+                        const childMenuResult = processMenuNode(child);
+                        if (childMenuResult) {
+                            childMenus.push(childMenuResult);
+                        }
                     }
                 });
             }
 
-            // Include this menu only if it's selected or any of its forms are selected
-            if (isMenuSelected || forms.length > 0) {
-                menus.push({
-                    menuId: node.data.id,
-                    isAllowed: isMenuSelected,
-                    forms,
-                });
+            const menuItem: any = {
+                menuId: node.data.menuId,
+                isAllowed: isMenuSelected,
+            };
+
+            // Always add forms array, even if empty
+            if (forms.length > 0) {
+                menuItem.forms = forms;
             }
+
+            // Always add children array, even if empty
+            if (childMenus.length > 0) {
+                menuItem.children = childMenus;
+            }
+
+            return menuItem;
         };
 
-        this.treeNodes.forEach(processMenuNode);
+        this.treeNodes.forEach((node) => {
+            const result = processMenuNode(node);
+            if (result) {
+                menus.push(result);
+            }
+        });
 
         return {
             menus: {

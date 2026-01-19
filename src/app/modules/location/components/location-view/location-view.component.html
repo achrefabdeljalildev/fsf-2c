@@ -1,10 +1,13 @@
 ﻿<p-breadcrumb
     [model]="[
-        { label: 'الأنظمة الأمنية' },
-        { label: 'الإدارة العامة لحماية المنشآت' },
-        { label: ' إدارة المسح الميداني' },
-        { label: 'المواقع', routerLink: '/location/list' },
-        { label: isEditMode ? 'تعديل موقع' : 'إضافة موقع جديد' },
+        { label: ('breadcrumbs.securitySystems' | translate), routerLink: '/' },
+        { label: ('breadcrumbs.generalAdministration' | translate), routerLink: '/' },
+        { label: ('location.locationList' | translate), routerLink: '/location/list' },
+        {
+            label: isEditMode
+                ? ('location.editLocation' | translate)
+                : ('location.addNewLocation' | translate),
+        },
     ]"
 />
 
@@ -41,14 +44,26 @@
                             {{ 'formLabels.locationCode' | translate }}
                             <span class="text-red-500">*</span>
                         </label>
-                        <input
-                            id="code"
-                            type="text"
-                            formControlName="code"
-                            pInputText
-                            class="w-full"
-                            [placeholder]="'formLabels.locationCode' | translate"
-                        />
+                        <div class="relative flex items-center">
+                            <input
+                                id="code"
+                                [type]="showLocationCode ? 'text' : 'password'"
+                                formControlName="code"
+                                pInputText
+                                class="w-full"
+                                [placeholder]="'formLabels.locationCode' | translate"
+                            />
+                            <button
+                                type="button"
+                                class="absolute left-3 text-gray-600 hover:text-gray-900 focus:outline-none"
+                                (click)="showLocationCode = !showLocationCode"
+                                [title]="
+                                    showLocationCode ? 'Hide location code' : 'Show location code'
+                                "
+                            >
+                                <i [class]="showLocationCode ? 'pi pi-eye-slash' : 'pi pi-eye'"></i>
+                            </button>
+                        </div>
                     </div>
 
                     <!-- Name in Arabic -->
@@ -167,15 +182,14 @@
                         />
                     </div>
 
-                    <!-- Opening Date -->
+                    <!-- تاريخ استلام الموقع - Site Receipt Date -->
                     <div class="form-group">
-                        <label for="openingDate" class="block text-sm font-medium mb-2">
-                            {{ 'formLabels.receiptDate' | translate }}
+                        <label for="siteReceiptDate" class="block text-sm font-medium mb-2">
+                            تاريخ استلام الموقع
                         </label>
                         <input
-                            id="openingDate"
-                            type="text"
-                            formControlName="openingDate"
+                            id="siteReceiptDate"
+                            formControlName="siteReceiptDate"
                             mwlFlatpickr
                             [options]="dateBasic"
                             pInputText
@@ -559,14 +573,15 @@
                                 />
                             </div>
 
-                            <!-- تاريخ استلام الموقع - Site Receipt Date -->
+                            <!-- Opening Date -->
                             <div class="form-group">
-                                <label for="siteReceiptDate" class="block text-sm font-medium mb-2">
-                                    تاريخ استلام الموقع
+                                <label for="openingDate" class="block text-sm font-medium mb-2">
+                                    {{ 'formLabels.openingDate' | translate }}
                                 </label>
                                 <input
-                                    id="siteReceiptDate"
-                                    formControlName="siteReceiptDate"
+                                    id="openingDate"
+                                    type="text"
+                                    formControlName="openingDate"
                                     mwlFlatpickr
                                     [options]="dateBasic"
                                     pInputText

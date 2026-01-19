@@ -1,7 +1,7 @@
 <p-breadcrumb
     [model]="[
-        { label: ('breadcrumbs.securitySystems' | translate) },
-        { label: ('breadcrumbs.generalAdministration' | translate) },
+        { label: ('breadcrumbs.securitySystems' | translate), routerLink: '/' },
+        { label: ('globalSettings.globalSettings' | translate), routerLink: '/' },
         { label: ('users.userList' | translate) },
     ]"
 />
@@ -11,8 +11,12 @@
         addNewRecordLabel="{{ 'users.addNewUser' | translate }}"
         tableTitle="{{ 'users.userList' | translate }}"
         [paginationInfo]="paginationInfo"
+        [pageNumber]="criteria.pageNumber"
+        [pageSize]="criteria.pageSize"
+        [totalCount]="criteria.totalCount ?? 0"
         (search)="onSearch($event)"
         (addNewRecord)="openCreateDialog()"
+        (pageChange)="onPageChange($event)"
     />
 
     <ng-datatable
@@ -28,13 +32,6 @@
     >
         <ng-template slot="actions" let-value="data">
             <div class="flex gap-2 items-center">
-                <!-- <div
-                    (click)="openEditDialog(value.id)"
-                    class="cursor-pointer btn btn-primary btn-sm"
-                >
-                    <i class="pi pi-pencil !text-white"></i>
-                </div> -->
-
                 <div
                     (click)="openRoleDialog(value.id)"
                     class="cursor-pointer flex items-center gap-2 btn btn-primary btn-sm truncate"

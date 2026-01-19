@@ -15,188 +15,11 @@ import { slideDownUp } from '../../shared/util/animations';
 export class SidebarComponent implements OnInit {
     isCollapsed: boolean = true;
     expandedItems: { [key: string]: boolean } = {};
+    expandedChildItems: { [key: string]: boolean } = {};
     // Signals from the UI store
     semidark = this.baseStore.semidark;
-
-    treeNodes: any[] = [
-        {
-            key: '1',
-            label: ' المواقع',
-            data: 'command and control',
-            icon: 'assets/images/icons/location-sidebar.svg',
-            children: [
-                {
-                    key: '11',
-                    label: ' لوحة القيادة',
-                    data: 'Sub Control 1',
-                    icon: 'pi pi-objects-column',
-                    routerLink: '/location/dashboard',
-                },
-                {
-                    key: '12',
-                    label: 'قائمة المواقع',
-                    data: 'Sub Control 2',
-                    icon: 'pi pi-list',
-                    routerLink: '/location/list',
-                },
-            ],
-        },
-        {
-            key: '2',
-            label: 'المسح الميداني',
-            data: 'Field Survey',
-            icon: 'assets/images/icons/field-survey-sidebar.svg',
-            children: [
-                {
-                    key: '20',
-                    label: 'لوحة المسح الميداني',
-                    data: 'Sub Survey Dashboard',
-                    icon: 'pi pi-chart-bar',
-                    routerLink: '/field-survey/dashboard',
-                },
-                {
-                    key: '21',
-                    label: 'قائمة المسح الميداني',
-                    data: 'Sub Survey 1',
-                    icon: 'pi pi-file',
-                    routerLink: '/field-survey/list',
-                },
-            ],
-        },
-        {
-            key: '3',
-            label: 'التقارير',
-            data: 'Security Support',
-            icon: 'assets/images/icons/reborts-sidebar-logo.svg',
-            children: [
-                {
-                    key: '3َ1',
-                    label: ' الحماية الميدانية',
-                    data: 'Sub Survey 2',
-                    icon: 'pi pi-file',
-                    routerLink: '/reports',
-                },
-            ],
-        },
-        {
-            key: '5',
-            label: 'المستخدمين',
-            data: 'Security Support',
-            icon: 'assets/images/icons/settings-sidebar-logo.svg',
-            children: [
-                {
-                    key: '51',
-                    label: 'قائمة المستخدمين',
-                    data: 'Sub Survey 2',
-                    icon: 'pi pi-list',
-                    routerLink: '/users/list',
-                },
-                {
-                    key: '52',
-                    label: 'الادوار',
-                    data: 'Sub Survey 2',
-                    icon: 'pi pi-list',
-                    routerLink: '/users/roles',
-                },
-            ],
-        },
-        {
-            key: '4',
-            label: 'الإعدادات',
-            data: 'Security Support',
-            icon: 'assets/images/icons/settings-sidebar-logo.svg',
-            children: [
-                {
-                    key: '41',
-                    label: 'الجهات',
-                    data: 'Sub Survey 2',
-                    icon: 'pi pi-list',
-                    routerLink: '/organization/list',
-                },
-                {
-                    key: '42',
-                    label: 'المناطق',
-                    data: 'Sub Survey 2',
-                    icon: 'pi pi-list',
-                    routerLink: '/regions/list',
-                },
-                {
-                    key: '43',
-                    label: 'المحافظات',
-                    data: 'Sub Survey 2',
-                    icon: 'pi pi-list',
-                    routerLink: '/province/list',
-                },
-                {
-                    key: '44',
-                    label: 'التصنيفات',
-                    data: 'Sub Survey 2',
-                    icon: 'pi pi-list',
-                    routerLink: '/location-classification/list',
-                },
-                {
-                    key: '45',
-                    label: 'معايير المسح الميداني',
-                    data: 'Sub Survey 2',
-                    icon: 'pi pi-list',
-                    routerLink: '/entity-classification/list',
-                },
-            ],
-        },
-        {
-            key: '46',
-            label: 'اعدادات سجل المخاطر',
-            data: 'Sub Survey 2',
-            icon: 'assets/images/icons/settings-sidebar-logo.svg',
-            routerLink: '/risk-register-settings',
-            children: [
-                {
-                    key: '461',
-                    label: 'تصنيف نوع الخطر',
-                    data: 'Sub Survey 3',
-                    icon: 'pi pi-list',
-                    routerLink: '/risk-register-settings/classification-of-risk-type/list',
-                },
-                {
-                    key: '462',
-                    label: 'تصنيف احتمال الوقوع',
-                    data: 'Sub Survey 3',
-                    icon: 'pi pi-list',
-                    routerLink: '/risk-register-settings/falling-load-classification/list',
-                },
-                {
-                    key: '463',
-                    label: 'تصنيف أثر الخطر',
-                    data: 'Sub Survey 3',
-                    icon: 'pi pi-list',
-                    routerLink: '/risk-register-settings/classification-of-risk-impact/list',
-                },
-                {
-                    key: '464',
-                    label: 'تصنيف حالات الخطر',
-                    data: 'Sub Survey 3',
-                    icon: 'pi pi-list',
-                    routerLink: '/risk-register-settings/classification-of-risk-situations/list',
-                },
-            ],
-        },
-        {
-            key: '47',
-            label: 'الاعدادات العامة',
-            data: 'Sub Survey 2',
-            icon: 'assets/images/icons/settings-sidebar-logo.svg',
-            routerLink: '/general-settings',
-            children: [
-                {
-                    key: '471',
-                    label: 'إعدادات عامة',
-                    data: 'Sub Survey 3',
-                    icon: 'pi pi-list',
-                    routerLink: '/general-settings/list',
-                },
-            ],
-        },
-    ];
+    treeNodes = this.baseStore.sidebarMenus;
+    sidebarTitle = this.baseStore.sidebarTitle;
 
     constructor(
         public translate: TranslateService,
@@ -218,15 +41,30 @@ export class SidebarComponent implements OnInit {
     expandCurrentRoute() {
         const currentUrl = this.router.url;
 
-        // Find the parent item that contains the current route
-        for (const item of this.treeNodes) {
+        // Find the parent item and child items that contain the current route
+        for (const item of this.treeNodes()) {
             if (item.children) {
-                const hasActiveChild = item.children.some(
-                    (child: any) => child.routerLink && currentUrl.startsWith(child.routerLink),
-                );
+                // Check second-level children for direct route match
+                for (const child of item.children) {
+                    // Direct route match on second-level
+                    if (child.routerLink && currentUrl.startsWith(child.routerLink)) {
+                        this.expandedItems[item.key] = true;
+                        break;
+                    }
 
-                if (hasActiveChild) {
-                    this.expandedItems[item.key] = true;
+                    // Check third-level children for route match
+                    if (child.children?.length) {
+                        const hasActiveGrandchild = child.children.some(
+                            (grand: any) =>
+                                grand.routerLink && currentUrl.startsWith(grand.routerLink),
+                        );
+
+                        if (hasActiveGrandchild) {
+                            this.expandedItems[item.key] = true;
+                            this.expandedChildItems[child.key] = true;
+                            break;
+                        }
+                    }
                 }
             }
         }
@@ -249,5 +87,13 @@ export class SidebarComponent implements OnInit {
 
     isExpanded(key: string): boolean {
         return this.expandedItems[key] || false;
+    }
+
+    toggleChildItem(key: string) {
+        this.expandedChildItems[key] = !this.expandedChildItems[key];
+    }
+
+    isChildExpanded(key: string): boolean {
+        return this.expandedChildItems[key] || false;
     }
 }

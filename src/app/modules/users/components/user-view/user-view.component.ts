@@ -1,9 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
+import { AbstractControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/modules/auth/services/auth.service';
 import { BaseComponent } from 'src/app/shared/components/base-component/base-component';
 import { UserService } from '../../services/user.service';
-import { UserModel } from '../../models/user.model';
-import { AuthService } from 'src/app/modules/auth/services/auth.service';
 
 @Component({
     selector: 'app-user-view',

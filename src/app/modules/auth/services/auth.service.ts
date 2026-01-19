@@ -1,14 +1,13 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
 import {
     API_URL_AUTH_LOGIN,
     API_URL_AUTH_REFRESH,
-    API_URL_AUTH_VERIFY,
     API_URL_AUTH_REQUEST_OTP,
     API_URL_AUTH_VALIDATE_OTP,
+    API_URL_AUTH_VERIFY,
 } from 'src/app/shared/consts/api.urls';
 import { ApiResponseModel } from 'src/app/shared/models/base/paged-response.model';
 
@@ -242,9 +241,9 @@ export class AuthService {
     /**
      * Verify token validity
      */
-    verifyToken(): Observable<{ valid: boolean }> {
-        return this.http.post<{ valid: boolean }>(API_URL_AUTH_VERIFY, {
-            token: this.getToken(),
+    verifyToken(): Observable<ApiResponseModel<any>> {
+        return this.http.get<ApiResponseModel<any>>(`${API_URL_AUTH_VERIFY}`, {
+            params: { AccessToken: this.getToken() || '' },
         });
     }
 

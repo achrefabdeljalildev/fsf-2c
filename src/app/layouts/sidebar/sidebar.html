@@ -64,10 +64,10 @@
             >
                 <h2 class="p-3 w-full flex justify-center gap-2 font-bold">
                     <img src="assets/images/icons/home-image.svg" alt="" />
-                    الإدارة العامة لحماية المنشآت
+                    {{ sidebarTitle() }}
                 </h2>
                 <div class="menu-list">
-                    <div *ngFor="let item of treeNodes" class="menu-item">
+                    <div *ngFor="let item of treeNodes()" class="menu-item">
                         <!-- Parent Item -->
                         <div
                             class="flex items-center justify-between px-4 py-3 cursor-pointer hover:bg-gray-50 dark:hover:bg-[#1b2e4b] border-b border-[#C3CAD980]"
@@ -94,12 +94,48 @@
                         >
                             <div
                                 *ngFor="let child of item.children"
-                                [routerLink]="child.routerLink"
-                                routerLinkActive="bg-primary  text-white hover:bg-primary"
-                                class="flex items-center gap-3 px-4 py-3 ps-12 cursor-pointer hover:bg-gray-100 dark:hover:bg-[#1b2e4b] border-b border-[#C3CAD980]"
+                                class="border-b border-[#C3CAD980]"
                             >
-                                <i [class]="child.icon"></i>
-                                <span> {{ child.label }} </span>
+                                <!-- Second level with children: acts as collapsible header -->
+                                <div
+                                    *ngIf="child.children?.length; else childLink"
+                                    class="flex items-center justify-between px-4 py-3 ps-12 cursor-pointer hover:bg-gray-100 dark:hover:bg-[#1b2e4b]"
+                                    (click)="toggleChildItem(child.key)"
+                                >
+                                    <div class="flex items-center gap-3">
+                                        <i [class]="child.icon"></i>
+                                        <span> {{ child.label }} </span>
+                                    </div>
+                                    <i
+                                        [class]="isChildExpanded(child.key) ? 'pi pi-angle-up' : 'pi pi-angle-down'"
+                                        class="text-gray-500 dark:text-white-dark transition-transform"
+                                    ></i>
+                                </div>
+
+                                <ng-template #childLink>
+                                    <a
+                                        [routerLink]="child.routerLink"
+                                        routerLinkActive="bg-primary text-white hover:bg-primary"
+                                        class="flex items-center px-4 py-3 ps-12 cursor-pointer hover:bg-gray-100 dark:hover:bg-[#1b2e4b]"
+                                    >
+                                        <!-- <i [class]="child.icon"></i> -->
+                                        <span> {{ child.label }} </span>
+                                    </a>
+                                </ng-template>
+
+                                <div
+                                    *ngIf="child.children?.length && isChildExpanded(child.key)"
+                                    class="bg-white dark:bg-[#0e1726] border-t border-[#C3CAD980]"
+                                >
+                                    <a
+                                        *ngFor="let grand of child.children"
+                                        [routerLink]="grand.routerLink"
+                                        routerLinkActive="bg-primary text-white hover:bg-primary"
+                                        class="flex items-center ps-20 gap-3 py-3 cursor-pointer hover:bg-gray-100 dark:hover:bg-[#1b2e4b] border-b border-[#C3CAD980]"
+                                    >
+                                        <span> {{ grand.label }} </span>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>

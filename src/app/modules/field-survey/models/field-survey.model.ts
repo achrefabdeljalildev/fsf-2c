@@ -10,5 +10,18 @@ export interface FieldSurvey {
     otherExperiments: string;
     nameAr: string;
     descriptionAr: string;
-    filedSurvyLocation: LocationModel;
+    fieldSurveyLocation: LocationModel;
+}
+
+export interface FieldSurveyClassificationForms {
+    id?: number;
+    entityId: number;
+    entityName: string;
+    entityClassficationFormId?: number;
+    isSelected?: boolean;
+    note?: string;
+}
+
+export interface EntityClassificationModel {
+    classificationData: FieldSurveyClassificationForms[];
 }

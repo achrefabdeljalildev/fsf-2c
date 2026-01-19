@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { BaseService } from 'src/app/shared/services/base.service';
-import { UserModel } from '../models/user.model';
-import { RoleModel } from '../models/role.model';
-import { API_URL_USERS } from 'src/app/shared/consts/api.urls';
 import { map, Observable, of } from 'rxjs';
-import { ApiResponseModel, PagedResponse } from 'src/app/shared/models/base/paged-response.model';
+import { API_URL_USERS } from 'src/app/shared/consts/api.urls';
 import { CriteriaModel } from 'src/app/shared/models/base/criteria.model';
+import { ApiResponseModel, PagedResponse } from 'src/app/shared/models/base/paged-response.model';
+import { BaseService } from 'src/app/shared/services/base.service';
+import { RoleModel } from '../models/role.model';
+import { UserModel } from '../models/user.model';
 
 @Injectable({
     providedIn: 'root',

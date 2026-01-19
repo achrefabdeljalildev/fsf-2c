@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BaseService } from 'src/app/shared/services/base.service';
 import { Observable } from 'rxjs';
 import { ApiResponseModel, PagedResponse } from 'src/app/shared/models/base/paged-response.model';
+import { BaseService } from 'src/app/shared/services/base.service';
 
 export interface MenuFormDto {
     menuFormId: number;
@@ -36,7 +36,9 @@ export class MenuService extends BaseService<MenuDto> {
     }
 
     getRoleAllowedMenus(roleId: number): Observable<ApiResponseModel<PagedResponse<MenuDto>>> {
-        return this.http.get<ApiResponseModel<PagedResponse<MenuDto>>>(`/Menus/${roleId}`);
+        return this.http.get<ApiResponseModel<PagedResponse<MenuDto>>>(
+            `/MenusAllowNotAllow/${roleId}`,
+        );
     }
 
     createRolePermissions(payload: any): Observable<ApiResponseModel<any>> {

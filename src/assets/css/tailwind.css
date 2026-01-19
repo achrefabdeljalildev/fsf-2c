@@ -110,6 +110,10 @@
         @apply border-primary bg-primary text-white shadow-primary/60;
     }
 
+    .btn-primary:hover {
+        @apply opacity-80;
+    }
+
     .btn-outline-primary {
         @apply border-primary text-primary shadow-none hover:bg-primary hover:text-white;
     }
@@ -119,7 +123,11 @@
     }
 
     .btn-secondary {
-        @apply border-secondary bg-secondary text-white shadow-primary/60;
+        @apply border-secondary bg-secondary text-primary shadow-primary/60;
+    }
+
+    .btn-secondary:hover {
+        @apply bg-slate-200;
     }
 
     .btn-outline-secondary {
@@ -153,12 +161,15 @@
     .btn-info {
         @apply border-info bg-info text-white shadow-info/60;
     }
+
     .btn-outline-info {
         @apply border-info text-info shadow-none hover:bg-info hover:text-white;
     }
+
     .btn-outline-gold {
         @apply border-gold text-gold shadow-none hover:bg-gold hover:text-white;
     }
+
     .btn-outline-secondary {
         @apply border-secondary text-secondary shadow-none hover:bg-secondary hover:text-white;
     }
@@ -250,40 +261,6 @@
     .has-success .multiselect__tags:hover {
         @apply border-success;
     }
-}
-
-/* swal2 */
-.swal2-container .swal2-close {
-    @apply text-white hover:text-dark-light focus:shadow-none;
-}
-
-.swal2-container .swal2-popup.swal2-toast {
-    @apply bg-dark px-5 py-2.5;
-}
-
-.swal2-popup.swal2-toast .swal2-title,
-.swal2-container .swal2-popup.swal2-toast .swal2-html-container {
-    @apply text-white;
-}
-.swal2-container .swal2-popup.swal2-toast.color-primary {
-    @apply bg-primary;
-}
-
-.swal2-container .swal2-popup.swal2-toast.color-secondary {
-    @apply bg-secondary;
-}
-
-.swal2-container .swal2-popup.swal2-toast.color-warning {
-    @apply bg-warning;
-}
-.swal2-container .swal2-popup.swal2-toast.color-info {
-    @apply bg-info;
-}
-.swal2-container .swal2-popup.swal2-toast.color-danger {
-    @apply bg-danger;
-}
-.swal2-container .swal2-popup.swal2-toast.color-success {
-    @apply bg-success;
 }
 
 .sidebar li .nav-link.active span {

@@ -51,6 +51,7 @@ export const routes: Routes = [
         canActivate: [AuthGuard],
         component: AppLayout,
         loadChildren: () => import('./modules/users/users.module').then((m) => m.UsersModule),
+        data: { isGlobalSettings: true },
     },
     {
         path: 'field-survey',
@@ -60,11 +61,30 @@ export const routes: Routes = [
             import('./modules/field-survey/field-survey.module').then((m) => m.FieldSurveyModule),
     },
     {
+        path: 'location-risk',
+        canActivate: [AuthGuard],
+        component: AppLayout,
+        loadChildren: () =>
+            import('./modules/location-risk/location-risk.module').then(
+                (m) => m.LocationRiskModule,
+            ),
+    },
+    {
         path: 'regions',
         canActivate: [AuthGuard],
         component: AppLayout,
         loadChildren: () =>
             import('./modules/settings/regions/region.module').then((m) => m.RegionModule),
+    },
+    {
+        path: 'global-settings',
+        canActivate: [AuthGuard],
+        component: AppLayout,
+        loadChildren: () =>
+            import('./modules/settings/global-settings/global-settings.module').then(
+                (m) => m.GlobalSettingsModule,
+            ),
+        data: { isGlobalSettings: true },
     },
     {
         path: 'province',
@@ -116,15 +136,6 @@ export const routes: Routes = [
         loadChildren: () =>
             import('./modules/settings/risk-register-settings/classification-of-risk-situations/classification-of-risk-situations.module').then(
                 (m) => m.ClassificationOfRiskSituationsModule,
-            ),
-    },
-    {
-        path: 'general-settings',
-        canActivate: [AuthGuard],
-        component: AppLayout,
-        loadChildren: () =>
-            import('./modules/settings/general-settings/general-settings.module').then(
-                (m) => m.GeneralSettingsModule,
             ),
     },
 ];

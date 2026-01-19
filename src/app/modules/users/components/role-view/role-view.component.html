@@ -25,9 +25,9 @@
                 "
                 class="text-red-500"
             >
-                <span *ngIf="form.get('roleName')?.errors?.['required']">{{
-                    'messages.requiredField' | translate
-                }}</span>
+                <span *ngIf="form.get('roleName')?.errors?.['required']">
+                    {{ 'messages.requiredField' | translate }}
+                </span>
                 <span *ngIf="form.get('roleName')?.errors?.['minlength']">{{
                     'messages.minLength' | translate: { length: 2 }
                 }}</span>
@@ -37,7 +37,7 @@
         <div class="flex justify-end gap-2 pt-2">
             <button
                 type="button"
-                class="btn bg-gray-50 hover:bg-gray-100 text-gray-700"
+                class="btn btn-secondary"
                 (click)="closeDialog()"
                 [disabled]="isLoading"
             >

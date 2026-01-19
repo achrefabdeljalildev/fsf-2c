@@ -1,6 +1,6 @@
 <p-breadcrumb
     [model]="[
-        { label: ('breadcrumbs.securitySystems' | translate) },
+        { label: ('breadcrumbs.securitySystems' | translate), routerLink: '/' },
         { label: ('breadcrumbs.riskRegisterSettings' | translate) },
         { label: ('breadcrumbs.classificationOfRiskSituations' | translate) },
     ]"
@@ -11,32 +11,36 @@
         addNewRecordLabel="{{ 'classificationOfRiskSituations.addNew' | translate }}"
         tableTitle="{{ 'classificationOfRiskSituations.list' | translate }}"
         [paginationInfo]="paginationInfo"
+        [pageNumber]="criteria.pageNumber"
+        [pageSize]="criteria.pageSize"
+        [totalCount]="criteria.totalCount ?? 0"
         (search)="onSearch($event)"
         (addNewRecord)="openCreateDialog()"
-    />
-
-    <ng-datatable
-        [rows]="rows"
-        [columns]="cols"
-        [hasCheckbox]="true"
-        [sortable]="false"
-        [loading]="isLoading"
-        [pagination]="true"
-        [pageSize]="criteria.pageSize"
-        rowClass="cursor-pointer"
-        noDataContent="{{ 'common.noDataOnList' | translate }}"
+        (pageChange)="onPageChange($event)"
     >
-        <ng-template slot="actions" let-value="data">
-            <div class="flex gap-2">
-                <div (click)="openEditDialog(value.id)" class="cursor-pointer">
-                    <i class="pi pi-pencil"></i>
+        <ng-datatable
+            [rows]="rows"
+            [columns]="cols"
+            [hasCheckbox]="true"
+            [sortable]="false"
+            [loading]="isLoading"
+            [pagination]="true"
+            [pageSize]="criteria.pageSize"
+            rowClass="cursor-pointer"
+            noDataContent="{{ 'common.noDataOnList' | translate }}"
+        >
+            <ng-template slot="actions" let-value="data">
+                <div class="flex gap-2">
+                    <div (click)="openEditDialog(value.id)" class="cursor-pointer">
+                        <i class="pi pi-pencil"></i>
+                    </div>
+                    <div (click)="removeItem(value.id)" class="cursor-pointer">
+                        <i class="pi pi-trash"></i>
+                    </div>
                 </div>
-                <div (click)="removeItem(value.id)" class="cursor-pointer">
-                    <i class="pi pi-trash"></i>
-                </div>
-            </div>
-        </ng-template>
-    </ng-datatable>
+            </ng-template>
+        </ng-datatable>
+    </list-header>
 </main-content>
 
 <app-situation-view [(visible)]="showDialog" [itemId]="selectedItemId" (onSave)="onDialogSave()" />

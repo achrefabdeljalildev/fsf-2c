@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,8 +14,13 @@ export class ListHeaderComponent {
     @Input() paginationInfo: string = '';
     @Input() showFilterButton: boolean = false;
     @Input() showMapsButton: boolean = false;
+    @Input() pageSize: number = 10;
+    @Input() pageNumber: number = 1;
+    @Input() totalCount: number = 0;
+    @Input() pagination: boolean = true;
 
     @Output() search = new EventEmitter<string>();
+    @Output() pageChange = new EventEmitter<any>();
     @Output() addNewRecord = new EventEmitter<void>();
     @Output() clickMaps = new EventEmitter<void>();
 
@@ -37,5 +42,11 @@ export class ListHeaderComponent {
             return;
         }
         this.addNewRecord.emit();
+    }
+
+    onPageChange(event: any) {
+        if (!event) return;
+
+        this.pageChange.emit(event);
     }
 }

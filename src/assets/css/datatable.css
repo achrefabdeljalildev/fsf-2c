@@ -93,11 +93,7 @@
     @apply hover:!bg-white-light/20 dark:hover:!bg-[#1a2941]/40;
 }
 
-.bh-datatable
-    .bh-table-responsive
-    table.bh-table-striped
-    tbody
-    tr:nth-child(odd) {
+.bh-datatable .bh-table-responsive table.bh-table-striped tbody tr:nth-child(odd) {
     @apply !bg-white-light/20 dark:!bg-[#1a2941]/40;
 }
 
@@ -116,7 +112,7 @@
 }
 
 .bh-datatable .bh-pagination {
-    @apply flex justify-center !important;
+    @apply hidden;
 }
 
 .bh-datatable .bh-page-item {

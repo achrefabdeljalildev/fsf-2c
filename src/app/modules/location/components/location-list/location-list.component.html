@@ -1,11 +1,10 @@
-<p-confirmDialog></p-confirmDialog>
+<p-confirmDialog />
 
 <p-breadcrumb
     [model]="[
-        { label: 'الأنظمة الأمنية' },
-        { label: 'الإدارة العامة لحماية المنشآت' },
-        { label: ' إدارة المسح الميداني' },
-        { label: 'المواقع' },
+        { label: ('breadcrumbs.securitySystems' | translate), routerLink: '/' },
+        { label: ('breadcrumbs.generalAdministration' | translate), routerLink: '/' },
+        { label: ('breadcrumbs.locations' | translate) },
     ]"
 />
 
@@ -14,36 +13,50 @@
         addNewRecordLabel="{{ 'location.addNewLocation' | translate }}"
         tableTitle="{{ 'location.locationList' | translate }}"
         [paginationInfo]="paginationInfo"
+        [pageNumber]="criteria.pageNumber"
+        [pageSize]="criteria.pageSize"
+        [totalCount]="criteria.totalCount ?? 0"
         [showMapsButton]="true"
         (search)="onSearch($event)"
         (clickMaps)="showMapsView = !showMapsView"
         (addNewRecord)="openCreateDialog()"
-    />
-
-    @if (showMapsView) {
-        <app-saudi-map [searchTerm]="searchTerm" />
-    } @else {
-        <ng-datatable
-            [rows]="rows"
-            [columns]="cols"
-            [hasCheckbox]="true"
-            [sortable]="false"
-            [loading]="isLoading"
-            [pagination]="true"
-            [pageSize]="criteria.pageSize"
-            rowClass="cursor-pointer"
-            noDataContent="{{ 'common.noDataOnList' | translate }}"
-        >
-            <ng-template slot="actions" let-value="data">
-                <div class="flex gap-2">
-                    <div (click)="openEditDialog(value.id)" class="cursor-pointer">
-                        <i class="pi pi-pencil"></i>
+        (pageChange)="onPageChange($event)"
+    >
+        @if (showMapsView) {
+            <app-saudi-map [searchTerm]="searchTerm" />
+        } @else {
+            <ng-datatable
+                [rows]="rows"
+                [columns]="cols"
+                [hasCheckbox]="true"
+                [sortable]="false"
+                [loading]="isLoading"
+                [pagination]="true"
+                [pageSize]="criteria.pageSize"
+                rowClass="cursor-pointer"
+                noDataContent="{{ 'common.noDataOnList' | translate }}"
+            >
+                <ng-template slot="actions" let-value="data">
+                    <div class="flex gap-2">
+                        <div
+                            (click)="createFieldSurvey(value)"
+                            class="cursor-pointer relative"
+                            title="إنشاء مسح"
+                        >
+                            <img src="assets/images/icons/field-survey-sidebar.svg" alt="" />
+                        </div>
+                        <div (click)="openEditDialog(value.id)" class="cursor-pointer">
+                            <i class="pi pi-pencil"></i>
+                        </div>
+                        <div
+                            (click)="removeLocation(value.id, value.nameAr)"
+                            class="cursor-pointer"
+                        >
+                            <i class="pi pi-trash"></i>
+                        </div>
                     </div>
-                    <div (click)="removeLocation(value.id, value.nameAr)" class="cursor-pointer">
-                        <i class="pi pi-trash"></i>
-                    </div>
-                </div>
-            </ng-template>
-        </ng-datatable>
-    }
+                </ng-template>
+            </ng-datatable>
+        }
+    </list-header>
 </main-content>

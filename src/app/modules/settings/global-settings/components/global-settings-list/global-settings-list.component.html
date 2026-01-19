@@ -1,0 +1,49 @@
+<p-confirmDialog />
+
+<p-breadcrumb
+    [model]="[
+        { label: ('breadcrumbs.securitySystems' | translate), routerLink: '/' },
+        { label: ('globalSettings.globalSettings' | translate) },
+        { label: ('globalSettings.globalSettingsList' | translate) },
+    ]"
+/>
+
+<main-content>
+    <list-header
+        addNewRecordLabel="{{ 'globalSettings.addNewGlobalSetting' | translate }}"
+        tableTitle="{{ 'globalSettings.globalSettingsList' | translate }}"
+        [paginationInfo]="paginationInfo"
+        [pageNumber]="criteria.pageNumber"
+        [pageSize]="criteria.pageSize"
+        [totalCount]="criteria.totalCount ?? 0"
+        (search)="onSearch($event)"
+        (addNewRecord)="openCreateDialog()"
+        (pageChange)="onPageChange($event)"
+    >
+        <ng-datatable
+            [rows]="rows"
+            [columns]="cols"
+            [hasCheckbox]="true"
+            [sortable]="false"
+            [loading]="isLoading"
+            [pagination]="true"
+            [pageSize]="criteria.pageSize"
+            rowClass="cursor-pointer"
+            noDataContent="{{ 'common.noDataOnList' | translate }}"
+        >
+            <ng-template slot="actions" let-value="data">
+                <div class="flex gap-2">
+                    <div (click)="openEditDialog(value.id)" class="cursor-pointer">
+                        <i class="pi pi-pencil"></i>
+                    </div>
+                </div>
+            </ng-template>
+        </ng-datatable>
+    </list-header>
+</main-content>
+
+<app-global-settings-view
+    [(visible)]="showDialog"
+    [settingId]="selectedSettingId"
+    (onSave)="onDialogSave()"
+/>

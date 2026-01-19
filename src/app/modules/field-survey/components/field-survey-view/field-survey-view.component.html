@@ -1,10 +1,17 @@
 <p-breadcrumb
     [model]="[
-        { label: 'الأنظمة الأمنية' },
-        { label: 'الإدارة العامة لحماية المنشآت' },
-        { label: 'المسح الميداني' },
-        { label: 'قائمة المسح الميداني', routerLink: '/field-survey/list' },
-        { label: isEditMode ? 'تعديل مسح' : 'إضافة مسح جديد' },
+        { label: ('breadcrumbs.securitySystems' | translate), routerLink: '/' },
+        { label: ('breadcrumbs.generalAdministration' | translate), routerLink: '/' },
+        { label: ('fieldSurvey.fieldSurvey' | translate) },
+        {
+            label: ('fieldSurvey.fieldSurveyListShort' | translate),
+            routerLink: '/field-survey/list',
+        },
+        {
+            label: isEditMode
+                ? ('fieldSurvey.editSurvey' | translate)
+                : ('fieldSurvey.addNewSurvey' | translate),
+        },
     ]"
 />
 
@@ -61,7 +68,7 @@
                                 formControlName="locationCode"
                                 pInputText
                                 class="w-full"
-                                placeholder="AZ-6543 09"
+                                placeholder="بحث برمز الموقع"
                                 (keyup.enter)="searchByCode()"
                             />
                             <button
@@ -158,7 +165,9 @@
                 <p-tab *ngFor="let tab of classificationTabs; let i = index" [value]="i.toString()">
                     {{ tab.nameAr }}
                 </p-tab>
-                <p-tab [value]="classificationTabs.length.toString()">سجل الإجراءات</p-tab>
+                <p-tab *ngIf="isEditMode" [value]="classificationTabs.length.toString()"
+                    >سجل الإجراءات</p-tab
+                >
             </p-tablist>
             <p-tabpanels>
                 <p-tabpanel
@@ -192,7 +201,12 @@
                                                         *ngIf="form.isCheckBox"
                                                         class="flex items-center pt-1"
                                                     >
-                                                        <p-checkbox [binary]="true" />
+                                                        <p-checkbox
+                                                            [binary]="true"
+                                                            [formControlName]="
+                                                                'form_' + form.id + '_checkbox'
+                                                            "
+                                                        />
                                                     </div>
 
                                                     <!-- Form Label/Text -->
@@ -209,7 +223,8 @@
                                                             type="text"
                                                             pInputText
                                                             class="w-full"
-                                                            [placeholder]="form.nameAr"
+                                                            [placeholder]="'ملاحظة'"
+                                                            [formControlName]="'form_' + form.id"
                                                         />
                                                     </div>
                                                 </div>
@@ -244,10 +259,10 @@
                     <div class="p-4">
                         <app-logs-list
                             *ngIf="fieldSurveyId"
-                            tableName="FieldSurveys"
+                            tableName="FieldSurveies"
                             [tableKey]="fieldSurveyId"
                             class="w-full"
-                        ></app-logs-list>
+                        />
                         <div *ngIf="!fieldSurveyId" class="text-sm text-gray-500">
                             سيتم عرض السجل بعد حفظ المسح.
                         </div>

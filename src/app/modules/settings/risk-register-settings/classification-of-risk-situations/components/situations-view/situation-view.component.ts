@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BaseComponent } from 'src/app/shared/components/base-component/base-component';
 import { ClassificationOfRiskSituationsService } from '../../services/classification-of-risk-situations.service';
+import { ClassificationOfRiskSituations } from '../../models/classification-of-risk-situations';
 
 @Component({
     selector: 'app-situation-view',

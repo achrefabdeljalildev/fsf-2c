@@ -2,15 +2,15 @@ import {
     Component,
     EventEmitter,
     Input,
+    OnChanges,
     OnInit,
     Output,
-    OnChanges,
     SimpleChanges,
 } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { BaseComponent } from 'src/app/shared/components/base-component/base-component';
-import { UserService } from '../../services/user.service';
 import { RoleModel } from '../../models/role.model';
+import { UserService } from '../../services/user.service';
 
 @Component({
     selector: 'app-role-view',

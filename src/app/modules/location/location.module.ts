@@ -1,21 +1,21 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { LocationListComponent } from './components/location-list/location-list.component';
+import { FlatpickrDirective } from 'angularx-flatpickr';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 import { Card } from 'primeng/card';
-import { TagModule } from 'primeng/tag';
-import { DividerModule } from 'primeng/divider';
-import { TableModule } from 'primeng/table';
 import { CheckboxModule } from 'primeng/checkbox';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { DividerModule } from 'primeng/divider';
+import { SelectModule } from 'primeng/select';
+import { TableModule } from 'primeng/table';
+import { TabsModule } from 'primeng/tabs';
+import { TagModule } from 'primeng/tag';
 import { LocationDashboardComponent } from 'src/app/modules/location/components/location-dashboard/location-dashboard.component';
 import { LocationViewComponent } from 'src/app/modules/location/components/location-view/location-view.component';
-import { TabsModule } from 'primeng/tabs';
-import { AutoCompleteModule } from 'primeng/autocomplete';
-import { SelectModule } from 'primeng/select';
-import { FlatpickrDirective } from 'angularx-flatpickr';
 import { SaudiMapComponent } from 'src/app/modules/location/components/saudi-map/saudi-map.component';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { LocationListComponent } from './components/location-list/location-list.component';
 
 const routes: Routes = [
     {

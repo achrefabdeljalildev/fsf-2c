@@ -58,7 +58,7 @@
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 w-full">
             <a
                 *ngFor="let subcard of selectedCard.subcards"
-                routerLink="/location/dashboard"
+                (click)="goSubmenuPage(subcard)"
                 class="bg-lightBlue hover:shadow-md transition-shadow border-[#0E8A8A63] w-full cursor-pointer p-3 px-2 rounded-lg shadow-sm border border-gray-100 relative block"
                 [class.disabled-card]="!subcard.enabled"
             >

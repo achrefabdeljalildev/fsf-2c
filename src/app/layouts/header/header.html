@@ -30,31 +30,31 @@
 <div
     class="bg-white border-b border-gray-200 px-8 sticky top-[28px] z-40 dark:bg-[#0b0e23] dark:border-b-gray-700"
 >
-    <div class="flex justify-between items-center gap-4 h-full">
+    <div class="flex justify-between items-center gap-2 h-full">
         <div class="flex items-center">
             <a class="flex gap-4 h-full" routerLink="/">
                 <img src="assets/images/logo.png" alt="Logo" class="h-10" />
             </a>
-            <button
-                class="rounded-full text-primary hover:bg-gray-200 py-3 px-3 flex items-center hover:font-bold"
-            >
+            <button class="rounded-full btn-secondary py-3 px-3 flex items-center hover:font-bold">
                 <i class="pi pi-list" (click)="toggleSidebar()"></i>
             </button>
         </div>
 
-        <div class="flex gap-4 h-full">
+        <div class="flex gap-2 h-full">
             <div
                 class="hover:bg-primary hover:text-white cursor-pointer flex items-center gap-1 px-2 py-4 rounded"
             >
                 <i class="pi pi-search"></i>
                 <span>بحث</span>
             </div>
-            <div
+            <a
+                routerLink="/global-settings/list"
                 class="flex items-center hover:bg-primary hover:text-white cursor-pointer gap-1 px-2 py-4 rounded"
+                [ngClass]="isGlobalSettings ? 'bg-primary text-white' : ''"
             >
                 <i class="pi pi-cog"></i>
                 <span>الإعدادات</span>
-            </div>
+            </a>
             <div
                 class="flex items-center hover:bg-primary hover:text-white cursor-pointer gap-1 px-2 py-4 rounded"
             >

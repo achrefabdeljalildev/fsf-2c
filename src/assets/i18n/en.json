@@ -47,6 +47,12 @@
         "classificationForm": "Classification Form",
         "classification": "Classification"
     },
+    "globalSettings": {
+        "globalSettings": "Global Settings",
+        "addNewGlobalSetting": "Add Global Setting",
+        "globalSettingsList": "Global Settings List",
+        "editGlobalSetting": "Edit Global Setting"
+    },
     "locationClassification": {
         "add": "Add Classification",
         "list": "Classification List",
@@ -55,20 +61,35 @@
         "description": "Description"
     },
     "fallingLoadClassification": {
-        "addNew": "Add New Falling Load Classification",
-        "list": "Falling Load Classification List"
+        "addNew": "Add New Risk Probability",
+        "list": "Risk Probability List"
     },
     "classificationOfRiskSituations": {
-        "addNew": "Add New Risk Situation Classification",
-        "list": "Risk Situation Classification List"
+        "addNew": "Add New Risk Situation",
+        "list": "Risk Situations List"
     },
     "classificationOfRiskImpact": {
-        "addNew": "Add New Risk Impact Classification",
-        "list": "Risk Impact Classification List"
+        "addNew": "Add New Risk Impact",
+        "list": "Risk Impact List"
     },
     "classificationOfRiskType": {
-        "addNew": "Add New Risk Type Classification",
-        "list": "Risk Type Classification List"
+        "addNew": "Add New Risk Type",
+        "list": "Risk Types List"
+    },
+    "locationRisk": {
+        "addNew": "Add New Risk",
+        "list": "Location Risks List",
+        "name": "Risk Name",
+        "riskType": "Risk Type",
+        "riskImpact": "Risk Impact",
+        "riskProbability": "Risk Probability",
+        "riskLikelihood": "Risk Likelihood",
+        "riskStatus": "Risk Status",
+        "selectRiskType": "Select Risk Type",
+        "selectRiskImpact": "Select Risk Impact",
+        "selectRiskProbability": "Select Risk Probability",
+        "selectRiskLikelihood": "Select Risk Likelihood",
+        "selectRiskStatus": "Select Risk Status"
     },
     "map": {
         "showRegions": "Show Regions",
@@ -148,7 +169,7 @@
         "addNewLocation": "Add New Location",
         "editLocation": "Edit Location",
         "addNewClassification": "Add New Classification",
-        "editClassification": "Edit Classification",
+        "editClassification": "Edit",
         "addNewSurvey": "Add New Survey",
         "editSurvey": "Edit Survey",
         "addNewOrganization": "Add New Organization",
@@ -167,10 +188,11 @@
         "classifications": "Classifications",
         "surveys": "Surveys",
         "riskRegisterSettings": "Risk Register Settings",
-        "fallingLoadClassification": "Falling Load Classification",
-        "classificationOfRiskSituations": "Risk Situation Classification",
-        "classificationOfRiskImpact": "Risk Impact Classification",
-        "classificationOfRiskType": "Risk Type Classification"
+        "fallingLoadClassification": "Risk Probability",
+        "classificationOfRiskSituations": "Risk Situations",
+        "classificationOfRiskImpact": "Risk Impact",
+        "classificationOfRiskType": "Risk Types",
+        "locationRisks": "Location Risks"
     },
     "validationMessages": {
         "savedSuccessfully": "Saved successfully",
@@ -222,6 +244,11 @@
         "locationFoundSuccess": "Location found successfully",
         "locationNotFound": "No location found with this code",
         "locationSearchError": "An error occurred while searching for location",
+        "globalSettingUpdatedSuccess": "Global setting updated successfully",
+        "globalSettingAddedSuccess": "Global setting added successfully",
+        "globalSettingErrorSave": "An error occurred while saving the global setting",
+        "globalSettingDeletedSuccess": "Global setting deleted successfully",
+        "globalSettingErrorDelete": "An error occurred while deleting the global setting",
         "recordWillBeDisplayedAfterSave": "The record will be displayed after saving the survey."
     },
     "formLabels": {
@@ -232,6 +259,10 @@
         "description": "Description",
         "enterDescription": "Enter Description",
         "locationCode": "Location Code",
+        "locationName": "Location Name",
+        "organization": "Organization",
+        "riskCode": "Risk Code",
+        "enterRiskCode": "Enter Risk Code",
         "province": "Province",
         "affiliatedEntity": "Affiliated Entity",
         "parent": "Parent",
@@ -239,7 +270,13 @@
         "addNote": "Add Note",
         "siteType": "Site Type",
         "coordinates": "Coordinates",
-        "administrator": "Administrator"
+        "administrator": "Administrator",
+        "location": "Location",
+        "selectLocation": "Select Location"
+    },
+    "labels": {
+        "relatedDetails": "Related Details",
+        "notes": "Notes"
     },
     "siteTypes": {
         "none": "None",

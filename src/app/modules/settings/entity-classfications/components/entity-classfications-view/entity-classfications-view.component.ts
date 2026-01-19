@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { BaseComponent } from 'src/app/shared/components/base-component/base-component';
-import { EntityClassficationsService } from '../../services/entity-classfications.service';
 import { EntityClassificationModel } from '../../models/entity-classification.model';
+import { EntityClassficationsService } from '../../services/entity-classfications.service';
 
 @Component({
     selector: 'app-entity-classfications-view',
@@ -10,10 +10,14 @@ import { EntityClassificationModel } from '../../models/entity-classification.mo
     standalone: false,
 })
 export class EntityClassficationsViewComponent extends BaseComponent implements OnInit {
+    @Input() visible: boolean = false;
+    @Input() entityId: number | null = null;
+    @Output() visibleChange = new EventEmitter<boolean>();
+    @Output() saved = new EventEmitter<void>();
+
     form!: FormGroup;
     isLoading: boolean = false;
     isEditMode: boolean = false;
-    entityId: number | null = null;
 
     constructor(private svc: EntityClassficationsService) {
         super();
@@ -21,17 +25,17 @@ export class EntityClassficationsViewComponent extends BaseComponent implements 
 
     ngOnInit(): void {
         this.initForm();
-        this.route.params.subscribe((params) => {
-            const id = params['id'] ? Number(params['id']) : null;
-            this.entityId = id;
-            this.isEditMode = !!id;
+    }
 
+    ngOnChanges(): void {
+        if (this.visible) {
+            this.isEditMode = !!this.entityId;
             if (this.isEditMode && this.entityId) {
                 this.loadEntity(this.entityId);
             } else {
                 this.form.reset();
             }
-        });
+        }
     }
 
     initForm(): void {
@@ -62,7 +66,7 @@ export class EntityClassficationsViewComponent extends BaseComponent implements 
         this.isLoading = true;
         const payload: EntityClassificationModel = {
             ...this.form.value,
-            entityName: 'fieldSurvey',
+            entityName: 'FieldSurvey',
         };
 
         const request = this.isEditMode
@@ -75,7 +79,8 @@ export class EntityClassficationsViewComponent extends BaseComponent implements 
                 this.showSuccessMessage(
                     this.isEditMode ? 'تم تحديث التصنيف بنجاح' : 'تم إضافة التصنيف بنجاح',
                 );
-                this.router.navigate(['/entity-classification/list']);
+                this.closeDialog();
+                this.saved.emit();
             },
             error: () => {
                 this.isLoading = false;
@@ -84,6 +89,13 @@ export class EntityClassficationsViewComponent extends BaseComponent implements 
         });
 
         this.subscriptions.add(subscription);
+    }
+
+    closeDialog(): void {
+        this.visible = false;
+        this.visibleChange.emit(false);
+        this.form.reset();
+        this.entityId = null;
     }
 
     ngOnDestroy(): void {

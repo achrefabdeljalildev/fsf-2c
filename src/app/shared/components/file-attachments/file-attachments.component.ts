@@ -18,7 +18,7 @@ export interface AttachmentItem {
     extension?: string;
     isUploading?: boolean;
     uploadProgress?: number;
-    file?: File; // Store the actual File object
+    file?: File;
 }
 
 @Component({

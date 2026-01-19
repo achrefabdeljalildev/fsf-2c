@@ -1,0 +1,348 @@
+<p-breadcrumb
+    [model]="[
+        { label: ('breadcrumbs.securitySystems' | translate), routerLink: '/' },
+        { label: ('breadcrumbs.generalAdministration' | translate), routerLink: '/' },
+        { label: ('breadcrumbs.locationRisks' | translate) },
+        {
+            label: isEditMode ? ('buttons.edit' | translate) : ('locationRisk.addNew' | translate),
+        },
+    ]"
+/>
+
+<main-content [isPanel]="false">
+    <form [formGroup]="locationRiskForm" (ngSubmit)="submit()" class="space-y-6">
+        <div class="grid grid-cols-3 gap-6">
+            <div class="panel flex flex-col col-span-2">
+                <!-- Top Action Buttons -->
+                <div class="flex justify-start gap-2 mb-4">
+                    <button
+                        type="button"
+                        class="btn bg-gray-50 hover:bg-gray-100 text-gray-700"
+                        (click)="back()"
+                    >
+                        {{ 'buttons.cancel' | translate }}
+                    </button>
+                    <button type="submit" class="btn btn-primary" [disabled]="isLoading">
+                        {{
+                            isEditMode ? ('buttons.save' | translate) : ('buttons.add' | translate)
+                        }}
+                    </button>
+                </div>
+
+                <!-- Grid Layout: 2 cols for form + 1 col for attachments -->
+                <div class="flex flex-col gap-6">
+                    <!-- Name -->
+                    <div class="form-group">
+                        <label for="nameAr" class="block text-sm font-medium mb-2">
+                            {{ 'formLabels.name' | translate }}
+                            <span class="text-red-500">*</span>
+                        </label>
+                        <input
+                            id="nameAr"
+                            type="text"
+                            formControlName="nameAr"
+                            pInputText
+                            class="w-full"
+                            [placeholder]="'formLabels.enterName' | translate"
+                        />
+                        <small
+                            *ngIf="
+                                locationRiskForm.get('nameAr')?.invalid &&
+                                (locationRiskForm.get('nameAr')?.dirty ||
+                                    locationRiskForm.get('nameAr')?.touched)
+                            "
+                            class="text-red-500"
+                        >
+                            <span *ngIf="locationRiskForm.get('nameAr')?.errors?.['required']">
+                                {{ 'messages.requiredField' | translate }}
+                            </span>
+                        </small>
+                    </div>
+
+                    <!-- Location Selection -->
+                    <div class="form-group">
+                        <label for="locationId" class="block text-sm font-medium mb-2">
+                            {{ 'formLabels.locationCode' | translate }}
+                            <span class="text-red-500">*</span>
+                        </label>
+                        <p-select
+                            id="locationId"
+                            formControlName="locationId"
+                            [options]="locations"
+                            optionLabel="code"
+                            optionValue="id"
+                            [placeholder]="'formLabels.selectLocation' | translate"
+                            [filter]="true"
+                            filterBy="code,nameAr"
+                            [style]="{ width: '100%' }"
+                            (onChange)="onLocationChange()"
+                        ></p-select>
+                        <small
+                            *ngIf="
+                                locationRiskForm.get('locationId')?.invalid &&
+                                (locationRiskForm.get('locationId')?.dirty ||
+                                    locationRiskForm.get('locationId')?.touched)
+                            "
+                            class="text-red-500"
+                        >
+                            <span *ngIf="locationRiskForm.get('locationId')?.errors?.['required']">
+                                {{ 'messages.requiredField' | translate }}
+                            </span>
+                        </small>
+                    </div>
+
+                    <!-- Location Details (Read-only) -->
+                    <div class="p-4 bg-gray-50">
+                        <div class="grid grid-cols-2 gap-4">
+                            <!-- Location Name -->
+                            <div class="form-group">
+                                <label for="locationName" class="block text-sm font-medium mb-2">
+                                    {{ 'formLabels.locationName' | translate }}
+                                </label>
+                                <input
+                                    id="locationName"
+                                    type="text"
+                                    formControlName="locationName"
+                                    pInputText
+                                    class="w-full"
+                                    readonly
+                                />
+                            </div>
+                            <!-- Organization -->
+                            <div class="form-group">
+                                <label for="organization" class="block text-sm font-medium mb-2">
+                                    {{ 'formLabels.organization' | translate }}
+                                </label>
+                                <input
+                                    id="organization"
+                                    type="text"
+                                    formControlName="organization"
+                                    pInputText
+                                    class="w-full"
+                                    readonly
+                                />
+                            </div>
+                            <!-- Region -->
+                            <div class="form-group">
+                                <label for="region" class="block text-sm font-medium mb-2">
+                                    {{ 'formLabels.region' | translate }}
+                                </label>
+                                <input
+                                    id="region"
+                                    type="text"
+                                    formControlName="region"
+                                    pInputText
+                                    class="w-full"
+                                    readonly
+                                />
+                            </div>
+                            <!-- Province -->
+                            <div class="form-group">
+                                <label for="province" class="block text-sm font-medium mb-2">
+                                    {{ 'formLabels.province' | translate }}
+                                </label>
+                                <input
+                                    id="province"
+                                    type="text"
+                                    formControlName="province"
+                                    pInputText
+                                    class="w-full"
+                                    readonly
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Right: Attachments (1 col) -->
+            <div class="col-span-1">
+                <app-file-attachments
+                    [attachments]="attachments"
+                    [entityName]="'LocationRisk'"
+                    [entityKey]="locationRiskId?.toString() || ''"
+                    [path]="'LocationRisk'"
+                    [category]="'Documents'"
+                    (fileAdded)="onFileAdded($event)"
+                    (download)="onAttachmentDownload($event)"
+                    (remove)="onAttachmentRemove($event)"
+                    (uploadSuccess)="onUploadSuccess($event)"
+                    (uploadError)="onUploadError($event)"
+                />
+            </div>
+        </div>
+        <p-tabs value="0">
+            <p-tablist>
+                <p-tab value="0">{{ 'labels.relatedDetails' | translate }}</p-tab>
+                <p-tab value="1" *ngIf="isEditMode">{{ 'labels.notes' | translate }}</p-tab>
+            </p-tablist>
+            <p-tabpanels>
+                <p-tabpanel value="0">
+                    <div class="grid grid-cols-2 gap-6">
+                        <!-- Risk Type -->
+                        <div class="form-group">
+                            <label for="riskTypeId" class="block text-sm font-medium mb-2">
+                                {{ 'locationRisk.riskType' | translate }}
+                                <span class="text-red-500">*</span>
+                            </label>
+                            <p-select
+                                id="riskTypeId"
+                                formControlName="riskTypeId"
+                                [options]="riskTypes"
+                                optionLabel="nameAr"
+                                optionValue="id"
+                                [placeholder]="'locationRisk.selectRiskType' | translate"
+                                [filter]="true"
+                                filterBy="nameAr"
+                                [style]="{ width: '100%' }"
+                            ></p-select>
+                            <small
+                                *ngIf="
+                                    locationRiskForm.get('riskTypeId')?.invalid &&
+                                    (locationRiskForm.get('riskTypeId')?.dirty ||
+                                        locationRiskForm.get('riskTypeId')?.touched)
+                                "
+                                class="text-red-500"
+                            >
+                                <span
+                                    *ngIf="locationRiskForm.get('riskTypeId')?.errors?.['required']"
+                                >
+                                    {{ 'messages.requiredField' | translate }}
+                                </span>
+                            </small>
+                        </div>
+
+                        <!-- Risk Impact -->
+                        <div class="form-group">
+                            <label for="riskImpactId" class="block text-sm font-medium mb-2">
+                                {{ 'locationRisk.riskImpact' | translate }}
+                                <span class="text-red-500">*</span>
+                            </label>
+                            <p-select
+                                id="riskImpactId"
+                                formControlName="riskImpactId"
+                                [options]="riskImpacts"
+                                optionLabel="nameAr"
+                                optionValue="id"
+                                [placeholder]="'locationRisk.selectRiskImpact' | translate"
+                                [filter]="true"
+                                filterBy="nameAr"
+                                [style]="{ width: '100%' }"
+                            ></p-select>
+                            <small
+                                *ngIf="
+                                    locationRiskForm.get('riskImpactId')?.invalid &&
+                                    (locationRiskForm.get('riskImpactId')?.dirty ||
+                                        locationRiskForm.get('riskImpactId')?.touched)
+                                "
+                                class="text-red-500"
+                            >
+                                <span
+                                    *ngIf="
+                                        locationRiskForm.get('riskImpactId')?.errors?.['required']
+                                    "
+                                >
+                                    {{ 'messages.requiredField' | translate }}
+                                </span>
+                            </small>
+                        </div>
+
+                        <!-- Risk Likelihood -->
+                        <div class="form-group">
+                            <label for="riskLikeliHoodId" class="block text-sm font-medium mb-2">
+                                {{ 'locationRisk.riskLikelihood' | translate }}
+                                <span class="text-red-500">*</span>
+                            </label>
+                            <p-select
+                                id="riskLikeliHoodId"
+                                formControlName="riskLikeliHoodId"
+                                [options]="riskLikelihoods"
+                                optionLabel="nameAr"
+                                optionValue="id"
+                                [placeholder]="'locationRisk.selectRiskLikelihood' | translate"
+                                [filter]="true"
+                                filterBy="nameAr"
+                                [style]="{ width: '100%' }"
+                            ></p-select>
+                            <small
+                                *ngIf="
+                                    locationRiskForm.get('riskLikeliHoodId')?.invalid &&
+                                    (locationRiskForm.get('riskLikeliHoodId')?.dirty ||
+                                        locationRiskForm.get('riskLikeliHoodId')?.touched)
+                                "
+                                class="text-red-500"
+                            >
+                                <span
+                                    *ngIf="
+                                        locationRiskForm.get('riskLikeliHoodId')?.errors?.[
+                                            'required'
+                                        ]
+                                    "
+                                >
+                                    {{ 'messages.requiredField' | translate }}
+                                </span>
+                            </small>
+                        </div>
+
+                        <!-- Risk Status -->
+                        <div class="form-group">
+                            <label for="riskStatusId" class="block text-sm font-medium mb-2">
+                                {{ 'locationRisk.riskStatus' | translate }}
+                                <span class="text-red-500">*</span>
+                            </label>
+                            <p-select
+                                id="riskStatusId"
+                                formControlName="riskStatusId"
+                                [options]="riskStatuses"
+                                optionLabel="nameAr"
+                                optionValue="id"
+                                [placeholder]="'locationRisk.selectRiskStatus' | translate"
+                                [filter]="true"
+                                filterBy="nameAr"
+                                [style]="{ width: '100%' }"
+                            ></p-select>
+                            <small
+                                *ngIf="
+                                    locationRiskForm.get('riskStatusId')?.invalid &&
+                                    (locationRiskForm.get('riskStatusId')?.dirty ||
+                                        locationRiskForm.get('riskStatusId')?.touched)
+                                "
+                                class="text-red-500"
+                            >
+                                <span
+                                    *ngIf="
+                                        locationRiskForm.get('riskStatusId')?.errors?.['required']
+                                    "
+                                >
+                                    {{ 'messages.requiredField' | translate }}
+                                </span>
+                            </small>
+                        </div>
+                        <!-- Description -->
+                        <div class="form-group col-span-2">
+                            <label for="descriptionAr" class="block text-sm font-medium mb-2">
+                                {{ 'formLabels.description' | translate }}
+                            </label>
+                            <textarea
+                                id="descriptionAr"
+                                formControlName="descriptionAr"
+                                rows="4"
+                                class="w-full border border-gray-300 rounded px-3 py-2"
+                                [placeholder]="'formLabels.enterDescription' | translate"
+                            ></textarea>
+                        </div>
+                    </div>
+                </p-tabpanel>
+                <p-tabpanel value="1">
+                    <app-logs-list
+                        *ngIf="isEditMode && locationRiskId"
+                        [tableName]="'LocationRisks'"
+                        [tableKey]="locationRiskId"
+                    />
+                    <p *ngIf="!isEditMode" class="text-gray-500">
+                        {{ 'messages.noLogsAvailable' | translate }}
+                    </p>
+                </p-tabpanel>
+            </p-tabpanels>
+        </p-tabs>
+    </form>
+</main-content>
