@@ -1,0 +1,42 @@
+<p-breadcrumb
+    [model]="[
+        { label: ('assumptionSettings.securitySystems' | translate) },
+        { label: ('assumptionSettings.hypothesesSettings' | translate) },
+        { label: ('assumptionSettings.PreparationOfParticipatingParties' | translate) },
+    ]"
+/>
+<main-content>
+    <list-header
+        addNewRecordLabel="{{ 'assumptionSettings.AddParticipatingParties' | translate }}"
+        tableTitle="{{ 'assumptionSettings.ParticipatingPartiesList' | translate }}"
+        [paginationInfo]="paginationInfo"
+        (search)="onSearch($event)"
+        (addNewRecord)="openCreateDialog()"
+    >
+        <ng-datatable
+            [rows]="rows"
+            [columns]="cols"
+            [hasCheckbox]="true"
+            [sortable]="false"
+            [loading]="isLoading"
+            [pagination]="true"
+            [pageSize]="criteria.pageSize"
+            rowClass="cursor-pointer"
+            noDataContent="{{ 'common.noDataOnList' | translate }}"
+        >
+            <ng-template slot="actions" let-value="data">
+                <div class="flex gap-2">
+                    <div (click)="openEditDialog(value.id)" class="cursor-pointer">
+                        <i class="pi pi-pencil"></i>
+                    </div>
+                </div>
+            </ng-template>
+        </ng-datatable>
+    </list-header>
+</main-content>
+
+<app-number-of-participating-entities-view
+    [(visible)]="showDialog"
+    [itemId]="selectedItemId"
+    (onSave)="onDialogSave()"
+/>

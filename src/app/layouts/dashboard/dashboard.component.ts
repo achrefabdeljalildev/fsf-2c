@@ -203,6 +203,34 @@ export class DashboardComponent extends BaseComponent {
                                 },
                             ],
                         },
+                        {
+                            key: '7',
+                            label: 'إعدادات الفرضيات',
+                            data: 'Sub Survey 2',
+                            icon: 'assets/images/icons/assumption-settings-sidebar.svg',
+                            children: [
+                                {
+                                    key: '7-1',
+                                    label: 'اعداد الجهات المشاركة',
+                                    data: 'Sub Survey 2',
+                                    routerLink:
+                                        '/assumption-settings/number-of-participating-entities/list',
+                                },
+                                {
+                                    key: '7-2',
+                                    label: 'اعداد مسميات الفرضيات',
+                                    data: 'Sub Survey 2',
+                                    routerLink:
+                                        '/assumption-settings/preparing-the-names-of-hypotheses/list',
+                                },
+                                {
+                                    key: '7-3',
+                                    label: 'اعداد انواع الفرضيات',
+                                    data: 'Sub Survey 2',
+                                    routerLink: '/assumption-settings/Types-of-hypotheses/list',
+                                },
+                            ],
+                        },
                     ],
                 },
                 {

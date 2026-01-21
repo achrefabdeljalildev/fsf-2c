@@ -138,4 +138,31 @@ export const routes: Routes = [
                 (m) => m.ClassificationOfRiskSituationsModule,
             ),
     },
+    {
+        path: 'assumption-settings/number-of-participating-entities',
+        canActivate: [AuthGuard],
+        component: AppLayout,
+        loadChildren: () =>
+            import('./modules/settings/assumption-settings/number-of-participating-entities/number-of-participating-entities.module').then(
+                (m) => m.NumberOfParticipatingEntitiesModule,
+            ),
+    },
+    {
+        path: 'assumption-settings/preparing-the-names-of-hypotheses',
+        canActivate: [AuthGuard],
+        component: AppLayout,
+        loadChildren: () =>
+            import('./modules/settings/assumption-settings/preparing-the-names-of-hypotheses/preparing-the-names-of-hypotheses.module').then(
+                (m) => m.PreparingTheNamesOfHypothesesModule,
+            ),
+    },
+    {
+        path: 'assumption-settings/Types-of-hypotheses',
+        canActivate: [AuthGuard],
+        component: AppLayout,
+        loadChildren: () =>
+            import('./modules/settings/assumption-settings/Types-of-hypotheses/Types-of-hypotheses.module').then(
+                (m) => m.TypeOfHypothesesModule,
+            ),
+    },
 ];
