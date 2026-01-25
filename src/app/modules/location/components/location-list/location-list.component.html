@@ -12,15 +12,37 @@
     <list-header
         addNewRecordLabel="{{ 'location.addNewLocation' | translate }}"
         tableTitle="{{ 'location.locationList' | translate }}"
+        [showFilterButton]="true"
         [paginationInfo]="paginationInfo"
         [pageNumber]="criteria.pageNumber"
         [pageSize]="criteria.pageSize"
         [totalCount]="criteria.totalCount ?? 0"
         [showMapsButton]="true"
+        [filterConfigs]="[
+            {
+                propertyName: 'nameAr',
+                filterType: 'text',
+                isSingle: true,
+                placeholder: ('formLabels.name' | translate),
+            },
+            {
+                propertyName: 'code',
+                filterType: 'text',
+                isSingle: true,
+                placeholder: ('formLabels.locationCode' | translate),
+            },
+            {
+                propertyName: 'weaponsWarehouse',
+                filterType: 'checkbox',
+                isSingle: true,
+                label: 'يوجد مستودع أسلحة',
+            },
+        ]"
         (search)="onSearch($event)"
         (clickMaps)="showMapsView = !showMapsView"
         (addNewRecord)="openCreateDialog()"
         (pageChange)="onPageChange($event)"
+        (filterChange)="filterChange($event)"
     >
         @if (showMapsView) {
             <app-saudi-map [searchTerm]="searchTerm" />
@@ -28,12 +50,10 @@
             <ng-datatable
                 [rows]="rows"
                 [columns]="cols"
-                [hasCheckbox]="true"
                 [sortable]="false"
                 [loading]="isLoading"
                 [pagination]="true"
                 [pageSize]="criteria.pageSize"
-                rowClass="cursor-pointer"
                 noDataContent="{{ 'common.noDataOnList' | translate }}"
             >
                 <ng-template slot="actions" let-value="data">

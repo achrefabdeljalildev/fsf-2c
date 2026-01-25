@@ -34,6 +34,37 @@
         "addNewRegion": "إضافة منطقة",
         "regionList": "قائمة المناطق"
     },
+    "hypotheseType": {
+        "addNewHypotheseType": "إضافة نوع فرضية",
+        "hypotheseTypeList": "قائمة أنواع الفرضيات",
+        "hypotheseType": "نوع الفرضية"
+    },
+    "hypotheseTitle": {
+        "addNewHypotheseTitle": "إضافة مسمى فرضية",
+        "hypotheseTitleList": "قائمة مسميات الفرضيات"
+    },
+    "hypothesesInvolvedParty": {
+        "addNewHypothesesInvolvedParty": "إضافة جهة مشاركة",
+        "hypothesesInvolvedPartyList": "قائمة الجهات المشاركة"
+    },
+    "locationHypothesisCriteria": {
+        "criteriaHierarchy": "هرم معايير الفرضيات",
+        "addNewRootCriteria": "إضافة معيار رئيسي",
+        "addNewCriteria": "إضافة معيار فرضية",
+        "editCriteria": "تعديل معيار الفرضية",
+        "criteriaDetails": "تفاصيل معيار الفرضية",
+        "childCriteria": "المعايير الفرعية",
+        "addChild": "إضافة معيار فرعي",
+        "addNewLocationHypothesisCriteria": "إضافة معيار فرضية",
+        "locationHypothesisCriteriaList": "قائمة معايير الفرضيات",
+        "viewDetails": "عرض التفاصيل"
+    },
+    "hypothese": {
+        "addNew": "إضافة فرضية جديدة",
+        "list": "قائمة الفرضيات",
+        "name": "اسم الفرضية",
+        "edit": "تعديل فرضية"
+    },
     "globalSettings": {
         "globalSettings": "الإعدادات العامة",
         "addNewGlobalSetting": "إضافة إعداد عام",
@@ -124,42 +155,6 @@
         "addNew": "إضافة نوع مخاطر جديد",
         "list": "قائمة أنواع المخاطر"
     },
-    "assumptionSettings": {
-        "addNew": "إضافة نوع فرضية ",
-        "list": "  قائمة أنواع الفرضيات",
-        "securitySystems":"الأنظمة الأمنية",
-        "PreparationOfParticipatingParties":"إعداد الجهات المشاركة",
-        "AddParticipatingParties":"إضافة جهات مشاركة",
-        "EditParticipatingParties":"تعديل جهات مشاركة",
-        "ParticipatingParties":" جهات مشاركة",
-        "ParticipatingPartiesList":" قائمة الجهات المشاركة",
-        "ParticipatingPartiesNames":"مسميات الجهات المشاركة",
-        "ParticipatingPartiesName":"اسم الجهة المشاركة",
-        "enterParticipatingPartiesName":"ادخل اسم الجهة المشاركة",
-        "hypothesesSettings" :"إعدادات الفرضيات",
-        "PreparingTheNamesOfTheHypotheses":"إعداد مسميات الفرضيات",
-        "typesOfHypotheses":"أنواع الفرضيات",
-        "ListOfHypothesisTitles":"قائمة مسميات الفرضيات",
-        "HypothesisTitles":"مسميات الفرضيات",
-        "EditHypothesisTitles":"تعديل مسمى الفرضية ",
-        "procedures":"الإجراءات ",
-        "addNewHypothesisTitles":"إضافة مسمى فرضية ",
-        "ChooseTheTypeOfHypothesis":"اختر نوع الفرضية ",
-        "procedure":"الإجراء ",
-        "enterProcedure":"أدخل الإجراء ",
-        "descriptionAr":"الوصف ",
-        "enterDescriptionAr":"أدخل الوصف ",
-        "nameAr":"اسم الفرضية ",
-        "enterNameAr":"أدخل اسم الفرضية ",
-        "edit":"تعديل نوع الفرضية",
-        "save": "حفظ",
-        "cancel":"إلغاء",
-        "typeOfHypothesis":"نوع الفرضية",
-        "enterTypeOfHypothesis":"أدخل نوع الفرضية",
-        "typeName":"اسم النوع",
-        "enterTypeName":"أدخل اسم النوع",
-        "typeOfHypothese":"نوع الفرضية"
-    },
     "locationRisk": {
         "addNew": "إضافة خطر جديد",
         "list": "قائمة مخاطر المواقع",
@@ -227,7 +222,11 @@
         "edit": "تعديل",
         "search": "بحث",
         "done": "تم",
-        "close": "إغلاق"
+        "close": "إغلاق",
+        "addChild": "إضافة عنصر فرعي",
+        "remove": "إزالة",
+        "apply": "تطبيق",
+        "clear": "مسح"
     },
     "messages": {
         "requiredField": "هذا الحقل مطلوب",
@@ -243,7 +242,8 @@
         "confirmDeleteUser": "هل أنت متأكد من حذف هذا المستخدم؟",
         "deletedSuccessfully": "تم الحذف بنجاح",
         "savedSuccessfully": "تم الحفظ بنجاح",
-        "error": "حدث خطأ"
+        "error": "حدث خطأ",
+        "noChildrenAdded": "لم يتم إضافة عناصر فرعية"
     },
     "actions": {
         "addNewProvince": "إضافة محافظة جديدة",
@@ -261,7 +261,17 @@
         "editOrganization": "تعديل جهة",
         "addNewUser": "إضافة مستخدم جديد",
         "editUser": "تعديل مستخدم",
-        "addNewClassificationForm": "إضافة نموذج تصنيف جديد"
+        "addNewHypotheseType": "إضافة نوع فرضية جديد",
+        "editHypotheseType": "تعديل نوع فرضية",
+        "addNewHypotheseTitle": "إضافة مسمى فرضية جديد",
+        "editHypotheseTitle": "تعديل مسمى فرضية",
+        "addNewHypothesesInvolvedParty": "إضافة جهة مشاركة جديدة",
+        "editHypothesesInvolvedParty": "تعديل جهة مشاركة",
+        "addNewLocationHypothesisCriteria": "إضافة معيار فرضية جديد",
+        "editLocationHypothesisCriteria": "تعديل معيار فرضية",
+        "addNewClassificationForm": "إضافة نموذج تصنيف جديد",
+        "addNewChild": "إضافة عنصر فرعي جديد",
+        "editChild": "تعديل عنصر فرعي"
     },
     "breadcrumbs": {
         "securitySystems": "الأنظمة الأمنية",
@@ -278,6 +288,11 @@
         "classificationOfRiskImpact": "تأثير المخاطر",
         "classificationOfRiskType": "أنواع المخاطر",
         "locationRisks": "مخاطر المواقع",
+        "hypotheseTypes": "أنواع الفرضيات",
+        "hypotheseTitles": "مسميات الفرضيات",
+        "hypothesesInvolvedParties": "الجهات المشاركة",
+        "locationHypothesisCriterias": "معايير الفرضيات",
+        "hypotheses": "الفرضيات",
         "settings": "الإعدادات"
     },
     "validationMessages": {
@@ -335,6 +350,33 @@
         "globalSettingErrorSave": "حدث خطأ أثناء حفظ الإعداد العام",
         "globalSettingDeletedSuccess": "تم حذف الإعداد العام بنجاح",
         "globalSettingErrorDelete": "حدث خطأ أثناء حذف الإعداد العام",
+        "hypotheseTypeUpdatedSuccess": "تم تحديث نوع الفرضية بنجاح",
+        "hypotheseTypeAddedSuccess": "تم إضافة نوع الفرضية بنجاح",
+        "hypotheseTypeErrorSave": "حدث خطأ أثناء حفظ نوع الفرضية",
+        "hypotheseTypeDeletedSuccess": "تم حذف نوع الفرضية بنجاح",
+        "hypotheseTypeErrorDelete": "حدث خطأ أثناء حذف نوع الفرضية",
+        "hypotheseTitleUpdatedSuccess": "تم تحديث مسمى الفرضية بنجاح",
+        "hypotheseTitleAddedSuccess": "تم إضافة مسمى الفرضية بنجاح",
+        "hypotheseTitleErrorSave": "حدث خطأ أثناء حفظ مسمى الفرضية",
+        "hypotheseTitleDeletedSuccess": "تم حذف مسمى الفرضية بنجاح",
+        "hypotheseTitleErrorDelete": "حدث خطأ أثناء حذف مسمى الفرضية",
+        "hypothesesInvolvedPartyUpdatedSuccess": "تم تحديث الجهة المشاركة بنجاح",
+        "hypothesesInvolvedPartyAddedSuccess": "تم إضافة الجهة المشاركة بنجاح",
+        "hypothesesInvolvedPartyErrorSave": "حدث خطأ أثناء حفظ الجهة المشاركة",
+        "hypothesesInvolvedPartyDeletedSuccess": "تم حذف الجهة المشاركة بنجاح",
+        "hypothesesInvolvedPartyErrorDelete": "حدث خطأ أثناء حذف الجهة المشاركة",
+        "locationHypothesisCriteriaUpdatedSuccess": "تم تحديث معيار الفرضية بنجاح",
+        "locationHypothesisCriteriaAddedSuccess": "تم إضافة معيار الفرضية بنجاح",
+        "locationHypothesisCriteriaErrorSave": "حدث خطأ أثناء حفظ معيار الفرضية",
+        "locationHypothesisCriteriaDeletedSuccess": "تم حذف معيار الفرضية بنجاح",
+        "locationHypothesisCriteriaErrorDelete": "حدث خطأ أثناء حذف معيار الفرضية",
+        "childCriteriaAddedSuccess": "تم إضافة العنصر الفرعي بنجاح",
+        "childCriteriaUpdatedSuccess": "تم تحديث العنصر الفرعي بنجاح",
+        "childCriteriaErrorSave": "حدث خطأ أثناء حفظ العنصر الفرعي",
+        "childCriteriaDeletedSuccess": "تم حذف العنصر الفرعي بنجاح",
+        "childCriteriaErrorDelete": "حدث خطأ أثناء حذف العنصر الفرعي",
+        "parentCriteriaRequired": "يجب حفظ المعيار الرئيسي أولاً",
+        "saveParentFirst": "يرجى حفظ المعيار الرئيسي أولاً قبل إضافة عناصر فرعية",
         "recordWillBeDisplayedAfterSave": "سيتم عرض السجل بعد حفظ المسح."
     },
     "formLabels": {
@@ -361,7 +403,20 @@
         "location": "الموقع",
         "selectLocation": "اختر الموقع",
         "value": "القيمة",
-        "key": "المفتاح"
+        "key": "المفتاح",
+        "hypotheseType": "نوع الفرضية",
+        "selectHypotheseType": "اختر نوع الفرضية",
+        "hypotheseTitle": "مسمى الفرضية",
+        "selectHypotheseTitle": "اختر مسمى الفرضية",
+        "day": "اليوم",
+        "selectDay": "اختر اليوم",
+        "enterDay": "أدخل اليوم",
+        "date": "التاريخ",
+        "selectDate": "اختر التاريخ",
+        "fromTime": "من الوقت",
+        "toTime": "إلى الوقت",
+        "children": "العناصر الفرعية",
+        "enterChildName": "أدخل اسم العنصر الفرعي"
     },
     "labels": {
         "relatedDetails": "بيانات ذات الصلة",

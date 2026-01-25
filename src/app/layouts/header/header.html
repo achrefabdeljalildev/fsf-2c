@@ -35,12 +35,15 @@
             <a class="flex gap-4 h-full" routerLink="/">
                 <img src="assets/images/logo.png" alt="Logo" class="h-10" />
             </a>
-            <button class="rounded-full btn-secondary py-3 px-3 flex items-center hover:font-bold">
+            <button
+                *ngIf="hasMenuButton"
+                class="rounded-full btn-secondary py-3 px-3 flex items-center hover:font-bold"
+            >
                 <i class="pi pi-list" (click)="toggleSidebar()"></i>
             </button>
         </div>
 
-        <div class="flex gap-2 h-full">
+        <div class="flex gap-2">
             <div
                 class="hover:bg-primary hover:text-white cursor-pointer flex items-center gap-1 px-2 py-4 rounded"
             >
@@ -49,11 +52,15 @@
             </div>
             <a
                 routerLink="/global-settings/list"
-                class="flex items-center hover:bg-primary hover:text-white cursor-pointer gap-1 px-2 py-4 rounded"
+                class="relative flex items-center hover:bg-primary hover:text-white cursor-pointer gap-1 px-2 py-4 rounded"
                 [ngClass]="isGlobalSettings ? 'bg-primary text-white' : ''"
             >
                 <i class="pi pi-cog"></i>
                 <span>الإعدادات</span>
+                <div
+                    *ngIf="isGlobalSettings"
+                    class="absolute bottom-0 bg-center h-1 bg-secondary-light rounded-full w-[80%] border-primary"
+                ></div>
             </a>
             <div
                 class="flex items-center hover:bg-primary hover:text-white cursor-pointer gap-1 px-2 py-4 rounded"

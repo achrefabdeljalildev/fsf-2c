@@ -26,7 +26,7 @@
     }
 
     body {
-        @apply bg-[#fafafa] font-ibmPlexSansArabic;
+        @apply bg-[#F3F4F6] font-ibmPlexSansArabic;
     }
 
     body.dark {
@@ -131,7 +131,7 @@
     }
 
     .btn-outline-secondary {
-        @apply border-secondary text-secondary shadow-none hover:bg-secondary hover:text-white;
+        @apply border-primary text-primary shadow-none hover:bg-secondary hover:text-primary;
     }
 
     .btn-success {
@@ -168,10 +168,6 @@
 
     .btn-outline-gold {
         @apply border-gold text-gold shadow-none hover:bg-gold hover:text-white;
-    }
-
-    .btn-outline-secondary {
-        @apply border-secondary text-secondary shadow-none hover:bg-secondary hover:text-white;
     }
 
     .btn-dark {

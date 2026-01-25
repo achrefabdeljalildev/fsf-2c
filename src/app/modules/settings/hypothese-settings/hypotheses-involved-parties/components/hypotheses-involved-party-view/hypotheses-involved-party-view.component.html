@@ -1,0 +1,92 @@
+<p-dialog
+    [(visible)]="visible"
+    [header]="
+        isEditMode
+            ? ('actions.editHypothesesInvolvedParty' | translate)
+            : ('actions.addNewHypothesesInvolvedParty' | translate)
+    "
+    [modal]="true"
+    [style]="{ width: '50vw' }"
+    [breakpoints]="{ '960px': '75vw', '640px': '90vw' }"
+    (onHide)="closeDialog()"
+>
+    <form [formGroup]="hypothesesInvolvedPartyForm" (ngSubmit)="submit()" class="space-y-6">
+        <!-- Name in Arabic -->
+        <div class="form-group">
+            <label for="nameAr" class="block text-sm font-medium mb-2">
+                {{ 'formLabels.name' | translate }}
+                <span class="text-red-500">*</span>
+            </label>
+            <input
+                id="nameAr"
+                type="text"
+                formControlName="nameAr"
+                pInputText
+                class="w-full"
+                [placeholder]="'formLabels.enterName' | translate"
+            />
+            <small
+                *ngIf="
+                    hypothesesInvolvedPartyForm.get('nameAr')?.invalid &&
+                    (hypothesesInvolvedPartyForm.get('nameAr')?.dirty ||
+                        hypothesesInvolvedPartyForm.get('nameAr')?.touched)
+                "
+                class="text-red-500"
+            >
+                <span *ngIf="hypothesesInvolvedPartyForm.get('nameAr')?.errors?.['required']">
+                    {{ 'messages.requiredField' | translate }}
+                </span>
+            </small>
+        </div>
+
+        <!-- Description in Arabic -->
+        <div class="form-group">
+            <label for="descriptionAr" class="block text-sm font-medium mb-2">
+                {{ 'formLabels.description' | translate }}
+            </label>
+            <textarea
+                id="descriptionAr"
+                formControlName="descriptionAr"
+                pInputTextarea
+                rows="5"
+                class="w-full"
+                [placeholder]="'formLabels.enterDescription' | translate"
+            ></textarea>
+            <small
+                *ngIf="
+                    hypothesesInvolvedPartyForm.get('descriptionAr')?.invalid &&
+                    (hypothesesInvolvedPartyForm.get('descriptionAr')?.dirty ||
+                        hypothesesInvolvedPartyForm.get('descriptionAr')?.touched)
+                "
+                class="text-red-500"
+            >
+                <span
+                    *ngIf="hypothesesInvolvedPartyForm.get('descriptionAr')?.errors?.['required']"
+                >
+                    {{ 'messages.requiredField' | translate }}
+                </span>
+            </small>
+        </div>
+    </form>
+
+    <ng-template pTemplate="footer">
+        <div class="flex justify-end gap-2">
+            <button
+                type="button"
+                class="btn bg-gray-50 hover:bg-gray-100 text-gray-700"
+                (click)="closeDialog()"
+                [disabled]="isLoading"
+            >
+                {{ 'buttons.cancel' | translate }}
+            </button>
+            <button
+                type="button"
+                class="btn btn-primary"
+                (click)="submit()"
+                [disabled]="hypothesesInvolvedPartyForm.invalid || isLoading"
+            >
+                {{ isEditMode ? ('buttons.save' | translate) : ('buttons.add' | translate) }}
+            </button>
+        </div>
+    </ng-template>
+</p-dialog>

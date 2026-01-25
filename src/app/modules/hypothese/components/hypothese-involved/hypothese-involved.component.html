@@ -1,0 +1,88 @@
+<div class="panel flex flex-col gap-4 h-full">
+    <div class="flex items-center justify-between">
+        <div>
+            <h3 class="text-base font-semibold">
+                {{ 'hypothesesInvolvedParty.hypothesesInvolvedPartyList' | translate }}
+            </h3>
+            <span *ngIf="!hypotheseId" class="text-sm text-red-500">
+                {{ 'messages.saveParentFirst' | translate }}
+            </span>
+        </div>
+        <button
+            type="button"
+            class="btn btn-primary btn-sm"
+            (click)="openModal()"
+            [disabled]="!hypotheseId"
+        >
+            <i class="pi pi-plus"></i>
+        </button>
+    </div>
+
+    <!-- list the selected involved parties -->
+    <div *ngIf="selectedInvolvedParties.length > 0; else noDataTemplate" class="space-y-2">
+        <div
+            *ngFor="let party of selectedInvolvedParties"
+            class="p-3 border border-gray-200 rounded-md flex justify-between items-center"
+        >
+            <span>{{ party.nameAr }}</span>
+        </div>
+    </div>
+    <ng-template #noDataTemplate>
+        <div class="text-gray-500 text-sm text-center py-4">
+            {{ 'common.noDataOnList' | translate }}
+        </div>
+    </ng-template>
+
+    <p-dialog
+        [(visible)]="visible"
+        [header]="'hypothesesInvolvedParty.hypothesesInvolvedPartyList' | translate"
+        [modal]="true"
+        [style]="{ width: '500px' }"
+        [draggable]="false"
+        [resizable]="false"
+    >
+        <form [formGroup]="form" class="flex flex-col gap-4">
+            <div class="form-group" *ngIf="!loadingParties">
+                <div class="flex flex-col gap-3 max-h-96">
+                    <div *ngFor="let party of involvedParties" class="flex items-center gap-3">
+                        <p-checkbox
+                            [value]="party.id"
+                            [formControl]="getPartyCheckbox(party.id)"
+                            [binary]="true"
+                            class="mr-2"
+                        ></p-checkbox>
+                        <label class="cursor-pointer flex-1">{{ party.nameAr }}</label>
+                    </div>
+                    <div
+                        *ngIf="involvedParties.length === 0"
+                        class="text-gray-500 text-sm text-center py-4"
+                    >
+                        {{ 'messages.noData' | translate }}
+                    </div>
+                </div>
+                <small
+                    *ngIf="
+                        form.get('involvedParty')?.invalid &&
+                        (form.get('involvedParty')?.dirty || form.get('involvedParty')?.touched)
+                    "
+                    class="text-red-500"
+                >
+                    {{ 'messages.requiredField' | translate }}
+                </small>
+            </div>
+
+            <div class="flex justify-end gap-2">
+                <button
+                    type="button"
+                    class="btn bg-gray-50 hover:bg-gray-100 text-gray-700"
+                    (click)="closeModal()"
+                >
+                    {{ 'buttons.cancel' | translate }}
+                </button>
+                <button type="button" class="btn btn-primary" (click)="save()" [disabled]="saving">
+                    {{ 'buttons.save' | translate }}
+                </button>
+            </div>
+        </form>
+    </p-dialog>
+</div>

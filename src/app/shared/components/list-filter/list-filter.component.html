@@ -1,0 +1,23 @@
+<div class="grid grid-cols-3 gap-3 p-4 border rounded bg-gray-50">
+    <div *ngFor="let cfg of configs" class="flex flex-col gap-2">
+        <app-base-input
+            [inputType]="cfg.filterType"
+            [label]="cfg.label"
+            [placeholder]="cfg.placeholder || ''"
+            [options]="cfg.options || []"
+            [optionLabel]="cfg.optionLabel || 'label'"
+            [optionValue]="cfg.optionValue || 'value'"
+            [ngModel]="filterValues.get(cfg.propertyName)"
+            (ngModelChange)="onFilterChange(cfg.propertyName, $event)"
+            [showClear]="true"
+        />
+    </div>
+    <div class="flex gap-2 col-span-3 justify-end mt-2">
+        <button type="button" class="btn btn-sm btn-outline-secondary" (click)="clearAllFilters()">
+            {{ 'مسح' | translate }}
+        </button>
+        <button type="button" class="btn btn-sm btn-primary" (click)="applyFilters()">
+            {{ 'تطبيق' | translate }}
+        </button>
+    </div>
+</div>

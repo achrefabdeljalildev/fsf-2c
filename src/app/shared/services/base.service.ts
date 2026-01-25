@@ -18,7 +18,10 @@ export class BaseService<T> {
     getAll(
         criteria: CriteriaModel = new CriteriaModel(),
     ): Observable<ApiResponseModel<PagedResponse<T>>> {
-        return this.http.post<ApiResponseModel<PagedResponse<T>>>(this.baseUrl, criteria || {});
+        return this.http.post<ApiResponseModel<PagedResponse<T>>>(
+            `${this.baseUrl}/GetAll`,
+            criteria || {},
+        );
     }
 
     getById(id: number): Observable<ApiResponseModel<T>> {

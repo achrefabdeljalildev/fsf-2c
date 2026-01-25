@@ -7,7 +7,7 @@
 }
 
 .bh-datatable .bh-table-responsive table thead tr th {
-    @apply font-bold bg-lightBlue;
+    @apply font-bold bg-primary text-white;
 }
 
 .bh-datatable .bh-pagination {
@@ -93,8 +93,12 @@
     @apply hover:!bg-white-light/20 dark:hover:!bg-[#1a2941]/40;
 }
 
-.bh-datatable .bh-table-responsive table.bh-table-striped tbody tr:nth-child(odd) {
+.bh-datatable .bh-table-responsive table.bh-table-striped tbody tr:nth-child(even) {
     @apply !bg-white-light/20 dark:!bg-[#1a2941]/40;
+}
+
+.bh-datatable .bh-table-responsive table.bh-table-striped tbody tr:nth-child(odd) {
+    @apply !bg-white;
 }
 
 .bh-datatable .bh-table-responsive table tbody tr td,

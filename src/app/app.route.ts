@@ -139,30 +139,46 @@ export const routes: Routes = [
             ),
     },
     {
-        path: 'assumption-settings/number-of-participating-entities',
+        path: 'hypothese-types',
         canActivate: [AuthGuard],
         component: AppLayout,
         loadChildren: () =>
-            import('./modules/settings/assumption-settings/number-of-participating-entities/number-of-participating-entities.module').then(
-                (m) => m.NumberOfParticipatingEntitiesModule,
+            import('./modules/settings/hypothese-settings/hypothese-types/hypothese-type.module').then(
+                (m) => m.HypotheseTypeModule,
             ),
     },
     {
-        path: 'assumption-settings/preparing-the-names-of-hypotheses',
+        path: 'hypothese-titles',
         canActivate: [AuthGuard],
         component: AppLayout,
         loadChildren: () =>
-            import('./modules/settings/assumption-settings/preparing-the-names-of-hypotheses/preparing-the-names-of-hypotheses.module').then(
-                (m) => m.PreparingTheNamesOfHypothesesModule,
+            import('./modules/settings/hypothese-settings/hypothese-titles/hypothese-title.module').then(
+                (m) => m.HypotheseTitleModule,
             ),
     },
     {
-        path: 'assumption-settings/Types-of-hypotheses',
+        path: 'hypotheses-involved-parties',
         canActivate: [AuthGuard],
         component: AppLayout,
         loadChildren: () =>
-            import('./modules/settings/assumption-settings/Types-of-hypotheses/Types-of-hypotheses.module').then(
-                (m) => m.TypeOfHypothesesModule,
+            import('./modules/settings/hypothese-settings/hypotheses-involved-parties/hypotheses-involved-party.module').then(
+                (m) => m.HypothesesInvolvedPartyModule,
             ),
+    },
+    {
+        path: 'location-hypothesis-criterias',
+        canActivate: [AuthGuard],
+        component: AppLayout,
+        loadChildren: () =>
+            import('./modules/settings/hypothese-settings/location-hypothesis-criterias/location-hypothesis-criteria.module').then(
+                (m) => m.LocationHypothesisCriteriaModule,
+            ),
+    },
+    {
+        path: 'hypothese',
+        canActivate: [AuthGuard],
+        component: AppLayout,
+        loadChildren: () =>
+            import('./modules/hypothese/hypothese.module').then((m) => m.HypotheseModule),
     },
 ];

@@ -44,18 +44,19 @@ export const API_URL_CLASSIFICATION_OF_RISK_SITUATION = '/RiskStatus';
 // Classification of Risk Type
 export const API_URL_CLASSIFICATION_OF_RISK_TYPE = '/RiskTypes';
 
-// General Settings
-export const API_URL_GENERAL_SETTINGS = '/GeneralSettings';
-
-export const API_URL_TYPE_OF_HYPOTHESES = '/HypotheseTypes';
-
-export const API_URL_NUMBER_OF_PARTICIPATING_ENTITIES = '/HypothesesInvolvedParties';
-
-// Preparing the Names of Hypotheses
-export const API_URL_PREPARING_THE_NAMES_OF_HYPOTHESES = '/HypotheseTitles';
-
 // Falling Load Classification
 export const API_URL_FALLING_LOAD_CLASSIFICATION = '/RiskLikeliHoods';
 
 // Location Risks
 export const API_URL_LOCATION_RISKS = '/LocationRisks';
+// Hypothese Types
+export const API_URL_HYPOTHESE_TYPES = '/HypotheseTypes';
+
+// Hypothese Titles
+export const API_URL_HYPOTHESE_TITLES = '/HypotheseTitles';
+
+// Hypotheses Involved Parties
+export const API_URL_HYPOTHESES_INVOLVED_PARTIES = '/HypothesesInvolvedParties';
+
+// Location Hypothesis Criterias
+export const API_URL_LOCATION_HYPOTHESIS_CRITERIAS = '/LocationHypothesisCriterias';

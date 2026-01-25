@@ -17,30 +17,28 @@
         (search)="onSearch($event)"
         (addNewRecord)="openCreateDialog()"
         (pageChange)="onPageChange($event)"
-    />
-
-    <ng-datatable
-        [rows]="rows"
-        [columns]="cols"
-        [hasCheckbox]="true"
-        [sortable]="false"
-        [loading]="isLoading"
-        [pagination]="true"
-        [pageSize]="criteria.pageSize"
-        rowClass="cursor-pointer"
-        noDataContent="{{ 'common.noDataOnList' | translate }}"
     >
-        <ng-template slot="actions" let-value="data">
-            <div class="flex gap-2 items-center">
-                <div
-                    (click)="openRoleDialog(value.id)"
-                    class="cursor-pointer flex items-center gap-2 btn btn-primary btn-sm truncate"
-                >
-                    <i class="pi pi-list-check"></i> الادوار
+        <ng-datatable
+            [rows]="rows"
+            [columns]="cols"
+            [sortable]="false"
+            [loading]="isLoading"
+            [pagination]="true"
+            [pageSize]="criteria.pageSize"
+            noDataContent="{{ 'common.noDataOnList' | translate }}"
+        >
+            <ng-template slot="actions" let-value="data">
+                <div class="flex items-center">
+                    <div
+                        (click)="openRoleDialog(value.id)"
+                        class="cursor-pointer flex items-center gap-2 btn btn-primary btn-xs truncate"
+                    >
+                        <i class="pi pi-users"></i> الأدوار
+                    </div>
                 </div>
-            </div>
-        </ng-template>
-    </ng-datatable>
+            </ng-template>
+        </ng-datatable>
+    </list-header>
 </main-content>
 
 <app-user-view [(visible)]="showDialog" [userId]="selectedUserId" (onSave)="onDialogSave()" />

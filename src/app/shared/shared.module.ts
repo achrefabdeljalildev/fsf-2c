@@ -2,24 +2,29 @@
 import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
 
 // 3rd party
+import { DataTableModule } from '@bhplugin/ng-datatable';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { SkeletonModule } from 'primeng/skeleton';
-import { BreadcrumbModule } from 'primeng/breadcrumb';
-import { TableModule } from 'primeng/table';
-import { PaginatorModule } from 'primeng/paginator';
-import { InputTextModule } from 'primeng/inputtext';
-import { TextareaModule } from 'primeng/textarea';
-import { ButtonModule } from 'primeng/button';
-import { DialogModule } from 'primeng/dialog';
-import { DataTableModule } from '@bhplugin/ng-datatable';
-import { TagModule } from 'primeng/tag';
 import { ConfirmationService } from 'primeng/api';
+import { BreadcrumbModule } from 'primeng/breadcrumb';
+import { ButtonModule } from 'primeng/button';
+import { CheckboxModule } from 'primeng/checkbox';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ContextMenuModule } from 'primeng/contextmenu';
+import { DialogModule } from 'primeng/dialog';
+import { InputTextModule } from 'primeng/inputtext';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { PaginatorModule } from 'primeng/paginator';
+import { SelectModule } from 'primeng/select';
+import { SkeletonModule } from 'primeng/skeleton';
+import { TableModule } from 'primeng/table';
+import { TagModule } from 'primeng/tag';
+import { TextareaModule } from 'primeng/textarea';
+import { TreeModule } from 'primeng/tree';
 
 // App - services
 import { AppService } from 'src/app/shared/services/app.service';
@@ -32,12 +37,14 @@ import { ButtonBusyDirective } from 'src/app/shared/directives/button-busy.direc
 import { SafePipe } from './pipes/safe.pipe';
 
 // App - components
-import { PdfViewerComponent } from 'src/app/shared/components/pdf-viewer/pdf-viewer.component';
 import { BaseFormHeaderComponent } from 'src/app/shared/components/base-form-header/base-form-header.component';
-import { ListHeaderComponent } from 'src/app/shared/components/list-header/list-header.component';
+import { BaseInputComponent } from 'src/app/shared/components/base-input-component/base-input.component';
 import { FileAttachmentsComponent } from 'src/app/shared/components/file-attachments/file-attachments.component';
+import { ListFilterComponent } from 'src/app/shared/components/list-filter/list-filter.component';
+import { ListHeaderComponent } from 'src/app/shared/components/list-header/list-header.component';
 import { LogsListComponent } from 'src/app/shared/components/logs-list/logs-list.component';
 import { MainContentComponent } from 'src/app/shared/components/main-content/main-content.component';
+import { PdfViewerComponent } from 'src/app/shared/components/pdf-viewer/pdf-viewer.component';
 
 @NgModule({
     imports: [
@@ -56,7 +63,12 @@ import { MainContentComponent } from 'src/app/shared/components/main-content/mai
         ButtonModule,
         DataTableModule,
         DialogModule,
+        TreeModule,
+        ContextMenuModule,
         TagModule,
+        CheckboxModule,
+        SelectModule,
+        MultiSelectModule,
     ],
     declarations: [
         // pipes
@@ -67,6 +79,8 @@ import { MainContentComponent } from 'src/app/shared/components/main-content/mai
         ButtonBusyDirective,
         PdfViewerComponent,
         BaseFormHeaderComponent,
+        BaseInputComponent,
+        ListFilterComponent,
         ListHeaderComponent,
         FileAttachmentsComponent,
         LogsListComponent,
@@ -91,10 +105,17 @@ import { MainContentComponent } from 'src/app/shared/components/main-content/mai
         TextareaModule,
         ButtonModule,
         TagModule,
+        TreeModule,
+        ContextMenuModule,
+        CheckboxModule,
+        SelectModule,
+        MultiSelectModule,
 
         // components
         PdfViewerComponent,
         BaseFormHeaderComponent,
+        BaseInputComponent,
+        ListFilterComponent,
         DataTableModule,
         ListHeaderComponent,
         LogsListComponent,

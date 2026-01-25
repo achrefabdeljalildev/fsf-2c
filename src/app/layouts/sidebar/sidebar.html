@@ -62,8 +62,11 @@
             <div
                 class="flex flex-col flex-1 rounded-2.5 pb-6 border border-[#C3CAD980] bg-white dark:bg-[#0e1726] overflow-y-auto"
             >
-                <h2 class="p-3 w-full flex justify-center gap-2 font-bold">
-                    <img src="assets/images/icons/home-image.svg" alt="" />
+                <h2
+                    class="p-3 w-full flex justify-center gap-2 font-bold hover:text-primary cursor-pointer"
+                    routerLink="/"
+                >
+                    <i class="pi pi-home"></i>
                     {{ sidebarTitle() }}
                 </h2>
                 <div class="menu-list">
@@ -102,7 +105,7 @@
                                     class="flex items-center justify-between px-4 py-3 ps-12 cursor-pointer hover:bg-gray-100 dark:hover:bg-[#1b2e4b]"
                                     (click)="toggleChildItem(child.key)"
                                 >
-                                    <div class="flex items-center gap-3">
+                                    <div class="flex items-center">
                                         <i [class]="child.icon"></i>
                                         <span> {{ child.label }} </span>
                                     </div>
@@ -131,7 +134,7 @@
                                         *ngFor="let grand of child.children"
                                         [routerLink]="grand.routerLink"
                                         routerLinkActive="bg-primary text-white hover:bg-primary"
-                                        class="flex items-center ps-20 gap-3 py-3 cursor-pointer hover:bg-gray-100 dark:hover:bg-[#1b2e4b] border-b border-[#C3CAD980]"
+                                        class="flex items-center ps-16 gap-3 py-3 cursor-pointer hover:bg-gray-100 dark:hover:bg-[#1b2e4b] border-b border-[#C3CAD980]"
                                     >
                                         <span> {{ grand.label }} </span>
                                     </a>

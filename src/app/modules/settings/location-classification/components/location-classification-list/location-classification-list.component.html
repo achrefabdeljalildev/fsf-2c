@@ -23,12 +23,10 @@
         <ng-datatable
             [rows]="rows"
             [columns]="cols"
-            [hasCheckbox]="true"
             [sortable]="false"
             [loading]="isLoading"
             [pagination]="true"
             [pageSize]="criteria.pageSize"
-            rowClass="cursor-pointer"
             noDataContent="{{ 'common.noDataOnList' | translate }}"
         >
             <ng-template slot="color" let-value="data">

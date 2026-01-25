@@ -53,6 +53,36 @@
         "globalSettingsList": "Global Settings List",
         "editGlobalSetting": "Edit Global Setting"
     },
+    "hypotheseType": {
+        "addNewHypotheseType": "Add Hypothese Type",
+        "hypotheseTypeList": "Hypothese Types List"
+    },
+    "hypotheseTitle": {
+        "addNewHypotheseTitle": "Add Hypothese Name",
+        "hypotheseTitleList": "Hypothese Names List"
+    },
+    "hypothesesInvolvedParty": {
+        "addNewHypothesesInvolvedParty": "Add Involved Party",
+        "hypothesesInvolvedPartyList": "Involved Parties List"
+    },
+    "locationHypothesisCriteria": {
+        "criteriaHierarchy": "Hypothesis Criteria Hierarchy",
+        "addNewRootCriteria": "Add Root Criteria",
+        "addNewCriteria": "Add Hypothesis Criteria",
+        "editCriteria": "Edit Hypothesis Criteria",
+        "criteriaDetails": "Hypothesis Criteria Details",
+        "childCriteria": "Child Criteria",
+        "addChild": "Add Sub Criteria",
+        "addNewLocationHypothesisCriteria": "Add Hypothesis Criteria",
+        "locationHypothesisCriteriaList": "Hypothesis Criterias List",
+        "viewDetails": "View Details"
+    },
+    "hypothese": {
+        "addNew": "Add New Hypothese",
+        "list": "Hypotheses List",
+        "name": "Hypothese Name",
+        "edit": "Edit Hypothese"
+    },
     "locationClassification": {
         "add": "Add Classification",
         "list": "Classification List",
@@ -143,7 +173,9 @@
         "edit": "Edit",
         "search": "Search",
         "done": "Done",
-        "close": "Close"
+        "close": "Close",
+        "addChild": "Add Child",
+        "remove": "Remove"
     },
     "messages": {
         "requiredField": "This field is required",
@@ -159,7 +191,8 @@
         "confirmDeleteOrganization": "Are you sure you want to delete this organization?",
         "confirmDeleteUser": "Are you sure you want to delete this user?",
         "deletedSuccessfully": "Deleted successfully",
-        "savedSuccessfully": "Saved successfully"
+        "savedSuccessfully": "Saved successfully",
+        "noChildrenAdded": "No children added"
     },
     "actions": {
         "addNewProvince": "Add New Province",
@@ -176,7 +209,17 @@
         "editOrganization": "Edit Organization",
         "addNewUser": "Add New User",
         "editUser": "Edit User",
-        "addNewClassificationForm": "Add New Classification Form"
+        "addNewHypotheseType": "Add New Hypothese Type",
+        "editHypotheseType": "Edit Hypothese Type",
+        "addNewHypotheseTitle": "Add New Hypothese Name",
+        "editHypotheseTitle": "Edit Hypothese Name",
+        "addNewHypothesesInvolvedParty": "Add New Involved Party",
+        "editHypothesesInvolvedParty": "Edit Involved Party",
+        "addNewLocationHypothesisCriteria": "Add New Hypothesis Criteria",
+        "editLocationHypothesisCriteria": "Edit Hypothesis Criteria",
+        "addNewClassificationForm": "Add New Classification Form",
+        "addNewChild": "Add New Child",
+        "editChild": "Edit Child"
     },
     "breadcrumbs": {
         "securitySystems": "Security Systems",
@@ -192,7 +235,12 @@
         "classificationOfRiskSituations": "Risk Situations",
         "classificationOfRiskImpact": "Risk Impact",
         "classificationOfRiskType": "Risk Types",
-        "locationRisks": "Location Risks"
+        "locationRisks": "Location Risks",
+        "hypotheseTypes": "Hypothese Types",
+        "hypotheseTitles": "Hypothese Names",
+        "hypothesesInvolvedParties": "Involved Parties",
+        "locationHypothesisCriterias": "Hypothesis Criterias",
+        "hypotheses": "Hypotheses"
     },
     "validationMessages": {
         "savedSuccessfully": "Saved successfully",
@@ -249,6 +297,33 @@
         "globalSettingErrorSave": "An error occurred while saving the global setting",
         "globalSettingDeletedSuccess": "Global setting deleted successfully",
         "globalSettingErrorDelete": "An error occurred while deleting the global setting",
+        "hypotheseTypeUpdatedSuccess": "Hypothese type updated successfully",
+        "hypotheseTypeAddedSuccess": "Hypothese type added successfully",
+        "hypotheseTypeErrorSave": "An error occurred while saving the hypothese type",
+        "hypotheseTypeDeletedSuccess": "Hypothese type deleted successfully",
+        "hypotheseTypeErrorDelete": "An error occurred while deleting the hypothese type",
+        "hypotheseTitleUpdatedSuccess": "Hypothese name updated successfully",
+        "hypotheseTitleAddedSuccess": "Hypothese name added successfully",
+        "hypotheseTitleErrorSave": "An error occurred while saving the hypothese name",
+        "hypotheseTitleDeletedSuccess": "Hypothese name deleted successfully",
+        "hypotheseTitleErrorDelete": "An error occurred while deleting the hypothese name",
+        "hypothesesInvolvedPartyUpdatedSuccess": "Involved party updated successfully",
+        "hypothesesInvolvedPartyAddedSuccess": "Involved party added successfully",
+        "hypothesesInvolvedPartyErrorSave": "An error occurred while saving the involved party",
+        "hypothesesInvolvedPartyDeletedSuccess": "Involved party deleted successfully",
+        "hypothesesInvolvedPartyErrorDelete": "An error occurred while deleting the involved party",
+        "locationHypothesisCriteriaUpdatedSuccess": "Hypothesis criteria updated successfully",
+        "locationHypothesisCriteriaAddedSuccess": "Hypothesis criteria added successfully",
+        "locationHypothesisCriteriaErrorSave": "An error occurred while saving the hypothesis criteria",
+        "locationHypothesisCriteriaDeletedSuccess": "Hypothesis criteria deleted successfully",
+        "locationHypothesisCriteriaErrorDelete": "An error occurred while deleting the hypothesis criteria",
+        "childCriteriaAddedSuccess": "Child criteria added successfully",
+        "childCriteriaUpdatedSuccess": "Child criteria updated successfully",
+        "childCriteriaErrorSave": "An error occurred while saving the child criteria",
+        "childCriteriaDeletedSuccess": "Child criteria deleted successfully",
+        "childCriteriaErrorDelete": "An error occurred while deleting the child criteria",
+        "parentCriteriaRequired": "Parent criteria must be saved first",
+        "saveParentFirst": "Please save the parent criteria first before adding children",
         "recordWillBeDisplayedAfterSave": "The record will be displayed after saving the survey."
     },
     "formLabels": {
@@ -272,7 +347,20 @@
         "coordinates": "Coordinates",
         "administrator": "Administrator",
         "location": "Location",
-        "selectLocation": "Select Location"
+        "selectLocation": "Select Location",
+        "hypotheseType": "Hypothese Type",
+        "selectHypotheseType": "Select Hypothese Type",
+        "hypotheseTitle": "Hypothese Title",
+        "selectHypotheseTitle": "Select Hypothese Title",
+        "day": "Day",
+        "selectDay": "Select day",
+        "enterDay": "Enter day",
+        "date": "Date",
+        "selectDate": "Select date",
+        "fromTime": "From Time",
+        "toTime": "To Time",
+        "children": "Children",
+        "enterChildName": "Enter child name"
     },
     "labels": {
         "relatedDetails": "Related Details",

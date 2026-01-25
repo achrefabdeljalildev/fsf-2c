@@ -1,0 +1,281 @@
+<p-breadcrumb
+    [model]="[
+        { label: ('breadcrumbs.securitySystems' | translate), routerLink: '/' },
+        { label: ('breadcrumbs.generalAdministration' | translate), routerLink: '/' },
+        { label: ('breadcrumbs.hypotheses' | translate), routerLink: '/hypothese/list' },
+        {
+            label: isEditMode ? ('buttons.edit' | translate) : ('hypothese.addNew' | translate),
+        },
+    ]"
+/>
+
+<main-content [isPanel]="false">
+    <form [formGroup]="hypotheseForm" (ngSubmit)="submit()" class="space-y-6">
+        <div class="grid grid-cols-3 gap-5">
+            <div class="panel flex flex-col col-span-2">
+                <!-- Top Action Buttons -->
+                <div class="flex justify-start gap-2 mb-4">
+                    <button
+                        type="button"
+                        class="btn bg-gray-50 hover:bg-gray-100 text-gray-700"
+                        (click)="back()"
+                    >
+                        {{ 'buttons.cancel' | translate }}
+                    </button>
+                    <button type="submit" class="btn btn-primary" [disabled]="isLoading">
+                        {{
+                            isEditMode ? ('buttons.save' | translate) : ('buttons.add' | translate)
+                        }}
+                    </button>
+                </div>
+
+                <div class="flex flex-col gap-5">
+                    <!-- Name -->
+                    <div class="form-group">
+                        <label for="nameAr" class="block text-sm font-medium mb-2">
+                            {{ 'formLabels.name' | translate }}
+                            <span class="text-red-500">*</span>
+                        </label>
+                        <input
+                            id="nameAr"
+                            type="text"
+                            formControlName="nameAr"
+                            pInputText
+                            class="w-full"
+                            [placeholder]="'formLabels.enterName' | translate"
+                        />
+                        <small
+                            *ngIf="
+                                hypotheseForm.get('nameAr')?.invalid &&
+                                (hypotheseForm.get('nameAr')?.dirty ||
+                                    hypotheseForm.get('nameAr')?.touched)
+                            "
+                            class="text-red-500"
+                        >
+                            {{ 'messages.requiredField' | translate }}
+                        </small>
+                    </div>
+
+                    <!-- Location Selection -->
+                    <div class="form-group">
+                        <label for="locationId" class="block text-sm font-medium mb-2">
+                            {{ 'formLabels.location' | translate }}
+                            <span class="text-red-500">*</span>
+                        </label>
+                        <p-select
+                            id="locationId"
+                            formControlName="locationId"
+                            [options]="locations"
+                            optionLabel="nameAr"
+                            optionValue="id"
+                            [placeholder]="'formLabels.selectLocation' | translate"
+                            [filter]="true"
+                            filterBy="code,nameAr"
+                            [style]="{ width: '100%' }"
+                        ></p-select>
+                        <small
+                            *ngIf="
+                                hypotheseForm.get('locationId')?.invalid &&
+                                (hypotheseForm.get('locationId')?.dirty ||
+                                    hypotheseForm.get('locationId')?.touched)
+                            "
+                            class="text-red-500"
+                        >
+                            {{ 'messages.requiredField' | translate }}
+                        </small>
+                    </div>
+
+                    <!-- Hypothese Type -->
+                    <div class="form-group">
+                        <label for="hypotheseTypeId" class="block text-sm font-medium mb-2">
+                            {{ 'formLabels.hypotheseType' | translate }}
+                            <span class="text-red-500">*</span>
+                        </label>
+                        <p-select
+                            id="hypotheseTypeId"
+                            formControlName="hypotheseTypeId"
+                            [options]="hypotheseTypes"
+                            optionLabel="nameAr"
+                            optionValue="id"
+                            [placeholder]="'formLabels.selectHypotheseType' | translate"
+                            [filter]="true"
+                            [style]="{ width: '100%' }"
+                        />
+                        <small
+                            *ngIf="
+                                hypotheseForm.get('hypotheseTypeId')?.invalid &&
+                                (hypotheseForm.get('hypotheseTypeId')?.dirty ||
+                                    hypotheseForm.get('hypotheseTypeId')?.touched)
+                            "
+                            class="text-red-500"
+                        >
+                            {{ 'messages.requiredField' | translate }}
+                        </small>
+                    </div>
+
+                    <!-- Hypothese Title -->
+                    <div class="form-group">
+                        <label for="hypotheseTitleId" class="block text-sm font-medium mb-2">
+                            {{ 'formLabels.hypotheseTitle' | translate }}
+                            <span class="text-red-500">*</span>
+                        </label>
+                        <p-select
+                            id="hypotheseTitleId"
+                            formControlName="hypotheseTitleId"
+                            [options]="hypotheseTitles"
+                            optionLabel="nameAr"
+                            optionValue="id"
+                            [loading]="loadingHypotheseTitles"
+                            [placeholder]="'formLabels.selectHypotheseTitle' | translate"
+                            [filter]="true"
+                            [style]="{ width: '100%' }"
+                        />
+                        <small
+                            *ngIf="
+                                hypotheseForm.get('hypotheseTitleId')?.invalid &&
+                                (hypotheseForm.get('hypotheseTitleId')?.dirty ||
+                                    hypotheseForm.get('hypotheseTitleId')?.touched)
+                            "
+                            class="text-red-500"
+                        >
+                            {{ 'messages.requiredField' | translate }}
+                        </small>
+                    </div>
+
+                    <!-- Day and Date -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="form-group">
+                            <label for="day" class="block text-sm font-medium mb-2">
+                                {{ 'formLabels.day' | translate }}
+                                <span class="text-red-500">*</span>
+                            </label>
+                            <p-select
+                                id="day"
+                                formControlName="day"
+                                [options]="days"
+                                [placeholder]="'formLabels.selectDay' | translate"
+                                [style]="{ width: '100%' }"
+                            ></p-select>
+                            <small
+                                *ngIf="
+                                    hypotheseForm.get('day')?.invalid &&
+                                    (hypotheseForm.get('day')?.dirty ||
+                                        hypotheseForm.get('day')?.touched)
+                                "
+                                class="text-red-500"
+                            >
+                                {{ 'messages.requiredField' | translate }}
+                            </small>
+                        </div>
+                        <div class="form-group">
+                            <label for="date" class="block text-sm font-medium mb-2">
+                                {{ 'formLabels.date' | translate }}
+                            </label>
+                            <input
+                                id="date"
+                                formControlName="date"
+                                mwlFlatpickr
+                                [options]="dateBasic"
+                                pInputText
+                                [altInput]="true"
+                                [convertModelValue]="true"
+                                class="w-full"
+                            />
+                        </div>
+                    </div>
+
+                    <!-- Time Spans (24-hour) -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="form-group">
+                            <label for="fromTimeSpan" class="block text-sm font-medium mb-2">
+                                {{ 'formLabels.fromTime' | translate }}
+                                <span class="text-red-500">*</span>
+                            </label>
+                            <p-datepicker
+                                id="fromTimeSpan"
+                                formControlName="fromTimeSpan"
+                                [timeOnly]="true"
+                                hourFormat="24"
+                                [showIcon]="true"
+                                [style]="{ width: '100%' }"
+                            />
+                            <small
+                                *ngIf="
+                                    hypotheseForm.get('fromTimeSpan')?.invalid &&
+                                    (hypotheseForm.get('fromTimeSpan')?.dirty ||
+                                        hypotheseForm.get('fromTimeSpan')?.touched)
+                                "
+                                class="text-red-500"
+                            >
+                                {{ 'messages.requiredField' | translate }}
+                            </small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="toTimeSpan" class="block text-sm font-medium mb-2">
+                                {{ 'formLabels.toTime' | translate }}
+                                <span class="text-red-500">*</span>
+                            </label>
+                            <p-datepicker
+                                id="toTimeSpan"
+                                formControlName="toTimeSpan"
+                                [timeOnly]="true"
+                                hourFormat="24"
+                                [showIcon]="true"
+                                [style]="{ width: '100%' }"
+                            />
+                            <small
+                                *ngIf="
+                                    hypotheseForm.get('toTimeSpan')?.invalid &&
+                                    (hypotheseForm.get('toTimeSpan')?.dirty ||
+                                        hypotheseForm.get('toTimeSpan')?.touched)
+                                "
+                                class="text-red-500"
+                            >
+                                {{ 'messages.requiredField' | translate }}
+                            </small>
+                        </div>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="form-group">
+                        <label for="descriptionAr" class="block text-sm font-medium mb-2">
+                            {{ 'formLabels.description' | translate }}
+                        </label>
+                        <textarea
+                            id="descriptionAr"
+                            formControlName="descriptionAr"
+                            pTextarea
+                            rows="4"
+                            class="w-full"
+                            [placeholder]="'formLabels.enterDescription' | translate"
+                        ></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-span-1 gap-4 flex flex-col">
+                <app-file-attachments
+                    class="flex-1"
+                    [attachments]="attachments"
+                    entityName="Hypothese"
+                    entityPath="Hypotheses"
+                    [entityKey]="hypotheseId ? hypotheseId.toString() : ''"
+                    (fileAdded)="onFileAdded($event)"
+                    (download)="onAttachmentDownload($event)"
+                    (remove)="onAttachmentRemove($event)"
+                    (uploadSuccess)="onUploadSuccess($event)"
+                    (uploadError)="onUploadError($event)"
+                />
+
+                <app-hypothese-involved
+                    *ngIf="isEditMode"
+                    class="flex-1"
+                    [hypotheseId]="hypotheseId"
+                    [selectedInvolvedParties]="hypotheseInvolvedPartiesData"
+                    (onSave)="loadHypothese(hypotheseId!)"
+                />
+            </div>
+        </div>
+    </form>
+</main-content>

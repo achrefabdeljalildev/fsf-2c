@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { colDef } from '@bhplugin/ng-datatable';
+import { CriteriaModel } from '@shared/models/base/criteria.model';
 import { Observable } from 'rxjs';
 import { BaseListComponent } from 'src/app/shared/components/base-list-component/base-list-component';
 import { ApiResponseModel, PagedResponse } from 'src/app/shared/models/base/paged-response.model';
@@ -27,7 +28,6 @@ export class LocationListComponent extends BaseListComponent<LocationModel> {
             {
                 field: 'code',
                 title: 'formLabels.locationCode',
-                cellRenderer: (d: LocationModel) => this.maskLocationCode(d.code),
             },
             { field: 'nameAr', title: 'formLabels.name' },
             { field: 'provinceNameAr', title: 'formLabels.province' },
@@ -46,9 +46,8 @@ export class LocationListComponent extends BaseListComponent<LocationModel> {
         return this.locationService.getPagedList(this.criteria);
     }
 
-    filterChange(event: any) {
-        this.criteria.pageSize = event.pageSize;
-        this.criteria.pageNumber = event.pageNumber;
+    filterChange(event: CriteriaModel) {
+        this.criteria = event;
         this.loadData();
     }
 

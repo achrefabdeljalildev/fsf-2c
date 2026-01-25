@@ -1,4 +1,4 @@
-<app-header></app-header>
+<app-header [hasMenuButton]="false"></app-header>
 
 <!-- Hero Section -->
 <div
@@ -27,6 +27,11 @@
             class="cursor-pointer p-8 rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-100 relative"
             [class.disabled-card]="!card.enabled"
         >
+            <img
+                *ngIf="!card.enabled"
+                src="assets/images/icons/development-soon-corner.svg"
+                class="absolute left-0 top-0"
+            />
             <div class="flex flex-col items-center text-center mb-6">
                 <div
                     [ngClass]="
@@ -54,7 +59,7 @@
     </div>
     <div *ngIf="selectedCard" class="py-12">
         <!-- Subcards Section -->
-        <h1 class="text-3xl font-bold mb-8">الادارات</h1>
+        <h1 class="text-3xl font-bold mb-8">الإدارات</h1>
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 w-full">
             <a
                 *ngFor="let subcard of selectedCard.subcards"
@@ -62,6 +67,11 @@
                 class="bg-lightBlue hover:shadow-md transition-shadow border-[#0E8A8A63] w-full cursor-pointer p-3 px-2 rounded-lg shadow-sm border border-gray-100 relative block"
                 [class.disabled-card]="!subcard.enabled"
             >
+                <img
+                    *ngIf="!subcard.enabled"
+                    src="assets/images/icons/development-soon-corner.svg"
+                    class="absolute left-0 top-0"
+                />
                 <div
                     class="bg-teal-600 text-3xl text-center w-12 h-12 rounded-full mb-4 hover:bg-teal-700 text-white transition-colors"
                 >

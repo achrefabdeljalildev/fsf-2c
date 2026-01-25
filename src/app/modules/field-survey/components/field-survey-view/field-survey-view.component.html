@@ -2,7 +2,6 @@
     [model]="[
         { label: ('breadcrumbs.securitySystems' | translate), routerLink: '/' },
         { label: ('breadcrumbs.generalAdministration' | translate), routerLink: '/' },
-        { label: ('fieldSurvey.fieldSurvey' | translate) },
         {
             label: ('fieldSurvey.fieldSurveyListShort' | translate),
             routerLink: '/field-survey/list',
@@ -145,7 +144,6 @@
             <div class="col-span-1">
                 <app-file-attachments
                     [attachments]="attachments"
-                    helperText="الحد الأقصى لحجم الملف هو 2 ميجابايت والصيغ المدعومة: jpg, png, pdf."
                     [entityName]="'FieldSurvey'"
                     [entityKey]="fieldSurveyId ? fieldSurveyId.toString() : ''"
                     [path]="'FieldSurvey'"
@@ -156,7 +154,7 @@
                     (remove)="onAttachmentRemove($event)"
                     (uploadSuccess)="onUploadSuccess($event)"
                     (uploadError)="onUploadError($event)"
-                ></app-file-attachments>
+                />
             </div>
         </div>
         <!-- Details Tabs (similar placement to Location view) -->

@@ -1,0 +1,53 @@
+<p-confirmDialog />
+
+<p-breadcrumb
+    [model]="[
+        { label: ('breadcrumbs.securitySystems' | translate), routerLink: '/' },
+        { label: ('breadcrumbs.generalAdministration' | translate), routerLink: '/' },
+        { label: ('breadcrumbs.hypotheseTitles' | translate) },
+    ]"
+/>
+
+<main-content>
+    <list-header
+        addNewRecordLabel="{{ 'hypotheseTitle.addNewHypotheseTitle' | translate }}"
+        tableTitle="{{ 'hypotheseTitle.hypotheseTitleList' | translate }}"
+        [paginationInfo]="paginationInfo"
+        [pageNumber]="criteria.pageNumber"
+        [pageSize]="criteria.pageSize"
+        [totalCount]="criteria.totalCount ?? 0"
+        (search)="onSearch($event)"
+        (addNewRecord)="openCreateDialog()"
+        (pageChange)="onPageChange($event)"
+    >
+        <ng-datatable
+            [rows]="rows"
+            [columns]="cols"
+            [sortable]="false"
+            [loading]="isLoading"
+            [pagination]="true"
+            [pageSize]="criteria.pageSize"
+            noDataContent="{{ 'common.noDataOnList' | translate }}"
+        >
+            <ng-template slot="actions" let-value="data">
+                <div class="flex gap-2">
+                    <div (click)="openEditDialog(value.id)" class="cursor-pointer">
+                        <i class="pi pi-pencil"></i>
+                    </div>
+                    <div
+                        (click)="removeHypotheseTitle(value.id, value.nameAr)"
+                        class="cursor-pointer"
+                    >
+                        <i class="pi pi-trash"></i>
+                    </div>
+                </div>
+            </ng-template>
+        </ng-datatable>
+    </list-header>
+</main-content>
+
+<app-hypothese-title-view
+    [(visible)]="showDialog"
+    [hypotheseTitleId]="selectedHypotheseTitleId"
+    (onSave)="onDialogSave()"
+/>

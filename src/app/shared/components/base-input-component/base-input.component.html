@@ -1,0 +1,69 @@
+<div class="form-group">
+    <label *ngIf="label && inputType !== 'checkbox'" class="block text-sm font-medium mb-2">
+        {{ label }}
+        <span *ngIf="required" class="text-red-500">*</span>
+    </label>
+
+    <!-- Text or Number Input -->
+    <input
+        *ngIf="inputType === 'text' || inputType === 'number'"
+        [type]="inputType"
+        pInputText
+        [value]="value"
+        [placeholder]="placeholder"
+        [disabled]="disabled"
+        (input)="onInputChange($event)"
+        (blur)="onTouched()"
+        class="w-full"
+    />
+
+    <!-- Select Dropdown -->
+    <p-select
+        *ngIf="inputType === 'select'"
+        [options]="options"
+        [optionLabel]="optionLabel"
+        [optionValue]="optionValue"
+        [placeholder]="placeholder"
+        [disabled]="disabled"
+        [filter]="filter"
+        [showClear]="showClear"
+        [loading]="loading"
+        [ngModel]="value"
+        (ngModelChange)="onValueChange($event)"
+        [style]="{ width: '100%' }"
+    />
+
+    <!-- Multi-Select -->
+    <p-multiSelect
+        *ngIf="inputType === 'multiselect'"
+        [options]="options"
+        [optionLabel]="optionLabel"
+        [optionValue]="optionValue"
+        [placeholder]="placeholder"
+        [disabled]="disabled"
+        [filter]="filter"
+        [showClear]="showClear"
+        [loading]="loading"
+        [ngModel]="value"
+        (ngModelChange)="onValueChange($event)"
+        class="w-full"
+    />
+
+    <!-- Checkbox -->
+    <button
+        *ngIf="inputType === 'checkbox'"
+        type="button"
+        class="cursor-pointer btn !h-[38px] w-full flex items-center justify-center gap-2 btn-outline-secondary"
+        [ngClass]="{
+            'border-gray-400 text-gray-700': value === null || value === undefined,
+            'text-primary border-primary': value === true || value === false,
+        }"
+        (click)="toggleCheckbox()"
+        [disabled]="disabled"
+    >
+        <i *ngIf="value === true" class="pi pi-check text-green-500"></i>
+        <i *ngIf="value === false" class="pi pi-times text-red-500"></i>
+        <i *ngIf="value === null || value === undefined" class="pi pi-minus"></i>
+        {{ label }}
+    </button>
+</div>

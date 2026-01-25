@@ -1,4 +1,4 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { Component, Input, OnInit } from '@angular/core';
 
 import { AuthService } from 'src/app/modules/auth/services/auth.service';
 import { BaseComponent } from 'src/app/shared/components/base-component/base-component';
@@ -12,6 +12,8 @@ import { BaseStore } from 'src/app/store/base.store';
     standalone: false,
 })
 export class HeaderComponent extends BaseComponent implements OnInit {
+    @Input() hasMenuButton: boolean = true;
+
     currentDate!: string;
     currentTime!: string;
     currentLocation: string = 'الرياض';
@@ -30,35 +32,53 @@ export class HeaderComponent extends BaseComponent implements OnInit {
                 this.baseStore.setSidebarTitle('الإعدادات العامة');
                 this.baseStore.setSidebarMenus([
                     {
-                        key: '6-3',
+                        key: '1',
                         label: 'الإعدادات العامة',
                         data: 'Global Settings',
                         icon: 'assets/images/icons/settings-sidebar-logo.svg',
                         children: [
                             {
-                                key: '6-3-1',
+                                key: '11',
                                 label: 'إعدادات النظام',
                                 data: 'Global Settings List',
                                 icon: 'pi pi-list',
                                 routerLink: '/global-settings/list',
                             },
+                            {
+                                key: '12',
+                                label: 'الجهات',
+                                data: 'Sub Survey 2',
+                                routerLink: '/organization/list',
+                            },
+                            {
+                                key: '13',
+                                label: 'المناطق',
+                                data: 'Sub Survey 2',
+                                routerLink: '/regions/list',
+                            },
+                            {
+                                key: '14',
+                                label: 'المحافظات',
+                                data: 'Sub Survey 2',
+                                routerLink: '/province/list',
+                            },
                         ],
                     },
                     {
-                        key: '5',
+                        key: '2',
                         label: 'المستخدمين',
                         data: 'Security Support',
                         icon: 'assets/images/icons/settings-sidebar-logo.svg',
                         children: [
                             {
-                                key: '51',
+                                key: '21',
                                 label: 'قائمة المستخدمين',
                                 data: 'Sub Survey 2',
                                 icon: 'pi pi-list',
                                 routerLink: '/users/list',
                             },
                             {
-                                key: '52',
+                                key: '22',
                                 label: 'الادوار',
                                 data: 'Sub Survey 2',
                                 icon: 'pi pi-list',

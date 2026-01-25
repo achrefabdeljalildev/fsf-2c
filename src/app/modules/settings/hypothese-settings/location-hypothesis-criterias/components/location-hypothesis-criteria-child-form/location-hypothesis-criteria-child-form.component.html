@@ -1,0 +1,52 @@
+<p-dialog
+    [(visible)]="visible"
+    [header]="isEditMode ? ('actions.editChild' | translate) : ('actions.addNewChild' | translate)"
+    [modal]="true"
+    [style]="{ width: '40vw' }"
+    [breakpoints]="{ '960px': '60vw', '640px': '90vw' }"
+    (onHide)="closeDialog()"
+>
+    <form [formGroup]="childForm" (ngSubmit)="submit()" class="space-y-4">
+        <div class="form-group">
+            <label for="childNameAr" class="block text-sm font-medium mb-2">
+                {{ 'formLabels.name' | translate }}
+                <span class="text-red-500">*</span>
+            </label>
+            <input
+                id="childNameAr"
+                type="text"
+                formControlName="nameAr"
+                pInputText
+                class="w-full"
+                [placeholder]="'formLabels.enterChildName' | translate"
+            />
+            <small
+                *ngIf="childForm.get('nameAr')?.invalid && childForm.get('nameAr')?.touched"
+                class="text-red-500"
+            >
+                {{ 'messages.requiredField' | translate }}
+            </small>
+        </div>
+    </form>
+
+    <ng-template pTemplate="footer">
+        <div class="flex justify-end gap-2">
+            <button
+                type="button"
+                class="btn bg-gray-50 hover:bg-gray-100 text-gray-700"
+                (click)="closeDialog()"
+                [disabled]="isLoading"
+            >
+                {{ 'buttons.cancel' | translate }}
+            </button>
+            <button
+                type="button"
+                class="btn btn-primary"
+                (click)="submit()"
+                [disabled]="childForm.invalid || isLoading"
+            >
+                {{ isEditMode ? ('buttons.save' | translate) : ('buttons.add' | translate) }}
+            </button>
+        </div>
+    </ng-template>
+</p-dialog>

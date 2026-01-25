@@ -3,6 +3,10 @@ export class FilterCriteriaModel {
     values: string[] = [];
     type: string = 'Equals';
     operator: string = 'And';
+
+    constructor(init?: Partial<FilterCriteriaModel>) {
+        Object.assign(this, init);
+    }
 }
 
 export class SortModel {
