@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-
+import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '@shared/shared.module';
 import { FlatpickrDirective } from 'angularx-flatpickr';
 import { Card } from 'primeng/card';
@@ -19,8 +19,13 @@ import { Textarea } from 'primeng/textarea';
 import { HypotheseInvolvedComponent } from './components/hypothese-involved/hypothese-involved.component';
 import { HypotheseListComponent } from './components/hypothese-list/hypothese-list.component';
 import { HypotheseViewComponent } from './components/hypothese-view/hypothese-view.component';
+import { HypotheseDashboardComponent } from './components/hypothese-dashboard/hypothese-dashboard.component';
 
 const routes: Routes = [
+    {
+        path: 'dashboard',
+        component: HypotheseDashboardComponent,
+    },
     {
         path: 'list',
         component: HypotheseListComponent,
@@ -53,7 +58,13 @@ const routes: Routes = [
         InputText,
         TabsModule,
         FlatpickrDirective,
+        TranslateModule,
     ],
-    declarations: [HypotheseListComponent, HypotheseViewComponent, HypotheseInvolvedComponent],
+    declarations: [
+        HypotheseListComponent,
+        HypotheseViewComponent,
+        HypotheseInvolvedComponent,
+        HypotheseDashboardComponent,
+    ],
 })
 export class HypotheseModule {}

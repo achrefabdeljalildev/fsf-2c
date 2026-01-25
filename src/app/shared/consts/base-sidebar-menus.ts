@@ -104,6 +104,13 @@ export const CONST_SIDEBAR_MENUS = [
         children: [
             {
                 key: '41',
+                label: '  لوحة قيادة المختص',
+                data: 'Hypothese Dashboard',
+                icon: 'pi pi-list',
+                routerLink: '/hypothese-dashboard/dashboard',
+            },
+            {
+                key: '42',
                 label: 'قائمة الفرضيات',
                 data: 'Hypotheses List',
                 icon: 'pi pi-list',

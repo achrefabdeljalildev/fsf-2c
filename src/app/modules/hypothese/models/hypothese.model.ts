@@ -5,8 +5,11 @@ export interface Hypothese {
     nameAr: string;
     descriptionAr: string;
     hypotheseTypeId: number;
+    hypotheseTypeName?: string;
     hypotheseTitleId: number;
+    hypotheseTitleName?: string;
     locationId: number;
+    locationCode?: string;
     day: string;
     date: Date | string;
     fromTimeSpan: string;

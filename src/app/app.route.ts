@@ -181,4 +181,11 @@ export const routes: Routes = [
         loadChildren: () =>
             import('./modules/hypothese/hypothese.module').then((m) => m.HypotheseModule),
     },
+    {
+        path: 'hypothese-dashboard',
+        canActivate: [AuthGuard],
+        component: AppLayout,
+        loadChildren: () =>
+            import('./modules/hypothese/hypothese.module').then((m) => m.HypotheseModule),
+    },
 ];

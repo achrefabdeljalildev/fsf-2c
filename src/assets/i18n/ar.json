@@ -292,8 +292,9 @@
         "hypotheseTitles": "مسميات الفرضيات",
         "hypothesesInvolvedParties": "الجهات المشاركة",
         "locationHypothesisCriterias": "معايير الفرضيات",
+        "settings": "الإعدادات",
         "hypotheses": "الفرضيات",
-        "settings": "الإعدادات"
+        "ControlManagement": "إدارة التحكم"
     },
     "validationMessages": {
         "savedSuccessfully": "تم الحفظ بنجاح",
