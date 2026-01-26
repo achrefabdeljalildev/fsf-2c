@@ -102,6 +102,7 @@ export class HypotheseInvolvedComponent extends BaseComponent implements OnInit 
         });
 
         this.saving = true;
+
         this.hypotheseService.createHypotheseInvolved(this.hypotheseId, selected).subscribe({
             next: (response: any) => {
                 if (response?.isSuccess) {
@@ -126,5 +127,40 @@ export class HypotheseInvolvedComponent extends BaseComponent implements OnInit 
                 this.saving = false;
             },
         });
+    }
+
+    removeInvolvedParty(hypotheseId: number, partyId: number): void {
+        this.selectedInvolvedParties = this.selectedInvolvedParties.filter((p) => p.id !== partyId);
+        this.hypotheseService
+            .createHypotheseInvolved(
+                hypotheseId,
+                this.selectedInvolvedParties.map((p) => p.id),
+            )
+            .subscribe({
+                next: (response: any) => {
+                    if (response?.isSuccess) {
+                        this.showSuccessMessage(
+                            this.translateService.instant('validationMessages.deletedSuccessfully'),
+                        );
+                        this.partyCheckboxes.forEach((control) => control.reset());
+                        this.closeModal();
+                        // emit event or callback if needed
+                        this.onSave.emit();
+                    }
+                    this.saving = false;
+                },
+                error: () => {
+                    this.showErrorMessage(
+                        this.translateService.instant(
+                            'validationMessages.hypothesesInvolvedPartyErrorSave',
+                        ),
+                    );
+                    this.saving = false;
+                },
+            });
+    }
+
+    addScenarioItem(hypotheseId: number, partyId: number): void {
+        // Implementation for adding a scenario item
     }
 }

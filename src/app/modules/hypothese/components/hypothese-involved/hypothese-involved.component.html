@@ -24,7 +24,12 @@
             *ngFor="let party of selectedInvolvedParties"
             class="p-3 border border-gray-200 rounded-md flex justify-between items-center"
         >
-            <span>{{ party.nameAr }}</span>
+            <div>{{ party.nameAr }}</div>
+            <i
+                class="pi pi-trash cursor-pointer"
+                *ngIf="hypotheseId"
+                (click)="removeInvolvedParty(hypotheseId, party.id)"
+            ></i>
         </div>
     </div>
     <ng-template #noDataTemplate>

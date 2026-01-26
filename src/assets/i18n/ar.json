@@ -45,7 +45,8 @@
     },
     "hypothesesInvolvedParty": {
         "addNewHypothesesInvolvedParty": "إضافة جهة مشاركة",
-        "hypothesesInvolvedPartyList": "قائمة الجهات المشاركة"
+        "hypothesesInvolvedPartyList": "قائمة الجهات المشاركة",
+        "hypothesesInvolvedParty": "الجهة مشاركة"
     },
     "locationHypothesisCriteria": {
         "criteriaHierarchy": "هرم معايير الفرضيات",
@@ -422,8 +423,11 @@
         "enterChildName": "أدخل اسم العنصر الفرعي"
     },
     "labels": {
+        "time": "الوقت",
         "relatedDetails": "بيانات ذات الصلة",
-        "notes": "الاجراءات"
+        "notes": "الاجراءات",
+        "sequenceEvents": "تسلسل الأحداث",
+        "eventName": "اسم الحدث"
     },
     "siteTypes": {
         "none": "لا يوجد",

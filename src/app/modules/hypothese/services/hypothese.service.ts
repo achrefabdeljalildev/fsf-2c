@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
+import { API_URL_HYPOTHESES } from '@shared/consts/api.urls';
 import { BaseService } from '../../../shared/services/base.service';
 import { Hypothese } from '../models/hypothese.model';
-
-const API_URL_HYPOTHESES = '/Hypotheses';
 
 export interface HypotheseInvolvedPayload {
     involvedParty: {
