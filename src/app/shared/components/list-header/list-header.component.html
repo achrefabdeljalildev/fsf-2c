@@ -18,9 +18,9 @@
                     <i class="pi pi-map"></i>
                 </button>
                 <button
-                    *ngIf="showFilterButton"
+                    *ngIf="filtersList.length > 0"
                     class="btn btn-primary btn-sm"
-                    (click)="showFilters = !showFilters"
+                    (click)="toggleDisplayFilters()"
                 >
                     <i class="pi pi-filter"></i>
                 </button>
@@ -55,7 +55,7 @@
         </div>
         <app-list-filter
             *ngIf="showFilters"
-            [configs]="filterConfigs"
+            [configs]="filtersList"
             (filtersChange)="filterChangeEvent($event)"
         />
     </div>

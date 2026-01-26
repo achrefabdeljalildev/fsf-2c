@@ -31,12 +31,6 @@ export class HypotheseTitleListComponent extends BaseListComponent<HypotheseTitl
         return this.hypotheseTitleService.getPagedList(this.criteria);
     }
 
-    filterChange(event: any) {
-        this.criteria.pageSize = event.pageSize;
-        this.criteria.pageNumber = event.pageNumber;
-        this.loadData();
-    }
-
     openCreateDialog() {
         this.selectedHypotheseTitleId = null;
         this.showDialog = true;

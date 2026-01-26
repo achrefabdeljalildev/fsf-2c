@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { UserService } from '../../services/user.service';
-import { UserModel } from '../../models/user.model';
 import { BaseListComponent } from 'src/app/shared/components/base-list-component/base-list-component';
+import { UserModel } from '../../models/user.model';
+import { UserService } from '../../services/user.service';
 
 @Component({
     selector: 'app-user-list',
@@ -30,12 +30,6 @@ export class UserListComponent extends BaseListComponent<UserModel> {
 
     protected override fetchPage() {
         return this.userService.getUserList(this.criteria);
-    }
-
-    filterChange(event: any) {
-        this.criteria.pageSize = event.pageSize;
-        this.criteria.pageNumber = event.pageNumber;
-        this.loadData();
     }
 
     openCreateDialog() {

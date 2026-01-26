@@ -2,9 +2,8 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
+
 import { SharedModule } from '@shared/shared.module';
-import { FlatpickrDirective } from 'angularx-flatpickr';
 import { Card } from 'primeng/card';
 import { CheckboxModule } from 'primeng/checkbox';
 import { DatePickerModule } from 'primeng/datepicker';
@@ -13,13 +12,13 @@ import { InputText } from 'primeng/inputtext';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { SelectModule } from 'primeng/select';
 import { TableModule } from 'primeng/table';
-import { TabsModule } from 'primeng/tabs';
+import { TabPanel, TabsModule } from 'primeng/tabs';
 import { TagModule } from 'primeng/tag';
 import { Textarea } from 'primeng/textarea';
+import { HypotheseDashboardComponent } from './components/hypothese-dashboard/hypothese-dashboard.component';
 import { HypotheseInvolvedComponent } from './components/hypothese-involved/hypothese-involved.component';
 import { HypotheseListComponent } from './components/hypothese-list/hypothese-list.component';
 import { HypotheseViewComponent } from './components/hypothese-view/hypothese-view.component';
-import { HypotheseDashboardComponent } from './components/hypothese-dashboard/hypothese-dashboard.component';
 
 const routes: Routes = [
     {
@@ -57,8 +56,7 @@ const routes: Routes = [
         Textarea,
         InputText,
         TabsModule,
-        FlatpickrDirective,
-        TranslateModule,
+        TabPanel,
     ],
     declarations: [
         HypotheseListComponent,

@@ -37,6 +37,7 @@ import { ButtonBusyDirective } from 'src/app/shared/directives/button-busy.direc
 import { SafePipe } from './pipes/safe.pipe';
 
 // App - components
+import { FlatpickrDirective } from 'angularx-flatpickr';
 import { BaseFormHeaderComponent } from 'src/app/shared/components/base-form-header/base-form-header.component';
 import { BaseInputComponent } from 'src/app/shared/components/base-input-component/base-input.component';
 import { FileAttachmentsComponent } from 'src/app/shared/components/file-attachments/file-attachments.component';
@@ -69,6 +70,7 @@ import { PdfViewerComponent } from 'src/app/shared/components/pdf-viewer/pdf-vie
         CheckboxModule,
         SelectModule,
         MultiSelectModule,
+        FlatpickrDirective,
     ],
     declarations: [
         // pipes
@@ -122,6 +124,7 @@ import { PdfViewerComponent } from 'src/app/shared/components/pdf-viewer/pdf-vie
         DialogModule,
         FileAttachmentsComponent,
         MainContentComponent,
+        FlatpickrDirective,
     ],
 })
 export class SharedModule {

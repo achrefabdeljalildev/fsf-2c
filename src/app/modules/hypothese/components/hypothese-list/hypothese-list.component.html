@@ -14,9 +14,12 @@
         [pageNumber]="criteria.pageNumber"
         [pageSize]="criteria.pageSize"
         [totalCount]="criteria.totalCount ?? 0"
+        [filtersList]="filtersList"
         (search)="onSearch($event)"
         (addNewRecord)="router.navigate(['/hypothese/create'])"
         (pageChange)="onPageChange($event)"
+        (filterChange)="filterChange($event)"
+        (toggleFilters)="toggleFilters($event)"
     >
         <ng-datatable
             [rows]="rows"

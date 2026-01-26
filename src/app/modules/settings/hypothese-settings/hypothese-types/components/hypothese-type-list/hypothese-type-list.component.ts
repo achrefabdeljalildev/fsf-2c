@@ -30,12 +30,6 @@ export class HypotheseTypeListComponent extends BaseListComponent<HypotheseType>
         return this.hypotheseTypeService.getPagedList(this.criteria);
     }
 
-    filterChange(event: any) {
-        this.criteria.pageSize = event.pageSize;
-        this.criteria.pageNumber = event.pageNumber;
-        this.loadData();
-    }
-
     openCreateDialog() {
         this.selectedHypotheseTypeId = null;
         this.showDialog = true;

@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FlatpickrDefaultsInterface } from 'angularx-flatpickr';
 import { LocationClassification } from 'src/app/modules/settings/location-classification/models/location-classification.model';
 import { LocationClassificationService } from 'src/app/modules/settings/location-classification/services/location-classification.service';
 import { Organization } from 'src/app/modules/settings/organization/models/organization.model';
@@ -13,7 +12,6 @@ import { BaseComponent } from 'src/app/shared/components/base-component/base-com
 import { AttachmentItem } from 'src/app/shared/components/file-attachments/file-attachments.component';
 import { CriteriaModel } from 'src/app/shared/models/base/criteria.model';
 import { FileAttachmentService } from 'src/app/shared/services/file-attachment.service';
-import HijriDateConfig from 'src/app/shared/util/hijri-date-config';
 import { LocationModel } from '../../models/location.model';
 import { LocationService } from '../../services/location.service';
 import { SaudiMapComponent } from '../saudi-map/saudi-map.component';
@@ -41,8 +39,6 @@ export class LocationViewComponent extends BaseComponent implements OnInit {
     filteredRegions: Region[] = [];
     filteredLocationClassifications: LocationClassification[] = [];
     attachments: AttachmentItem[] = [];
-
-    dateBasic: FlatpickrDefaultsInterface = HijriDateConfig;
 
     siteTypeOptions = [
         { label: 'لا يوجد', id: 'None' },

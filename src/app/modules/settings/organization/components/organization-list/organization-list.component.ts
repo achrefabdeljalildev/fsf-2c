@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { colDef } from '@bhplugin/ng-datatable';
 import { Observable } from 'rxjs';
-import { Organization } from '../../models/organization.model';
-import { OrganizationService } from '../../services/organization.service';
 import { BaseListComponent } from 'src/app/shared/components/base-list-component/base-list-component';
 import { ApiResponseModel, PagedResponse } from 'src/app/shared/models/base/paged-response.model';
+import { Organization } from '../../models/organization.model';
+import { OrganizationService } from '../../services/organization.service';
 
 @Component({
     selector: 'app-organization-list',
@@ -28,12 +28,6 @@ export class OrganizationListComponent extends BaseListComponent<Organization> {
 
     protected override fetchPage(): Observable<ApiResponseModel<PagedResponse<Organization>>> {
         return this.organizationService.getPagedList(this.criteria);
-    }
-
-    filterChange(event: any) {
-        this.criteria.pageSize = event.pageSize;
-        this.criteria.pageNumber = event.pageNumber;
-        this.loadData();
     }
 
     openCreateDialog() {

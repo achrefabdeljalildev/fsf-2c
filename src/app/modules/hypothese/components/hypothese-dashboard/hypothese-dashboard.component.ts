@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { BaseComponent } from 'src/app/shared/components/base-component/base-component';
-import { HypotheseService } from '../../services/hypothese.service';
-import { Hypothese } from '../../models/hypothese.model';
 import { CriteriaModel } from '@shared/models/base/criteria.model';
+import { BaseComponent } from 'src/app/shared/components/base-component/base-component';
+import { Hypothese } from '../../models/hypothese.model';
+import { HypotheseService } from '../../services/hypothese.service';
 type ActionSeverity = 'success' | 'info' | 'warn' | 'danger';
 
 interface StatCard {

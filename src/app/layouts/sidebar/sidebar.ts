@@ -42,7 +42,7 @@ export class SidebarComponent implements OnInit {
         const currentUrl = this.router.url;
 
         // Find the parent item and child items that contain the current route
-        for (const item of this.treeNodes()) {
+        for (const item of this.treeNodes() || []) {
             if (item.children) {
                 // Check second-level children for direct route match
                 for (const child of item.children) {

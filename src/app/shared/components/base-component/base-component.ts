@@ -4,6 +4,7 @@ import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { AppService } from '@shared/services/app.service';
+import HijriDateConfig from '@shared/util/hijri-date-config';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 
@@ -18,6 +19,7 @@ export abstract class BaseComponent {
     protected appService = inject(AppService);
 
     subscriptions: Subscription = new Subscription();
+    dateBasicConfig = HijriDateConfig;
 
     constructor() {
         this.translateService = inject(TranslateService);

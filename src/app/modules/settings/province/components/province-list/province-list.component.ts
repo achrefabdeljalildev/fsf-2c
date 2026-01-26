@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { colDef } from '@bhplugin/ng-datatable';
 import { Observable } from 'rxjs';
-import { Province } from '../../models/province.model';
-import { ProvinceService } from '../../services/province.service';
 import { BaseListComponent } from 'src/app/shared/components/base-list-component/base-list-component';
 import { ApiResponseModel, PagedResponse } from 'src/app/shared/models/base/paged-response.model';
+import { Province } from '../../models/province.model';
+import { ProvinceService } from '../../services/province.service';
 
 @Component({
     selector: 'app-province-list',
@@ -29,12 +29,6 @@ export class ProvinceListComponent extends BaseListComponent<Province> {
 
     protected override fetchPage(): Observable<ApiResponseModel<PagedResponse<Province>>> {
         return this.provinceService.getPagedList(this.criteria);
-    }
-
-    filterChange(event: any) {
-        this.criteria.pageSize = event.pageSize;
-        this.criteria.pageNumber = event.pageNumber;
-        this.loadData();
     }
 
     openCreateDialog() {

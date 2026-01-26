@@ -1,5 +1,7 @@
 import { Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FlatpickrDefaultsInterface } from 'angularx-flatpickr';
+import HijriDateConfig from '../../util/hijri-date-config';
 
 export type InputType = 'text' | 'number' | 'multiselect' | 'select' | 'checkbox' | 'date' | 'time';
 
@@ -29,6 +31,7 @@ export class BaseInputComponent implements ControlValueAccessor {
     @Input() showClear: boolean = false;
     @Input() loading: boolean = false;
 
+    hijriDateConfig: FlatpickrDefaultsInterface = HijriDateConfig;
     value: any;
     onChange: any = () => {};
     onTouched: any = () => {};
@@ -90,5 +93,9 @@ export class BaseInputComponent implements ControlValueAccessor {
             cursor: this.disabled ? 'not-allowed' : 'pointer',
             opacity: this.disabled ? 0.6 : 1,
         };
+    }
+
+    onDateValueChange(selectedDates: Date): void {
+        this.onValueChange(selectedDates + 'T00:00:00');
     }
 }

@@ -37,3 +37,7 @@ html[dir='rtl'] .p-breadcrumb-separator {
 .p-paginator-page.p-paginator-page-selected {
     @apply !bg-lightBlue;
 }
+
+.p-datepicker input {
+    width: 100% !important;
+}

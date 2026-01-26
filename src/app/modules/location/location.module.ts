@@ -1,8 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
-import { FlatpickrDirective } from 'angularx-flatpickr';
+
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { Card } from 'primeng/card';
 import { CheckboxModule } from 'primeng/checkbox';
@@ -49,8 +48,6 @@ const routes: Routes = [
         AutoCompleteModule,
         SharedModule,
         SelectModule,
-        FlatpickrDirective,
-        TranslateModule,
     ],
     declarations: [
         LocationDashboardComponent,

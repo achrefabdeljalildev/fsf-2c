@@ -32,12 +32,6 @@ export class HypothesesInvolvedPartyListComponent extends BaseListComponent<Hypo
         return this.hypothesesInvolvedPartyService.getPagedList(this.criteria);
     }
 
-    filterChange(event: any) {
-        this.criteria.pageSize = event.pageSize;
-        this.criteria.pageNumber = event.pageNumber;
-        this.loadData();
-    }
-
     openCreateDialog() {
         this.selectedHypothesesInvolvedPartyId = null;
         this.showDialog = true;

@@ -32,12 +32,6 @@ export class ClassificationOfRiskTypeListComponent extends BaseListComponent<Cla
         return this.service.getPagedList(this.criteria);
     }
 
-    filterChange(event: any) {
-        this.criteria.pageSize = event.pageSize;
-        this.criteria.pageNumber = event.pageNumber;
-        this.loadData();
-    }
-
     openCreateDialog() {
         this.selectedItemId = null;
         this.showDialog = true;

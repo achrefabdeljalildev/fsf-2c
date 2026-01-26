@@ -31,12 +31,6 @@ export class GlobalSettingsListComponent extends BaseListComponent<GlobalSetting
         return this.globalSettingsService.getPagedList(this.criteria);
     }
 
-    filterChange(event: any) {
-        this.criteria.pageSize = event.pageSize;
-        this.criteria.pageNumber = event.pageNumber;
-        this.loadData();
-    }
-
     openCreateDialog() {
         this.selectedSettingId = null;
         this.showDialog = true;

@@ -1,6 +1,6 @@
 <div class="form-group">
     <label *ngIf="label && inputType !== 'checkbox'" class="block text-sm font-medium mb-2">
-        {{ label }}
+        {{ label | translate }}
         <span *ngIf="required" class="text-red-500">*</span>
     </label>
 
@@ -10,7 +10,7 @@
         [type]="inputType"
         pInputText
         [value]="value"
-        [placeholder]="placeholder"
+        [placeholder]="placeholder | translate"
         [disabled]="disabled"
         (input)="onInputChange($event)"
         (blur)="onTouched()"
@@ -23,7 +23,7 @@
         [options]="options"
         [optionLabel]="optionLabel"
         [optionValue]="optionValue"
-        [placeholder]="placeholder"
+        [placeholder]="placeholder | translate"
         [disabled]="disabled"
         [filter]="filter"
         [showClear]="showClear"
@@ -39,13 +39,40 @@
         [options]="options"
         [optionLabel]="optionLabel"
         [optionValue]="optionValue"
-        [placeholder]="placeholder"
+        [placeholder]="placeholder | translate"
         [disabled]="disabled"
         [filter]="filter"
         [showClear]="showClear"
         [loading]="loading"
         [ngModel]="value"
         (ngModelChange)="onValueChange($event)"
+        class="w-full"
+    />
+
+    <!-- Date Input (Hijri) -->
+    <input
+        *ngIf="inputType === 'date'"
+        id="date"
+        pInputText
+        mwlFlatpickr
+        [ngModel]="value"
+        [options]="hijriDateConfig"
+        (ngModelChange)="onDateValueChange($event)"
+        [altInput]="true"
+        [convertModelValue]="false"
+        class="w-full"
+    />
+
+    <!-- Time Input -->
+    <input
+        *ngIf="inputType === 'time'"
+        type="time"
+        pInputText
+        [value]="value"
+        [placeholder]="placeholder | translate"
+        [disabled]="disabled"
+        (input)="onInputChange($event)"
+        (blur)="onTouched()"
         class="w-full"
     />
 

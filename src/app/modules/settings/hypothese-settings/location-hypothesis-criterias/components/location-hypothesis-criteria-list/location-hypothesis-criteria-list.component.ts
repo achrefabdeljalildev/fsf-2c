@@ -33,12 +33,6 @@ export class LocationHypothesisCriteriaListComponent extends BaseListComponent<L
         return this.criteriaService.getPagedList(this.criteria);
     }
 
-    filterChange(event: any) {
-        this.criteria.pageSize = event.pageSize;
-        this.criteria.pageNumber = event.pageNumber;
-        this.loadData();
-    }
-
     openCreateDialog() {
         this.selectedCriteriaId = null;
         this.showDialog = true;

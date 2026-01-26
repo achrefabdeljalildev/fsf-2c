@@ -1,4 +1,5 @@
 ﻿import { Component, Input, OnInit } from '@angular/core';
+import { SIDEBAR_MENUS_KEYS } from '@shared/consts/base-sidebar-menus';
 
 import { AuthService } from 'src/app/modules/auth/services/auth.service';
 import { BaseComponent } from 'src/app/shared/components/base-component/base-component';
@@ -26,67 +27,15 @@ export class HeaderComponent extends BaseComponent implements OnInit {
         super();
 
         this.route.data.subscribe((value) => {
-            this.isGlobalSettings = value['isGlobalSettings'];
+            this.isGlobalSettings = value['key'] === 'globalSettings';
+            const key = value['key'];
 
-            if (this.isGlobalSettings) {
-                this.baseStore.setSidebarTitle('الإعدادات العامة');
-                this.baseStore.setSidebarMenus([
-                    {
-                        key: '1',
-                        label: 'الإعدادات العامة',
-                        data: 'Global Settings',
-                        icon: 'assets/images/icons/settings-sidebar-logo.svg',
-                        children: [
-                            {
-                                key: '11',
-                                label: 'إعدادات النظام',
-                                data: 'Global Settings List',
-                                icon: 'pi pi-list',
-                                routerLink: '/global-settings/list',
-                            },
-                            {
-                                key: '12',
-                                label: 'الجهات',
-                                data: 'Sub Survey 2',
-                                routerLink: '/organization/list',
-                            },
-                            {
-                                key: '13',
-                                label: 'المناطق',
-                                data: 'Sub Survey 2',
-                                routerLink: '/regions/list',
-                            },
-                            {
-                                key: '14',
-                                label: 'المحافظات',
-                                data: 'Sub Survey 2',
-                                routerLink: '/province/list',
-                            },
-                        ],
-                    },
-                    {
-                        key: '2',
-                        label: 'المستخدمين',
-                        data: 'Security Support',
-                        icon: 'assets/images/icons/settings-sidebar-logo.svg',
-                        children: [
-                            {
-                                key: '21',
-                                label: 'قائمة المستخدمين',
-                                data: 'Sub Survey 2',
-                                icon: 'pi pi-list',
-                                routerLink: '/users/list',
-                            },
-                            {
-                                key: '22',
-                                label: 'الادوار',
-                                data: 'Sub Survey 2',
-                                icon: 'pi pi-list',
-                                routerLink: '/users/roles',
-                            },
-                        ],
-                    },
-                ]);
+            if (key) {
+                const menuConfig = SIDEBAR_MENUS_KEYS.find((m) => m.key === key);
+                if (menuConfig) {
+                    this.baseStore.setSidebarMenus(menuConfig.sidebarMenus);
+                    this.baseStore.setSidebarTitle(menuConfig.title);
+                }
             }
         });
     }

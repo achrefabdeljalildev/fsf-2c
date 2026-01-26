@@ -1,5 +1,6 @@
 import { Directive, OnDestroy, OnInit } from '@angular/core';
 import { colDef } from '@bhplugin/ng-datatable';
+import { ListFilterConfig } from '@shared/components/list-filter/list-filter.component';
 import { Observable, Subscription } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/components/base-component/base-component';
 import { CriteriaModel } from 'src/app/shared/models/base/criteria.model';
@@ -11,6 +12,7 @@ export abstract class BaseListComponent<T> extends BaseComponent implements OnIn
     rows: T[] = [];
     isLoading = false;
     paginationInfo: string = '';
+    filtersList: ListFilterConfig[] = [];
 
     criteria: CriteriaModel = new CriteriaModel();
     protected subscription = new Subscription();
@@ -75,15 +77,15 @@ export abstract class BaseListComponent<T> extends BaseComponent implements OnIn
         this.subscription.add(sub);
     }
 
+    filterChange(event: CriteriaModel): void {
+        this.criteria = event;
+        this.loadData();
+    }
+
     onPageChange(event: any): void {
         if (!event) return;
         this.criteria.pageNumber = event.first / event.rows + 1;
         this.criteria.pageSize = event.rows;
-        this.loadData();
-    }
-
-    onFilterApplied(): void {
-        this.criteria.pageNumber = 1;
         this.loadData();
     }
 

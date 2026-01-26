@@ -3,8 +3,8 @@
 <p-breadcrumb
     [model]="[
         { label: ('breadcrumbs.securitySystems' | translate), routerLink: '/' },
-        { label: ('breadcrumbs.hypotheses' | translate), routerLink: '/' },
-        { label: ('breadcrumbs.ControlManagement' | translate) },
+        { label: ('breadcrumbs.generalAdministration' | translate), routerLink: '/' },
+        { label: ('breadcrumbs.locations' | translate) },
     ]"
 />
 
@@ -12,32 +12,12 @@
     <list-header
         addNewRecordLabel="{{ 'location.addNewLocation' | translate }}"
         tableTitle="{{ 'location.locationList' | translate }}"
-        [showFilterButton]="true"
         [paginationInfo]="paginationInfo"
         [pageNumber]="criteria.pageNumber"
         [pageSize]="criteria.pageSize"
         [totalCount]="criteria.totalCount ?? 0"
         [showMapsButton]="true"
-        [filterConfigs]="[
-            {
-                propertyName: 'nameAr',
-                filterType: 'text',
-                isSingle: true,
-                placeholder: ('formLabels.name' | translate),
-            },
-            {
-                propertyName: 'code',
-                filterType: 'text',
-                isSingle: true,
-                placeholder: ('formLabels.locationCode' | translate),
-            },
-            {
-                propertyName: 'weaponsWarehouse',
-                filterType: 'checkbox',
-                isSingle: true,
-                label: 'يوجد مستودع أسلحة',
-            },
-        ]"
+        [filtersList]="filtersList"
         (search)="onSearch($event)"
         (clickMaps)="showMapsView = !showMapsView"
         (addNewRecord)="openCreateDialog()"

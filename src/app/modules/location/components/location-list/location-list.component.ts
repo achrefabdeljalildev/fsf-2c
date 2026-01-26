@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { colDef } from '@bhplugin/ng-datatable';
-import { CriteriaModel } from '@shared/models/base/criteria.model';
 import { Observable } from 'rxjs';
 import { BaseListComponent } from 'src/app/shared/components/base-list-component/base-list-component';
 import { ApiResponseModel, PagedResponse } from 'src/app/shared/models/base/paged-response.model';
@@ -44,11 +43,6 @@ export class LocationListComponent extends BaseListComponent<LocationModel> {
 
     protected override fetchPage(): Observable<ApiResponseModel<PagedResponse<LocationModel>>> {
         return this.locationService.getPagedList(this.criteria);
-    }
-
-    filterChange(event: CriteriaModel) {
-        this.criteria = event;
-        this.loadData();
     }
 
     openCreateDialog() {

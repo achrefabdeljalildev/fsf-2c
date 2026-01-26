@@ -19,14 +19,14 @@ export class ListHeaderComponent {
     @Input() pageNumber: number = 1;
     @Input() totalCount: number = 0;
     @Input() pagination: boolean = true;
-    @Input() showFilterButton: boolean = false;
-    @Input() filterConfigs: ListFilterConfig[] = [];
+    @Input() filtersList: ListFilterConfig[] = [];
 
     @Output() search = new EventEmitter<string>();
     @Output() pageChange = new EventEmitter<any>();
     @Output() addNewRecord = new EventEmitter<void>();
     @Output() clickMaps = new EventEmitter<void>();
     @Output() filterChange = new EventEmitter<CriteriaModel>();
+    @Output() toggleFilters = new EventEmitter<boolean>();
 
     searchTerm: string = '';
     showFilters: boolean = false;
@@ -64,5 +64,10 @@ export class ListHeaderComponent {
                 filters: filters,
             }),
         );
+    }
+
+    toggleDisplayFilters() {
+        this.showFilters = !this.showFilters;
+        this.toggleFilters.emit(this.showFilters);
     }
 }

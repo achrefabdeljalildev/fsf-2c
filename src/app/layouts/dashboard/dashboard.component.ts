@@ -1,24 +1,6 @@
 import { Component } from '@angular/core';
-import { CONST_SIDEBAR_MENUS } from '@shared/consts/base-sidebar-menus';
 import { BaseComponent } from 'src/app/shared/components/base-component/base-component';
-import { BaseStore, TreeNode } from 'src/app/store/base.store';
-
-interface Card {
-    id: number;
-    title: string;
-    description: string;
-    icon: string;
-    iconActive: string;
-    enabled?: boolean;
-    subcards?: SubCard[];
-}
-
-interface SubCard {
-    id: number;
-    title: string;
-    enabled?: boolean;
-    sidebarMenus?: TreeNode[];
-}
+import { BaseStore, Card, SubCard } from 'src/app/store/base.store';
 
 @Component({
     selector: 'app-dashboard',
@@ -37,15 +19,17 @@ export class DashboardComponent extends BaseComponent {
             subcards: [
                 {
                     id: 11,
+                    key: '',
                     title: 'إدارة التحكم و التوجيه',
                     enabled: false,
-                    sidebarMenus: [],
+                    routerLink: '/location/dashboard',
                 },
                 {
                     id: 12,
+                    key: '',
                     title: 'إدارة الخطط و الاسناد الامني',
                     enabled: false,
-                    sidebarMenus: [],
+                    routerLink: '/location/dashboard',
                 },
             ],
         },
@@ -59,15 +43,17 @@ export class DashboardComponent extends BaseComponent {
             subcards: [
                 {
                     id: 21,
+                    key: 'fieldSurvey',
+                    routerLink: '/location/dashboard',
                     title: 'إدارة المسح الميداني',
                     enabled: true,
-                    sidebarMenus: CONST_SIDEBAR_MENUS,
                 },
                 {
                     id: 22,
+                    key: 'hypothese',
                     title: 'إدارة الحماية الميدانية',
-                    enabled: false,
-                    sidebarMenus: [],
+                    enabled: true,
+                    routerLink: '/hypothese/dashboard',
                 },
             ],
         },
@@ -81,15 +67,17 @@ export class DashboardComponent extends BaseComponent {
             subcards: [
                 {
                     id: 31,
+                    key: '',
                     title: 'إدارة السلامة الصناعية',
                     enabled: false,
-                    sidebarMenus: [],
+                    routerLink: '/location/dashboard',
                 },
                 {
                     id: 32,
+                    key: '',
                     title: 'إدارة متابعة الأمن الذاتي',
                     enabled: false,
-                    sidebarMenus: [],
+                    routerLink: '/location/dashboard',
                 },
             ],
         },
@@ -106,10 +94,8 @@ export class DashboardComponent extends BaseComponent {
     }
 
     goSubmenuPage(subcard: SubCard) {
-        if (subcard.enabled && subcard.sidebarMenus) {
-            this.baseStore.setSidebarMenus(subcard.sidebarMenus);
-            this.baseStore.setSidebarTitle(subcard.title);
-            this.navigateTo('/location/dashboard');
+        if (subcard.enabled && subcard.routerLink) {
+            this.navigateTo(subcard.routerLink);
         }
     }
 }

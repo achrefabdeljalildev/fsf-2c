@@ -1,5 +1,4 @@
 import { Injectable, WritableSignal, computed, signal } from '@angular/core';
-import { CONST_SIDEBAR_MENUS } from '@shared/consts/base-sidebar-menus';
 
 export interface TreeNode {
     key: string;
@@ -8,6 +7,24 @@ export interface TreeNode {
     icon?: string;
     routerLink?: string;
     children?: TreeNode[];
+}
+
+export interface Card {
+    id: number;
+    title: string;
+    description: string;
+    icon: string;
+    iconActive: string;
+    enabled?: boolean;
+    subcards?: SubCard[];
+}
+
+export interface SubCard {
+    id: number;
+    key: string;
+    title: string;
+    enabled?: boolean;
+    routerLink: string;
 }
 
 export interface UiState {
@@ -43,8 +60,8 @@ const initialState: UiState = {
     ],
     isShowMainLoader: true,
     semidark: false,
-    sidebarMenus: CONST_SIDEBAR_MENUS,
-    sidebarTitle: 'إدارة نظم المعلومات الأمنية',
+    sidebarMenus: [],
+    sidebarTitle: 'العودة الى الرئيسية',
 };
 
 @Injectable({ providedIn: 'root' })

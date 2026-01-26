@@ -29,33 +29,7 @@
                     </button>
                 </div>
 
-                <div class="flex flex-col gap-5">
-                    <!-- Name -->
-                    <div class="form-group">
-                        <label for="nameAr" class="block text-sm font-medium mb-2">
-                            {{ 'formLabels.name' | translate }}
-                            <span class="text-red-500">*</span>
-                        </label>
-                        <input
-                            id="nameAr"
-                            type="text"
-                            formControlName="nameAr"
-                            pInputText
-                            class="w-full"
-                            [placeholder]="'formLabels.enterName' | translate"
-                        />
-                        <small
-                            *ngIf="
-                                hypotheseForm.get('nameAr')?.invalid &&
-                                (hypotheseForm.get('nameAr')?.dirty ||
-                                    hypotheseForm.get('nameAr')?.touched)
-                            "
-                            class="text-red-500"
-                        >
-                            {{ 'messages.requiredField' | translate }}
-                        </small>
-                    </div>
-
+                <div class="grid grid-cols-2 gap-5">
                     <!-- Location Selection -->
                     <div class="form-group">
                         <label for="locationId" class="block text-sm font-medium mb-2">
@@ -70,7 +44,6 @@
                             optionValue="id"
                             [placeholder]="'formLabels.selectLocation' | translate"
                             [filter]="true"
-                            filterBy="code,nameAr"
                             [style]="{ width: '100%' }"
                         ></p-select>
                         <small
@@ -114,7 +87,7 @@
                     </div>
 
                     <!-- Hypothese Title -->
-                    <div class="form-group">
+                    <div class="form-group col-span-2">
                         <label for="hypotheseTitleId" class="block text-sm font-medium mb-2">
                             {{ 'formLabels.hypotheseTitle' | translate }}
                             <span class="text-red-500">*</span>
@@ -142,114 +115,91 @@
                         </small>
                     </div>
 
-                    <!-- Day and Date -->
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="form-group">
-                            <label for="day" class="block text-sm font-medium mb-2">
-                                {{ 'formLabels.day' | translate }}
-                                <span class="text-red-500">*</span>
-                            </label>
-                            <p-select
-                                id="day"
-                                formControlName="day"
-                                [options]="days"
-                                [placeholder]="'formLabels.selectDay' | translate"
-                                [style]="{ width: '100%' }"
-                            ></p-select>
-                            <small
-                                *ngIf="
-                                    hypotheseForm.get('day')?.invalid &&
-                                    (hypotheseForm.get('day')?.dirty ||
-                                        hypotheseForm.get('day')?.touched)
-                                "
-                                class="text-red-500"
-                            >
-                                {{ 'messages.requiredField' | translate }}
-                            </small>
-                        </div>
-                        <div class="form-group">
-                            <label for="date" class="block text-sm font-medium mb-2">
-                                {{ 'formLabels.date' | translate }}
-                            </label>
-                            <input
-                                id="date"
-                                formControlName="date"
-                                mwlFlatpickr
-                                [options]="dateBasic"
-                                pInputText
-                                [altInput]="true"
-                                [convertModelValue]="true"
-                                class="w-full"
-                            />
-                        </div>
-                    </div>
-
-                    <!-- Time Spans (24-hour) -->
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="form-group">
-                            <label for="fromTimeSpan" class="block text-sm font-medium mb-2">
-                                {{ 'formLabels.fromTime' | translate }}
-                                <span class="text-red-500">*</span>
-                            </label>
-                            <p-datepicker
-                                id="fromTimeSpan"
-                                formControlName="fromTimeSpan"
-                                [timeOnly]="true"
-                                hourFormat="24"
-                                [showIcon]="true"
-                                [style]="{ width: '100%' }"
-                            />
-                            <small
-                                *ngIf="
-                                    hypotheseForm.get('fromTimeSpan')?.invalid &&
-                                    (hypotheseForm.get('fromTimeSpan')?.dirty ||
-                                        hypotheseForm.get('fromTimeSpan')?.touched)
-                                "
-                                class="text-red-500"
-                            >
-                                {{ 'messages.requiredField' | translate }}
-                            </small>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="toTimeSpan" class="block text-sm font-medium mb-2">
-                                {{ 'formLabels.toTime' | translate }}
-                                <span class="text-red-500">*</span>
-                            </label>
-                            <p-datepicker
-                                id="toTimeSpan"
-                                formControlName="toTimeSpan"
-                                [timeOnly]="true"
-                                hourFormat="24"
-                                [showIcon]="true"
-                                [style]="{ width: '100%' }"
-                            />
-                            <small
-                                *ngIf="
-                                    hypotheseForm.get('toTimeSpan')?.invalid &&
-                                    (hypotheseForm.get('toTimeSpan')?.dirty ||
-                                        hypotheseForm.get('toTimeSpan')?.touched)
-                                "
-                                class="text-red-500"
-                            >
-                                {{ 'messages.requiredField' | translate }}
-                            </small>
-                        </div>
-                    </div>
-
-                    <!-- Description -->
                     <div class="form-group">
-                        <label for="descriptionAr" class="block text-sm font-medium mb-2">
-                            {{ 'formLabels.description' | translate }}
+                        <label for="date" class="block text-sm font-medium mb-2">
+                            {{ 'formLabels.date' | translate }}
                         </label>
-                        <textarea
-                            id="descriptionAr"
-                            formControlName="descriptionAr"
-                            pTextarea
-                            rows="4"
+                        <input
+                            id="date"
+                            formControlName="date"
+                            mwlFlatpickr
+                            [options]="dateBasicConfig"
+                            pInputText
+                            [altInput]="true"
                             class="w-full"
-                            [placeholder]="'formLabels.enterDescription' | translate"
-                        ></textarea>
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="day" class="block text-sm font-medium mb-2">
+                            {{ 'formLabels.day' | translate }}
+                            <span class="text-red-500">*</span>
+                        </label>
+                        <p-select
+                            id="day"
+                            formControlName="day"
+                            [options]="days"
+                            [placeholder]="'formLabels.selectDay' | translate"
+                            [style]="{ width: '100%' }"
+                        ></p-select>
+                        <small
+                            *ngIf="
+                                hypotheseForm.get('day')?.invalid &&
+                                (hypotheseForm.get('day')?.dirty ||
+                                    hypotheseForm.get('day')?.touched)
+                            "
+                            class="text-red-500"
+                        >
+                            {{ 'messages.requiredField' | translate }}
+                        </small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fromTimeSpan" class="block text-sm font-medium mb-2">
+                            {{ 'formLabels.fromTime' | translate }}
+                            <span class="text-red-500">*</span>
+                        </label>
+                        <p-datepicker
+                            id="fromTimeSpan"
+                            formControlName="fromTimeSpan"
+                            hourFormat="24"
+                            [showIcon]="true"
+                            [timeOnly]="true"
+                        />
+                        <small
+                            *ngIf="
+                                hypotheseForm.get('fromTimeSpan')?.invalid &&
+                                (hypotheseForm.get('fromTimeSpan')?.dirty ||
+                                    hypotheseForm.get('fromTimeSpan')?.touched)
+                            "
+                            class="text-red-500"
+                        >
+                            {{ 'messages.requiredField' | translate }}
+                        </small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="toTimeSpan" class="block text-sm font-medium mb-2">
+                            {{ 'formLabels.toTime' | translate }}
+                            <span class="text-red-500">*</span>
+                        </label>
+                        <p-datepicker
+                            id="toTimeSpan"
+                            formControlName="toTimeSpan"
+                            hourFormat="24"
+                            [showIcon]="true"
+                            [timeOnly]="true"
+                        />
+                        <small
+                            *ngIf="
+                                hypotheseForm.get('toTimeSpan')?.invalid &&
+                                (hypotheseForm.get('toTimeSpan')?.dirty ||
+                                    hypotheseForm.get('toTimeSpan')?.touched)
+                            "
+                            class="text-red-500"
+                        >
+                            {{ 'messages.requiredField' | translate }}
+                        </small>
                     </div>
                 </div>
             </div>
@@ -267,15 +217,45 @@
                     (uploadSuccess)="onUploadSuccess($event)"
                     (uploadError)="onUploadError($event)"
                 />
-
-                <app-hypothese-involved
-                    *ngIf="isEditMode"
-                    class="flex-1"
-                    [hypotheseId]="hypotheseId"
-                    [selectedInvolvedParties]="hypotheseInvolvedPartiesData"
-                    (onSave)="loadHypothese(hypotheseId!)"
-                />
             </div>
         </div>
+        <!-- Tabs Section -->
+        <p-tabs class="mt-6" value="1">
+            <p-tablist>
+                <p-tab value="1" *ngIf="isEditMode"> الجهات المشاركة </p-tab>
+                <p-tab value="2"> الوصف </p-tab>
+                <p-tab value="3">سجل الإجراءات</p-tab>
+            </p-tablist>
+            <p-tabpanels>
+                <p-tabpanel value="1">
+                    <app-hypothese-involved
+                        [hypotheseId]="hypotheseId"
+                        [selectedInvolvedParties]="hypotheseInvolvedPartiesData"
+                        (onSave)="loadHypothese(hypotheseId!)"
+                    />
+                </p-tabpanel>
+                <p-tabpanel value="2">
+                    <div class="form-group">
+                        <textarea
+                            id="descriptionAr"
+                            formControlName="descriptionAr"
+                            pTextarea
+                            rows="6"
+                            class="w-full"
+                            [placeholder]="'formLabels.enterDescription' | translate"
+                        ></textarea>
+                    </div>
+                </p-tabpanel>
+
+                <p-tabpanel value="3">
+                    <ng-template pTemplate="header">
+                        <span>{{ 'labels.logs' | translate }}</span>
+                    </ng-template>
+                    <div class="text-center text-gray-500 py-4">
+                        {{ 'messages.noLogsAvailable' | translate }}
+                    </div>
+                </p-tabpanel>
+            </p-tabpanels>
+        </p-tabs>
     </form>
 </main-content>

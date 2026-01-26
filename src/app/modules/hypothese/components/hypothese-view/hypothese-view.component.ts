@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import HijriDateConfig from '@shared/util/hijri-date-config';
-import { FlatpickrDefaultsInterface } from 'node_modules/angularx-flatpickr/lib/flatpickr-defaults.service';
 import { BaseComponent } from '../../../../shared/components/base-component/base-component';
 import { AttachmentItem } from '../../../../shared/components/file-attachments/file-attachments.component';
 import { CriteriaModel, FilterCriteriaModel } from '../../../../shared/models/base/criteria.model';
@@ -9,6 +7,7 @@ import { FileAttachmentService } from '../../../../shared/services/file-attachme
 import { LocationService } from '../../../location/services/location.service';
 import { HypotheseTitleService } from '../../../settings/hypothese-settings/hypothese-titles/services/hypothese-title.service';
 import { HypotheseTypeService } from '../../../settings/hypothese-settings/hypothese-types/services/hypothese-type.service';
+import { HypothesesInvolvedPartyService } from '../../../settings/hypothese-settings/hypotheses-involved-parties/services/hypotheses-involved-party.service';
 import { Hypothese } from '../../models/hypothese.model';
 import { HypotheseService } from '../../services/hypothese.service';
 
@@ -23,7 +22,7 @@ export class HypotheseViewComponent extends BaseComponent implements OnInit {
     isLoading: boolean = false;
     isEditMode: boolean = false;
     isInitializing: boolean = false;
-    dateBasic: FlatpickrDefaultsInterface = HijriDateConfig;
+    showInvolvedPartiesMode: boolean = false;
 
     // Dropdowns data
     locations: any[] = [];
@@ -32,6 +31,8 @@ export class HypotheseViewComponent extends BaseComponent implements OnInit {
     allHypotheseTitles: any[] = [];
     loadingHypotheseTitles: boolean = false;
     hypotheseInvolvedPartiesData: any[] = [];
+    availableInvolvedParties: any[] = [];
+    selectedInvolvedParties: any[] = [];
     days: string[] = ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
 
     // Attachments
@@ -43,6 +44,7 @@ export class HypotheseViewComponent extends BaseComponent implements OnInit {
         private locationService: LocationService,
         private hypotheseTypeService: HypotheseTypeService,
         private hypotheseTitleService: HypotheseTitleService,
+        private hypothesesInvolvedPartyService: HypothesesInvolvedPartyService,
         private fileAttachmentService: FileAttachmentService,
     ) {
         super();
@@ -62,7 +64,6 @@ export class HypotheseViewComponent extends BaseComponent implements OnInit {
 
     initForm(): void {
         this.hypotheseForm = this.fb.group({
-            nameAr: ['', [Validators.required]],
             descriptionAr: [''],
             locationId: [null, [Validators.required]],
             hypotheseTypeId: [null, [Validators.required]],
@@ -101,6 +102,13 @@ export class HypotheseViewComponent extends BaseComponent implements OnInit {
             if (response?.isSuccess && response.data?.items) {
                 this.allHypotheseTitles = response.data.items;
                 this.hypotheseTitles = response.data.items;
+            }
+        });
+
+        // Load available involved parties
+        this.hypothesesInvolvedPartyService.getPagedList(criteria).subscribe((response: any) => {
+            if (response?.isSuccess && response.data?.items) {
+                this.availableInvolvedParties = response.data.items;
             }
         });
     }
@@ -226,6 +234,7 @@ export class HypotheseViewComponent extends BaseComponent implements OnInit {
         const formVal = this.hypotheseForm.value;
         const hypotheseData: Hypothese = {
             ...formVal,
+            nameAr: 'فرضية',
             fromTimeSpan: this.formatDateToTimeString(formVal.fromTimeSpan) ?? '',
             toTimeSpan: this.formatDateToTimeString(formVal.toTimeSpan) ?? '',
         } as Hypothese;
@@ -283,6 +292,34 @@ export class HypotheseViewComponent extends BaseComponent implements OnInit {
         });
     }
 
+    private handlePostSubmitAttachments(): void {
+        const pendingUploads = this.attachments.filter((attachment) => attachment.file);
+
+        if (pendingUploads.length > 0 && this.hypotheseId) {
+            this.fileAttachmentService
+                .uploadFiles(
+                    pendingUploads.map((attachment) => ({
+                        file: attachment.file!,
+                        entityName: 'Hypothese',
+                        entityKey: this.hypotheseId!.toString(),
+                        path: 'Hypotheses',
+                        category: 'Documents',
+                    })),
+                )
+                .subscribe({
+                    next: () => {
+                        this.router.navigate(['/hypothese/list']);
+                    },
+                    error: (error) => {
+                        console.error('Failed to upload attachments', error);
+                        this.router.navigate(['/hypothese/list']);
+                    },
+                });
+        } else {
+            this.router.navigate(['/hypothese/list']);
+        }
+    }
+
     onFileAdded(file: File): void {
         if (this.isEditMode || !file) return;
         // Queue pending attachment until entity is created
@@ -337,6 +374,63 @@ export class HypotheseViewComponent extends BaseComponent implements OnInit {
     }
 
     back(): void {
+        this.router.navigate(['/hypothese/list']);
+    }
+
+    removeInvolvedParty(partyId: number): void {
+        this.hypotheseInvolvedPartiesData = this.hypotheseInvolvedPartiesData.filter(
+            (p) => p.id !== partyId,
+        );
+    }
+
+    addSelectedInvolvedParties(): void {
+        if (!this.selectedInvolvedParties || this.selectedInvolvedParties.length === 0) {
+            this.finishAddingInvolvedParties();
+            return;
+        }
+
+        this.isLoading = true;
+        const partiesToAdd = this.selectedInvolvedParties.map((party) => ({
+            hypothesesInvolvedPartyId: party.id,
+        }));
+
+        this.addPartiesSequentially(partiesToAdd, 0);
+    }
+
+    private addPartiesSequentially(parties: any[], index: number): void {
+        if (index >= parties.length) {
+            this.isLoading = false;
+            this.finishAddingInvolvedParties();
+            return;
+        }
+
+        if (!this.hypotheseId) {
+            this.isLoading = false;
+            return;
+        }
+
+        this.hypotheseService.createHypotheseInvolved(this.hypotheseId, parties[index]).subscribe({
+            next: (response: any) => {
+                if (response?.isSuccess) {
+                    this.hypotheseInvolvedPartiesData.push(response.data);
+                }
+                this.addPartiesSequentially(parties, index + 1);
+            },
+            error: (error) => {
+                console.error('Failed to add involved party', error);
+                this.addPartiesSequentially(parties, index + 1);
+            },
+        });
+    }
+
+    finishAddingInvolvedParties(): void {
+        this.showInvolvedPartiesMode = false;
+        this.handlePostSubmitAttachments();
+    }
+
+    cancelInvolvedPartiesMode(): void {
+        this.showInvolvedPartiesMode = false;
+        this.selectedInvolvedParties = [];
         this.router.navigate(['/hypothese/list']);
     }
 }

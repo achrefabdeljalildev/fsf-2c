@@ -243,7 +243,8 @@
         "deletedSuccessfully": "تم الحذف بنجاح",
         "savedSuccessfully": "تم الحفظ بنجاح",
         "error": "حدث خطأ",
-        "noChildrenAdded": "لم يتم إضافة عناصر فرعية"
+        "noChildrenAdded": "لم يتم إضافة عناصر فرعية",
+        "noLogsAvailable": "لا توجد سجلات متاحة للعرض"
     },
     "actions": {
         "addNewProvince": "إضافة محافظة جديدة",
@@ -292,8 +293,8 @@
         "hypotheseTitles": "مسميات الفرضيات",
         "hypothesesInvolvedParties": "الجهات المشاركة",
         "locationHypothesisCriterias": "معايير الفرضيات",
-        "settings": "الإعدادات",
         "hypotheses": "الفرضيات",
+        "settings": "الإعدادات",
         "ControlManagement": "إدارة التحكم"
     },
     "validationMessages": {
@@ -393,6 +394,7 @@
         "riskCode": "رمز الخطر",
         "enterRiskCode": "أدخل رمز الخطر",
         "province": "المحافظة",
+        "selectProvince": "اختر المحافظة",
         "affiliatedEntity": "الجهة التابعة لها",
         "parent": "التصنيف الأب",
         "receiptDate": "تاريخ الاستلام",

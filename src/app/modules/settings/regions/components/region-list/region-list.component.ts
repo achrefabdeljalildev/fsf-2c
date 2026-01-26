@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { colDef } from '@bhplugin/ng-datatable';
 import { Observable } from 'rxjs';
-import { Region } from '../../models/region.model';
-import { RegionService } from '../../services/region.service';
 import { BaseListComponent } from 'src/app/shared/components/base-list-component/base-list-component';
 import { ApiResponseModel, PagedResponse } from 'src/app/shared/models/base/paged-response.model';
+import { Region } from '../../models/region.model';
+import { RegionService } from '../../services/region.service';
 
 @Component({
     selector: 'app-region-list',
@@ -28,12 +28,6 @@ export class RegionListComponent extends BaseListComponent<Region> {
 
     protected override fetchPage(): Observable<ApiResponseModel<PagedResponse<Region>>> {
         return this.regionService.getPagedList(this.criteria);
-    }
-
-    filterChange(event: any) {
-        this.criteria.pageSize = event.pageSize;
-        this.criteria.pageNumber = event.pageNumber;
-        this.loadData();
     }
 
     openCreateDialog() {

@@ -36,12 +36,6 @@ export class LocationRiskListComponent extends BaseListComponent<LocationRisk> {
         return this.locationRiskService.getPagedList(this.criteria);
     }
 
-    filterChange(event: any) {
-        this.criteria.pageSize = event.pageSize;
-        this.criteria.pageNumber = event.pageNumber;
-        this.loadData();
-    }
-
     removeLocationRisk(id: number) {
         if (confirm(this.translateService.instant('messages.confirmDeleteItem'))) {
             this.locationRiskService.deleteById(id).subscribe(() => {
