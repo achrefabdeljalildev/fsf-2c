@@ -1,32 +1,41 @@
 <p-breadcrumb
     [model]="[
-        { label: ('breadcrumbs.securitySystems' | translate), routerLink: '/' },
-        { label: ('breadcrumbs.riskRegisterSettings' | translate) },
-        { label: ('breadcrumbs.classificationOfRiskImpact' | translate) },
+        { label: ('workFlow.securitySystems' | translate) },
+        { label: ('workFlow.pathSettings' | translate) },
+        { label: ('workFlow.ListWorkFlows' | translate) },
     ]"
 />
-
 <main-content>
     <list-header
-        addNewRecordLabel="{{ 'classificationOfRiskImpact.addNew' | translate }}"
-        tableTitle="{{ 'classificationOfRiskImpact.list' | translate }}"
+        addNewRecordLabel="{{ 'workFlow.addNew' | translate }}"
+        tableTitle="{{ 'workFlow.List' | translate }}"
         [paginationInfo]="paginationInfo"
-        [pageNumber]="criteria.pageNumber"
-        [pageSize]="criteria.pageSize"
-        [totalCount]="criteria.totalCount ?? 0"
         (search)="onSearch($event)"
         (addNewRecord)="openCreateDialog()"
-        (pageChange)="onPageChange($event)"
     >
         <ng-datatable
             [rows]="rows"
             [columns]="cols"
+            [hasCheckbox]="true"
             [sortable]="false"
             [loading]="isLoading"
             [pagination]="true"
             [pageSize]="criteria.pageSize"
+            rowClass="cursor-pointer"
             noDataContent="{{ 'common.noDataOnList' | translate }}"
         >
+            <!-- isOptional app-->
+            <ng-template slot="isOptinalApprover" let-value="data">
+                <p-tag
+                    value="{{
+                        value.isOptinalApprove
+                            ? ('common.optionalOption' | translate)
+                            : ('common.requiredOption' | translate)
+                    }}"
+                    [severity]="value.isOptinalApprove ? 'success' : 'danger'"
+                >
+                </p-tag>
+            </ng-template>
             <ng-template slot="actions" let-value="data">
                 <div class="flex gap-2">
                     <div (click)="openEditDialog(value.id)" class="cursor-pointer">
@@ -37,15 +46,12 @@
                     </div>
                 </div>
             </ng-template>
-            <ng-template slot="color" let-value="data">
-                <div
-                    [style.backgroundColor]="value.color"
-                    class="w-6 h-6 rounded border border-gray-300"
-                    [title]="value.color"
-                ></div>
-            </ng-template>
         </ng-datatable>
     </list-header>
 </main-content>
 
-<app-impact-view [(visible)]="showDialog" [itemId]="selectedItemId" (onSave)="onDialogSave()" />
+<app-process-approval-view
+    [(visible)]="showDialog"
+    [itemId]="selectedItemId"
+    (onSave)="onDialogSave()"
+/>

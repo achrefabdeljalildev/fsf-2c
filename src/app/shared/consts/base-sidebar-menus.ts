@@ -105,7 +105,7 @@ export const HYPOTHESE_PROTECTION_SIDEBAR_MENU: TreeNode[] = [
         key: '22',
         label: 'الفرضيات',
         data: 'Hypotheses',
-        icon: 'assets/images/icons/field-survey-sidebar.svg',
+        icon: '/assets/images/icons/Hypotheses.svg',
         children: [
             {
                 key: '41',
@@ -206,6 +206,21 @@ export const GLOBAL_SETTINGS_SIDEBAR_MENU: TreeNode[] = [
                 data: 'Sub Survey 2',
                 icon: 'pi pi-list',
                 routerLink: '/users/roles',
+            },
+        ],
+    },
+    {
+        key: '3',
+        label: 'اعدادات مسارات العمل',
+        data: 'Security Support',
+        icon: 'assets/images/icons/settings-sidebar-logo.svg',
+        children: [
+            {
+                key: '31',
+                label: '  مراحل مسارات العمل',
+                data: 'Sub Survey 2',
+                icon: 'pi pi-list',
+                routerLink: '/process-approval/list',
             },
         ],
     },

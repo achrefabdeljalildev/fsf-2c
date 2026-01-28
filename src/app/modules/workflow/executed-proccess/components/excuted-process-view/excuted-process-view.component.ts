@@ -1,14 +1,15 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BaseComponent } from 'src/app/shared/components/base-component/base-component';
-import { ClassificationOfRiskImpactService } from '../../services/classification-of-risk-impact.service';
+import { ProcessService } from '../../services/process.service';
+import { CriteriaModel } from '@shared/models/base/criteria.model';
 
 @Component({
-    selector: 'app-impact-view',
-    templateUrl: './impact-view.components.html',
+    selector: 'app-excuted-process-view',
+    templateUrl: './excuted-process-view.component.html',
     standalone: false,
 })
-export class ClassificationOfRiskImpactViewComponent extends BaseComponent implements OnInit {
+export class ExcutedProcessViewComponent extends BaseComponent implements OnInit {
     @Input() visible: boolean = false;
     @Input() itemId: number | null = null;
 
@@ -18,12 +19,37 @@ export class ClassificationOfRiskImpactViewComponent extends BaseComponent imple
     form!: FormGroup;
     isLoading: boolean = false;
     isEditMode: boolean = false;
+    processes: any[] = [];
+    processApprovalUser: any[] = [];
+    processApproval: any[] = [];
+    allprocessApproval: any[] = [];
 
     constructor(
         private fb: FormBuilder,
-        private service: ClassificationOfRiskImpactService,
+        private ProcessService: ProcessService,
+        private ExcutedProcessService: ProcessService,
     ) {
         super();
+
+        this.loadDropdownData();
+    }
+
+    loadDropdownData(): void {
+        const criteria = new CriteriaModel({ pageNumber: 1, pageSize: 1000 });
+
+        // Load processes
+        this.ProcessService.getPagedList(criteria).subscribe((response) => {
+            if (response?.isSuccess && response.data?.items) {
+                this.processes = response.data.items;
+            }
+        });
+
+        // Load all process approvals
+        this.ExcutedProcessService.getPagedList(criteria).subscribe((response: any) => {
+            if (response?.isSuccess && response.data?.items) {
+                this.allprocessApproval = response.data.items;
+            }
+        });
     }
 
     ngOnInit(): void {
@@ -34,9 +60,25 @@ export class ClassificationOfRiskImpactViewComponent extends BaseComponent imple
         if (this.visible && this.itemId) {
             this.isEditMode = true;
             this.loadItem(this.itemId);
+            this.disableKeyField();
         } else if (this.visible && !this.itemId) {
             this.isEditMode = false;
             this.form?.reset();
+            this.enableKeyField();
+        }
+    }
+
+    disableKeyField(): void {
+        const keyControl = this.form.get('nameAr');
+        if (keyControl) {
+            keyControl.disable();
+        }
+    }
+
+    enableKeyField(): void {
+        const keyControl = this.form.get('nameAr');
+        if (keyControl) {
+            keyControl.enable();
         }
     }
 
@@ -44,19 +86,19 @@ export class ClassificationOfRiskImpactViewComponent extends BaseComponent imple
         this.form = this.fb.group({
             nameAr: ['', [Validators.required]],
             descriptionAr: [''],
-            color: ['', [Validators.required]],
+            processId: [null, [Validators.required]],
+            isOptinalApprover: [false],
         });
     }
 
     loadItem(id: number): void {
         this.isLoading = true;
-        this.service.getById(id).subscribe(
+        this.ProcessService.getById(id).subscribe(
             (response: any) => {
                 const item = response.data;
                 this.form.patchValue({
-                    nameAr: item.nameAr,
+                    nameAr: item.key,
                     descriptionAr: item.descriptionAr,
-                    color: item.color,
                 });
                 this.isLoading = false;
             },
@@ -73,11 +115,11 @@ export class ClassificationOfRiskImpactViewComponent extends BaseComponent imple
         }
 
         this.isLoading = true;
-        const formValue = this.form.value;
+        const formValue = this.form.getRawValue();
 
         if (this.isEditMode && this.itemId) {
             const itemToUpdate = { ...formValue, id: this.itemId };
-            this.service.update(itemToUpdate).subscribe(
+            this.ProcessService.update(itemToUpdate).subscribe(
                 () => {
                     this.isLoading = false;
                     this.closeDialog();
@@ -89,7 +131,7 @@ export class ClassificationOfRiskImpactViewComponent extends BaseComponent imple
                 },
             );
         } else {
-            this.service.create(formValue).subscribe(
+            this.ProcessService.create(formValue).subscribe(
                 () => {
                     this.isLoading = false;
                     this.closeDialog();

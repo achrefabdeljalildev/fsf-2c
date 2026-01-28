@@ -1,36 +1,41 @@
 import { Component } from '@angular/core';
 import { colDef } from '@bhplugin/ng-datatable';
 import { Observable } from 'rxjs';
+import { ProcessApproval } from '../../models/process-approval';
 import { BaseListComponent } from 'src/app/shared/components/base-list-component/base-list-component';
 import { ApiResponseModel, PagedResponse } from 'src/app/shared/models/base/paged-response.model';
-import { fallingLoadClassification as FallingLoadClassification } from '../../../falling-load-classification/models/falling-load-classification';
-import { FallingLoadClassificationService } from '../../../falling-load-classification/services/falling-load-classification.service';
+import { ProcessApprovalService } from '../../services/process-approval.service';
 
 @Component({
-    selector: 'app-classification-list',
-    templateUrl: './classification-list.component.html',
+    selector: 'app-process-approval-list',
+    templateUrl: './process-approval-list.component.html',
     standalone: false,
 })
-export class FallingLoadClassificationListComponent extends BaseListComponent<FallingLoadClassification> {
+export class ProcessApprovalListComponent extends BaseListComponent<ProcessApproval> {
     showDialog: boolean = false;
     selectedItemId: number | null = null;
 
-    constructor(private service: FallingLoadClassificationService) {
+    constructor(private service: ProcessApprovalService) {
         super();
     }
 
     protected override getColumns(): colDef[] {
         return [
-            { field: 'nameAr', title: 'formLabels.name' },
-            { field: 'color', title: 'common.color' },
-            { field: 'actions', title: 'dataTable.actions', width: '150px' },
+            { field: 'nameAr', title: 'workFlow.name' },
+            { field: 'processNameAr', title: 'workFlow.processName' },
+            { field: 'isOptinalApprover', title: 'workFlow.isApprover' },
+            { field: 'actions', title: 'workFlow.procedures', width: '150px' },
         ];
     }
 
-    protected override fetchPage(): Observable<
-        ApiResponseModel<PagedResponse<FallingLoadClassification>>
-    > {
+    protected override fetchPage(): Observable<ApiResponseModel<PagedResponse<ProcessApproval>>> {
         return this.service.getPagedList(this.criteria);
+    }
+
+    override filterChange(event: any) {
+        this.criteria.pageSize = event.pageSize;
+        this.criteria.pageNumber = event.pageNumber;
+        this.loadData();
     }
 
     openCreateDialog() {
@@ -42,7 +47,6 @@ export class FallingLoadClassificationListComponent extends BaseListComponent<Fa
         this.selectedItemId = id;
         this.showDialog = true;
     }
-
     removeFieldSurvey(id: number) {
         if (confirm('هل أنت متأكد من حذف هذا المسح؟')) {
             this.service.deleteById(id).subscribe(() => {
@@ -51,7 +55,6 @@ export class FallingLoadClassificationListComponent extends BaseListComponent<Fa
             });
         }
     }
-
     onDialogSave() {
         this.showDialog = false;
         this.selectedItemId = null;

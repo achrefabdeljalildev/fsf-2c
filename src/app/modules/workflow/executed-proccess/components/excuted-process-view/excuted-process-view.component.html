@@ -1,0 +1,74 @@
+<p-dialog
+    [(visible)]="visible"
+    [header]="isEditMode ? ('workFlow.edit' | translate) : ('workFlow.addNew' | translate)"
+    [modal]="true"
+    [contentStyle]="{ height: '50vw' }"
+    [breakpoints]="{ '960px': '75vw', '640px': '90vw' }"
+    (onHide)="closeDialog()"
+>
+    <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-6">
+        <!-- Name in Arabic -->
+        <div class="form-group">
+            <label for="nameAr" class="block text-sm font-medium mb-2">
+                {{ 'workFlow.name' | translate }}
+                <span class="text-red-500">*</span>
+            </label>
+            <input
+                id="nameAr"
+                type="text"
+                formControlName="nameAr"
+                pInputText
+                class="w-full"
+                [placeholder]="'workFlow.enterName' | translate"
+                [disabled]="isEditMode"
+            />
+            <small
+                *ngIf="
+                    form.get('nameAr')?.invalid &&
+                    (form.get('nameAr')?.dirty || form.get('nameAr')?.touched)
+                "
+                class="text-red-500"
+            >
+                <span *ngIf="form.get('nameAr')?.errors?.['required']">
+                    {{ 'messages.requiredField' | translate }}
+                </span>
+            </small>
+        </div>
+
+        <!-- value in Arabic -->
+        <div class="form-group">
+            <label for="processId" class="block text-sm font-medium mb-2">
+                {{ 'workFlow.nameNewWorkFlow' | translate }}
+            </label>
+            <p-select
+                id="processId"
+                formControlName="processId"
+                [options]="processes"
+                optionLabel="nameAr"
+                optionValue="id"
+                [placeholder]="'formLabels.yy' | translate"
+                [filter]="true"
+                [style]="{ width: '100%' }"
+            />
+        </div>
+
+        <button
+            type="button"
+            pButton
+            pRipple
+            [label]="'workFlow.cancel' | translate"
+            icon="pi pi-times"
+            class="p-button-text"
+            (click)="closeDialog()"
+        ></button>
+        <button
+            type="submit"
+            pButton
+            pRipple
+            [label]="'workFlow.save' | translate"
+            icon="pi pi-check"
+            [loading]="isLoading"
+            [disabled]="form.invalid || isLoading"
+        ></button>
+    </form>
+</p-dialog>

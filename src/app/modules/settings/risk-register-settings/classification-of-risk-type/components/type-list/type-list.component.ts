@@ -42,17 +42,13 @@ export class ClassificationOfRiskTypeListComponent extends BaseListComponent<Cla
         this.showDialog = true;
     }
 
-    removeItem(id: number) {
-        this.confirmDelete('Item', () => {
-            this.service.deleteById(id).subscribe(
-                () => {
-                    this.loadData();
-                },
-                (error: any) => {
-                    console.error('Error deleting item', error);
-                },
-            );
-        });
+    removeFieldSurvey(id: number) {
+        if (confirm('هل أنت متأكد من حذف هذا المسح؟')) {
+            this.service.deleteById(id).subscribe(() => {
+                this.showSuccessMessage('تم حذف المسح بنجاح');
+                this.loadData();
+            });
+        }
     }
 
     onDialogSave() {

@@ -55,6 +55,21 @@ export const API_URL_HYPOTHESE_TYPES = '/HypotheseTypes';
 // Hypothese Titles
 export const API_URL_HYPOTHESE_TITLES = '/HypotheseTitles';
 
+// General Settings
+export const API_URL_GENERAL_SETTINGS = '/GeneralSettings';
+
+// Executed Process
+export const API_URL_EXECUTED_PROCCESS = '/ExcutedProcess';
+
+// Workflow Processes
+export const API_URL_PROCCESS = '/ExcutedProcess/Process';
+
+// Workflow Stages
+export const API_URL_PROCCESS_APPROVAL = '/ExcutedProcess/ProcessApproval';
+
+// Workflow Process Approval User
+export const API_URL_PROCCESS_APPROVAL_USER = '/ExcutedProcess/ProcessApprovalUser';
+
 // Hypotheses Involved Parties
 export const API_URL_HYPOTHESES_INVOLVED_PARTIES = '/HypothesesInvolvedParties';
 

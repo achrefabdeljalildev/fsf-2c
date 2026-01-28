@@ -14,7 +14,10 @@
         "details": "التفاصيل",
         "languageArabic": "عربي",
         "languageEnglish": "إنجليزي",
-        "color": "اللون"
+        "color": "اللون",
+        "requiredOption": "إجباري",
+        "optionalOption": "اختياري"
+
     },
     "auth": {
         "login": "تسجيل الدخول",
@@ -210,6 +213,30 @@
         "allRolesAssigned": "تم تعيين جميع الأدوار",
         "managePermissions": "إدارة الأدوار"
     },
+
+
+    "workFlow": {
+        "securitySystems": "الأنظمة الأمنية",
+        "pathSettings": "إعدادات المسار",
+        "ListWorkFlows": "قائمة مسارات العمل",
+        "addNew":"اضافة مسار عمل جديد",
+        "List":"قائمة مسارات العمل ",
+        "nameWorkFlow":"اسم مسار العمل",
+        "name":"الاسم",
+        "nameNewWorkFlow":"اسم مسار العمل الجديد",
+        "enterNameNewWorkFlow":"ادخل اسم مسار العمل الجديد",
+        "enterNameWorkFlow":"ادخل اسم مسار العمل",
+        "isOptinalApprover":" إعتماد الكل اختياري",
+        "isApprover":" إعتماد الكل ",
+        "procedures":"الإجراءات",
+        "enterProcedure":"أدخل الإجراء",
+        "enterName":"أدخل الاسم",
+        "cancel":"إلغاء",
+        "save":"حفظ",
+        "edit":"تعديل",
+        "processName":"اسم المسار"
+    },
+    
     "fileAttachments": {
         "attachments": "المرفقات",
         "noAttachments": "لا توجد مرفقات بعد."

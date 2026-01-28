@@ -1,29 +1,61 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { BaseComponent } from 'src/app/shared/components/base-component/base-component';
-import { ClassificationOfRiskImpactService } from '../../services/classification-of-risk-impact.service';
+import { ProcessApprovalService } from '../../services/process-approval.service';
+import { ProcessApprovalUserService } from '../../services/process-approval-user.service';
+import { CriteriaModel } from '@shared/models/base/criteria.model';
+import { ProcessService } from '../../../executed-proccess/services/process.service';
 
 @Component({
-    selector: 'app-impact-view',
-    templateUrl: './impact-view.components.html',
+    selector: 'app-process-approval-view',
+    templateUrl: './process-approval-view.component.html',
     standalone: false,
 })
-export class ClassificationOfRiskImpactViewComponent extends BaseComponent implements OnInit {
+export class ProcessApprovalViewComponent extends BaseComponent implements OnInit {
     @Input() visible: boolean = false;
     @Input() itemId: number | null = null;
+    @Input() selectedInvolvedParties: any[] = [];
 
     @Output() visibleChange = new EventEmitter<boolean>();
     @Output() onSave = new EventEmitter<void>();
 
+    partyCheckboxes: Map<number, FormControl> = new Map();
     form!: FormGroup;
     isLoading: boolean = false;
     isEditMode: boolean = false;
+    processList: any[] = [];
+    processApprovalUser: any[] = [];
+    processApproval: any[] = [];
+    allprocessApproval: any[] = [];
 
     constructor(
         private fb: FormBuilder,
-        private service: ClassificationOfRiskImpactService,
+        private excutedProcessService: ProcessService,
+        private processApprovalService: ProcessApprovalService,
+        private processApprovalUserService: ProcessApprovalUserService,
     ) {
         super();
+
+        this.loadDropdownData();
+    }
+
+    loadDropdownData(): void {
+        const criteria = new CriteriaModel({ pageNumber: 1, pageSize: 1000 });
+
+        // Load process approval users
+        this.excutedProcessService.getPagedList(criteria).subscribe((response: any) => {
+            if (response?.isSuccess && response.data?.items) {
+                this.processList = response.data.items;
+            }
+        });
+
+        // Load all process approvals
+        this.processApprovalService.getPagedList(criteria).subscribe((response: any) => {
+            if (response?.isSuccess && response.data?.items) {
+                this.allprocessApproval = response.data.items;
+                this.processApproval = response.data.items;
+            }
+        });
     }
 
     ngOnInit(): void {
@@ -43,20 +75,22 @@ export class ClassificationOfRiskImpactViewComponent extends BaseComponent imple
     initForm(): void {
         this.form = this.fb.group({
             nameAr: ['', [Validators.required]],
-            descriptionAr: [''],
-            color: ['', [Validators.required]],
+            descriptionAr: ['descriptionAr shouldnt be required'],
+            processId: [null, [Validators.required]],
+            isOptinalApprove: [false],
         });
     }
 
     loadItem(id: number): void {
         this.isLoading = true;
-        this.service.getById(id).subscribe(
+        this.processApprovalService.getById(id).subscribe(
             (response: any) => {
                 const item = response.data;
                 this.form.patchValue({
-                    nameAr: item.nameAr,
+                    nameAr: item.key,
                     descriptionAr: item.descriptionAr,
-                    color: item.color,
+                    processId: item.processId,
+                    isOptinalApprover: item.isOptinalApprover,
                 });
                 this.isLoading = false;
             },
@@ -73,11 +107,14 @@ export class ClassificationOfRiskImpactViewComponent extends BaseComponent imple
         }
 
         this.isLoading = true;
-        const formValue = this.form.value;
+        const formValue = {
+            ...this.form.getRawValue(),
+            descriptionAr: 'descriptionAr shouldnt be required',
+        };
 
         if (this.isEditMode && this.itemId) {
             const itemToUpdate = { ...formValue, id: this.itemId };
-            this.service.update(itemToUpdate).subscribe(
+            this.processApprovalService.update(itemToUpdate).subscribe(
                 () => {
                     this.isLoading = false;
                     this.closeDialog();
@@ -89,7 +126,7 @@ export class ClassificationOfRiskImpactViewComponent extends BaseComponent imple
                 },
             );
         } else {
-            this.service.create(formValue).subscribe(
+            this.processApprovalService.create(formValue).subscribe(
                 () => {
                     this.isLoading = false;
                     this.closeDialog();

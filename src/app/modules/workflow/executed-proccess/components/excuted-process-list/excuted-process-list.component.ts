@@ -1,33 +1,33 @@
 import { Component } from '@angular/core';
 import { colDef } from '@bhplugin/ng-datatable';
 import { Observable } from 'rxjs';
-import { GeneralSettings } from 'src/app/modules/settings/general-settings/models/general-settings.model';
-import { GeneralSettingsService } from 'src/app/modules/settings/general-settings/services/general-settings.service';
 import { BaseListComponent } from 'src/app/shared/components/base-list-component/base-list-component';
 import { ApiResponseModel, PagedResponse } from 'src/app/shared/models/base/paged-response.model';
+import { ProcessService } from '../../services/process.service';
+import { ExcutedProcess } from '../../models/excuted-process';
 
 @Component({
-    selector: 'app-general-settings-list',
-    templateUrl: './general-settings-list.component.html',
+    selector: 'app-excuted-process-list',
+    templateUrl: './excuted-process-list.component.html',
     standalone: false,
 })
-export class GeneralSettingsListComponent extends BaseListComponent<GeneralSettings> {
+export class ExcutedProcessListComponent extends BaseListComponent<ExcutedProcess> {
     showDialog: boolean = false;
     selectedItemId: number | null = null;
 
-    constructor(private service: GeneralSettingsService) {
+    constructor(private service: ProcessService) {
         super();
     }
 
     protected override getColumns(): colDef[] {
         return [
-            { field: 'key', title: 'GeneralSettings.keys' },
-            { field: 'value', title: 'GeneralSettings.value' },
-            { field: 'actions', title: 'GeneralSettings.procedures', width: '150px' },
+            { field: 'nameAr', title: 'workFlow.name' },
+            { field: 'descriptionAr', title: 'workFlow.nameWorkFlow' },
+            { field: 'actions', title: 'workFlow.procedures', width: '150px' },
         ];
     }
 
-    protected override fetchPage(): Observable<ApiResponseModel<PagedResponse<GeneralSettings>>> {
+    protected override fetchPage(): Observable<ApiResponseModel<PagedResponse<ExcutedProcess>>> {
         return this.service.getPagedList(this.criteria);
     }
 
@@ -46,7 +46,6 @@ export class GeneralSettingsListComponent extends BaseListComponent<GeneralSetti
         this.selectedItemId = id;
         this.showDialog = true;
     }
-
     removeItem(id: number) {
         this.confirmDelete('Item', () => {
             this.service.deleteById(id).subscribe(
@@ -59,7 +58,6 @@ export class GeneralSettingsListComponent extends BaseListComponent<GeneralSetti
             );
         });
     }
-
     onDialogSave() {
         this.showDialog = false;
         this.selectedItemId = null;

@@ -205,4 +205,24 @@ export const routes: Routes = [
         loadChildren: () => import('./modules/users/users.module').then((m) => m.UsersModule),
         data: { key: 'globalSettings' },
     },
+    {
+        path: 'executed-process',
+        canActivate: [AuthGuard],
+        component: AppLayout,
+        loadChildren: () =>
+            import('./modules/workflow/executed-proccess/excuted-process.module').then(
+                (m) => m.ExcutedProcessModule,
+            ),
+        data: { key: 'globalSettings' },
+    },
+    {
+        path: 'process-approval',
+        canActivate: [AuthGuard],
+        component: AppLayout,
+        loadChildren: () =>
+            import('./modules/workflow/proccess-approval/proccess-approval.module').then(
+                (m) => m.ProcessApprovalModule,
+            ),
+        data: { key: 'globalSettings' },
+    },
 ];
