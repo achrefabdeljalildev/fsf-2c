@@ -27,6 +27,21 @@
             [pageSize]="criteria.pageSize"
             [noDataContent]="'common.noDataOnList' | translate"
         >
+            <ng-template slot="location.organization.nameAr" let-value="data">
+                <p-tag
+                    [value]="value.riskImpact.nameAr"
+                    [style.backgroundColor]="value.riskImpact.color"
+                >
+                </p-tag>
+            </ng-template>
+            <ng-template slot="location.province.nameAr" let-value="data">
+                <p-tag
+                    [value]="value.riskLikeliHood.nameAr"
+                    [style.backgroundColor]="value.riskLikeliHood.color"
+                >
+                </p-tag>
+            </ng-template>
+
             <ng-template slot="actions" let-value="data">
                 <div class="flex gap-2">
                     <div

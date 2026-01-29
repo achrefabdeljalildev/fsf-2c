@@ -130,7 +130,9 @@
         "locationList": "قائمة المواقع",
         "locationName": "اسم الموقع",
         "selectLocationFromMap": "اختر الموقع من الخريطة",
-        "editLocation": "تعديل موقع"
+        "editLocation": "تعديل موقع",
+        "riskImpact":"تأثير الخطر",
+        "riskStatus":"حالة الخطر"
     },
     "province": {
         "addNewProvince": "إضافة محافظة",

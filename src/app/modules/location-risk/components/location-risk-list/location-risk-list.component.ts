@@ -25,9 +25,9 @@ export class LocationRiskListComponent extends BaseListComponent<LocationRisk> {
             { field: 'riskStatus.nameAr', title: 'locationRisk.riskStatus' },
             { field: 'location.code', title: 'formLabels.locationCode' },
             { field: 'location.nameAr', title: 'location.locationName' },
-            { field: 'location.organization.nameAr', title: 'formLabels.affiliatedEntity' },
             { field: 'location.province.region.nameAr', title: 'formLabels.region' },
-            { field: 'location.province.nameAr', title: 'formLabels.province' },
+            { field: 'location.organization.nameAr', title: 'location.riskImpact' },
+            { field: 'location.province.nameAr', title: 'location.riskStatus' },
             { field: 'actions', title: 'common.actions', width: '100px' },
         ];
     }
