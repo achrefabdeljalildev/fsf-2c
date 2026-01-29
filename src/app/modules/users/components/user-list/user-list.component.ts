@@ -24,7 +24,7 @@ export class UserListComponent extends BaseListComponent<UserModel> {
             { field: 'fullName', title: 'users.fullName' },
             { field: 'jobName', title: 'users.jobName' },
             { field: 'rankName', title: 'users.rankName' },
-            { field: 'actions', title: 'dataTable.actions', width: '150px' },
+            { field: 'actions', title: 'dataTable.actions', width: '100px' },
         ];
     }
 

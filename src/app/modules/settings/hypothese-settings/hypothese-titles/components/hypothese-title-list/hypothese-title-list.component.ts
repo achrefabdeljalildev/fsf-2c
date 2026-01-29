@@ -23,7 +23,7 @@ export class HypotheseTitleListComponent extends BaseListComponent<HypotheseTitl
         return [
             { field: 'nameAr', title: 'formLabels.name' },
             { field: 'hypotheseTypeName', title: 'hypotheseType.hypotheseType' },
-            { field: 'actions', title: 'dataTable.actions', width: '150px' },
+            { field: 'actions', title: 'dataTable.actions', width: '100px' },
         ];
     }
 

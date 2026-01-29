@@ -44,7 +44,7 @@
     <!-- Dialog for Add/Edit Event -->
     <p-dialog
         [(visible)]="displayDialog"
-        [header]="'titles.addSequenceEvent' | translate"
+        [header]="'labels.addEvent' | translate"
         [closable]="true"
         [contentStyle]="{ height: '15rem' }"
         (onHide)="closeDialog()"
@@ -61,14 +61,14 @@
                         [options]="involvedParties"
                         [optionLabel]="'nameAr'"
                         [optionValue]="'id'"
+                        emptyMessage="الرجاء اظافة جهة مشاركة أولا !"
                         class="w-full"
                         [ngClass]="{
                             'p-invalid':
                                 eventForm.get('hypothesesInvolvedPartiesId')?.invalid &&
                                 eventForm.get('hypothesesInvolvedPartiesId')?.touched,
                         }"
-                    >
-                    </p-select>
+                    />
                     <small
                         class="text-red-500"
                         *ngIf="

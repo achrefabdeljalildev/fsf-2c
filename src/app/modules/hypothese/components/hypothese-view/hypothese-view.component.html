@@ -30,6 +30,37 @@
                 </div>
 
                 <div class="grid grid-cols-2 gap-5">
+                    <!-- Name Arabic -->
+                    <div class="form-group col-span-2">
+                        <label for="nameAr" class="block text-sm font-medium mb-2">
+                            {{ 'formLabels.name' | translate }}
+                            <span class="text-red-500">*</span>
+                        </label>
+                        <input
+                            id="nameAr"
+                            type="text"
+                            pInputText
+                            formControlName="nameAr"
+                            class="w-full"
+                            [ngClass]="{
+                                'p-invalid':
+                                    hypotheseForm.get('nameAr')?.invalid &&
+                                    (hypotheseForm.get('nameAr')?.dirty ||
+                                        hypotheseForm.get('nameAr')?.touched),
+                            }"
+                        />
+                        <small
+                            *ngIf="
+                                hypotheseForm.get('nameAr')?.invalid &&
+                                (hypotheseForm.get('nameAr')?.dirty ||
+                                    hypotheseForm.get('nameAr')?.touched)
+                            "
+                            class="text-red-500"
+                        >
+                            {{ 'messages.requiredField' | translate }}
+                        </small>
+                    </div>
+
                     <!-- Location Selection -->
                     <div class="form-group">
                         <label for="locationId" class="block text-sm font-medium mb-2">
@@ -45,7 +76,7 @@
                             [placeholder]="'formLabels.selectLocation' | translate"
                             [filter]="true"
                             [style]="{ width: '100%' }"
-                        ></p-select>
+                        />
                         <small
                             *ngIf="
                                 hypotheseForm.get('locationId')?.invalid &&
@@ -207,10 +238,12 @@
             <div class="col-span-1 gap-4 flex flex-col">
                 <app-file-attachments
                     class="flex-1"
-                    [attachments]="attachments"
                     entityName="Hypothese"
-                    entityPath="Hypotheses"
+                    path="Hypothese"
+                    [attachments]="attachments"
                     [entityKey]="hypotheseId ? hypotheseId.toString() : ''"
+                    [category]="'Documents'"
+                    [itemsPerPage]="3"
                     (fileAdded)="onFileAdded($event)"
                     (download)="onAttachmentDownload($event)"
                     (remove)="onAttachmentRemove($event)"
@@ -220,12 +253,12 @@
             </div>
         </div>
         <!-- Tabs Section -->
-        <p-tabs class="mt-6" value="1">
+        <p-tabs class="mt-6" [value]="isEditMode ? '1' : '3'">
             <p-tablist>
                 <p-tab value="1" *ngIf="isEditMode"> الجهات المشاركة </p-tab>
-                <p-tab value="4" *ngIf="isEditMode"> الأحداث </p-tab>
-                <p-tab value="2"> الملاحظات </p-tab>
-                <p-tab value="3">سجل الإجراءات</p-tab>
+                <p-tab value="2" *ngIf="isEditMode"> الأحداث </p-tab>
+                <p-tab value="3"> الملاحظات </p-tab>
+                <p-tab value="4" *ngIf="isEditMode">سجل الإجراءات</p-tab>
             </p-tablist>
             <p-tabpanels>
                 <p-tabpanel value="1">
@@ -235,7 +268,15 @@
                         (onSave)="loadHypothese(hypotheseId!)"
                     />
                 </p-tabpanel>
-                <p-tabpanel value="2">
+                <p-tabpanel value="2" *ngIf="isEditMode">
+                    <app-hypothese-sequence-event
+                        [hypotheseId]="hypotheseId"
+                        [involvedParties]="hypotheseInvolvedPartiesData"
+                        [sequenceEvents]="hypotheseSequenceEvent"
+                        (onSave)="loadHypothese(hypotheseId!)"
+                    />
+                </p-tabpanel>
+                <p-tabpanel value="3">
                     <div class="form-group">
                         <textarea
                             id="descriptionAr"
@@ -249,14 +290,6 @@
                 </p-tabpanel>
 
                 <p-tabpanel value="4" *ngIf="isEditMode">
-                    <app-hypothese-sequence-event
-                        [hypotheseId]="hypotheseId"
-                        [involvedParties]="hypotheseInvolvedPartiesData"
-                        [sequenceEvents]="hypotheseSequenceEvent"
-                        (onSave)="loadHypothese(hypotheseId!)"
-                    />
-                </p-tabpanel>
-                <p-tabpanel value="3">
                     <!-- Logs List Component -->
                     <app-logs-list tableName="Hypotheses" [tableKey]="hypotheseId" class="w-full" />
                 </p-tabpanel>

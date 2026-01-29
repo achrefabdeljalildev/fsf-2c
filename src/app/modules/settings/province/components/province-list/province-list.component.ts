@@ -23,7 +23,7 @@ export class ProvinceListComponent extends BaseListComponent<Province> {
         return [
             { field: 'nameAr', title: 'formLabels.name' },
             { field: 'regionName', title: 'formLabels.region' },
-            { field: 'actions', title: 'dataTable.actions', width: '150px' },
+            { field: 'actions', title: 'dataTable.actions', width: '100px' },
         ];
     }
 

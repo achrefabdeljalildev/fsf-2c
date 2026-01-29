@@ -23,7 +23,7 @@ export class FallingLoadClassificationListComponent extends BaseListComponent<Fa
         return [
             { field: 'nameAr', title: 'formLabels.name' },
             { field: 'color', title: 'common.color' },
-            { field: 'actions', title: 'dataTable.actions', width: '150px' },
+            { field: 'actions', title: 'dataTable.actions', width: '100px' },
         ];
     }
 
@@ -43,13 +43,17 @@ export class FallingLoadClassificationListComponent extends BaseListComponent<Fa
         this.showDialog = true;
     }
 
-    removeFieldSurvey(id: number) {
-        if (confirm('هل أنت متأكد من حذف هذا المسح؟')) {
-            this.service.deleteById(id).subscribe(() => {
-                this.showSuccessMessage('تم حذف المسح بنجاح');
-                this.loadData();
-            });
-        }
+    removeItem(id: number) {
+        this.confirmDelete('Item', () => {
+            this.service.deleteById(id).subscribe(
+                () => {
+                    this.loadData();
+                },
+                (error: any) => {
+                    console.error('Error deleting item', error);
+                },
+            );
+        });
     }
 
     onDialogSave() {

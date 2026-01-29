@@ -1,0 +1,29 @@
+<p-breadcrumb
+    [model]="[
+        { label: ('breadcrumbs.securitySystems' | translate), routerLink: '/' },
+        { label: ('breadcrumbs.generalAdministration' | translate), routerLink: '/' },
+        { label: ('breadcrumbs.hypotheses' | translate), routerLink: '/hypothese/list' },
+        { label: ('evaluation.evaluationForm' | translate) },
+    ]"
+/>
+
+<main-content>
+    <!-- Header with hypothesis info -->
+    <div class="mb-3 border-b">
+        <div class="flex items-center justify-between">
+            <div>
+                <h1 class="text-2xl font-bold text-gray-800 mb-2">
+                    {{ 'evaluation.evaluateHypothesis' | translate }}
+                </h1>
+                <p class="text-gray-600">{{ hypothese?.hypotheseName }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Two column layout for evaluation sections -->
+    <div class="grid grid-cols-1 gap-4">
+        <app-location-evaluation-form [hypothese]="hypothese" (onSave)="onEvaluationSaved()" />
+
+        <app-participating-evaluation-form [hypothese]="hypothese" (onSave)="onEvaluationSaved()" />
+    </div>
+</main-content>

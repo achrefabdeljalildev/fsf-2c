@@ -33,6 +33,12 @@
             <ng-template slot="actions" let-value="data">
                 <div class="flex gap-2">
                     <div
+                        (click)="router.navigate(['/hypothese-evaluation/evaluate', value.id])"
+                        class="cursor-pointer"
+                    >
+                        <i class="pi pi-clipboard"></i>
+                    </div>
+                    <div
                         (click)="router.navigate(['/hypothese/edit', value.id])"
                         class="cursor-pointer"
                     >

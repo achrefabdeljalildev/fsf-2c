@@ -50,7 +50,7 @@ export class HypotheseListComponent extends BaseListComponent<Hypothese> {
                 title: 'formLabels.date',
                 cellRenderer: (d: Hypothese) => new Date(d.date).toLocaleDateString('fr-EG'),
             },
-            { field: 'actions', title: 'common.actions', width: '150px' },
+            { field: 'actions', title: 'common.actions', width: '100px' },
         ];
     }
 

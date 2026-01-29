@@ -77,11 +77,37 @@
         "locationHypothesisCriteriaList": "Hypothesis Criterias List",
         "viewDetails": "View Details"
     },
+    "involvedPartiesCriteria": {
+        "criteriaHierarchy": "Involved Parties Criteria Hierarchy",
+        "addNewRootCriteria": "Add Root Criteria",
+        "addNewCriteria": "Add Involved Parties Criteria",
+        "editCriteria": "Edit Involved Parties Criteria",
+        "criteriaDetails": "Involved Parties Criteria Details",
+        "childCriteria": "Child Criteria",
+        "addChild": "Add Sub Criteria",
+        "addNewInvolvedPartiesCriteria": "Add Involved Parties Criteria",
+        "involvedPartiesCriteriaList": "Involved Parties Criterias List",
+        "viewDetails": "View Details"
+    },
     "hypothese": {
         "addNew": "Add New Hypothese",
         "list": "Hypotheses List",
         "name": "Hypothese Name",
         "edit": "Edit Hypothese"
+    },
+    "evaluation": {
+        "addNewEvaluation": "Add New Evaluation",
+        "evaluationList": "Evaluations List",
+        "evaluateHypothesis": "Evaluate Hypothesis",
+        "evaluationForm": "Evaluation Form",
+        "locationEvaluation": "Location Evaluation",
+        "participatingEvaluation": "Participating Evaluation",
+        "evaluateLocation": "Evaluate Geographic Criteria",
+        "evaluateParticipating": "Evaluate Participating Criteria",
+        "locationCriteriaEvaluationDescription": "Please evaluate the geographic criteria for this hypothesis",
+        "participatingCriteriaEvaluationDescription": "Please evaluate the participating criteria for each party",
+        "locationEvaluationStatus": "Location Evaluation Status",
+        "participatingEvaluationStatus": "Participating Evaluation Status"
     },
     "locationClassification": {
         "add": "Add Classification",
@@ -217,6 +243,8 @@
         "editHypothesesInvolvedParty": "Edit Involved Party",
         "addNewLocationHypothesisCriteria": "Add New Hypothesis Criteria",
         "editLocationHypothesisCriteria": "Edit Hypothesis Criteria",
+        "addNewInvolvedPartiesCriteria": "Add New Involved Parties Criteria",
+        "editInvolvedPartiesCriteria": "Edit Involved Parties Criteria",
         "addNewClassificationForm": "Add New Classification Form",
         "addNewChild": "Add New Child",
         "editChild": "Edit Child"
@@ -240,7 +268,9 @@
         "hypotheseTitles": "Hypothese Names",
         "hypothesesInvolvedParties": "Involved Parties",
         "locationHypothesisCriterias": "Hypothesis Criterias",
-        "hypotheses": "Hypotheses"
+        "involvedPartiesCriterias": "Involved Parties Criterias",
+        "hypotheses": "Hypotheses",
+        "evaluations": "Evaluations"
     },
     "validationMessages": {
         "savedSuccessfully": "Saved successfully",
@@ -317,6 +347,11 @@
         "locationHypothesisCriteriaErrorSave": "An error occurred while saving the hypothesis criteria",
         "locationHypothesisCriteriaDeletedSuccess": "Hypothesis criteria deleted successfully",
         "locationHypothesisCriteriaErrorDelete": "An error occurred while deleting the hypothesis criteria",
+        "involvedPartiesCriteriaUpdatedSuccess": "Involved parties criteria updated successfully",
+        "involvedPartiesCriteriaAddedSuccess": "Involved parties criteria added successfully",
+        "involvedPartiesCriteriaErrorSave": "An error occurred while saving the involved parties criteria",
+        "involvedPartiesCriteriaDeletedSuccess": "Involved parties criteria deleted successfully",
+        "involvedPartiesCriteriaErrorDelete": "An error occurred while deleting the involved parties criteria",
         "childCriteriaAddedSuccess": "Child criteria added successfully",
         "childCriteriaUpdatedSuccess": "Child criteria updated successfully",
         "childCriteriaErrorSave": "An error occurred while saving the child criteria",
@@ -324,6 +359,9 @@
         "childCriteriaErrorDelete": "An error occurred while deleting the child criteria",
         "parentCriteriaRequired": "Parent criteria must be saved first",
         "saveParentFirst": "Please save the parent criteria first before adding children",
+        "locationEvaluationSavedSuccess": "Location evaluation saved successfully",
+        "participatingEvaluationSavedSuccess": "Participating evaluation saved successfully",
+        "errorSavingEvaluation": "An error occurred while saving the evaluation",
         "recordWillBeDisplayedAfterSave": "The record will be displayed after saving the survey."
     },
     "formLabels": {

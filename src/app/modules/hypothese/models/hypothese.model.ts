@@ -22,6 +22,26 @@ export interface Hypothese {
 
     hypotheseInvolvedPartiesData?: InvolvedParty[];
     hypotheseSequenceEvent?: HypotheseSequenceEvent[];
+    locationHypothesisEvaluation: {
+        id: number;
+        parentId: number;
+        nameAr: string;
+        parentNameAr: string;
+        value: number;
+    }[];
+    hypothesisParticipatingEvaluation:
+        | number
+        | {
+              id: number;
+              participatingHypothesisCriteriaId: number;
+              participatingHypothesisCriteriaNameAr: string;
+              participatingHypothesisCriteriaParentNameAr: string;
+              hypothesesInvolvedPartiesId: number;
+              hypothesesInvolvedPartiesNameAr: string;
+              value: string;
+          }[];
+
+    locationHypothesisEvaluationCount?: number;
 }
 
 export interface HypotheseType {

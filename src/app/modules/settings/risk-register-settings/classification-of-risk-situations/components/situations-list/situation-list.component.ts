@@ -22,7 +22,7 @@ export class ClassificationOfRiskSituationsListComponent extends BaseListCompone
     protected override getColumns(): colDef[] {
         return [
             { field: 'nameAr', title: 'formLabels.name' },
-            { field: 'actions', title: 'dataTable.actions', width: '150px' },
+            { field: 'actions', title: 'dataTable.actions', width: '100px' },
         ];
     }
 
@@ -42,14 +42,19 @@ export class ClassificationOfRiskSituationsListComponent extends BaseListCompone
         this.showDialog = true;
     }
 
-    removeFieldSurvey(id: number) {
-        if (confirm('هل أنت متأكد من حذف هذا المسح؟')) {
-            this.service.deleteById(id).subscribe(() => {
-                this.showSuccessMessage('تم حذف المسح بنجاح');
-                this.loadData();
-            });
-        }
+    removeItem(id: number) {
+        this.confirmDelete('Item', () => {
+            this.service.deleteById(id).subscribe(
+                () => {
+                    this.loadData();
+                },
+                (error: any) => {
+                    console.error('Error deleting item', error);
+                },
+            );
+        });
     }
+
     onDialogSave() {
         this.showDialog = false;
         this.selectedItemId = null;

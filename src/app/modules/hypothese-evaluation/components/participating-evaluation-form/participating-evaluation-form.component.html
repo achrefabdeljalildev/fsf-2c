@@ -1,0 +1,129 @@
+<form [formGroup]="evaluationForm" (ngSubmit)="submit()" class="space-y-6">
+    <!-- Participating Parties Evaluation Section -->
+    <div class="bg-gray-50 rounded-lg p-6">
+        <div class="flex items-center justify-between border-b-2 pb-2 mb-2 border-green-500">
+            <div class="flex items-center gap-2">
+                <i class="pi pi-users text-green-600 text-xl"></i>
+                <h2 class="text-lg font-bold text-gray-800">
+                    {{ 'evaluation.participatingEvaluation' | translate }}
+                </h2>
+            </div>
+
+            <div class="flex gap-1">
+                <button
+                    type="button"
+                    class="btn btn-secondary btn-sm"
+                    (click)="collapsedAll = !collapsedAll"
+                    [title]="collapsedAll ? 'فتح الكل' : 'إغلاق الكل'"
+                >
+                    <i
+                        class="text-sm"
+                        [class]="collapsedAll ? 'pi pi-chevron-down' : 'pi pi-chevron-up'"
+                    ></i>
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-primary btn-sm"
+                    (click)="submit()"
+                    [disabled]="evaluationForm.invalid || isLoading"
+                >
+                    <i class="pi pi-save me-1"></i>
+                    {{ 'buttons.save' | translate }}
+                </button>
+            </div>
+        </div>
+        <div class="space-y-4">
+            <!-- Outer Panel: For each involved party -->
+            <p-panel
+                [collapsed]="collapsedAll"
+                [toggleable]="true"
+                *ngFor="let party of involvedParties"
+                class="mb-6"
+            >
+                <ng-template #header>
+                    <h1 class="font-bold">{{ party.nameAr }}</h1>
+                </ng-template>
+                <!-- Inner Panels: For each parent criteria -->
+                <p-panel
+                    [collapsed]="collapsedAll"
+                    [toggleable]="true"
+                    *ngFor="let parentCriteria of participatingCriterias"
+                    class="mb-4"
+                >
+                    <ng-template #header>
+                        <h2 class="font-semibold">{{ parentCriteria.nameAr }}</h2>
+                    </ng-template>
+
+                    <!-- Display child criteria -->
+                    <div
+                        *ngIf="parentCriteria.children && parentCriteria.children.length > 0"
+                        class="space-y-4"
+                    >
+                        <div *ngFor="let childCriteria of parentCriteria.children" class="pl-4">
+                            <!-- Child Criteria Label and Rating -->
+                            <div class="flex items-center justify-between mb-2">
+                                <label class="block text-sm font-medium">
+                                    {{ childCriteria.nameAr }}
+                                    <span class="text-red-500">*</span>
+                                </label>
+                                <input
+                                    pInputText
+                                    pSize="small"
+                                    [formControlName]="
+                                        'criteria_' + childCriteria.id + '_party_' + party.id
+                                    "
+                                />
+                            </div>
+                            <small
+                                *ngIf="
+                                    evaluationForm.get(
+                                        'criteria_' + childCriteria.id + '_party_' + party.id
+                                    )?.invalid &&
+                                    evaluationForm.get(
+                                        'criteria_' + childCriteria.id + '_party_' + party.id
+                                    )?.touched
+                                "
+                                class="text-red-500 block mb-2"
+                            >
+                                {{ 'messages.requiredField' | translate }}
+                            </small>
+                        </div>
+                    </div>
+
+                    <!-- If no children, show rating for parent criteria -->
+                    <div
+                        *ngIf="!parentCriteria.children || parentCriteria.children.length === 0"
+                        class="flex items-center justify-between"
+                    >
+                        <label class="block text-sm font-medium">
+                            {{ 'evaluation.rating' | translate }}
+                            <span class="text-red-500">*</span>
+                        </label>
+                        <p-rating
+                            [formControlName]="
+                                'criteria_' + parentCriteria.id + '_party_' + party.id
+                            "
+                            [stars]="10"
+                            [iconOnClass]="'pi pi-star-fill'"
+                            [iconOffClass]="'pi pi-star'"
+                        />
+                    </div>
+                    <small
+                        *ngIf="
+                            (!parentCriteria.children || parentCriteria.children.length === 0) &&
+                            evaluationForm.get(
+                                'criteria_' + parentCriteria.id + '_party_' + party.id
+                            )?.invalid &&
+                            evaluationForm.get(
+                                'criteria_' + parentCriteria.id + '_party_' + party.id
+                            )?.touched
+                        "
+                        class="text-red-500 block mt-2"
+                    >
+                        {{ 'messages.requiredField' | translate }}
+                    </small>
+                </p-panel>
+            </p-panel>
+        </div>
+    </div>
+</form>

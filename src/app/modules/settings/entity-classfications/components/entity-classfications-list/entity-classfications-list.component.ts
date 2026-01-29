@@ -24,7 +24,7 @@ export class EntityClassficationsListComponent
             { field: 'nameAr', title: 'entityClassification.name' },
             { field: 'descriptionAr', title: 'entityClassification.description' },
             { field: 'entityName', title: 'entityClassification.entityName' },
-            { field: 'actions', title: 'dataTable.actions', width: '150px' },
+            { field: 'actions', title: 'dataTable.actions', width: '100px' },
         ];
     }
 

@@ -55,8 +55,23 @@ export const API_URL_HYPOTHESE_TYPES = '/HypotheseTypes';
 // Hypothese Titles
 export const API_URL_HYPOTHESE_TITLES = '/HypotheseTitles';
 
-// General Settings
-export const API_URL_GENERAL_SETTINGS = '/GeneralSettings';
+// Hypotheses Involved Parties
+export const API_URL_HYPOTHESES_INVOLVED_PARTIES = '/HypothesesInvolvedParties';
+
+// Location Hypothesis Criterias
+export const API_URL_LOCATION_HYPOTHESIS_CRITERIAS = '/LocationHypothesisCriterias';
+
+// Hypotheses Involved Parties Criterias
+export const API_URL_HYPOTHESES_INVOLVED_PARTIES_CRITERIAS = '/ParticipatingHypothesisCriterias';
+
+export const API_URL_HYPOTHESES = '/Hypotheses';
+
+// Hypothese Evaluations
+export const API_URL_HYPOTHESIS_LOCATION_EVALUATIONS = '/HypothesisLocationEvaluations';
+export const API_URL_HYPOTHESIS_PARTICIPATING_EVALUATIONS = '/HypothesisparticipatingEvaluations';
+
+// Global Settings
+export const API_URL_GLOBAL_SETTINGS = '/GeneralSettings';
 
 // Executed Process
 export const API_URL_EXECUTED_PROCCESS = '/ExcutedProcess';
@@ -69,14 +84,3 @@ export const API_URL_PROCCESS_APPROVAL = '/ExcutedProcess/ProcessApproval';
 
 // Workflow Process Approval User
 export const API_URL_PROCCESS_APPROVAL_USER = '/ExcutedProcess/ProcessApprovalUser';
-
-// Hypotheses Involved Parties
-export const API_URL_HYPOTHESES_INVOLVED_PARTIES = '/HypothesesInvolvedParties';
-
-// Location Hypothesis Criterias
-export const API_URL_LOCATION_HYPOTHESIS_CRITERIAS = '/LocationHypothesisCriterias';
-
-export const API_URL_HYPOTHESES = '/Hypotheses';
-
-// Global Settings
-export const API_URL_GLOBAL_SETTINGS = '/GeneralSettings';

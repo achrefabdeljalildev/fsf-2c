@@ -23,7 +23,7 @@ export class LocationHypothesisCriteriaListComponent extends BaseListComponent<L
         return [
             { field: 'nameAr', title: 'formLabels.name' },
             { field: 'children', title: 'locationHypothesisCriteria.childCriteria' },
-            { field: 'actions', title: 'dataTable.actions', width: '150px' },
+            { field: 'actions', title: 'dataTable.actions', width: '100px' },
         ];
     }
 

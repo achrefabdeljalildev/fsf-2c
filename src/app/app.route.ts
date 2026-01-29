@@ -60,56 +60,6 @@ export const routes: Routes = [
             import('./modules/field-survey/field-survey.module').then((m) => m.FieldSurveyModule),
         data: { key: 'fieldSurvey' },
     },
-    {
-        path: 'location-risk',
-        canActivate: [AuthGuard],
-        component: AppLayout,
-        loadChildren: () =>
-            import('./modules/location-risk/location-risk.module').then(
-                (m) => m.LocationRiskModule,
-            ),
-        data: { key: 'fieldSurvey' },
-    },
-    {
-        path: 'risk-register-settings/classification-of-risk-type',
-        canActivate: [AuthGuard],
-        component: AppLayout,
-        loadChildren: () =>
-            import('./modules/settings/risk-register-settings/classification-of-risk-type/classification-of-risk-type.module').then(
-                (m) => m.ClassificationOfRiskTypeModule,
-            ),
-        data: { key: 'fieldSurvey' },
-    },
-    {
-        path: 'risk-register-settings/falling-load-classification',
-        canActivate: [AuthGuard],
-        component: AppLayout,
-        loadChildren: () =>
-            import('./modules/settings/risk-register-settings/falling-load-classification/falling-load-classification.module').then(
-                (m) => m.FallingLoadClassificationModule,
-            ),
-        data: { key: 'fieldSurvey' },
-    },
-    {
-        path: 'risk-register-settings/classification-of-risk-impact',
-        canActivate: [AuthGuard],
-        component: AppLayout,
-        loadChildren: () =>
-            import('./modules/settings/risk-register-settings/classification-of-risk-impact/classification-of-risk-impact.module').then(
-                (m) => m.ClassificationOfRiskImpactModule,
-            ),
-        data: { key: 'fieldSurvey' },
-    },
-    {
-        path: 'risk-register-settings/classification-of-risk-situations',
-        canActivate: [AuthGuard],
-        component: AppLayout,
-        loadChildren: () =>
-            import('./modules/settings/risk-register-settings/classification-of-risk-situations/classification-of-risk-situations.module').then(
-                (m) => m.ClassificationOfRiskSituationsModule,
-            ),
-        data: { key: 'fieldSurvey' },
-    },
 
     // hypothese routes
     {
@@ -157,6 +107,86 @@ export const routes: Routes = [
         loadChildren: () =>
             import('./modules/settings/hypothese-settings/location-hypothesis-criterias/location-hypothesis-criteria.module').then(
                 (m) => m.LocationHypothesisCriteriaModule,
+            ),
+        data: { key: 'hypothese' },
+    },
+    {
+        path: 'hypotheses-involved-parties-criterias',
+        canActivate: [AuthGuard],
+        component: AppLayout,
+        loadChildren: () =>
+            import('./modules/settings/hypothese-settings/involved-parties-criterias/involved-parties-criteria.module').then(
+                (m) => m.HypothesesInvolvedPartiesCriteriaModule,
+            ),
+        data: { key: 'hypothese' },
+    },
+    {
+        path: 'hypothese-evaluation',
+        canActivate: [AuthGuard],
+        component: AppLayout,
+        loadChildren: () =>
+            import('./modules/hypothese-evaluation/hypothese-evaluation.module').then(
+                (m) => m.HypotheseEvaluationModule,
+            ),
+        data: { key: 'hypothese' },
+    },
+    {
+        path: 'hypothese-evaluations',
+        canActivate: [AuthGuard],
+        component: AppLayout,
+        loadChildren: () =>
+            import('./modules/hypothese-evaluation/hypothese-evaluation.module').then(
+                (m) => m.HypotheseEvaluationModule,
+            ),
+        data: { key: 'hypothese' },
+    },
+    {
+        path: 'location-risk',
+        canActivate: [AuthGuard],
+        component: AppLayout,
+        loadChildren: () =>
+            import('./modules/location-risk/location-risk.module').then(
+                (m) => m.LocationRiskModule,
+            ),
+        data: { key: 'hypothese' },
+    },
+    {
+        path: 'risk-register-settings/classification-of-risk-type',
+        canActivate: [AuthGuard],
+        component: AppLayout,
+        loadChildren: () =>
+            import('./modules/settings/risk-register-settings/classification-of-risk-type/classification-of-risk-type.module').then(
+                (m) => m.ClassificationOfRiskTypeModule,
+            ),
+        data: { key: 'hypothese' },
+    },
+    {
+        path: 'risk-register-settings/falling-load-classification',
+        canActivate: [AuthGuard],
+        component: AppLayout,
+        loadChildren: () =>
+            import('./modules/settings/risk-register-settings/falling-load-classification/falling-load-classification.module').then(
+                (m) => m.FallingLoadClassificationModule,
+            ),
+        data: { key: 'hypothese' },
+    },
+    {
+        path: 'risk-register-settings/classification-of-risk-impact',
+        canActivate: [AuthGuard],
+        component: AppLayout,
+        loadChildren: () =>
+            import('./modules/settings/risk-register-settings/classification-of-risk-impact/classification-of-risk-impact.module').then(
+                (m) => m.ClassificationOfRiskImpactModule,
+            ),
+        data: { key: 'hypothese' },
+    },
+    {
+        path: 'risk-register-settings/classification-of-risk-situations',
+        canActivate: [AuthGuard],
+        component: AppLayout,
+        loadChildren: () =>
+            import('./modules/settings/risk-register-settings/classification-of-risk-situations/classification-of-risk-situations.module').then(
+                (m) => m.ClassificationOfRiskSituationsModule,
             ),
         data: { key: 'hypothese' },
     },

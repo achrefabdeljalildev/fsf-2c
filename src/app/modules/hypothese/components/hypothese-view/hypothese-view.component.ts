@@ -65,6 +65,7 @@ export class HypotheseViewComponent extends BaseComponent implements OnInit {
 
     initForm(): void {
         this.hypotheseForm = this.fb.group({
+            nameAr: [''],
             descriptionAr: [''],
             locationId: [null, [Validators.required]],
             hypotheseTypeId: [null, [Validators.required]],
@@ -236,7 +237,6 @@ export class HypotheseViewComponent extends BaseComponent implements OnInit {
         const formVal = this.hypotheseForm.value;
         const hypotheseData: Hypothese = {
             ...formVal,
-            nameAr: 'فرضية',
             fromTimeSpan: this.formatDateToTimeString(formVal.fromTimeSpan) ?? '',
             toTimeSpan: this.formatDateToTimeString(formVal.toTimeSpan) ?? '',
         } as Hypothese;
@@ -270,7 +270,7 @@ export class HypotheseViewComponent extends BaseComponent implements OnInit {
                                 )
                                 .subscribe({
                                     next: () => {
-                                        this.router.navigate(['/hypothese/list']);
+                                        this.router.navigate(['/hypothese/edit', response.data.id]);
                                     },
                                     error: (error) => {
                                         console.error('Failed to upload attachments', error);

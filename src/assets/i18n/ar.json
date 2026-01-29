@@ -17,7 +17,6 @@
         "color": "اللون",
         "requiredOption": "إجباري",
         "optionalOption": "اختياري"
-
     },
     "auth": {
         "login": "تسجيل الدخول",
@@ -63,11 +62,58 @@
         "locationHypothesisCriteriaList": "قائمة معايير الفرضيات",
         "viewDetails": "عرض التفاصيل"
     },
+    "involvedPartiesCriteria": {
+        "criteriaHierarchy": "هرم معايير الجهات المشاركة",
+        "addNewRootCriteria": "إضافة معيار رئيسي",
+        "addNewCriteria": "إضافة معيار جهة مشاركة",
+        "editCriteria": "تعديل معيار الجهة المشاركة",
+        "criteriaDetails": "تفاصيل معيار الجهة المشاركة",
+        "childCriteria": "المعايير الفرعية",
+        "addChild": "إضافة معيار فرعي",
+        "addNewInvolvedPartiesCriteria": "إضافة معيار جهة مشاركة",
+        "involvedPartiesCriteriaList": "قائمة معايير الجهات المشاركة",
+        "viewDetails": "عرض التفاصيل"
+    },
     "hypothese": {
         "addNew": "إضافة فرضية جديدة",
         "list": "قائمة الفرضيات",
         "name": "اسم الفرضية",
         "edit": "تعديل فرضية"
+    },
+    "evaluation": {
+        "addNewEvaluation": "إضافة تقييم جديد",
+        "evaluationList": "قائمة التقييمات",
+        "evaluateHypothesis": "تقييم الفرضية",
+        "evaluationForm": "نموذج التقييم",
+        "locationEvaluation": "تقييم الموقع",
+        "participatingEvaluation": "تقييم الجهات المشاركة",
+        "evaluateLocation": "تقييم المعايير الجغرافية",
+        "evaluateParticipating": "تقييم معايير الجهات المشاركة",
+        "locationCriteriaEvaluationDescription": "الرجاء تقييم المعايير الجغرافية للفرضية",
+        "participatingCriteriaEvaluationDescription": "الرجاء تقييم معايير الجهات المشاركة لكل جهة",
+        "locationEvaluationStatus": "حالة تقييم الموقع",
+        "participatingEvaluationStatus": "حالة تقييم الجهات المشاركة"
+    },
+    "workFlow": {
+        "securitySystems": "الأنظمة الأمنية",
+        "pathSettings": "إعدادات المسار",
+        "ListWorkFlows": "قائمة مسارات العمل",
+        "addNew": "اضافة مسار عمل جديد",
+        "List": "قائمة مسارات العمل ",
+        "nameWorkFlow": "اسم مسار العمل",
+        "name": "الاسم",
+        "nameNewWorkFlow": "اسم مسار العمل الجديد",
+        "enterNameNewWorkFlow": "ادخل اسم مسار العمل الجديد",
+        "enterNameWorkFlow": "ادخل اسم مسار العمل",
+        "isOptinalApprover": " إعتماد الكل اختياري",
+        "isApprover": " إعتماد الكل ",
+        "procedures": "الإجراءات",
+        "enterProcedure": "أدخل الإجراء",
+        "enterName": "أدخل الاسم",
+        "cancel": "إلغاء",
+        "save": "حفظ",
+        "edit": "تعديل",
+        "processName": "اسم المسار"
     },
     "globalSettings": {
         "globalSettings": "الإعدادات العامة",
@@ -214,30 +260,6 @@
         "allRolesAssigned": "تم تعيين جميع الأدوار",
         "managePermissions": "إدارة الأدوار"
     },
-
-
-    "workFlow": {
-        "securitySystems": "الأنظمة الأمنية",
-        "pathSettings": "إعدادات المسار",
-        "ListWorkFlows": "قائمة مسارات العمل",
-        "addNew":"اضافة مسار عمل جديد",
-        "List":"قائمة مسارات العمل ",
-        "nameWorkFlow":"اسم مسار العمل",
-        "name":"الاسم",
-        "nameNewWorkFlow":"اسم مسار العمل الجديد",
-        "enterNameNewWorkFlow":"ادخل اسم مسار العمل الجديد",
-        "enterNameWorkFlow":"ادخل اسم مسار العمل",
-        "isOptinalApprover":" إعتماد الكل اختياري",
-        "isApprover":" إعتماد الكل ",
-        "procedures":"الإجراءات",
-        "enterProcedure":"أدخل الإجراء",
-        "enterName":"أدخل الاسم",
-        "cancel":"إلغاء",
-        "save":"حفظ",
-        "edit":"تعديل",
-        "processName":"اسم المسار"
-    },
-    
     "fileAttachments": {
         "attachments": "المرفقات",
         "noAttachments": "لا توجد مرفقات بعد."
@@ -298,6 +320,8 @@
         "editHypothesesInvolvedParty": "تعديل جهة مشاركة",
         "addNewLocationHypothesisCriteria": "إضافة معيار فرضية جديد",
         "editLocationHypothesisCriteria": "تعديل معيار فرضية",
+        "addNewInvolvedPartiesCriteria": "إضافة معيار جهة مشاركة جديد",
+        "editInvolvedPartiesCriteria": "تعديل معيار جهة مشاركة",
         "addNewClassificationForm": "إضافة نموذج تصنيف جديد",
         "addNewChild": "إضافة عنصر فرعي جديد",
         "editChild": "تعديل عنصر فرعي"
@@ -321,7 +345,9 @@
         "hypotheseTitles": "مسميات الفرضيات",
         "hypothesesInvolvedParties": "الجهات المشاركة",
         "locationHypothesisCriterias": "معايير الفرضيات",
+        "involvedPartiesCriterias": "معايير الجهات المشاركة",
         "hypotheses": "الفرضيات",
+        "evaluations": "التقييمات",
         "settings": "الإعدادات",
         "ControlManagement": "إدارة التحكم"
     },
@@ -400,6 +426,11 @@
         "locationHypothesisCriteriaErrorSave": "حدث خطأ أثناء حفظ معيار الفرضية",
         "locationHypothesisCriteriaDeletedSuccess": "تم حذف معيار الفرضية بنجاح",
         "locationHypothesisCriteriaErrorDelete": "حدث خطأ أثناء حذف معيار الفرضية",
+        "involvedPartiesCriteriaUpdatedSuccess": "تم تحديث معيار الجهة المشاركة بنجاح",
+        "involvedPartiesCriteriaAddedSuccess": "تم إضافة معيار الجهة المشاركة بنجاح",
+        "involvedPartiesCriteriaErrorSave": "حدث خطأ أثناء حفظ معيار الجهة المشاركة",
+        "involvedPartiesCriteriaDeletedSuccess": "تم حذف معيار الجهة المشاركة بنجاح",
+        "involvedPartiesCriteriaErrorDelete": "حدث خطأ أثناء حذف معيار الجهة المشاركة",
         "childCriteriaAddedSuccess": "تم إضافة العنصر الفرعي بنجاح",
         "childCriteriaUpdatedSuccess": "تم تحديث العنصر الفرعي بنجاح",
         "childCriteriaErrorSave": "حدث خطأ أثناء حفظ العنصر الفرعي",
@@ -407,6 +438,9 @@
         "childCriteriaErrorDelete": "حدث خطأ أثناء حذف العنصر الفرعي",
         "parentCriteriaRequired": "يجب حفظ المعيار الرئيسي أولاً",
         "saveParentFirst": "يرجى حفظ المعيار الرئيسي أولاً قبل إضافة عناصر فرعية",
+        "locationEvaluationSavedSuccess": "تم حفظ تقييم الموقع بنجاح",
+        "participatingEvaluationSavedSuccess": "تم حفظ تقييم الجهات المشاركة بنجاح",
+        "errorSavingEvaluation": "حدث خطأ أثناء حفظ التقييم",
         "recordWillBeDisplayedAfterSave": "سيتم عرض السجل بعد حفظ المسح."
     },
     "formLabels": {
@@ -447,14 +481,16 @@
         "fromTime": "من الوقت",
         "toTime": "إلى الوقت",
         "children": "العناصر الفرعية",
-        "enterChildName": "أدخل اسم العنصر الفرعي"
+        "enterChildName": "أدخل اسم العنصر الفرعي",
+        "hypotheseName": "اسم الفرضية"
     },
     "labels": {
         "time": "الوقت",
         "relatedDetails": "بيانات ذات الصلة",
         "notes": "الاجراءات",
         "sequenceEvents": "تسلسل الأحداث",
-        "eventName": "اسم الحدث"
+        "eventName": "اسم الحدث",
+        "addEvent": "إضافة حدث"
     },
     "siteTypes": {
         "none": "لا يوجد",

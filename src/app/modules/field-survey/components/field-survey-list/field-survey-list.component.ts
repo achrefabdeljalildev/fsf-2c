@@ -20,7 +20,7 @@ export class FieldSurveyListComponent extends BaseListComponent<FieldSurvey> {
         return [
             { field: 'nameAr', title: 'fieldSurvey.surveyName' },
             { field: 'fieldSurveyLocation.nameAr', title: 'location.locationName' },
-            { field: 'actions', title: 'الاجراءات', width: '150px' },
+            { field: 'actions', title: 'الاجراءات', width: '100px' },
         ];
     }
 

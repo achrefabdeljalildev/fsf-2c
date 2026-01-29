@@ -37,7 +37,7 @@ export class LocationListComponent extends BaseListComponent<LocationModel> {
                 cellRenderer: (d: LocationModel) =>
                     new Date(d.siteReceiptDate).toLocaleDateString('fr-EG'),
             },
-            { field: 'actions', title: 'common.actions', width: '150px' },
+            { field: 'actions', title: 'common.actions', width: '100px' },
         ];
     }
 

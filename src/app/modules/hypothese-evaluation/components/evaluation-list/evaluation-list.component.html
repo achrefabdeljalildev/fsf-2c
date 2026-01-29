@@ -1,0 +1,65 @@
+<p-confirmDialog />
+
+<p-breadcrumb
+    [model]="[
+        { label: ('breadcrumbs.securitySystems' | translate), routerLink: '/' },
+        { label: ('breadcrumbs.generalAdministration' | translate), routerLink: '/' },
+        { label: ('breadcrumbs.evaluations' | translate) },
+    ]"
+/>
+
+<main-content>
+    <list-header
+        addNewRecordLabel="{{ 'evaluation.addNewEvaluation' | translate }}"
+        tableTitle="{{ 'evaluation.evaluationList' | translate }}"
+        [showAddNewRecordButton]="false"
+        [paginationInfo]="paginationInfo"
+        [pageNumber]="criteria.pageNumber"
+        [pageSize]="criteria.pageSize"
+        [totalCount]="criteria.totalCount ?? 0"
+        (search)="onSearch($event)"
+        (pageChange)="onPageChange($event)"
+    >
+        <ng-datatable
+            [rows]="rows"
+            [columns]="cols"
+            [sortable]="false"
+            [loading]="isLoading"
+            [pagination]="true"
+            [pageSize]="criteria.pageSize"
+            noDataContent="{{ 'common.noDataOnList' | translate }}"
+        >
+            <ng-template slot="locationEvaluated" let-value="data">
+                <p-tag
+                    [severity]="value.locationHypothesisEvaluationCount > 0 ? 'success' : 'warn'"
+                    [value]="
+                        value.locationHypothesisEvaluationCount > 0
+                            ? 'تم التقييم'
+                            : 'لم يتم التقييم'
+                    "
+                />
+            </ng-template>
+            <ng-template slot="involvedPartiesEvaluated" let-value="data">
+                <p-tag
+                    [severity]="value.hypothesisParticipatingEvaluation > 0 ? 'success' : 'warn'"
+                    [value]="
+                        value.hypothesisParticipatingEvaluation > 0
+                            ? 'تم التقييم'
+                            : 'لم يتم التقييم'
+                    "
+                />
+            </ng-template>
+            <ng-template slot="actions" let-value="data">
+                <div class="flex gap-2">
+                    <button
+                        class="btn btn-sm"
+                        (click)="openLocationEvaluation(value.id)"
+                        [title]="'evaluation.evaluateLocation' | translate"
+                    >
+                        <i class="pi pi-pencil"></i>
+                    </button>
+                </div>
+            </ng-template>
+        </ng-datatable>
+    </list-header>
+</main-content>

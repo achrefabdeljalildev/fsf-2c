@@ -23,7 +23,7 @@ export class GlobalSettingsListComponent extends BaseListComponent<GlobalSetting
         return [
             { field: 'key', title: 'formLabels.key' },
             { field: 'value', title: 'formLabels.value' },
-            { field: 'actions', title: 'dataTable.actions', width: '150px' },
+            { field: 'actions', title: 'dataTable.actions', width: '100px' },
         ];
     }
 

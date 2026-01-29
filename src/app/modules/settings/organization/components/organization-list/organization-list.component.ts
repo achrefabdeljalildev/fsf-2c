@@ -22,7 +22,7 @@ export class OrganizationListComponent extends BaseListComponent<Organization> {
     protected override getColumns(): colDef[] {
         return [
             { field: 'nameAr', title: 'formLabels.name' },
-            { field: 'actions', title: 'dataTable.actions', width: '150px' },
+            { field: 'actions', title: 'dataTable.actions', width: '100px' },
         ];
     }
 

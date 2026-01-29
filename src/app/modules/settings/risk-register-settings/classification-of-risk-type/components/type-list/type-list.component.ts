@@ -22,7 +22,7 @@ export class ClassificationOfRiskTypeListComponent extends BaseListComponent<Cla
     protected override getColumns(): colDef[] {
         return [
             { field: 'nameAr', title: 'formLabels.name' },
-            { field: 'actions', title: 'dataTable.actions', width: '150px' },
+            { field: 'actions', title: 'dataTable.actions', width: '100px' },
         ];
     }
 
@@ -42,13 +42,17 @@ export class ClassificationOfRiskTypeListComponent extends BaseListComponent<Cla
         this.showDialog = true;
     }
 
-    removeFieldSurvey(id: number) {
-        if (confirm('هل أنت متأكد من حذف هذا المسح؟')) {
-            this.service.deleteById(id).subscribe(() => {
-                this.showSuccessMessage('تم حذف المسح بنجاح');
-                this.loadData();
-            });
-        }
+    removeItem(id: number) {
+        this.confirmDelete('Item', () => {
+            this.service.deleteById(id).subscribe(
+                () => {
+                    this.loadData();
+                },
+                (error: any) => {
+                    console.error('Error deleting item', error);
+                },
+            );
+        });
     }
 
     onDialogSave() {

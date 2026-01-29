@@ -1,0 +1,95 @@
+<p-dialog
+    [(visible)]="visible"
+    [header]="
+        isEditMode
+            ? ('actions.editInvolvedPartiesCriteria' | translate)
+            : ('actions.addNewInvolvedPartiesCriteria' | translate)
+    "
+    [modal]="true"
+    [style]="{ width: '50vw' }"
+    [breakpoints]="{ '960px': '75vw', '640px': '90vw' }"
+    (onHide)="closeDialog()"
+>
+    <form [formGroup]="criteriaForm" (ngSubmit)="submit()" class="space-y-6">
+        <div class="form-group">
+            <label for="nameAr" class="block text-sm font-medium mb-2">
+                {{ 'formLabels.name' | translate }}
+                <span class="text-red-500">*</span>
+            </label>
+            <input
+                id="nameAr"
+                type="text"
+                formControlName="nameAr"
+                pInputText
+                class="w-full"
+                [placeholder]="'formLabels.enterName' | translate"
+            />
+            <small
+                *ngIf="criteriaForm.get('nameAr')?.invalid && criteriaForm.get('nameAr')?.touched"
+                class="text-red-500"
+            >
+                {{ 'messages.requiredField' | translate }}
+            </small>
+        </div>
+
+        <!-- Children Management Section -->
+        <div class="form-group">
+            <div class="flex justify-between items-center mb-3">
+                <label class="block text-sm font-medium">
+                    {{ 'formLabels.children' | translate }}
+                </label>
+                <button type="button" class="btn btn-sm btn-primary" (click)="openChildModal()">
+                    {{ 'buttons.addChild' | translate }}
+                </button>
+            </div>
+
+            <ng-datatable
+                [rows]="children"
+                [columns]="cols"
+                [sortable]="false"
+                [loading]="isLoading"
+                [pagination]="true"
+                noDataContent="{{ 'common.noDataOnList' | translate }}"
+            >
+                <ng-template slot="actions" let-value="data">
+                    <div class="flex gap-2">
+                        <div (click)="editChild(value.id)" class="cursor-pointer">
+                            <i class="pi pi-pencil"></i>
+                        </div>
+                        <div (click)="removeChild(value.id)" class="cursor-pointer">
+                            <i class="pi pi-trash"></i>
+                        </div>
+                    </div> </ng-template
+            ></ng-datatable>
+        </div>
+    </form>
+
+    <ng-template pTemplate="footer">
+        <div class="flex justify-end gap-2">
+            <button
+                type="button"
+                class="btn bg-gray-50 hover:bg-gray-100 text-gray-700"
+                (click)="closeDialog()"
+                [disabled]="isLoading"
+            >
+                {{ 'buttons.cancel' | translate }}
+            </button>
+            <button
+                type="button"
+                class="btn btn-primary"
+                (click)="submit()"
+                [disabled]="criteriaForm.invalid || isLoading"
+            >
+                {{ isEditMode ? ('buttons.save' | translate) : ('buttons.add' | translate) }}
+            </button>
+        </div>
+    </ng-template>
+</p-dialog>
+
+<!-- Child Add/Edit Modal -->
+<app-involved-parties-criteria-child-form
+    [(visible)]="showChildModal"
+    [childData]="getEditingChild()"
+    [parentId]="criteriaId"
+    (onSave)="onChildSaved()"
+/>

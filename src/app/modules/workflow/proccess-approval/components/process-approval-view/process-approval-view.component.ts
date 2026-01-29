@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { BaseComponent } from 'src/app/shared/components/base-component/base-component';
-import { ProcessApprovalService } from '../../services/process-approval.service';
-import { ProcessApprovalUserService } from '../../services/process-approval-user.service';
 import { CriteriaModel } from '@shared/models/base/criteria.model';
+import { BaseComponent } from 'src/app/shared/components/base-component/base-component';
 import { ProcessService } from '../../../executed-proccess/services/process.service';
+import { ProcessApprovalUserService } from '../../services/process-approval-user.service';
+import { ProcessApprovalService } from '../../services/process-approval.service';
 
 @Component({
     selector: 'app-process-approval-view',
@@ -48,14 +48,6 @@ export class ProcessApprovalViewComponent extends BaseComponent implements OnIni
                 this.processList = response.data.items;
             }
         });
-
-        // Load all process approvals
-        this.processApprovalService.getPagedList(criteria).subscribe((response: any) => {
-            if (response?.isSuccess && response.data?.items) {
-                this.allprocessApproval = response.data.items;
-                this.processApproval = response.data.items;
-            }
-        });
     }
 
     ngOnInit(): void {
@@ -87,10 +79,10 @@ export class ProcessApprovalViewComponent extends BaseComponent implements OnIni
             (response: any) => {
                 const item = response.data;
                 this.form.patchValue({
-                    nameAr: item.key,
+                    nameAr: item.nameAr,
                     descriptionAr: item.descriptionAr,
                     processId: item.processId,
-                    isOptinalApprover: item.isOptinalApprover,
+                    isOptinalApprove: item.isOptinalApprove,
                 });
                 this.isLoading = false;
             },

@@ -1,12 +1,16 @@
 <div class="flex flex-col h-full">
     <div class="flex flex-col bg-white border-b p-2 mb-2 rounded-t-lg gap-4">
-        <div class="flex justify-between items-center">
+        <div
+            class="flex items-center"
+            [ngClass]="!showAddNewRecordButton ? 'justify-end ' : 'justify-between'"
+        >
             <a
+                *ngIf="showAddNewRecordButton"
                 class="btn btn-primary btn-sm p-2 flex items-center gap-2 cursor-pointer"
                 (click)="onAddNewRecord()"
             >
                 <i class="pi pi-plus"></i>
-                {{ addNewRecordLabel }}
+                {{ addNewRecordLabel | translate }}
             </a>
 
             <div class="flex gap-2">

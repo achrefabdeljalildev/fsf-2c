@@ -1,0 +1,58 @@
+<p-confirmDialog />
+
+<p-breadcrumb
+    [model]="[
+        { label: ('breadcrumbs.securitySystems' | translate), routerLink: '/' },
+        { label: ('breadcrumbs.generalAdministration' | translate), routerLink: '/' },
+        { label: ('breadcrumbs.involvedPartiesCriterias' | translate) },
+    ]"
+/>
+
+<main-content>
+    <list-header
+        addNewRecordLabel="involvedPartiesCriteria.addNewInvolvedPartiesCriteria"
+        tableTitle="{{ 'involvedPartiesCriteria.involvedPartiesCriteriaList' | translate }}"
+        [paginationInfo]="paginationInfo"
+        [pageNumber]="criteria.pageNumber"
+        [pageSize]="criteria.pageSize"
+        [totalCount]="criteria.totalCount ?? 0"
+        (search)="onSearch($event)"
+        (addNewRecord)="openCreateDialog()"
+        (pageChange)="onPageChange($event)"
+    >
+        <ng-datatable
+            [rows]="rows"
+            [columns]="cols"
+            [sortable]="false"
+            [loading]="isLoading"
+            [pagination]="true"
+            [pageSize]="criteria.pageSize"
+            noDataContent="{{ 'common.noDataOnList' | translate }}"
+        >
+            <ng-template slot="children" let-value="data">
+                <button
+                    class="btn btn-xs btn-outline-secondary w-12"
+                    (click)="openEditDialog(value.id)"
+                >
+                    {{ value.children?.length || 0 }}
+                </button>
+            </ng-template>
+            <ng-template slot="actions" let-value="data">
+                <div class="flex gap-2">
+                    <div (click)="openEditDialog(value.id)" class="cursor-pointer">
+                        <i class="pi pi-pencil"></i>
+                    </div>
+                    <div (click)="removeCriteria(value.id, value.nameAr)" class="cursor-pointer">
+                        <i class="pi pi-trash"></i>
+                    </div>
+                </div>
+            </ng-template>
+        </ng-datatable>
+    </list-header>
+</main-content>
+
+<app-involved-parties-criteria-view
+    [(visible)]="showDialog"
+    [criteriaId]="selectedCriteriaId"
+    (onSave)="onDialogSave()"
+/>

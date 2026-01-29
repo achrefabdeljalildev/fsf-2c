@@ -50,67 +50,19 @@ export const FIELD_SURVEY_SIDEBAR_MENU: TreeNode[] = [
             },
         ],
     },
-    {
-        key: '3',
-        label: 'مخاطر المواقع',
-        data: 'Location Risks',
-        icon: 'assets/images/icons/field-survey-sidebar.svg',
-        children: [
-            {
-                key: '31',
-                label: 'قائمة مخاطر المواقع',
-                data: 'Location Risks List',
-                icon: 'pi pi-list',
-                routerLink: '/location-risk/list',
-            },
-            {
-                key: '32',
-                label: 'اعدادات سجل المخاطر',
-                data: 'Sub Survey 2',
-                icon: 'assets/images/icons/settings-sidebar-logo.svg',
-                children: [
-                    {
-                        key: '321',
-                        label: 'تصنيف نوع الخطر',
-                        data: 'Sub Survey 3',
-                        routerLink: '/risk-register-settings/classification-of-risk-type/list',
-                    },
-                    {
-                        key: '322',
-                        label: 'تصنيف احتمال الوقوع',
-                        data: 'Sub Survey 3',
-                        routerLink: '/risk-register-settings/falling-load-classification/list',
-                    },
-                    {
-                        key: '323',
-                        label: 'تصنيف أثر الخطر',
-                        data: 'Sub Survey 3',
-                        routerLink: '/risk-register-settings/classification-of-risk-impact/list',
-                    },
-                    {
-                        key: '324',
-                        label: 'تصنيف حالات الخطر',
-                        data: 'Sub Survey 3',
-                        routerLink:
-                            '/risk-register-settings/classification-of-risk-situations/list',
-                    },
-                ],
-            },
-        ],
-    },
 ];
 
 export const HYPOTHESE_PROTECTION_SIDEBAR_MENU: TreeNode[] = [
     {
         key: '22',
-        label: 'الفرضيات',
+        label: 'شعبة الفرضيات والبرامج التطبيقية',
         data: 'Hypotheses',
-        icon: '/assets/images/icons/Hypotheses.svg',
+        icon: 'assets/images/icons/field-survey-sidebar.svg',
         children: [
             {
                 key: '41',
                 label: '  لوحة قيادة المختص',
-                data: 'Hypothese Dashboard',
+                data: 'Hypothesis Dashboard',
                 icon: 'pi pi-list',
                 routerLink: '/hypothese/dashboard',
             },
@@ -148,6 +100,75 @@ export const HYPOTHESE_PROTECTION_SIDEBAR_MENU: TreeNode[] = [
                 data: 'Hypothesis Criterias',
                 icon: 'pi pi-objects-column',
                 routerLink: '/location-hypothesis-criterias/list',
+            },
+            {
+                key: '226',
+                label: 'معايير الجهات المشاركة',
+                data: 'Involved Parties Criterias',
+                icon: 'pi pi-objects-column',
+                routerLink: '/hypotheses-involved-parties-criterias/list',
+            },
+            {
+                key: '227',
+                label: 'قائمة تقييم الفرضيات ',
+                data: 'Hypothesis Evaluations',
+                icon: 'pi pi-check-circle',
+                routerLink: '/hypothese-evaluations/list',
+            },
+        ],
+    },
+    {
+        key: '3',
+        label: 'شعبة تحليل المخاطر ',
+        data: 'Location Risks',
+        icon: 'assets/images/icons/field-survey-sidebar.svg',
+        children: [
+            {
+                key: '31',
+                label: 'قائمة المخاطر ',
+                data: 'Location Risks List',
+                icon: 'pi pi-list',
+                routerLink: '/location-risk/list',
+            },
+            {
+                key: '32',
+                label: 'قائمة سجلات المواقع ',
+                data: 'Location Risks List',
+                icon: 'pi pi-list',
+                routerLink: '/location-risk/list?register=true',
+            },
+            {
+                key: '32',
+                label: 'اعدادات سجل المخاطر',
+                data: 'Sub Survey 2',
+                icon: 'assets/images/icons/settings-sidebar-logo.svg',
+                children: [
+                    {
+                        key: '321',
+                        label: 'تصنيف نوع الخطر',
+                        data: 'Sub Survey 3',
+                        routerLink: '/risk-register-settings/classification-of-risk-type/list',
+                    },
+                    {
+                        key: '322',
+                        label: 'تصنيف احتمال الوقوع',
+                        data: 'Sub Survey 3',
+                        routerLink: '/risk-register-settings/falling-load-classification/list',
+                    },
+                    {
+                        key: '323',
+                        label: 'تصنيف أثر الخطر',
+                        data: 'Sub Survey 3',
+                        routerLink: '/risk-register-settings/classification-of-risk-impact/list',
+                    },
+                    {
+                        key: '324',
+                        label: 'تصنيف حالات الخطر',
+                        data: 'Sub Survey 3',
+                        routerLink:
+                            '/risk-register-settings/classification-of-risk-situations/list',
+                    },
+                ],
             },
         ],
     },

@@ -24,7 +24,7 @@ export class LocationClassificationListComponent
             { field: 'nameAr', title: 'locationClassification.name' },
             { field: 'color', title: 'locationClassification.color' },
             // { field: 'descriptionAr', title: 'locationClassification.description' },
-            { field: 'actions', title: 'dataTable.actions', width: '150px' },
+            { field: 'actions', title: 'dataTable.actions', width: '100px' },
         ];
     }
 

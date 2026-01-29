@@ -1,0 +1,77 @@
+<div class="space-y-6">
+    <!-- Page Mode: Full page form -->
+    <form [formGroup]="evaluationForm" (ngSubmit)="submit()" class="space-y-6">
+        <!-- Location/Hypothesis Criteria Evaluation Section -->
+        <div class="bg-gray-50 rounded-lg p-6">
+            <div class="flex items-center justify-between border-b-2 pb-2 mb-2 border-green-500">
+                <div class="flex items-center gap-2">
+                    <i class="pi pi-map-marker text-green-600 text-xl"></i>
+                    <h2 class="text-lg font-bold text-gray-800">
+                        {{ 'evaluation.locationEvaluation' | translate }}
+                    </h2>
+                </div>
+
+                <div class="flex gap-1">
+                    <button
+                        type="button"
+                        class="btn btn-secondary btn-sm"
+                        (click)="collapsedAll = !collapsedAll"
+                        [title]="collapsedAll ? 'فتح الكل' : 'إغلاق الكل'"
+                    >
+                        <i
+                            class="text-sm"
+                            [class]="collapsedAll ? 'pi pi-chevron-down' : 'pi pi-chevron-up'"
+                        ></i>
+                    </button>
+                    <button
+                        type="button"
+                        class="btn btn-primary btn-sm"
+                        (click)="submit()"
+                        [disabled]="evaluationForm.invalid || isLoading"
+                    >
+                        <i class="pi pi-save me-1"></i>
+                        {{ 'buttons.save' | translate }}
+                    </button>
+                </div>
+            </div>
+            <div class="space-y-4">
+                <!-- Parent criteria with children -->
+                <p-panel
+                    [toggleable]="true"
+                    *ngFor="let criteria of locationCriterias"
+                    class="mb-6"
+                    [collapsed]="collapsedAll"
+                >
+                    <ng-template #header>
+                        <h1 class="font-bold">{{ criteria.nameAr }}</h1>
+                    </ng-template>
+                    <!-- Child criteria with input fields -->
+                    <div
+                        *ngFor="let child of criteria.children"
+                        class="form-group mb-4 flex justify-between"
+                    >
+                        <label class="block text-sm font-medium mb-2">
+                            {{ child.nameAr }}
+                            <span class="text-red-500">*</span>
+                        </label>
+                        <p-rating
+                            [formControlName]="'criteria_' + child.id"
+                            [stars]="10"
+                            [iconOnClass]="'pi pi-star-fill'"
+                            [iconOffClass]="'pi pi-star'"
+                        />
+                        <small
+                            *ngIf="
+                                evaluationForm.get('criteria_' + child.id)?.invalid &&
+                                evaluationForm.get('criteria_' + child.id)?.touched
+                            "
+                            class="text-red-500"
+                        >
+                            {{ 'messages.requiredField' | translate }}
+                        </small>
+                    </div>
+                </p-panel>
+            </div>
+        </div>
+    </form>
+</div>
