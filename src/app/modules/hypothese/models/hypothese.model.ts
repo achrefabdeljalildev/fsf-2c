@@ -1,3 +1,4 @@
+import { HypotheseSequenceEvent } from 'src/app/modules/hypothese/models/hypothese-sequence-event.model';
 import { LocationModel } from '../../location/models/location.model';
 
 export interface Hypothese {
@@ -19,7 +20,8 @@ export interface Hypothese {
     location?: LocationModel;
     hypotheseTitle?: HypotheseTitle;
 
-    hypotheseInvolvedPartiesData?: any[];
+    hypotheseInvolvedPartiesData?: InvolvedParty[];
+    hypotheseSequenceEvent?: HypotheseSequenceEvent[];
 }
 
 export interface HypotheseType {
@@ -33,4 +35,9 @@ export interface HypotheseTitle {
     nameAr: string;
     descriptionAr?: string;
     hypotheseType?: HypotheseType;
+}
+
+export interface InvolvedParty {
+    id: number;
+    nameAr: string;
 }

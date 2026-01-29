@@ -38,6 +38,7 @@ html[dir='rtl'] .p-breadcrumb-separator {
     @apply !bg-lightBlue;
 }
 
+.p-datepicker,
 .p-datepicker input {
     width: 100% !important;
 }

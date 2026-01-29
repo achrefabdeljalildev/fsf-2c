@@ -75,3 +75,8 @@ export const API_URL_HYPOTHESES_INVOLVED_PARTIES = '/HypothesesInvolvedParties';
 
 // Location Hypothesis Criterias
 export const API_URL_LOCATION_HYPOTHESIS_CRITERIAS = '/LocationHypothesisCriterias';
+
+export const API_URL_HYPOTHESES = '/Hypotheses';
+
+// Global Settings
+export const API_URL_GLOBAL_SETTINGS = '/GeneralSettings';

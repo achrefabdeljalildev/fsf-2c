@@ -1,0 +1,148 @@
+<div>
+    <div class="flex justify-between items-center">
+        <h3 class="text-base font-semibold">{{ 'labels.sequenceEvents' | translate }}</h3>
+        <div (click)="openDialog()" class="btn btn-primary btn-sm">
+            <i class="pi pi-plus !text-white"></i>
+        </div>
+    </div>
+
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="flex justify-center items-center py-8">
+        <i class="pi pi-spin pi-spinner text-4xl text-gray-500"></i>
+    </div>
+
+    <!-- Events Table -->
+    <div *ngIf="!isLoading && sequenceEvents.length > 0" class="overflow-x-auto">
+        <p-timeline [value]="sequenceEvents">
+            <ng-template #opposite let-event>
+                <small class="flex flex-col items-end">
+                    <div class="flex items-center">
+                        <i (click)="editEvent(event)" class="cursor-pointer me-1">
+                            <i class="pi pi-pencil"></i>
+                        </i>
+                        <i (click)="deleteEvent(event)" class="cursor-pointer me-1">
+                            <i class="pi pi-trash"></i>
+                        </i>
+                        {{ event.hypotheseInvolvedPartiesNameAr }}
+                    </div>
+                    {{ event.time }}
+                </small>
+            </ng-template>
+            <ng-template #content let-event>
+                <span>
+                    {{ event.event }}
+                </span>
+            </ng-template>
+        </p-timeline>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="!isLoading && sequenceEvents.length === 0" class="text-center py-8 text-gray-500">
+        <p>{{ 'common.noDataOnList' | translate }}</p>
+    </div>
+
+    <!-- Dialog for Add/Edit Event -->
+    <p-dialog
+        [(visible)]="displayDialog"
+        [header]="'titles.addSequenceEvent' | translate"
+        [closable]="true"
+        [contentStyle]="{ height: '15rem' }"
+        (onHide)="closeDialog()"
+    >
+        <form [formGroup]="eventForm">
+            <div class="space-y-4 h-100">
+                <div class="form-group">
+                    <label class="text-sm block font-medium mb-1">
+                        {{ 'hypothesesInvolvedParty.hypothesesInvolvedParty' | translate }}
+                        <span class="text-red-500">*</span>
+                    </label>
+                    <p-select
+                        formControlName="hypothesesInvolvedPartiesId"
+                        [options]="involvedParties"
+                        [optionLabel]="'nameAr'"
+                        [optionValue]="'id'"
+                        class="w-full"
+                        [ngClass]="{
+                            'p-invalid':
+                                eventForm.get('hypothesesInvolvedPartiesId')?.invalid &&
+                                eventForm.get('hypothesesInvolvedPartiesId')?.touched,
+                        }"
+                    >
+                    </p-select>
+                    <small
+                        class="text-red-500"
+                        *ngIf="
+                            eventForm.get('hypothesesInvolvedPartiesId')?.invalid &&
+                            eventForm.get('hypothesesInvolvedPartiesId')?.touched
+                        "
+                    >
+                        {{ 'common.required' | translate }}
+                    </small>
+                </div>
+
+                <!-- Time -->
+                <div class="form-group">
+                    <label class="text-sm font-medium mb-1">
+                        {{ 'labels.time' | translate }} <span class="text-red-500">*</span>
+                    </label>
+                    <p-datePicker
+                        formControlName="time"
+                        [timeOnly]="true"
+                        [showTime]="true"
+                        dateFormat="HH:mm:ss"
+                        [ngClass]="{
+                            'p-invalid':
+                                eventForm.get('time')?.invalid && eventForm.get('time')?.touched,
+                        }"
+                    ></p-datePicker>
+                    <small
+                        class="text-red-500"
+                        *ngIf="eventForm.get('time')?.invalid && eventForm.get('time')?.touched"
+                    >
+                        {{ 'common.required' | translate }}
+                    </small>
+                </div>
+
+                <!-- Event Name -->
+                <div class="form-group">
+                    <label class="text-sm font-medium mb-1">
+                        {{ 'labels.eventName' | translate }} <span class="text-red-500">*</span>
+                    </label>
+                    <input
+                        pInputText
+                        type="text"
+                        formControlName="event"
+                        [ngClass]="{
+                            'p-invalid':
+                                eventForm.get('event')?.invalid && eventForm.get('event')?.touched,
+                        }"
+                        class="w-full"
+                    />
+                    <small
+                        class="text-red-500"
+                        *ngIf="eventForm.get('event')?.invalid && eventForm.get('event')?.touched"
+                    >
+                        {{ 'common.required' | translate }}
+                    </small>
+                </div>
+            </div>
+        </form>
+
+        <ng-template pTemplate="footer">
+            <button
+                pButton
+                [label]="'buttons.cancel' | translate"
+                icon="pi pi-times"
+                (click)="closeDialog()"
+                class="p-button-text"
+            ></button>
+            <button
+                pButton
+                [label]="'buttons.save' | translate"
+                icon="pi pi-check"
+                (click)="saveEvent()"
+                [disabled]="eventForm.invalid || isLoading"
+            ></button>
+        </ng-template>
+    </p-dialog>
+</div>

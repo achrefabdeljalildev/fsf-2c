@@ -31,6 +31,7 @@ export class HypotheseViewComponent extends BaseComponent implements OnInit {
     allHypotheseTitles: any[] = [];
     loadingHypotheseTitles: boolean = false;
     hypotheseInvolvedPartiesData: any[] = [];
+    hypotheseSequenceEvent: any[] = [];
     availableInvolvedParties: any[] = [];
     selectedInvolvedParties: any[] = [];
     days: string[] = ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
@@ -171,6 +172,7 @@ export class HypotheseViewComponent extends BaseComponent implements OnInit {
                     });
 
                     this.hypotheseInvolvedPartiesData = data.hypotheseInvolvedPartiesData || [];
+                    this.hypotheseSequenceEvent = data.hypotheseSequenceEvent || [];
 
                     this.isInitializing = false;
                     this.loadHypotheseAttachments(id);

@@ -223,7 +223,8 @@
         <p-tabs class="mt-6" value="1">
             <p-tablist>
                 <p-tab value="1" *ngIf="isEditMode"> الجهات المشاركة </p-tab>
-                <p-tab value="2"> الوصف </p-tab>
+                <p-tab value="4" *ngIf="isEditMode"> الأحداث </p-tab>
+                <p-tab value="2"> الملاحظات </p-tab>
                 <p-tab value="3">سجل الإجراءات</p-tab>
             </p-tablist>
             <p-tabpanels>
@@ -247,13 +248,17 @@
                     </div>
                 </p-tabpanel>
 
+                <p-tabpanel value="4" *ngIf="isEditMode">
+                    <app-hypothese-sequence-event
+                        [hypotheseId]="hypotheseId"
+                        [involvedParties]="hypotheseInvolvedPartiesData"
+                        [sequenceEvents]="hypotheseSequenceEvent"
+                        (onSave)="loadHypothese(hypotheseId!)"
+                    />
+                </p-tabpanel>
                 <p-tabpanel value="3">
-                    <ng-template pTemplate="header">
-                        <span>{{ 'labels.logs' | translate }}</span>
-                    </ng-template>
-                    <div class="text-center text-gray-500 py-4">
-                        {{ 'messages.noLogsAvailable' | translate }}
-                    </div>
+                    <!-- Logs List Component -->
+                    <app-logs-list tableName="Hypotheses" [tableKey]="hypotheseId" class="w-full" />
                 </p-tabpanel>
             </p-tabpanels>
         </p-tabs>
