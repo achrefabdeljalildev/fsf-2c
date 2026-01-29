@@ -35,16 +35,22 @@
                     <div
                         (click)="router.navigate(['/hypothese-evaluation/evaluate', value.id])"
                         class="cursor-pointer"
+                        title="تقييم الفرضية"
                     >
                         <i class="pi pi-clipboard"></i>
                     </div>
                     <div
                         (click)="router.navigate(['/hypothese/edit', value.id])"
                         class="cursor-pointer"
+                        title="تعديل الفرضية"
                     >
                         <i class="pi pi-pencil"></i>
                     </div>
-                    <div (click)="removeHypothese(value.id)" class="cursor-pointer">
+                    <div
+                        (click)="removeHypothese(value.id)"
+                        class="cursor-pointer"
+                        title="حذف الفرضية"
+                    >
                         <i class="pi pi-trash"></i>
                     </div>
                 </div>

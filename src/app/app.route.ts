@@ -190,6 +190,14 @@ export const routes: Routes = [
             ),
         data: { key: 'hypothese' },
     },
+    {
+        path: 'location-risk-register',
+        canActivate: [AuthGuard],
+        component: AppLayout,
+        loadChildren: () =>
+            import('./modules/location/location.module').then((m) => m.LocationModule),
+        data: { key: 'hypothese' },
+    },
 
     // globalSettings routes
     {

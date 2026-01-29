@@ -115,6 +115,11 @@
         "edit": "تعديل",
         "processName": "اسم المسار"
     },
+    "processApproval": {
+        "addNew": "إضافة مرحلة مسار",
+        "list": "قائمة مراحل المسارات",
+        "edit": "تعديل مرحلة مسار"
+    },
     "globalSettings": {
         "globalSettings": "الإعدادات العامة",
         "addNewGlobalSetting": "إضافة إعداد عام",
@@ -130,7 +135,11 @@
         "locationList": "قائمة المواقع",
         "locationName": "اسم الموقع",
         "selectLocationFromMap": "اختر الموقع من الخريطة",
-        "editLocation": "تعديل موقع"
+        "editLocation": "تعديل موقع",
+        "locationRegisterList": "قائمة سجلات المواقع",
+        "editLocationRegister": "تعديل سجل الموقع",
+        "riskImpact": "تأثير الخطر",
+        "riskStatus": "حالة الخطر"
     },
     "province": {
         "addNewProvince": "إضافة محافظة",
@@ -482,7 +491,8 @@
         "toTime": "إلى الوقت",
         "children": "العناصر الفرعية",
         "enterChildName": "أدخل اسم العنصر الفرعي",
-        "hypotheseName": "اسم الفرضية"
+        "hypotheseName": "اسم الفرضية",
+        "lastRegisterDateUpdate": "تاریخ آخر تحدیث للسجل"
     },
     "labels": {
         "time": "الوقت",

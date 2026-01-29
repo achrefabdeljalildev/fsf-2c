@@ -26,6 +26,11 @@ const routes: Routes = [
         component: LocationListComponent,
     },
     {
+        path: 'risk-register',
+        component: LocationListComponent,
+        data: { key: 'hypothese' },
+    },
+    {
         path: 'create',
         component: LocationViewComponent,
     },

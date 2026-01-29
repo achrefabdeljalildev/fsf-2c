@@ -44,26 +44,14 @@
                             {{ 'formLabels.locationCode' | translate }}
                             <span class="text-red-500">*</span>
                         </label>
-                        <div class="relative flex items-center">
-                            <input
-                                id="code"
-                                [type]="showLocationCode ? 'text' : 'password'"
-                                formControlName="code"
-                                pInputText
-                                class="w-full"
-                                [placeholder]="'formLabels.locationCode' | translate"
-                            />
-                            <button
-                                type="button"
-                                class="absolute left-3 text-gray-600 hover:text-gray-900 focus:outline-none"
-                                (click)="showLocationCode = !showLocationCode"
-                                [title]="
-                                    showLocationCode ? 'Hide location code' : 'Show location code'
-                                "
-                            >
-                                <i [class]="showLocationCode ? 'pi pi-eye-slash' : 'pi pi-eye'"></i>
-                            </button>
-                        </div>
+
+                        <input
+                            id="code"
+                            formControlName="code"
+                            pInputText
+                            class="w-full"
+                            [placeholder]="'formLabels.locationCode' | translate"
+                        />
                     </div>
 
                     <!-- Name in Arabic -->
@@ -145,16 +133,6 @@
                             [style]="{ width: '100%' }"
                         >
                             <ng-template pTemplate="selectedItem" let-option>
-                                <div class="flex items-center gap-2">
-                                    <span
-                                        class="inline-block w-4 h-4 rounded"
-                                        [style.backgroundColor]="option?.color"
-                                        style="border: 1px solid #ddd"
-                                    ></span>
-                                    <span>{{ option?.nameAr }}</span>
-                                </div>
-                            </ng-template>
-                            <ng-template pTemplate="item" let-option>
                                 <div class="flex items-center gap-2">
                                     <span
                                         class="inline-block w-4 h-4 rounded"

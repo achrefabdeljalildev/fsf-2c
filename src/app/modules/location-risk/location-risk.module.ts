@@ -8,6 +8,7 @@ import { Card } from 'primeng/card';
 import { CheckboxModule } from 'primeng/checkbox';
 import { DividerModule } from 'primeng/divider';
 import { InputText } from 'primeng/inputtext';
+import { PanelModule } from 'primeng/panel';
 import { SelectModule } from 'primeng/select';
 import { TableModule } from 'primeng/table';
 import { TabsModule } from 'primeng/tabs';
@@ -22,11 +23,23 @@ const routes: Routes = [
         component: LocationRiskListComponent,
     },
     {
+        path: 'list/:locationId',
+        component: LocationRiskListComponent,
+    },
+    {
         path: 'create',
         component: LocationRiskViewComponent,
     },
     {
+        path: 'create/:locationId',
+        component: LocationRiskViewComponent,
+    },
+    {
         path: 'edit/:id',
+        component: LocationRiskViewComponent,
+    },
+    {
+        path: 'edit/:id/:locationId',
         component: LocationRiskViewComponent,
     },
 ];
@@ -46,6 +59,7 @@ const routes: Routes = [
         Textarea,
         InputText,
         TabsModule,
+        PanelModule,
     ],
     declarations: [LocationRiskListComponent, LocationRiskViewComponent],
 })

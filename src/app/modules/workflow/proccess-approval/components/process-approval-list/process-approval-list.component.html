@@ -1,14 +1,14 @@
 <p-breadcrumb
     [model]="[
-        { label: ('workFlow.securitySystems' | translate) },
-        { label: ('workFlow.pathSettings' | translate) },
-        { label: ('workFlow.ListWorkFlows' | translate) },
+        { label: ('workFlow.securitySystems' | translate), routerLink: '/' },
+        { label: ('workFlow.pathSettings' | translate), routerLink: '/' },
+        { label: ('processApproval.list' | translate) },
     ]"
 />
 <main-content>
     <list-header
-        addNewRecordLabel="{{ 'workFlow.addNew' | translate }}"
-        tableTitle="{{ 'workFlow.List' | translate }}"
+        addNewRecordLabel="{{ 'processApproval.addNew' | translate }}"
+        tableTitle="{{ 'processApproval.list' | translate }}"
         [paginationInfo]="paginationInfo"
         (search)="onSearch($event)"
         (addNewRecord)="openCreateDialog()"

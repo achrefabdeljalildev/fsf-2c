@@ -4,19 +4,20 @@
     [model]="[
         { label: ('breadcrumbs.securitySystems' | translate), routerLink: '/' },
         { label: ('breadcrumbs.generalAdministration' | translate), routerLink: '/' },
-        { label: ('breadcrumbs.locations' | translate) },
+        { label: listTitle },
     ]"
 />
 
 <main-content>
     <list-header
         addNewRecordLabel="{{ 'location.addNewLocation' | translate }}"
-        tableTitle="{{ 'location.locationList' | translate }}"
+        [tableTitle]="listTitle"
         [paginationInfo]="paginationInfo"
         [pageNumber]="criteria.pageNumber"
         [pageSize]="criteria.pageSize"
         [totalCount]="criteria.totalCount ?? 0"
-        [showMapsButton]="true"
+        [showMapsButton]="!isRiskLocationList"
+        [showAddNewRecordButton]="!isRiskLocationList"
         [filtersList]="filtersList"
         (search)="onSearch($event)"
         (clickMaps)="showMapsView = !showMapsView"
@@ -53,6 +54,17 @@
                             class="cursor-pointer"
                         >
                             <i class="pi pi-trash"></i>
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template slot="riskActions" let-value="data">
+                    <div class="flex gap-2">
+                        <div
+                            (click)="router.navigate(['/location-risk/list', value.id])"
+                            class="cursor-pointer"
+                            [title]="'location.editLocationRegister' | translate"
+                        >
+                            <i class="pi pi-pencil text-primary"></i>
                         </div>
                     </div>
                 </ng-template>

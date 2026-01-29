@@ -135,7 +135,7 @@ export const HYPOTHESE_PROTECTION_SIDEBAR_MENU: TreeNode[] = [
                 label: 'قائمة سجلات المواقع ',
                 data: 'Location Risks List',
                 icon: 'pi pi-list',
-                routerLink: '/location-risk/list?register=true',
+                routerLink: '/location-risk-register/risk-register',
             },
             {
                 key: '32',
@@ -238,7 +238,7 @@ export const GLOBAL_SETTINGS_SIDEBAR_MENU: TreeNode[] = [
         children: [
             {
                 key: '31',
-                label: '  مراحل مسارات العمل',
+                label: 'processApproval.list',
                 data: 'Sub Survey 2',
                 icon: 'pi pi-list',
                 routerLink: '/process-approval/list',

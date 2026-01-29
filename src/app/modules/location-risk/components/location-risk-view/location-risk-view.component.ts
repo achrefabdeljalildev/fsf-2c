@@ -24,6 +24,7 @@ export class LocationRiskViewComponent extends BaseComponent implements OnInit {
     isEditMode: boolean = false;
 
     // Dropdowns data
+    routeParamLocationId: number | null = null;
     locations: any[] = [];
     riskImpacts: any[] = [];
     riskTypes: any[] = [];
@@ -54,6 +55,13 @@ export class LocationRiskViewComponent extends BaseComponent implements OnInit {
                 this.locationRiskId = +params['id'];
                 this.isEditMode = true;
                 this.loadLocationRisk(this.locationRiskId);
+            }
+
+            if (params['locationId']) {
+                this.routeParamLocationId = +params['locationId'];
+                this.locationRiskForm.patchValue({ locationId: this.routeParamLocationId });
+
+                this.onLocationChange();
             }
         });
     }
@@ -176,23 +184,28 @@ export class LocationRiskViewComponent extends BaseComponent implements OnInit {
     onLocationChange(): void {
         const selectedLocationId = this.locationRiskForm.get('locationId')?.value;
         if (selectedLocationId) {
-            const selectedLocation = this.locations.find((loc) => loc.id === selectedLocationId);
-            if (selectedLocation) {
-                this.locationRiskForm.patchValue({
-                    locationCode: selectedLocation.code || '',
-                    locationName: selectedLocation.nameAr || '',
-                    organization:
-                        selectedLocation.organizationNameAr ||
-                        selectedLocation.organization?.nameAr ||
-                        '',
-                    region:
-                        selectedLocation.regionNameAr ||
-                        selectedLocation.province?.region?.nameAr ||
-                        '',
-                    province:
-                        selectedLocation.provinceNameAr || selectedLocation.province?.nameAr || '',
-                });
-            }
+            this.locationService.getById(selectedLocationId).subscribe((response) => {
+                const selectedLocation = response.data;
+
+                if (selectedLocation) {
+                    this.locationRiskForm.patchValue({
+                        locationCode: selectedLocation.code || '',
+                        locationName: selectedLocation.nameAr || '',
+                        organization:
+                            selectedLocation.organizationNameAr ||
+                            selectedLocation.organization?.nameAr ||
+                            '',
+                        region:
+                            selectedLocation.regionNameAr ||
+                            selectedLocation.province?.region?.nameAr ||
+                            '',
+                        province:
+                            selectedLocation.provinceNameAr ||
+                            selectedLocation.province?.nameAr ||
+                            '',
+                    });
+                }
+            });
         }
     }
 
@@ -234,18 +247,22 @@ export class LocationRiskViewComponent extends BaseComponent implements OnInit {
                                 )
                                 .subscribe({
                                     next: () => {
-                                        this.router.navigate(['/location-risk/list']);
+                                        this.redirectToList();
                                     },
                                     error: (error) => {
                                         console.error('Failed to upload attachments', error);
-                                        this.router.navigate(['/location-risk/list']);
+                                        this.showErrorMessage(
+                                            this.translateService.instant('messages.error'),
+                                        );
+
+                                        this.isLoading = false;
                                     },
                                 });
                         } else {
-                            this.router.navigate(['/location-risk/list']);
+                            this.redirectToList();
                         }
                     } else {
-                        this.router.navigate(['/location-risk/list']);
+                        this.redirectToList();
                     }
                 }
                 this.isLoading = false;
@@ -303,7 +320,11 @@ export class LocationRiskViewComponent extends BaseComponent implements OnInit {
         this.showErrorMessage('فشل تحميل الملف');
     }
 
-    back(): void {
-        this.router.navigate(['/location-risk/list']);
+    redirectToList(): void {
+        if (this.routeParamLocationId) {
+            this.router.navigate(['/location-risk/list', this.routeParamLocationId]);
+        } else {
+            this.router.navigate(['/location-risk/list']);
+        }
     }
 }

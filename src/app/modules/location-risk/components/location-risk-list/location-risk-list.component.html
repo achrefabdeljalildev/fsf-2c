@@ -6,6 +6,82 @@
     ]"
 />
 
+<p-panel class="mb-5" toggleable *ngIf="selectedLocation">
+    <ng-template #header>
+        <!-- رمز الموقع - Survey Code -->
+        <h1
+            for="locationCode"
+            class="flex text-2xl mb-4 py-3 w-full border-b-2 border-gray-200 items-center gap-2"
+        >
+            <i class="pi pi-building before:text-xl text-primary"></i>
+            <span
+                class="cursor-pointer"
+                (click)="router.navigate(['location/edit', selectedLocation.id])"
+                >{{ selectedLocation.code }}</span
+            >
+            <i class="pi pi-file-export text-success cursor-pointer"></i>
+        </h1>
+    </ng-template>
+    <form [formGroup]="locationForm" class="flex flex-col gap-3 mb-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <!-- اسم الموقع - Location Name -->
+            <div class="form-group">
+                <label for="nameAr" class="block text-sm font-medium mb-2">
+                    اسم الموقع
+                    <span class="text-red-500">*</span>
+                </label>
+                <input
+                    id="nameAr"
+                    type="text"
+                    formControlName="nameAr"
+                    pInputText
+                    class="w-full"
+                    placeholder="اسم الموقع"
+                />
+            </div>
+
+            <!-- الجهة - Entity -->
+            <div class="form-group">
+                <label for="organization" class="block text-sm font-medium mb-2">الجهة</label>
+                <input
+                    id="organization"
+                    type="text"
+                    formControlName="organization"
+                    pInputText
+                    class="w-full"
+                    placeholder="الجهة"
+                />
+            </div>
+
+            <!-- المنطقة - Region -->
+            <div class="form-group">
+                <label for="region" class="block text-sm font-medium mb-2">المنطقة</label>
+                <input
+                    id="region"
+                    type="text"
+                    formControlName="region"
+                    pInputText
+                    class="w-full"
+                    placeholder="المنطقة"
+                />
+            </div>
+
+            <!-- المحافظة - Province -->
+            <div class="form-group">
+                <label for="province" class="block text-sm font-medium mb-2"> المحافظة </label>
+                <input
+                    id="province"
+                    type="text"
+                    formControlName="province"
+                    pInputText
+                    class="w-full"
+                    placeholder="المحافظة"
+                />
+            </div>
+        </div>
+    </form>
+</p-panel>
+
 <main-content>
     <list-header
         [addNewRecordLabel]="'locationRisk.addNew' | translate"
@@ -15,7 +91,7 @@
         [pageSize]="criteria.pageSize"
         [totalCount]="criteria.totalCount ?? 0"
         (search)="onSearch($event)"
-        (addNewRecord)="router.navigate(['/location-risk/create'])"
+        (addNewRecord)="navigateToCreate()"
         (pageChange)="onPageChange($event)"
     >
         <ng-datatable
@@ -27,12 +103,23 @@
             [pageSize]="criteria.pageSize"
             [noDataContent]="'common.noDataOnList' | translate"
         >
+            <ng-template slot="riskImpact" let-value="data">
+                <p-tag
+                    [value]="value.riskImpact.nameAr"
+                    [style.backgroundColor]="value.riskImpact.color"
+                    [style.color]="'#ffffff'"
+                />
+            </ng-template>
+            <ng-template slot="riskLikelihood" let-value="data">
+                <p-tag
+                    [value]="value.riskLikeliHood.nameAr"
+                    [style.backgroundColor]="value.riskLikeliHood.color"
+                    [style.color]="'#ffffff'"
+                />
+            </ng-template>
             <ng-template slot="actions" let-value="data">
                 <div class="flex gap-2">
-                    <div
-                        (click)="router.navigate(['/location-risk/edit', value.id])"
-                        class="cursor-pointer"
-                    >
+                    <div (click)="navigateToEdit(value.id)" class="cursor-pointer">
                         <i class="pi pi-pencil"></i>
                     </div>
                     <div (click)="removeLocationRisk(value.id)" class="cursor-pointer">

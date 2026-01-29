@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { colDef } from '@bhplugin/ng-datatable';
+import { FilterCriteriaModel } from '@shared/models/base/criteria.model';
 import { Observable } from 'rxjs';
+import { LocationModel } from 'src/app/modules/location/models/location.model';
+import { LocationService } from 'src/app/modules/location/services/location.service';
 import { BaseListComponent } from '../../../../shared/components/base-list-component/base-list-component';
 import {
     ApiResponseModel,
@@ -15,8 +19,48 @@ import { LocationRiskService } from '../../services/location-risk.service';
     standalone: false,
 })
 export class LocationRiskListComponent extends BaseListComponent<LocationRisk> {
-    constructor(private locationRiskService: LocationRiskService) {
+    locationId: string | null = this.route.snapshot.params['locationId'] || null;
+    selectedLocation: LocationModel | null = null;
+    locationForm!: FormGroup;
+
+    constructor(
+        private locationRiskService: LocationRiskService,
+        private locationService: LocationService,
+        private fb: FormBuilder,
+    ) {
         super();
+
+        this.locationId = this.route.snapshot.params['locationId'] || null;
+
+        if (this.locationId) {
+            this.criteria.filters = [
+                ...this.criteria.filters,
+                new FilterCriteriaModel({
+                    propertyName: 'locationId',
+                    values: [this.locationId],
+                }),
+            ];
+        }
+    }
+
+    override ngOnInit(): void {
+        super.ngOnInit();
+
+        if (this.locationId) {
+            this.locationService.getById(+this.locationId).subscribe((response) => {
+                this.selectedLocation = response.data;
+
+                this.locationForm = this.fb.group({
+                    nameAr: [{ value: this.selectedLocation.nameAr, disabled: true }],
+                    code: [{ value: this.selectedLocation.code, disabled: true }],
+                    region: [{ value: this.selectedLocation.regionNameAr, disabled: true }],
+                    province: [{ value: this.selectedLocation.provinceNameAr, disabled: true }],
+                    organization: [
+                        { value: this.selectedLocation.organizationNameAr, disabled: true },
+                    ],
+                });
+            });
+        }
     }
 
     protected override getColumns(): colDef[] {
@@ -25,9 +69,9 @@ export class LocationRiskListComponent extends BaseListComponent<LocationRisk> {
             { field: 'riskStatus.nameAr', title: 'locationRisk.riskStatus' },
             { field: 'location.code', title: 'formLabels.locationCode' },
             { field: 'location.nameAr', title: 'location.locationName' },
-            { field: 'location.organization.nameAr', title: 'formLabels.affiliatedEntity' },
             { field: 'location.province.region.nameAr', title: 'formLabels.region' },
-            { field: 'location.province.nameAr', title: 'formLabels.province' },
+            { field: 'riskImpact', title: 'location.riskImpact' },
+            { field: 'riskLikelihood', title: 'location.riskStatus' },
             { field: 'actions', title: 'common.actions', width: '100px' },
         ];
     }
@@ -44,6 +88,22 @@ export class LocationRiskListComponent extends BaseListComponent<LocationRisk> {
                 );
                 this.loadData();
             });
+        }
+    }
+
+    navigateToCreate() {
+        if (this.locationId) {
+            this.router.navigate(['/location-risk/create', this.locationId]);
+        } else {
+            this.router.navigate(['/location-risk/create']);
+        }
+    }
+
+    navigateToEdit(id: number) {
+        if (this.locationId) {
+            this.router.navigate(['/location-risk/edit', id, this.locationId]);
+        } else {
+            this.router.navigate(['/location-risk/edit', id]);
         }
     }
 }

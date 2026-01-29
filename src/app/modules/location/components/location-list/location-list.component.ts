@@ -13,13 +13,22 @@ import { LocationService } from '../../services/location.service';
 })
 export class LocationListComponent extends BaseListComponent<LocationModel> {
     showMapsView: boolean = false;
+    isRiskLocationList: boolean = this.router.url.includes('risk-register');
 
     constructor(private locationService: LocationService) {
         super();
+
+        this.isRiskLocationList = this.router.url.includes('risk-register');
     }
 
     get searchTerm(): string {
         return this.criteria.searchTerm;
+    }
+
+    get listTitle(): string {
+        return this.isRiskLocationList
+            ? this.translate('location.locationRegisterList')
+            : this.translate('location.locationList');
     }
 
     protected override getColumns(): colDef[] {
@@ -29,15 +38,34 @@ export class LocationListComponent extends BaseListComponent<LocationModel> {
                 title: 'formLabels.locationCode',
             },
             { field: 'nameAr', title: 'formLabels.name' },
+            { field: 'regionNameAr', title: 'formLabels.region' },
             { field: 'provinceNameAr', title: 'formLabels.province' },
             { field: 'organizationNameAr', title: 'formLabels.affiliatedEntity' },
             {
                 field: 'siteReceiptDate',
                 title: 'formLabels.receiptDate',
+                hide: this.isRiskLocationList,
                 cellRenderer: (d: LocationModel) =>
                     new Date(d.siteReceiptDate).toLocaleDateString('fr-EG'),
             },
-            { field: 'actions', title: 'common.actions', width: '100px' },
+            {
+                field: 'aaa',
+                title: 'formLabels.lastRegisterDateUpdate',
+                hide: !this.isRiskLocationList,
+                cellRenderer: (d: LocationModel) => '22/02/2026',
+            },
+            {
+                field: 'actions',
+                title: 'common.actions',
+                width: '100px',
+                hide: this.isRiskLocationList,
+            },
+            {
+                field: 'riskActions',
+                title: 'common.actions',
+                width: '100px',
+                hide: !this.isRiskLocationList,
+            },
         ];
     }
 

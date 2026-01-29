@@ -80,7 +80,7 @@
                                 <!-- <i [class]="item.icon" class="text-primary text-lg"></i> -->
                                 <img [src]="item.icon" alt="" />
                                 <span class="font-medium text-gray-700 dark:text-white-dark">
-                                    {{ item.label }}
+                                    {{ item.label | translate }}
                                 </span>
                             </div>
                             <i
@@ -107,7 +107,7 @@
                                 >
                                     <div class="flex items-center">
                                         <i [class]="child.icon"></i>
-                                        <span> {{ child.label }} </span>
+                                        <span> {{ child.label |translate}} </span>
                                     </div>
                                     <i
                                         [class]="isChildExpanded(child.key) ? 'pi pi-angle-up' : 'pi pi-angle-down'"
@@ -122,7 +122,7 @@
                                         class="flex items-center px-4 py-3 ps-12 cursor-pointer hover:bg-gray-100 dark:hover:bg-[#1b2e4b]"
                                     >
                                         <!-- <i [class]="child.icon"></i> -->
-                                        <span> {{ child.label }} </span>
+                                        <span> {{ child.label |translate}} </span>
                                     </a>
                                 </ng-template>
 
@@ -136,7 +136,7 @@
                                         routerLinkActive="bg-primary text-white hover:bg-primary"
                                         class="flex items-center ps-16 gap-3 py-3 cursor-pointer hover:bg-gray-100 dark:hover:bg-[#1b2e4b] border-b border-[#C3CAD980]"
                                     >
-                                        <span> {{ grand.label }} </span>
+                                        <span> {{ grand.label |translate}} </span>
                                     </a>
                                 </div>
                             </div>
