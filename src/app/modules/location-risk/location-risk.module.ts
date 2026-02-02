@@ -16,8 +16,14 @@ import { TagModule } from 'primeng/tag';
 import { Textarea } from 'primeng/textarea';
 import { LocationRiskViewComponent } from 'src/app/modules/location-risk/components/location-risk-view/location-risk-view.component';
 import { LocationRiskListComponent } from './components/location-risk-list/location-risk-list.component';
+import { LocationRiskDashboardComponent } from './components/location-risk-dashboard/location-risk-dashboard.component';
+import { Timeline } from 'primeng/timeline';
 
 const routes: Routes = [
+    {
+        path: 'dashboard',
+        component: LocationRiskDashboardComponent,
+    },
     {
         path: 'list',
         component: LocationRiskListComponent,
@@ -60,7 +66,12 @@ const routes: Routes = [
         InputText,
         TabsModule,
         PanelModule,
+        Timeline,
     ],
-    declarations: [LocationRiskListComponent, LocationRiskViewComponent],
+    declarations: [
+        LocationRiskListComponent,
+        LocationRiskViewComponent,
+        LocationRiskDashboardComponent,
+    ],
 })
 export class LocationRiskModule {}

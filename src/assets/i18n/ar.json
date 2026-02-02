@@ -139,7 +139,7 @@
         "locationRegisterList": "قائمة سجلات المواقع",
         "editLocationRegister": "تعديل سجل الموقع",
         "riskImpact": "تأثير الخطر",
-        "riskStatus": "حالة الخطر"
+        "riskStatus": "احتمال وقوع الخطر"
     },
     "province": {
         "addNewProvince": "إضافة محافظة",
@@ -339,6 +339,9 @@
         "securitySystems": "الأنظمة الأمنية",
         "generalAdministration": "الإدارة العامة لحماية المنشآت",
         "fieldSurveyAdmin": "إدارة المسح الميداني",
+        "FieldProtectionMnagement": "إدارة الحماية الميدانية",
+        "RiskAnalysisDivision": "قسم تحليل المخاطر",
+        "SpecialistDashboard":" لوحة قيادة المختص",
         "provinces": "المحافظات",
         "regions": "المناطق",
         "locations": "المواقع",

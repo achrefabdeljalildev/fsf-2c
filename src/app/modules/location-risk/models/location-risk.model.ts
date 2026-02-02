@@ -8,6 +8,7 @@ export interface LocationRisk {
     locationId: number;
     riskImpactId: number;
     riskLikeliHoodId: number;
+    date: Date | string;
     riskStatusId: number;
     riskTypeId: number;
 

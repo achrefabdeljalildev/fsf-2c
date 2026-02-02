@@ -1,0 +1,79 @@
+<p-breadcrumb
+    [model]="[
+        { label: ('breadcrumbs.securitySystems' | translate), routerLink: '/' },
+        { label: ('breadcrumbs.FieldProtectionMnagement' | translate), routerLink: '/' },
+        { label: ('breadcrumbs.RiskAnalysisDivision' | translate), routerLink: '/' },
+        { label: ('breadcrumbs.SpecialistDashboard' | translate) },
+    ]"
+/>
+
+<main-content [isPanel]="false">
+    <!-- Top stat cards -->
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4 p-4 rounded-lg bg-primary">
+        <p-card
+            *ngFor="let s of stats"
+            class="rounded-2xl shadow-md bg-green-800 text-white transition-shadow duration-200 hover:shadow-lg p-6"
+        >
+            <div class="text-5xl md:text-6xl font-extrabold leading-none">
+                <div class="text-4xl font-extrabold text-teal-800 leading-none">
+                    {{ s.value }}
+                </div>
+                <div class="text-slate-600 text-sm font-semibold">
+                    {{ s.label }}
+                </div>
+            </div>
+        </p-card>
+    </div>
+    <p-timeline [value]="actionLog" class="w-full mt-4" align="right">
+        <ng-template pTemplate="marker">
+            <span
+                class="flex w-8 h-8 items-center justify-center rounded-full bg-emerald-800 text-white"
+            >
+                <i class="pi pi-check text-sm"></i>
+            </span>
+        </ng-template>
+        <ng-template pTemplate="content" let-a>
+            <p-card
+                class="p-card-event rounded-lg mt-3 !bg-lightBlue cursor-pointer"
+                (click)="router.navigate(['/location-risk/edit', a.id])"
+            >
+                <div
+                    class="timeline-event-content flex flex-col gap-1 text-sm font-bold text-slate-900 items-end ml-auto"
+                >
+                    <div class="flex items-center gap-1 text-sm text-slate-900">
+                        <span class="text-slate-500 text-xs">
+                            {{ a.date }}
+                        </span>
+                        <i class="pi pi-calendar text-sm"></i>
+                    </div>
+
+                    <span
+                        class="text-[10px] font-semibold text-orange-700 bg-orange-100 px-2 py-0.5 rounded-full inline-flex items-center"
+                    >
+                        تحت الإجراء
+                    </span>
+
+                    <span
+                        class="event-name text-slate-900 font-extrabold cursor-pointer transition-colors duration-200"
+                    >
+                        {{ a.name }}
+                    </span>
+                </div>
+                <span
+                    class="event-description text-slate-500 font-normal cursor-pointer transition-colors duration-200"
+                >
+                    {{ a.descriptionAr }}
+                </span>
+            </p-card>
+        </ng-template>
+    </p-timeline>
+    <div class="flex items-center justify-between">
+        <button
+            pButton
+            type="button"
+            class="p-button-text"
+            (click)="viewMore()"
+            label="عرض المزيد"
+        ></button>
+    </div>
+</main-content>

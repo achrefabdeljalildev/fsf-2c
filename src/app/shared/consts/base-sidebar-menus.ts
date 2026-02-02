@@ -125,6 +125,13 @@ export const HYPOTHESE_PROTECTION_SIDEBAR_MENU: TreeNode[] = [
         children: [
             {
                 key: '31',
+                label: ' لوحة قيادة المختص',
+                data: 'Location Risks dashboard',
+                icon: 'pi pi-list',
+                routerLink: '/location-risk/dashboard',
+            },
+            {
+                key: '31',
                 label: 'قائمة المخاطر ',
                 data: 'Location Risks List',
                 icon: 'pi pi-list',
