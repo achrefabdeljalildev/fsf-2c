@@ -84,3 +84,12 @@ export const API_URL_PROCCESS_APPROVAL = '/ExcutedProcess/ProcessApproval';
 
 // Workflow Process Approval User
 export const API_URL_PROCCESS_APPROVAL_USER = '/ExcutedProcess/ProcessApprovalUser';
+
+// Types of Patrols
+export const API_URL_TYPE_OF_PATROLS = '/#####################';
+
+// Types of Security Checkpoints
+export const API_URL_TYPE_OF_SECURITY_CHECKPOINTS = '/#####################';
+
+// Work Systems
+export const API_URL_WORK_SYSTEMS = '/#####################';

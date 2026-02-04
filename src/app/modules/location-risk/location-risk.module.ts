@@ -18,6 +18,8 @@ import { LocationRiskViewComponent } from 'src/app/modules/location-risk/compone
 import { LocationRiskListComponent } from './components/location-risk-list/location-risk-list.component';
 import { LocationRiskDashboardComponent } from './components/location-risk-dashboard/location-risk-dashboard.component';
 import { Timeline } from 'primeng/timeline';
+import { TooltipModule } from 'primeng/tooltip';
+import { Overlay } from 'primeng/overlay';
 
 const routes: Routes = [
     {
@@ -67,6 +69,8 @@ const routes: Routes = [
         TabsModule,
         PanelModule,
         Timeline,
+        TooltipModule,
+        Overlay,
     ],
     declarations: [
         LocationRiskListComponent,

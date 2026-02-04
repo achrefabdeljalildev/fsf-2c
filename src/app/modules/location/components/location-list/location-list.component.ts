@@ -41,6 +41,7 @@ export class LocationListComponent extends BaseListComponent<LocationModel> {
             { field: 'regionNameAr', title: 'formLabels.region' },
             { field: 'provinceNameAr', title: 'formLabels.province' },
             { field: 'organizationNameAr', title: 'formLabels.affiliatedEntity' },
+            { field: 'locationClassification', title: 'formLabels.locationClassification' },
             {
                 field: 'siteReceiptDate',
                 title: 'formLabels.receiptDate',

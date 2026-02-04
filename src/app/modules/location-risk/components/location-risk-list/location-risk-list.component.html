@@ -117,6 +117,20 @@
                     [style.color]="'#ffffff'"
                 />
             </ng-template>
+
+            <ng-template slot="descriptionAr" let-value="data">
+                <span
+                    [pTooltip]="value.descriptionAr"
+                    tooltipPosition="top"
+                    tooltipEvent="focus"
+                    appendTo="body"
+                    tabindex="0"
+                    class="inline-block truncate max-w-[260px] cursor-pointer focus:outline-none"
+                >
+                    {{ value.descriptionAr }}
+                </span>
+            </ng-template>
+
             <ng-template slot="actions" let-value="data">
                 <div class="flex gap-2">
                     <div (click)="navigateToEdit(value.id)" class="cursor-pointer">

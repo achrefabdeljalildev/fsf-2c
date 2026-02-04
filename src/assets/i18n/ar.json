@@ -227,7 +227,8 @@
         "selectRiskImpact": "اختر تأثير الخطر",
         "selectRiskProbability": "اختر احتمالية الخطر",
         "selectRiskLikelihood": "اختر احتمالية الخطر",
-        "selectRiskStatus": "اختر حالة الخطر"
+        "selectRiskStatus": "اختر حالة الخطر",
+        "description":"وصف الخطر"
     },
     "map": {
         "showRegions": "عرض المناطق",
@@ -361,7 +362,14 @@
         "hypotheses": "الفرضيات",
         "evaluations": "التقييمات",
         "settings": "الإعدادات",
-        "ControlManagement": "إدارة التحكم"
+        "ControlManagement": "إدارة التحكم",
+        "performanceEvaluationAndDevelopmentDivision": "شعبة تقييم وتطوير الأداء الميداني",
+        "operationalPlan": "الخطة التشغيلية",
+        "operationalPlanSettings": "اعدادات الخطة التشغيلية",
+        "typesOfPatrols":"انواع الدوريات",
+        "typesOfSecurityCheckpoints":"انواع نقاط التفتيش الأمنية",
+        "workSystem":"نظام العمل"
+
     },
     "validationMessages": {
         "savedSuccessfully": "تم الحفظ بنجاح",
@@ -465,6 +473,7 @@
         "locationCode": "رمز الموقع",
         "locationName": "اسم الموقع",
         "organization": "المنظمة",
+        "affiliatedEntities": "الجهات التابعة لها",
         "riskCode": "رمز الخطر",
         "enterRiskCode": "أدخل رمز الخطر",
         "province": "المحافظة",
@@ -495,7 +504,8 @@
         "children": "العناصر الفرعية",
         "enterChildName": "أدخل اسم العنصر الفرعي",
         "hypotheseName": "اسم الفرضية",
-        "lastRegisterDateUpdate": "تاریخ آخر تحدیث للسجل"
+        "lastRegisterDateUpdate": "تاریخ آخر تحدیث للسجل",
+        "locationClassification":" تصنيف الموقع"
     },
     "labels": {
         "time": "الوقت",
@@ -504,6 +514,24 @@
         "sequenceEvents": "تسلسل الأحداث",
         "eventName": "اسم الحدث",
         "addEvent": "إضافة حدث"
+    },
+    "typesOfPatrols": {
+        "addNew": "إضافة نوع دورية جديد",
+        "list": "قائمة أنواع الدوريات",
+        "edit": "تعديل نوع دورية",
+        "name": "اسم نوع الدورية"
+    },
+    "workSystem": {
+        "addNew": "اضافة نظام عمل جديد",
+        "list": "قائمة انظمة العمل",
+        "edit": "تعديل نظام عمل",
+        "name": "اسم نظام العمل"
+    },
+    "typesOfSecurityCheckpoints": {
+        "addNew": "إضافة نوع نقطة تفتيش أمنية جديدة",
+        "list": "قائمة أنواع نقاط التفتيش الأمنية",
+        "edit": "تعديل نوع نقطة تفتيش أمنية",
+        "name": "اسم نوع نقطة التفتيش الأمنية"
     },
     "siteTypes": {
         "none": "لا يوجد",

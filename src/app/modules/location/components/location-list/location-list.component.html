@@ -68,6 +68,13 @@
                         </div>
                     </div>
                 </ng-template>
+                <ng-template slot="locationClassification" let-value="data">
+                    <p-tag
+                        [value]="'التصنيف'"
+                        [style.backgroundColor]="value.locationClassificationColor"
+                        [style.color]="'#ffffff'"
+                    />
+                </ng-template>
             </ng-datatable>
         }
     </list-header>

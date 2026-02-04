@@ -199,6 +199,37 @@ export const routes: Routes = [
         data: { key: 'hypothese' },
     },
 
+    {
+        path: 'types-of-patrols',
+        canActivate: [AuthGuard],
+        component: AppLayout,
+        loadChildren: () =>
+            import('./modules/evaluating-improving-performance/operational-plan/operational-plan-settings/types-of-patrols/types-of-patrols.module').then(
+                (m) => m.TypesOfPatrolsModule,
+            ),
+        data: { key: 'hypothese' },
+    },
+    {
+        path: 'types-of-security-checkpoints',
+        canActivate: [AuthGuard],
+        component: AppLayout,
+        loadChildren: () =>
+            import('./modules/evaluating-improving-performance/operational-plan/operational-plan-settings/types-of-security-checkpoints/types-of-security-checkpoints.module').then(
+                (m) => m.TypesOfSecurityCheckpointsModule,
+            ),
+        data: { key: 'hypothese' },
+    },
+    {
+        path: 'work-systems',
+        canActivate: [AuthGuard],
+        component: AppLayout,
+        loadChildren: () =>
+            import('./modules/evaluating-improving-performance/operational-plan/operational-plan-settings/work-systems/work-systems.module').then(
+                (m) => m.WorkSystemsModule,
+            ),
+        data: { key: 'hypothese' },
+    },
+
     // globalSettings routes
     {
         path: 'global-settings',

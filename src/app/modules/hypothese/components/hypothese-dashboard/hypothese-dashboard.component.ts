@@ -12,6 +12,7 @@ interface StatCard {
 }
 
 interface ActionLogItem {
+    id: number;
     name: string;
     title: string;
     date: string;
@@ -83,6 +84,7 @@ export class HypotheseDashboardComponent extends BaseComponent implements OnInit
             next: (response: any) => {
                 const hypotheses = response.data.items as Hypothese[];
                 this.actionLog = hypotheses.map((hypothese: Hypothese) => ({
+                    id: hypothese.id || 0,
                     name: hypothese.nameAr,
                     title: hypothese.hypotheseTitleName || '',
                     date: hypothese.date

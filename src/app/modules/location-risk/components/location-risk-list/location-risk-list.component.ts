@@ -66,12 +66,17 @@ export class LocationRiskListComponent extends BaseListComponent<LocationRisk> {
     protected override getColumns(): colDef[] {
         return [
             { field: 'nameAr', title: 'locationRisk.name' },
-            { field: 'riskStatus.nameAr', title: 'locationRisk.riskStatus' },
-            { field: 'location.code', title: 'formLabels.locationCode' },
-            { field: 'location.nameAr', title: 'location.locationName' },
-            { field: 'location.province.region.nameAr', title: 'formLabels.region' },
+            { field: 'descriptionAr', title: 'locationRisk.description' },
+            { field: 'location.code', title: 'formLabels.locationCode', hide: !!this.locationId },
+            { field: 'location.nameAr', title: 'location.locationName', hide: !!this.locationId },
+            {
+                field: 'location.province.region.nameAr',
+                title: 'formLabels.region',
+                hide: !!this.locationId,
+            },
             { field: 'riskImpact', title: 'location.riskImpact' },
             { field: 'riskLikelihood', title: 'location.riskStatus' },
+            { field: 'riskStatus.nameAr', title: 'locationRisk.riskStatus' },
             { field: 'actions', title: 'common.actions', width: '100px' },
         ];
     }
