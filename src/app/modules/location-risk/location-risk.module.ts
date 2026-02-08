@@ -14,12 +14,11 @@ import { TableModule } from 'primeng/table';
 import { TabsModule } from 'primeng/tabs';
 import { TagModule } from 'primeng/tag';
 import { Textarea } from 'primeng/textarea';
-import { LocationRiskViewComponent } from 'src/app/modules/location-risk/components/location-risk-view/location-risk-view.component';
-import { LocationRiskListComponent } from './components/location-risk-list/location-risk-list.component';
-import { LocationRiskDashboardComponent } from './components/location-risk-dashboard/location-risk-dashboard.component';
 import { Timeline } from 'primeng/timeline';
 import { TooltipModule } from 'primeng/tooltip';
-import { Overlay } from 'primeng/overlay';
+import { LocationRiskDashboardComponent } from 'src/app/modules/location-risk/components/location-risk-dashboard/location-risk-dashboard.component';
+import { LocationRiskViewComponent } from 'src/app/modules/location-risk/components/location-risk-view/location-risk-view.component';
+import { LocationRiskListComponent } from './components/location-risk-list/location-risk-list.component';
 
 const routes: Routes = [
     {
@@ -68,14 +67,13 @@ const routes: Routes = [
         InputText,
         TabsModule,
         PanelModule,
-        Timeline,
         TooltipModule,
-        Overlay,
+        Timeline,
     ],
     declarations: [
+        LocationRiskDashboardComponent,
         LocationRiskListComponent,
         LocationRiskViewComponent,
-        LocationRiskDashboardComponent,
     ],
 })
 export class LocationRiskModule {}

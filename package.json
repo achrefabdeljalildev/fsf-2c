@@ -9,6 +9,8 @@
         "build": "ng build",
         "build-prod": "ng build --configuration production",
         "build-staging": "ng build --configuration staging",
+        "zip-build": "powershell -NoProfile -Command \"$ts=Get-Date -Format 'yyyy-MM-dd_HH-mm'; New-Item -ItemType Directory -Path dist -Force | Out-Null; Compress-Archive -Path dist\\browser\\* -DestinationPath \\\"dist\\build-$ts.zip\\\" -Force\"",
+        "build-and-zip": "npm run build-prod && npm run zip-build",
         "start-prod": "http-server dist\\browser -p 4200 --proxy http://localhost:4200",
         "reinstall": "rmdir /s /q node_modules 2>nul & del package-lock.json 2>nul & npm install"
     },

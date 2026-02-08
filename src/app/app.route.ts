@@ -198,13 +198,12 @@ export const routes: Routes = [
             import('./modules/location/location.module').then((m) => m.LocationModule),
         data: { key: 'hypothese' },
     },
-
     {
         path: 'types-of-patrols',
         canActivate: [AuthGuard],
         component: AppLayout,
         loadChildren: () =>
-            import('./modules/evaluating-improving-performance/operational-plan/operational-plan-settings/types-of-patrols/types-of-patrols.module').then(
+            import('./modules/settings/operational-plan-settings/types-of-patrols/types-of-patrols.module').then(
                 (m) => m.TypesOfPatrolsModule,
             ),
         data: { key: 'hypothese' },
@@ -214,7 +213,7 @@ export const routes: Routes = [
         canActivate: [AuthGuard],
         component: AppLayout,
         loadChildren: () =>
-            import('./modules/evaluating-improving-performance/operational-plan/operational-plan-settings/types-of-security-checkpoints/types-of-security-checkpoints.module').then(
+            import('./modules/settings/operational-plan-settings/types-of-security-checkpoints/types-of-security-checkpoints.module').then(
                 (m) => m.TypesOfSecurityCheckpointsModule,
             ),
         data: { key: 'hypothese' },
@@ -224,7 +223,7 @@ export const routes: Routes = [
         canActivate: [AuthGuard],
         component: AppLayout,
         loadChildren: () =>
-            import('./modules/evaluating-improving-performance/operational-plan/operational-plan-settings/work-systems/work-systems.module').then(
+            import('./modules/settings/operational-plan-settings/work-systems/work-systems.module').then(
                 (m) => m.WorkSystemsModule,
             ),
         data: { key: 'hypothese' },

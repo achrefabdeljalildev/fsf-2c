@@ -42,8 +42,8 @@ export class ClassificationOfRiskSituationsListComponent extends BaseListCompone
         this.showDialog = true;
     }
 
-    removeItem(id: number) {
-        this.confirmDelete('Item', () => {
+    removeItem(id: number, itemName: string) {
+        this.confirmDelete(`'${itemName}'`, () => {
             this.service.deleteById(id).subscribe(
                 () => {
                     this.loadData();

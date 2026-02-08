@@ -40,7 +40,6 @@ export class HypotheseListComponent extends BaseListComponent<Hypothese> {
 
     protected override getColumns(): colDef[] {
         return [
-            { field: 'nameAr', title: 'formLabels.name' },
             { field: 'hypotheseTitleName', title: 'formLabels.hypotheseTitle' },
             { field: 'locationCode', title: 'formLabels.locationCode' },
             { field: 'locationName', title: 'location.locationName' },
@@ -58,15 +57,15 @@ export class HypotheseListComponent extends BaseListComponent<Hypothese> {
         return this.hypotheseService.getPagedList(this.criteria);
     }
 
-    removeHypothese(id: number) {
-        if (confirm(this.translateService.instant('messages.confirmDeleteItem'))) {
+    removeHypothese(id: number, hypotheseTitle: string) {
+        this.confirmDelete(hypotheseTitle, () => {
             this.hypotheseService.deleteById(id).subscribe(() => {
                 this.showSuccessMessage(
                     this.translateService.instant('messages.deletedSuccessfully'),
                 );
                 this.loadData();
             });
-        }
+        });
     }
 
     toggleFilters(show: boolean) {

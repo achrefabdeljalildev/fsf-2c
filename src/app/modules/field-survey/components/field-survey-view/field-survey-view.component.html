@@ -54,31 +54,31 @@
                         />
                     </div>
 
-                    <!-- رمز الموقع - Survey Code -->
+                    <!-- اختيار الموقع - Location Selection -->
                     <div class="form-group col-span-2">
-                        <label for="locationCode" class="block text-sm font-medium mb-2">
-                            رمز الموقع
+                        <label for="locationId" class="block text-sm font-medium mb-2">
+                            الموقع
                             <span class="text-red-500">*</span>
                         </label>
-                        <div class="flex gap-2">
-                            <input
-                                id="locationCode"
-                                type="text"
-                                formControlName="locationCode"
-                                pInputText
-                                class="w-full"
-                                placeholder="بحث برمز الموقع"
-                                (keyup.enter)="searchByCode()"
-                            />
-                            <button
-                                type="button"
-                                class="btn btn-primary"
-                                (click)="searchByCode()"
-                                [disabled]="isLoading"
-                            >
-                                <i class="pi pi-search"></i>
-                            </button>
-                        </div>
+                        <p-select
+                            id="locationId"
+                            formControlName="locationId"
+                            [options]="locations"
+                            optionLabel="nameAr"
+                            optionValue="id"
+                            [placeholder]="'formLabels.selectLocation' | translate"
+                            [filter]="true"
+                            filterBy="code,nameAr"
+                            [style]="{ width: '100%' }"
+                            (onChange)="onLocationChange()"
+                        >
+                            <ng-template pTemplate="selectedItem" let-option>
+                                <span>{{ option?.code }} - {{ option?.nameAr }}</span>
+                            </ng-template>
+                            <ng-template pTemplate="item" let-option>
+                                <span>{{ option?.code }} - {{ option?.nameAr }}</span>
+                            </ng-template>
+                        </p-select>
                     </div>
 
                     <!-- اسم الموقع - Location Name -->
@@ -139,10 +139,94 @@
                             placeholder="المحافظة"
                         />
                     </div>
+
+                    <!-- تصنيف الموقع -->
+                    <div class="form-group">
+                        <label for="classificationId" class="block text-sm font-medium mb-2">
+                            {{ 'locationClassification.name' | translate }}
+                        </label>
+                        <p-select
+                            formControlName="classificationId"
+                            [options]="filteredLocationClassifications"
+                            optionLabel="nameAr"
+                            optionValue="id"
+                            [placeholder]="'locationClassification.name' | translate"
+                            [style]="{ width: '100%' }"
+                        >
+                            <ng-template pTemplate="selectedItem" let-option>
+                                <div class="flex items-center gap-2">
+                                    <span
+                                        class="inline-block w-4 h-4 rounded"
+                                        [style.backgroundColor]="option?.color"
+                                        style="border: 1px solid #ddd"
+                                    ></span>
+                                    <span>{{ option?.nameAr }}</span>
+                                </div>
+                            </ng-template>
+                        </p-select>
+                    </div>
+
+                    <!-- مركز العمليات - Operation Center -->
+                    <div class="form-group">
+                        <label for="opearationCenter" class="block text-sm font-medium mb-2">
+                            مركز العمليات
+                        </label>
+                        <input
+                            id="opearationCenter"
+                            type="text"
+                            formControlName="opearationCenter"
+                            pInputText
+                            class="w-full"
+                            placeholder="مركز العمليات"
+                        />
+                    </div>
+
+                    <!-- تاريخ استلام الموقع - Site Receipt Date -->
+                    <div class="form-group">
+                        <label for="siteReceiptDate" class="block text-sm font-medium mb-2">
+                            تاريخ استلام الموقع
+                        </label>
+                        <input
+                            id="siteReceiptDate"
+                            formControlName="siteReceiptDate"
+                            mwlFlatpickr
+                            [options]="dateBasicConfig"
+                            pInputText
+                            [altInput]="true"
+                            [convertModelValue]="true"
+                            class="w-full"
+                        />
+                    </div>
+
+                    <!-- Coordinates -->
+                    <div class="form-group">
+                        <label for="siteCoordinates" class="block text-sm font-medium mb-2">
+                            {{ 'formLabels.coordinates' | translate }}
+                        </label>
+                        <div class="flex gap-2">
+                            <input
+                                id="siteCoordinates"
+                                type="text"
+                                formControlName="siteCoordinates"
+                                pInputText
+                                class="w-full"
+                                [placeholder]="'formLabels.coordinates' | translate"
+                            />
+                            <button
+                                type="button"
+                                class="btn btn-sm btn-outline-primary"
+                                (click)="openMapDialog()"
+                                title="Select from map"
+                            >
+                                <i class="pi pi-map-marker"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-span-1">
+            <div class="col-span-1 flex flex-col gap-4">
                 <app-file-attachments
+                    class="basis-4/5"
                     [attachments]="attachments"
                     [entityName]="'FieldSurvey'"
                     [entityKey]="fieldSurveyId ? fieldSurveyId.toString() : ''"
@@ -155,22 +239,394 @@
                     (uploadSuccess)="onUploadSuccess($event)"
                     (uploadError)="onUploadError($event)"
                 />
+
+                <!-- مسار الصورة - Image Path -->
+                <div class="form-group basis-1/5 panel">
+                    <label for="imagePath" class="block text-sm font-medium mb-2">
+                        المسح الجوي
+                    </label>
+                    <div
+                        class="mb-3 rounded border border-dashed border-gray-300 p-2 cursor-pointer"
+                        role="button"
+                        tabindex="0"
+                        aria-label="اختر صورة المسح"
+                        (click)="imageInput.click()"
+                        (keydown.enter)="imageInput.click()"
+                        (keydown.space)="imageInput.click()"
+                    >
+                        <img
+                            [src]="imagePreviewUrl"
+                            alt="مسح جوي"
+                            class="w-full h-auto rounded"
+                            (error)="onImageError()"
+                        />
+                    </div>
+                    <input
+                        #imageInput
+                        id="imagePath"
+                        type="file"
+                        accept="image/*"
+                        class="hidden"
+                        (change)="onImageSelect($event)"
+                    />
+                </div>
             </div>
         </div>
-        <!-- Details Tabs (similar placement to Location view) -->
-        <p-tabs value="0">
+        <!-- Details Tabs -->
+        <p-tabs [value]="currentTabIndex">
             <p-tablist>
-                <p-tab *ngFor="let tab of classificationTabs; let i = index" [value]="i.toString()">
+                <p-tab value="0">{{ 'formLabels.addNote' | translate }}</p-tab>
+                <p-tab value="1">حدود الموقع</p-tab>
+                <p-tab value="2">المقر الإداري أو الموقع</p-tab>
+                <p-tab value="3">سجل الإجراءات</p-tab>
+                <p-tab
+                    *ngFor="let tab of classificationTabs; let i = index"
+                    [value]="(i + staticTabOffset).toString()"
+                >
                     {{ tab.nameAr }}
                 </p-tab>
-                <p-tab *ngIf="isEditMode" [value]="classificationTabs.length.toString()"
-                    >سجل الإجراءات</p-tab
-                >
             </p-tablist>
             <p-tabpanels>
+                <!-- Add Note -->
+                <p-tabpanel value="0">
+                    <div class="mt-4">
+                        <div class="form-group">
+                            <label for="descriptionAr" class="block text-sm font-medium mb-2">
+                                {{ 'formLabels.description' | translate }}
+                            </label>
+                            <textarea
+                                id="descriptionAr"
+                                formControlName="descriptionAr"
+                                pInputTextarea
+                                rows="5"
+                                class="w-full"
+                                [placeholder]="'formLabels.enterDescription' | translate"
+                            ></textarea>
+                        </div>
+                    </div>
+                </p-tabpanel>
+
+                <!-- Site Boundaries -->
+                <p-tabpanel value="1">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                        <div class="form-group">
+                            <label for="northBoundar" class="block text-sm font-medium mb-2">
+                                الحد الشمالي
+                            </label>
+                            <input
+                                id="northBoundar"
+                                type="text"
+                                formControlName="northBoundar"
+                                pInputText
+                                class="w-full"
+                            />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="southBoundar" class="block text-sm font-medium mb-2">
+                                الحد الجنوبي
+                            </label>
+                            <input
+                                id="southBoundar"
+                                type="text"
+                                formControlName="southBoundar"
+                                pInputText
+                                class="w-full"
+                            />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="westBoundar" class="block text-sm font-medium mb-2">
+                                الحد الغربي
+                            </label>
+                            <input
+                                id="westBoundar"
+                                type="text"
+                                formControlName="westBoundar"
+                                pInputText
+                                class="w-full"
+                            />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="eastBoundar" class="block text-sm font-medium mb-2">
+                                الحد الشرقي
+                            </label>
+                            <input
+                                id="eastBoundar"
+                                type="text"
+                                formControlName="eastBoundar"
+                                pInputText
+                                class="w-full"
+                            />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="siteLength" class="block text-sm font-medium mb-2">
+                                طول الموقع
+                            </label>
+                            <input
+                                id="siteLength"
+                                type="text"
+                                formControlName="siteLength"
+                                pInputText
+                                class="w-full"
+                            />
+                        </div>
+
+                        <div class="form-group">
+                            <label
+                                for="nearestPoliceStation"
+                                class="block text-sm font-medium mb-2"
+                            >
+                                أقرب مركز شرطة
+                            </label>
+                            <input
+                                id="nearestPoliceStation"
+                                type="text"
+                                formControlName="nearestPoliceStation"
+                                pInputText
+                                class="w-full"
+                            />
+                        </div>
+
+                        <div class="form-group">
+                            <label
+                                for="nearestDefenseCenter"
+                                class="block text-sm font-medium mb-2"
+                            >
+                                أقرب مركز دفاع
+                            </label>
+                            <input
+                                id="nearestDefenseCenter"
+                                type="text"
+                                formControlName="nearestDefenseCenter"
+                                pInputText
+                                class="w-full"
+                            />
+                        </div>
+                    </div>
+                </p-tabpanel>
+
+                <!-- Administrative Site -->
+                <p-tabpanel value="2">
+                    <div class="mt-4">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="form-group">
+                                <label
+                                    for="administrativeSiteType"
+                                    class="block text-sm font-medium mb-2"
+                                >
+                                    نوع المبنى
+                                </label>
+                                <input
+                                    id="administrativeSiteType"
+                                    type="text"
+                                    formControlName="administrativeSiteType"
+                                    pInputText
+                                    class="w-full"
+                                    placeholder="نوع المبنى"
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label
+                                    for="administrativeOfficeNumber"
+                                    class="block text-sm font-medium mb-2"
+                                >
+                                    عدد المباني
+                                </label>
+                                <input
+                                    id="administrativeOfficeNumber"
+                                    type="number"
+                                    formControlName="administrativeOfficeNumber"
+                                    pInputText
+                                    class="w-full"
+                                    placeholder="المباني عدد"
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label
+                                    for="administrativeWCNumber"
+                                    class="block text-sm font-medium mb-2"
+                                >
+                                    دورة مياه
+                                </label>
+                                <input
+                                    id="administrativeWCNumber"
+                                    type="number"
+                                    formControlName="administrativeWCNumber"
+                                    pInputText
+                                    class="w-full"
+                                    placeholder="عدد دورات المياه"
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label
+                                    for="administrativeServiceNumber"
+                                    class="block text-sm font-medium mb-2"
+                                >
+                                    عدد غرف الخدمات
+                                </label>
+                                <input
+                                    id="administrativeServiceNumber"
+                                    type="number"
+                                    formControlName="administrativeServiceNumber"
+                                    pInputText
+                                    class="w-full"
+                                    placeholder=" عدد غرف الخدمات"
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label
+                                    for="administrativeSite"
+                                    class="block text-sm font-medium mb-2"
+                                >
+                                    اسم المبنى
+                                </label>
+                                <input
+                                    id="administrativeSite"
+                                    type="text"
+                                    formControlName="administrativeSite"
+                                    pInputText
+                                    class="w-full"
+                                    placeholder="اسم المبنى"
+                                />
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                            <div class="flex items-center gap-2">
+                                <p-checkbox
+                                    formControlName="weaponsWarehouse"
+                                    [binary]="true"
+                                    inputId="weaponsWarehouse"
+                                />
+                                <label for="weaponsWarehouse">مستودع أسلحة</label>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="warhouseArea" class="block text-sm font-medium mb-2">
+                                    تحديد المساحة
+                                </label>
+                                <input
+                                    id="warhouseArea"
+                                    type="text"
+                                    formControlName="warhouseArea"
+                                    pInputText
+                                    class="w-full"
+                                />
+                            </div>
+
+                            <div class="flex items-center gap-2">
+                                <p-checkbox
+                                    formControlName="maintainceWorkShop"
+                                    [binary]="true"
+                                    inputId="maintainceWorkShop"
+                                />
+                                <label for="maintainceWorkShop">ورشة صيانة</label>
+                            </div>
+
+                            <div></div>
+
+                            <div class="flex items-center gap-2">
+                                <p-checkbox
+                                    formControlName="parkingSpaces"
+                                    [binary]="true"
+                                    inputId="parkingSpaces"
+                                />
+                                <label for="parkingSpaces">يوجد مواقف للضباط والأفراد</label>
+                            </div>
+
+                            <div class="form-group">
+                                <label
+                                    for="parkingSpacesNumber"
+                                    class="block text-sm font-medium mb-2"
+                                >
+                                    عدد المواقف
+                                </label>
+                                <input
+                                    id="parkingSpacesNumber"
+                                    type="number"
+                                    formControlName="parkingSpacesNumber"
+                                    pInputText
+                                    class="w-full"
+                                />
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                            <div class="form-group">
+                                <label
+                                    for="administrativeSiteDistance"
+                                    class="block text-sm font-medium mb-2"
+                                >
+                                    مسافة الموقع الإداري
+                                </label>
+                                <input
+                                    id="administrativeSiteDistance"
+                                    type="text"
+                                    formControlName="administrativeSiteDistance"
+                                    pInputText
+                                    class="w-full"
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="openingDate" class="block text-sm font-medium mb-2">
+                                    {{ 'formLabels.openingDate' | translate }}
+                                </label>
+                                <input
+                                    id="openingDate"
+                                    type="text"
+                                    formControlName="openingDate"
+                                    mwlFlatpickr
+                                    [options]="dateBasicConfig"
+                                    pInputText
+                                    [altInput]="true"
+                                    [convertModelValue]="true"
+                                    class="w-full"
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="staff" class="block text-sm font-medium mb-2">
+                                    عدد الموظفين
+                                </label>
+                                <input
+                                    id="staff"
+                                    type="number"
+                                    formControlName="staff"
+                                    pInputText
+                                    class="w-full"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </p-tabpanel>
+
+                <!-- Logs -->
+                <p-tabpanel value="3">
+                    <div class="p-4">
+                        <app-logs-list
+                            *ngIf="fieldSurveyId"
+                            tableName="FieldSurveies"
+                            [tableKey]="fieldSurveyId"
+                            class="w-full"
+                        />
+                        <div *ngIf="!fieldSurveyId" class="text-sm text-gray-500">
+                            سيتم عرض السجل بعد حفظ المسح.
+                        </div>
+                    </div>
+                </p-tabpanel>
+
+                <!-- Dynamic Classification Tabs -->
                 <p-tabpanel
                     *ngFor="let tab of classificationTabs; let i = index"
-                    [value]="i.toString()"
+                    [value]="(i + staticTabOffset).toString()"
                 >
                     <div class="p-4">
                         <ng-container *ngIf="tab.children && tab.children.length > 0">
@@ -194,7 +650,6 @@
                                                 class="form-group"
                                             >
                                                 <div class="flex items-start gap-3">
-                                                    <!-- Checkbox if isCheckBox is true -->
                                                     <div
                                                         *ngIf="form.isCheckBox"
                                                         class="flex items-center pt-1"
@@ -207,7 +662,6 @@
                                                         />
                                                     </div>
 
-                                                    <!-- Form Label/Text -->
                                                     <div class="flex-1">
                                                         <label
                                                             class="block text-sm font-medium mb-1"
@@ -215,7 +669,6 @@
                                                             {{ form.nameAr }}
                                                         </label>
 
-                                                        <!-- Text Input if isText is true -->
                                                         <input
                                                             *ngIf="form.isText"
                                                             type="text"
@@ -252,21 +705,43 @@
                         </div>
                     </div>
                 </p-tabpanel>
-
-                <p-tabpanel [value]="classificationTabs.length.toString()">
-                    <div class="p-4">
-                        <app-logs-list
-                            *ngIf="fieldSurveyId"
-                            tableName="FieldSurveies"
-                            [tableKey]="fieldSurveyId"
-                            class="w-full"
-                        />
-                        <div *ngIf="!fieldSurveyId" class="text-sm text-gray-500">
-                            سيتم عرض السجل بعد حفظ المسح.
-                        </div>
-                    </div>
-                </p-tabpanel>
             </p-tabpanels>
         </p-tabs>
     </form>
 </div>
+
+<!-- Map Selection Dialog -->
+<p-dialog
+    [(visible)]="showMapDialog"
+    [header]="'location.selectLocationFromMap' | translate"
+    [modal]="true"
+    [style]="{ width: '90vw' }"
+    [maximizable]="true"
+    [closeOnEscape]="true"
+    (onShow)="onMapDialogShow()"
+>
+    <div class="h-full flex flex-col justify-between">
+        <app-saudi-map
+            *ngIf="showMapDialog"
+            [initializeOnLoad]="false"
+            (markerSelected)="onMapMarkerSelected($event)"
+            class="flex-1"
+        />
+    </div>
+    <!-- the actions should be in footer -->
+    <ng-template #footer>
+        <div class="flex gap-2 mt-4 justify-end">
+            <button type="button" class="btn btn-outline" (click)="closeMapDialog()">
+                {{ 'buttons.cancel' | translate }}
+            </button>
+            <button
+                type="button"
+                class="btn btn-primary"
+                (click)="confirmMapSelection()"
+                [disabled]="!selectedMarkerCoordinates"
+            >
+                {{ 'dataTable.confirm' | translate }}
+            </button>
+        </div>
+    </ng-template>
+</p-dialog>

@@ -59,5 +59,6 @@ input[type='range']:active::-webkit-slider-thumb {
 }
 
 .p-inputtext:disabled {
+    border: none !important;
     background-color: #e7f1f0 !important;
 }

@@ -46,22 +46,22 @@ export class LocationRiskDashboardComponent extends BaseComponent implements OnI
         {
             icon: 'assets/images/icons/location-logo.svg',
             value: '16',
-            label: 'الفرضيات المنفذة بالمنطقة',
+            label: 'المخاطر المفعلة بالمنطقة',
         },
         {
             icon: 'assets/images/icons/location-important-logo.svg',
             value: '20%',
-            label: 'نسبة الفرضيات المرسلة للوزارة',
+            label: 'نسبة المخاطر المرسلة للوزارة',
         },
         {
             icon: 'assets/images/icons/location-whait-active-logo.svg',
             value: '08',
-            label: 'الفرضيات بإنتظار التنفيذ',
+            label: 'المخاطر بإنتظار التفعيل',
         },
         {
             icon: 'assets/images/icons/pending-verification-logo.svg',
             value: '10',
-            label: 'الفرضيات المقترحة ',
+            label: 'المخاطر المقترحة ',
         },
     ];
 

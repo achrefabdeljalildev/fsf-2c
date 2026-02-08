@@ -139,7 +139,7 @@
         "locationRegisterList": "قائمة سجلات المواقع",
         "editLocationRegister": "تعديل سجل الموقع",
         "riskImpact": "تأثير الخطر",
-        "riskStatus": "احتمال وقوع الخطر"
+        "riskStatus": "حالة الخطر"
     },
     "province": {
         "addNewProvince": "إضافة محافظة",
@@ -228,7 +228,7 @@
         "selectRiskProbability": "اختر احتمالية الخطر",
         "selectRiskLikelihood": "اختر احتمالية الخطر",
         "selectRiskStatus": "اختر حالة الخطر",
-        "description":"وصف الخطر"
+        "description": "وصف الخطر"
     },
     "map": {
         "showRegions": "عرض المناطق",
@@ -337,12 +337,12 @@
         "editChild": "تعديل عنصر فرعي"
     },
     "breadcrumbs": {
+        "FieldProtectionMnagement": "إدارة الحماية الميدانية",
+        "RiskAnalysisDivision": "قسم تحليل المخاطر",
+        "SpecialistDashboard": " لوحة قيادة المختص",
         "securitySystems": "الأنظمة الأمنية",
         "generalAdministration": "الإدارة العامة لحماية المنشآت",
         "fieldSurveyAdmin": "إدارة المسح الميداني",
-        "FieldProtectionMnagement": "إدارة الحماية الميدانية",
-        "RiskAnalysisDivision": "قسم تحليل المخاطر",
-        "SpecialistDashboard":" لوحة قيادة المختص",
         "provinces": "المحافظات",
         "regions": "المناطق",
         "locations": "المواقع",
@@ -366,10 +366,9 @@
         "performanceEvaluationAndDevelopmentDivision": "شعبة تقييم وتطوير الأداء الميداني",
         "operationalPlan": "الخطة التشغيلية",
         "operationalPlanSettings": "اعدادات الخطة التشغيلية",
-        "typesOfPatrols":"انواع الدوريات",
-        "typesOfSecurityCheckpoints":"انواع نقاط التفتيش الأمنية",
-        "workSystem":"نظام العمل"
-
+        "typesOfPatrols": "انواع الدوريات",
+        "typesOfSecurityCheckpoints": "انواع نقاط التفتيش الأمنية",
+        "workSystem": "نظام العمل"
     },
     "validationMessages": {
         "savedSuccessfully": "تم الحفظ بنجاح",
@@ -473,7 +472,6 @@
         "locationCode": "رمز الموقع",
         "locationName": "اسم الموقع",
         "organization": "المنظمة",
-        "affiliatedEntities": "الجهات التابعة لها",
         "riskCode": "رمز الخطر",
         "enterRiskCode": "أدخل رمز الخطر",
         "province": "المحافظة",
@@ -486,6 +484,7 @@
         "siteType": "يوجد مقر بالموقع",
         "coordinates": "الإحداثيات",
         "administrator": "المسؤول",
+        "affiliatedEntities": "الجهات التابعة لها",
         "location": "الموقع",
         "selectLocation": "اختر الموقع",
         "value": "القيمة",
@@ -505,15 +504,7 @@
         "enterChildName": "أدخل اسم العنصر الفرعي",
         "hypotheseName": "اسم الفرضية",
         "lastRegisterDateUpdate": "تاریخ آخر تحدیث للسجل",
-        "locationClassification":" تصنيف الموقع"
-    },
-    "labels": {
-        "time": "الوقت",
-        "relatedDetails": "بيانات ذات الصلة",
-        "notes": "الاجراءات",
-        "sequenceEvents": "تسلسل الأحداث",
-        "eventName": "اسم الحدث",
-        "addEvent": "إضافة حدث"
+        "locationClassification": " تصنيف الموقع"
     },
     "typesOfPatrols": {
         "addNew": "إضافة نوع دورية جديد",
@@ -532,6 +523,14 @@
         "list": "قائمة أنواع نقاط التفتيش الأمنية",
         "edit": "تعديل نوع نقطة تفتيش أمنية",
         "name": "اسم نوع نقطة التفتيش الأمنية"
+    },
+    "labels": {
+        "time": "الوقت",
+        "relatedDetails": "بيانات ذات الصلة",
+        "notes": "الاجراءات",
+        "sequenceEvents": "تسلسل الأحداث",
+        "eventName": "اسم الحدث",
+        "addEvent": "إضافة حدث"
     },
     "siteTypes": {
         "none": "لا يوجد",

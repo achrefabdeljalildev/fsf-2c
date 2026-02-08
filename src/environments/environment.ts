@@ -6,6 +6,6 @@ export const environment = {
     production: false,
     appVersion: 'v0.0.1-dev',
     USERDATA_KEY: 'authf6a5f49fc955',
-    // baseUrl: 'https://dev-operation-srv.fsf.gov.sa/api/v1',
-    baseUrl: 'http://securityopearation.runasp.net/api/v1',
+    baseUrl: 'https://dev-operation-srv.fsf.gov.sa/api/v1',
+    // baseUrl: 'http://securityopearation.runasp.net/api/v1',
 };

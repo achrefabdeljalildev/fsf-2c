@@ -12,7 +12,6 @@ import { TabsModule } from 'primeng/tabs';
 import { TagModule } from 'primeng/tag';
 import { LocationDashboardComponent } from 'src/app/modules/location/components/location-dashboard/location-dashboard.component';
 import { LocationViewComponent } from 'src/app/modules/location/components/location-view/location-view.component';
-import { SaudiMapComponent } from 'src/app/modules/location/components/saudi-map/saudi-map.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { LocationListComponent } from './components/location-list/location-list.component';
 
@@ -54,11 +53,6 @@ const routes: Routes = [
         SharedModule,
         SelectModule,
     ],
-    declarations: [
-        LocationDashboardComponent,
-        LocationListComponent,
-        LocationViewComponent,
-        SaudiMapComponent,
-    ],
+    declarations: [LocationDashboardComponent, LocationListComponent, LocationViewComponent],
 })
 export class LocationModule {}

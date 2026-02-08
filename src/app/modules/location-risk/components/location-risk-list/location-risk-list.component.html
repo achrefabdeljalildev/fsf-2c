@@ -110,14 +110,6 @@
                     [style.color]="'#ffffff'"
                 />
             </ng-template>
-            <ng-template slot="riskLikelihood" let-value="data">
-                <p-tag
-                    [value]="value.riskLikeliHood.nameAr"
-                    [style.backgroundColor]="value.riskLikeliHood.color"
-                    [style.color]="'#ffffff'"
-                />
-            </ng-template>
-
             <ng-template slot="descriptionAr" let-value="data">
                 <span
                     [pTooltip]="value.descriptionAr"
@@ -130,7 +122,13 @@
                     {{ value.descriptionAr }}
                 </span>
             </ng-template>
-
+            <ng-template slot="riskLikelihood" let-value="data">
+                <p-tag
+                    [value]="value.riskLikeliHood.nameAr"
+                    [style.backgroundColor]="value.riskLikeliHood.color"
+                    [style.color]="'#ffffff'"
+                />
+            </ng-template>
             <ng-template slot="actions" let-value="data">
                 <div class="flex gap-2">
                     <div (click)="navigateToEdit(value.id)" class="cursor-pointer">

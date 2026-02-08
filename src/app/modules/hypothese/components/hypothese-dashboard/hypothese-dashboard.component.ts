@@ -84,7 +84,7 @@ export class HypotheseDashboardComponent extends BaseComponent implements OnInit
             next: (response: any) => {
                 const hypotheses = response.data.items as Hypothese[];
                 this.actionLog = hypotheses.map((hypothese: Hypothese) => ({
-                    id: hypothese.id || 0,
+                    id: hypothese.id!,
                     name: hypothese.nameAr,
                     title: hypothese.hypotheseTitleName || '',
                     date: hypothese.date

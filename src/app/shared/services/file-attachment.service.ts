@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 export interface FileUploadResponse {
@@ -28,6 +28,11 @@ export interface GetFileResponse {
     success: boolean;
     message: string;
     data?: FileItem[];
+}
+
+export interface ImageUploadResponse {
+    fileName: string;
+    filePath: string;
 }
 
 @Injectable({
@@ -136,5 +141,15 @@ export class FileAttachmentService {
      */
     deleteFile(fileId: string | number): Observable<FileUploadResponse> {
         return this.http.delete<FileUploadResponse>(`/General/${fileId}`);
+    }
+
+    /**
+     * Upload a single image to the general image endpoint
+     */
+    uploadImage(file: File): Observable<ImageUploadResponse> {
+        const formData = new FormData();
+        formData.append('File', file);
+
+        return this.http.post<ImageUploadResponse>('/upload/image', formData);
     }
 }

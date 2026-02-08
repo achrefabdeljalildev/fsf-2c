@@ -38,6 +38,7 @@ import { SafePipe } from './pipes/safe.pipe';
 
 // App - components
 import { FlatpickrDirective } from 'angularx-flatpickr';
+import { SaudiMapComponent } from 'src/app/modules/location/components/saudi-map/saudi-map.component';
 import { BaseFormHeaderComponent } from 'src/app/shared/components/base-form-header/base-form-header.component';
 import { BaseInputComponent } from 'src/app/shared/components/base-input-component/base-input.component';
 import { FileAttachmentsComponent } from 'src/app/shared/components/file-attachments/file-attachments.component';
@@ -87,6 +88,7 @@ import { PdfViewerComponent } from 'src/app/shared/components/pdf-viewer/pdf-vie
         FileAttachmentsComponent,
         LogsListComponent,
         MainContentComponent,
+        SaudiMapComponent,
     ],
     exports: [
         // pipes
@@ -124,6 +126,7 @@ import { PdfViewerComponent } from 'src/app/shared/components/pdf-viewer/pdf-vie
         DialogModule,
         FileAttachmentsComponent,
         MainContentComponent,
+        SaudiMapComponent,
         FlatpickrDirective,
     ],
 })

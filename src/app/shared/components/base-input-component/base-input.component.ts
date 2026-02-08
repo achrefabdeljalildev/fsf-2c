@@ -67,7 +67,6 @@ export class BaseInputComponent implements ControlValueAccessor {
 
     toggleCheckbox(): void {
         if (!this.disabled) {
-            console.log('before: ', this.value);
             switch (this.value) {
                 case null:
                 case undefined:
@@ -80,8 +79,6 @@ export class BaseInputComponent implements ControlValueAccessor {
                     this.value = null;
                     break;
             }
-
-            console.log('after: ', this.value);
 
             this.onChange(this.value);
             this.onTouched();
