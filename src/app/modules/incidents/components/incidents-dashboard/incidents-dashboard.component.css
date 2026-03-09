@@ -1,0 +1,7 @@
+:host ::ng-deep .p-timeline .p-timeline-event-opposite {
+  display: none !important;
+}
+
+:host ::ng-deep .p-timeline-event-connector {
+    @apply bg-primary;
+}

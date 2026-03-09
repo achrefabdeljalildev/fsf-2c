@@ -1,0 +1,179 @@
+<p-dialog
+    [(visible)]="visible"
+    [header]="
+        isEditMode ? ('actions.editClassification' | translate) : ('listOfPlans.addNew' | translate)
+    "
+    [modal]="true"
+    [style]="{ width: '50vw' }"
+    [breakpoints]="{ '960px': '75vw', '640px': '90vw' }"
+    (onHide)="closeDialog()"
+>
+    <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-6">
+        <!-- Code ID -->
+        <div class="form-group">
+            <label for="codeId" class="block text-sm font-medium mb-2">
+                {{ 'listOfPlans.codeId' | translate }}
+                <span class="text-red-500">*</span>
+            </label>
+            <input
+                id="codeId"
+                type="text"
+                formControlName="codeId"
+                pInputText
+                class="w-full"
+                [placeholder]="'listOfPlans.enterCodeId' | translate"
+            />
+            <small
+                *ngIf="
+                    form.get('codeId')?.invalid &&
+                    (form.get('codeId')?.dirty || form.get('codeId')?.touched)
+                "
+                class="text-red-500"
+            >
+                <span *ngIf="form.get('codeId')?.errors?.['required']">
+                    {{ 'messages.requiredField' | translate }}
+                </span>
+            </small>
+        </div>
+        <div class="form-group">
+            <label for="locationName" class="block text-sm font-medium mb-2">
+                {{ 'listOfPlans.locationName' | translate }}
+                <span class="text-red-500">*</span>
+            </label>
+            <input
+                id="locationName"
+                type="text"
+                formControlName="locationName"
+                pInputText
+                class="w-full"
+                [placeholder]="'listOfPlans.enterLocationName' | translate"
+            />
+            <small
+                *ngIf="
+                    form.get('locationName')?.invalid &&
+                    (form.get('locationName')?.dirty || form.get('locationName')?.touched)
+                "
+                class="text-red-500"
+            >
+                <span *ngIf="form.get('locationName')?.errors?.['required']">
+                    {{ 'messages.requiredField' | translate }}
+                </span>
+            </small>
+        </div>
+        <div class="form-group">
+            <label for="region" class="block text-sm font-medium mb-2">
+                {{ 'listOfPlans.region' | translate }}
+                <span class="text-red-500">*</span>
+            </label>
+            <input
+                id="region"
+                type="text"
+                formControlName="region"
+                pInputText
+                class="w-full"
+                [placeholder]="'listOfPlans.enterRegion' | translate"
+            />
+            <small
+                *ngIf="
+                    form.get('region')?.invalid &&
+                    (form.get('region')?.dirty || form.get('region')?.touched)
+                "
+                class="text-red-500"
+            >
+                <span *ngIf="form.get('region')?.errors?.['required']">
+                    {{ 'messages.requiredField' | translate }}
+                </span>
+            </small>
+        </div>
+        <div class="form-group">
+            <label for="governorate" class="block text-sm font-medium mb-2">
+                {{ 'listOfPlans.governorate' | translate }}
+                <span class="text-red-500">*</span>
+            </label>
+            <input
+                id="governorate"
+                type="text"
+                formControlName="governorate"
+                pInputText
+                class="w-full"
+                [placeholder]="'listOfPlans.enterGovernorate' | translate"
+            />
+            <small
+                *ngIf="
+                    form.get('governorate')?.invalid &&
+                    (form.get('governorate')?.dirty || form.get('governorate')?.touched)
+                "
+                class="text-red-500"
+            >
+                <span *ngIf="form.get('governorate')?.errors?.['required']">
+                    {{ 'messages.requiredField' | translate }}
+                </span>
+            </small>
+        </div>
+        <div class="form-group">
+            <label for="affiliatedEntities" class="block text-sm font-medium mb-2">
+                {{ 'listOfPlans.affiliatedEntities' | translate }}
+                <span class="text-red-500">*</span>
+            </label>
+            <input
+                id="affiliatedEntities"
+                type="text"
+                formControlName="affiliatedEntities"
+                pInputText
+                class="w-full"
+                [placeholder]="'listOfPlans.enterAffiliatedEntities' | translate"
+            />
+            <small
+                *ngIf="
+                    form.get('affiliatedEntities')?.invalid &&
+                    (form.get('affiliatedEntities')?.dirty ||
+                        form.get('affiliatedEntities')?.touched)
+                "
+                class="text-red-500"
+            >
+                <span *ngIf="form.get('affiliatedEntities')?.errors?.['required']">
+                    {{ 'messages.requiredField' | translate }}
+                </span>
+            </small>
+        </div>
+        <div class="form-group">
+            <label for="planUpdates" class="block text-sm font-medium mb-2">
+                {{ 'listOfPlans.planUpdates' | translate }}
+                <span class="text-red-500">*</span>
+            </label>
+            <input
+                id="planUpdates"
+                type="text"
+                formControlName="planUpdates"
+                pInputText
+                class="w-full"
+                [placeholder]="'listOfPlans.enterPlanUpdates' | translate"
+            />
+            <small
+                *ngIf="
+                    form.get('planUpdates')?.invalid &&
+                    (form.get('planUpdates')?.dirty || form.get('planUpdates')?.touched)
+                "
+                class="text-red-500"
+            >
+                <span *ngIf="form.get('planUpdates')?.errors?.['required']">
+                    {{ 'messages.requiredField' | translate }}
+                </span>
+            </small>
+        </div>
+
+        <div class="flex justify-end gap-2">
+            <button
+                type="button"
+                class="btn bg-gray-50 hover:bg-gray-100 text-gray-700"
+                (click)="closeDialog()"
+                [disabled]="isLoading"
+            >
+                {{ 'buttons.cancel' | translate }}
+            </button>
+            <button type="submit" class="btn btn-primary" [disabled]="form.invalid || isLoading">
+                {{ 'buttons.save' | translate }}
+            </button>
+        </div>
+    </form>
+</p-dialog>

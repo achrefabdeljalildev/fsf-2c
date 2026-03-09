@@ -228,7 +228,8 @@
         "selectRiskProbability": "اختر احتمالية الخطر",
         "selectRiskLikelihood": "اختر احتمالية الخطر",
         "selectRiskStatus": "اختر حالة الخطر",
-        "description": "وصف الخطر"
+        "description": "وصف الخطر",
+        "potentialDanger": "احتمالية الخطر"
     },
     "map": {
         "showRegions": "عرض المناطق",
@@ -368,7 +369,19 @@
         "operationalPlanSettings": "اعدادات الخطة التشغيلية",
         "typesOfPatrols": "انواع الدوريات",
         "typesOfSecurityCheckpoints": "انواع نقاط التفتيش الأمنية",
-        "workSystem": "نظام العمل"
+        "workSystem": "نظام العمل",
+        "listOfPlans": "قائمة الخطط",
+        "listOfSites": "قائمة المواقع",
+        "dutyOfficers": "ضباط المناوبين",
+        "dutyShifts": "الوردّيات",
+        "distributionIndividuals": "توزيع الأفراد",
+        "planSummary": "ملخص الخطة",
+        "planDetails": "تفاصيل الخطة",
+        "planReviews": "مراجعات الخطة",
+        "approvalsCenter":"مركز الموافقات",
+        "ControlAndGuidanceManagement": "إدارة التحكم والتوجيه",
+        "incidentsDepartment": "قسم البلاغات"
+        
     },
     "validationMessages": {
         "savedSuccessfully": "تم الحفظ بنجاح",
@@ -504,7 +517,19 @@
         "enterChildName": "أدخل اسم العنصر الفرعي",
         "hypotheseName": "اسم الفرضية",
         "lastRegisterDateUpdate": "تاریخ آخر تحدیث للسجل",
-        "locationClassification": " تصنيف الموقع"
+        "locationClassification": " تصنيف الموقع",
+        "planUpdates":"اخر تحديثات الخطة",
+        "governorate": "المحافظة",
+        "codeIlocationName": "اسم الموقع",
+        "codeId": "رمز الموقع",
+        "departments": "الادارات",
+        "numberOfDutyOfficers": "عدد ضباط المناوبين",
+        "enterNumberOfDutyOfficers": "أدخل عدد ضباط المناوبين",
+        "shift": "الوردية",
+        "from": "من",
+        "to": "إلى",
+        "supplySpecialist":"مختص التموين",
+        "supplySupervisor":"مشرف التموين"
     },
     "typesOfPatrols": {
         "addNew": "إضافة نوع دورية جديد",
@@ -517,6 +542,49 @@
         "list": "قائمة انظمة العمل",
         "edit": "تعديل نظام عمل",
         "name": "اسم نظام العمل"
+    },
+    "listOfPlans": {
+        "addNew": "اضافة خطة جديدة",
+        "list": "قائمة الخطط",
+        "edit": "تعديل الخطة",
+        "name": "اسم الخطة",
+        "codeId": "رمز الموقع",
+        "enterCodeId": "أدخل رمز الموقع",
+        "locationName": "اسم الموقع",
+        "enterLocationName": "أدخل اسم الموقع",
+        "region": "المنطقة",
+        "enterRegion": "أدخل المنطقة",
+        "governorate": "المحافظة",
+        "enterGovernorate": "أدخل المحافظة",
+        "affiliatedEntities": "الجهات التابعة لها",
+        "enterAffiliatedEntities": "أدخل الجهات التابعة لها",
+        "planUpdates": "اخر تحديثات الخطة",
+        "enterPlanUpdates": "أدخل اخر تحديثات الخطة"
+    },
+    "dutyOfficers": {
+        "addNew": "اضافة ضابط مناوب جديد",
+        "list": "قائمة ضباط المناوبين",
+        "edit": "تعديل ضابط مناوب",
+        "nameDepartment": "اسم الادارة", 
+        "numberDutyOfficers": "عدد ضباط المناوبين"
+    },
+    "locationCard": {
+       "patrols": "البوابات",
+       "proactivePatrols": "الدوريات الاستباقية",
+       "stationedPatrols": "الدوريات المتمركزة",
+       "protectiveSystems": " المنظومات الوقائية",
+       "antiAircraftSystems": "أنظمة مضادة للطائرات",
+       "pointContention": "النقطة الاعتراضية",
+       "platoonSupervisor": "مشرف الفصيل",
+       "oneFactionGroup": "مجموعة الفصيل الواحد",
+       "totalFactions": "مجموع الفصائل",
+       "morningFixer": "المثبت الصباح",
+       "operatingRoom": "غرفة العمليات",
+       "headquartersGuarding": "حراسة المقر",
+       "numberOfAdministrators": "عدد الاداريين",
+       "numberOfAlternates": "عدد المناوبين",
+       "holidaysAndCourses": "الاجازات والدورات 10%",
+       "total": "المجموع الكلي"
     },
     "typesOfSecurityCheckpoints": {
         "addNew": "إضافة نوع نقطة تفتيش أمنية جديدة",

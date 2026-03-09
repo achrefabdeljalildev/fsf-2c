@@ -1,0 +1,195 @@
+<p-breadcrumb
+    [model]="[
+        { label: ('breadcrumbs.securitySystems' | translate), routerLink: '/' },
+        { label: ('breadcrumbs.performanceEvaluationAndDevelopmentDivision' | translate) },
+        { label: ('breadcrumbs.operationalPlan' | translate) },
+        { label: ('breadcrumbs.planSummary' | translate) },
+    ]"
+/>
+<div class="w-full bg-white border rounded-xl px-8 py-6">
+    <div class="relative flex items-center justify-between" dir="rtl">
+        <div
+            class="absolute top-[18px] h-[2.5px] bg-slate-200"
+            style="right: calc(50% / 6); left: calc(50% / 6)"
+        ></div>
+
+        <div
+            class="absolute top-[18px] h-[2.5px] bg-teal-500 transition-all duration-300"
+            [style.right]="startOffset"
+            [style.width.%]="progressWidth"
+        ></div>
+
+        <ng-container *ngFor="let step of steps; let i = index">
+            <div class="relative z-10 flex flex-col items-center flex-1">
+                <div
+                    class="w-9 h-9 rounded-full border flex items-center justify-center font-semibold transition-all duration-300 leading-none"
+                    [ngClass]="{
+                        'bg-teal-500 border-teal-500 text-white': step.id < currentStep,
+                        'border-teal-500 text-teal-600': step.id === currentStep,
+                        'border-slate-300 text-slate-400': step.id > currentStep,
+                    }"
+                >
+                    <ng-container *ngIf="step.id < currentStep; else stepNumber">
+                        <i class="pi pi-check text-sm text-white"></i>
+                    </ng-container>
+
+                    <ng-template #stepNumber>
+                        <span class="flex items-center justify-center leading-none bg-white px-3">
+                            {{ step.id }}
+                        </span>
+                    </ng-template>
+                </div>
+
+                <span
+                    class="mt-2 text-sm"
+                    [ngClass]="{
+                        'text-slate-700': step.id <= currentStep,
+                        'text-slate-400': step.id > currentStep,
+                    }"
+                >
+                    {{ step.label }}
+                </span>
+            </div>
+        </ng-container>
+    </div>
+</div>
+
+<div class="w-full bg-white border rounded-xl p-6 mt-6">
+    <div class="flex items-center justify-between mb-4" dir="rtl">
+        <button
+            class="flex items-center gap-2 bg-white hover:bg-gray-100 text-gray-600 px-4 py-2 rounded-md text-sm font-semibold transition border border-gray-300"
+            routerLink="/distribution-individuals/list"
+        >
+            <i class="pi pi-arrow-right text-xs"></i>
+            العودة
+        </button>
+
+        <div class="flex gap-3">
+            <button
+                class="flex items-center gap-2 bg-amber-400 hover:bg-amber-500 text-white px-4 py-2 rounded-md text-sm font-semibold transition"
+            >
+                حفظ
+                <i class="pi pi-bookmark text-xs"></i>
+            </button>
+            <button
+                class="flex items-center gap-2 bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-md text-sm font-semibold transition"
+                routerLink="/#########/list"
+            >
+                التالي
+                <i class="pi pi-arrow-left text-xs"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="h-px bg-slate-200 mb-6"></div>
+
+    <div class="w-full" dir="rtl">
+        <span class="text-lg font-semibold">ملخص الخطة</span>
+        <div
+            class="bg-teal-700 text-white px-6 py-4 flex justify-between items-center cursor-pointer mt-4"
+            (click)="toggleSection('plan')"
+        >
+            <span class="text-lg font-semibold">الضباط المناوبين</span>
+
+            <span class="transition-transform duration-300" [class.rotate-180]="sections.plan">
+                ⌃
+            </span>
+        </div>
+
+        <div *ngIf="sections.plan" class="flex flex-wrap gap-6 py-8">
+            <div
+                *ngFor="let item of planItems"
+                class="bg-gray-100 border border-teal-200 rounded-2xl p-8 min-w-[220px] text-center"
+            >
+                <div class="text-4xl font-bold text-teal-700 mb-3">
+                    {{ item.value }}
+                </div>
+
+                <div class="text-gray-700">
+                    {{ item.title }}
+                </div>
+            </div>
+        </div>
+
+        <div
+            class="bg-teal-700 text-white px-6 py-4 flex justify-between items-center cursor-pointer mt-6"
+            (click)="toggleSection('patrols')"
+        >
+            <span class="text-lg font-semibold">الورديات</span>
+
+            <span class="transition-transform duration-300" [class.rotate-180]="sections.patrols">
+                ⌃
+            </span>
+        </div>
+
+        <div *ngIf="sections.patrols" class="flex flex-wrap gap-6 py-8">
+            <div
+                *ngFor="let item of patrolItems"
+                class="bg-gray-100 border border-teal-200 rounded-2xl p-8 min-w-[220px] text-center"
+            >
+                <div class="text-4xl font-bold text-teal-700 mb-3">
+                    {{ item.value }}
+                </div>
+
+                <div class="text-gray-700">
+                    {{ item.title }}
+                </div>
+            </div>
+        </div>
+
+        <div
+            class="bg-teal-700 text-white px-6 py-4 flex justify-between items-center cursor-pointer mt-6"
+            (click)="toggleSection('distribution')"
+        >
+            <span class="text-lg font-semibold">توزيع الأفراد</span>
+
+            <span
+                class="transition-transform duration-300"
+                [class.rotate-180]="sections.distribution"
+            >
+                ⌃
+            </span>
+        </div>
+    </div>
+    <div *ngIf="sections.distribution" class="mt-6 mb-2">
+        <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+            <h3 class="text-gray-800 font-semibold text-base mb-6 text-right">
+                توزيع النقاط الأمنية
+            </h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <ng-container *ngFor="let item of securityPoints">
+                    <div *ngIf="item.status === 'success'" class="rounded-xl p-5 bg-gray-100">
+                        <div class="flex items-center gap-2" dir="rtl">
+                            <div
+                                class="w-7 h-7 rounded-full border flex items-center justify-center border-green-500 bg-green-50"
+                            >
+                                <i class="pi pi-check text-green-600 text-xs"></i>
+                            </div>
+
+                            <div class="flex flex-col items-start gap-1">
+                                <span class="text-gray-900 font-semibold text-sm">
+                                    {{ item.name }}
+                                </span>
+
+                                <span
+                                    class="text-sm px-3 py-1 rounded-md font-medium bg-orange-50 text-orange-700 border border-orange-200"
+                                >
+                                    {{ item.type }}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div
+                            class="flex justify-between text-base font-semibold mt-4 text-[#0C7C80]"
+                            dir="rtl"
+                        >
+                            <span>العدد المطلوب: {{ item.required }}</span>
+                            <span>{{ item.location }}</span>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>

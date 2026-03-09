@@ -1,0 +1,78 @@
+<p-dialog
+    [(visible)]="visible"
+    [header]="
+        isEditMode
+            ? ('actions.editClassification' | translate)
+            : ('dutyOfficers.addNew' | translate)
+    "
+    [modal]="true"
+    [style]="{ width: '50vw' }"
+    [breakpoints]="{ '960px': '75vw', '640px': '90vw' }"
+    (onHide)="closeDialog()"
+>
+    <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-6">
+        <div class="form-group">
+            <label for="nameAr" class="block text-sm font-medium mb-2">
+                {{ 'dutyOfficers.nameDepartment' | translate }}
+                <span class="text-red-500">*</span>
+            </label>
+            <input
+                id="nameAr"
+                type="text"
+                formControlName="nameAr"
+                pInputText
+                class="w-full"
+                [placeholder]="'formLabels.enterName' | translate"
+            />
+            <small
+                *ngIf="
+                    form.get('nameAr')?.invalid &&
+                    (form.get('nameAr')?.dirty || form.get('nameAr')?.touched)
+                "
+                class="text-red-500"
+            >
+                <span *ngIf="form.get('nameAr')?.errors?.['required']">
+                    {{ 'messages.requiredField' | translate }}
+                </span>
+            </small>
+
+            <label for="number" class="block text-sm font-medium mb-2 mt-4">
+                {{ 'dutyOfficers.numberDutyOfficers' | translate }}
+                <span class="text-red-500">*</span>
+            </label>
+            <input
+                id="number"
+                type="text"
+                formControlName="number"
+                pInputText
+                class="w-full"
+                [placeholder]="'formLabels.enterNumberOfDutyOfficers' | translate"
+            />
+            <small
+                *ngIf="
+                    form.get('number')?.invalid &&
+                    (form.get('number')?.dirty || form.get('number')?.touched)
+                "
+                class="text-red-500"
+            >
+                <span *ngIf="form.get('number')?.errors?.['required']">
+                    {{ 'messages.requiredField' | translate }}
+                </span>
+            </small>
+        </div>
+
+        <div class="flex justify-end gap-2">
+            <button
+                type="button"
+                class="btn bg-gray-50 hover:bg-gray-100 text-gray-700"
+                (click)="closeDialog()"
+                [disabled]="isLoading"
+            >
+                {{ 'buttons.cancel' | translate }}
+            </button>
+            <button type="submit" class="btn btn-primary" [disabled]="form.invalid || isLoading">
+                {{ 'buttons.save' | translate }}
+            </button>
+        </div>
+    </form>
+</p-dialog>

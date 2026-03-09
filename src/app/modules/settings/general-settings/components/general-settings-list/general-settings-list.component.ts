@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { colDef } from '@bhplugin/ng-datatable';
 import { Observable } from 'rxjs';
-import { GeneralSettings } from 'src/app/modules/settings/general-settings/models/general-settings.model';
-import { GeneralSettingsService } from 'src/app/modules/settings/general-settings/services/general-settings.service';
+import { GeneralSettings } from '../../models/general-settings.model';
+import { GeneralSettingsService } from '../../services/general-settings.service';
 import { BaseListComponent } from 'src/app/shared/components/base-list-component/base-list-component';
 import { ApiResponseModel, PagedResponse } from 'src/app/shared/models/base/paged-response.model';
 

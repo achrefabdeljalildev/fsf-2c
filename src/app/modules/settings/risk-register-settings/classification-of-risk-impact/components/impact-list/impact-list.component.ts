@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { colDef } from '@bhplugin/ng-datatable';
 import { Observable } from 'rxjs';
-import { ClassificationOfRiskImpact } from 'src/app/modules/settings/risk-register-settings/classification-of-risk-impact/models/classification-of-risk-impact';
-import { ClassificationOfRiskImpactService } from 'src/app/modules/settings/risk-register-settings/classification-of-risk-impact/services/classification-of-risk-impact.service';
+import { ClassificationOfRiskImpact } from '../../models/classification-of-risk-impact';
+import { ClassificationOfRiskImpactService } from '../../services/classification-of-risk-impact.service';
 import { BaseListComponent } from 'src/app/shared/components/base-list-component/base-list-component';
 import { ApiResponseModel, PagedResponse } from 'src/app/shared/models/base/paged-response.model';
 

@@ -1,0 +1,214 @@
+<p-breadcrumb
+    [model]="[
+        { label: ('breadcrumbs.securitySystems' | translate), routerLink: '/' },
+        { label: ('breadcrumbs.performanceEvaluationAndDevelopmentDivision' | translate) },
+        { label: ('breadcrumbs.operationalPlan' | translate) },
+        { label: ('breadcrumbs.distributionIndividuals' | translate) },
+    ]"
+/>
+<div class="w-full bg-white border rounded-xl px-8 py-6">
+    <div class="relative flex items-center justify-between" dir="rtl">
+        <div
+            class="absolute top-[18px] h-[2.5px] bg-slate-200"
+            style="right: calc(50% / 6); left: calc(50% / 6)"
+        ></div>
+
+        <div
+            class="absolute top-[18px] h-[2.5px] bg-teal-500 transition-all duration-300"
+            [style.right]="startOffset"
+            [style.width.%]="progressWidth"
+        ></div>
+
+        <ng-container *ngFor="let step of steps; let i = index">
+            <div class="relative z-10 flex flex-col items-center flex-1">
+                <div
+                    class="w-9 h-9 rounded-full border flex items-center justify-center font-semibold transition-all duration-300 leading-none"
+                    [ngClass]="{
+                        'bg-teal-500 border-teal-500 text-white': step.id < currentStep,
+                        'border-teal-500 text-teal-600': step.id === currentStep,
+                        'border-slate-300 text-slate-400': step.id > currentStep,
+                    }"
+                >
+                    <ng-container *ngIf="step.id < currentStep; else stepNumber">
+                        <i class="pi pi-check text-sm text-white"></i>
+                    </ng-container>
+
+                    <ng-template #stepNumber>
+                        <span class="flex items-center justify-center leading-none bg-white px-3">
+                            {{ step.id }}
+                        </span>
+                    </ng-template>
+                </div>
+
+                <span
+                    class="mt-2 text-sm"
+                    [ngClass]="{
+                        'text-slate-700': step.id <= currentStep,
+                        'text-slate-400': step.id > currentStep,
+                    }"
+                >
+                    {{ step.label }}
+                </span>
+            </div>
+        </ng-container>
+    </div>
+</div>
+
+<div class="w-full bg-white border rounded-xl p-6 mt-6">
+    <div class="flex items-center justify-between mb-4" dir="rtl">
+        <button
+            class="flex items-center gap-2 bg-white hover:bg-gray-100 text-gray-600 px-4 py-2 rounded-md text-sm font-semibold transition border border-gray-300"
+            routerLink="/duty-shifts/list"
+        >
+            <i class="pi pi-arrow-right text-xs"></i>
+            العودة
+        </button>
+
+        <div class="flex gap-3">
+            <button
+                class="flex items-center gap-2 bg-amber-400 hover:bg-amber-500 text-white px-4 py-2 rounded-md text-sm font-semibold transition"
+            >
+                حفظ
+                <i class="pi pi-bookmark text-xs"></i>
+            </button>
+            <button
+                class="flex items-center gap-2 bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-md text-sm font-semibold transition"
+                routerLink="/plan-summary/list"
+            >
+                التالي
+                <i class="pi pi-arrow-left text-xs"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="h-px bg-slate-200 mb-6"></div>
+
+    <div class="flex gap-4" dir="rtl">
+        <button
+            class="flex items-center gap-2 bg-teal-600 hover:bg-teal-700 text-white px-5 py-2.5 rounded-md text-sm font-semibold transition"
+        >
+            إضافة نقطة أمنية
+            <span class="flex items-center justify-center w-6 h-6 rounded-md bg-white/20">
+                <i class="pi pi-plus text-xs text-white"></i>
+            </span>
+        </button>
+
+        <button
+            class="flex items-center gap-2 bg-teal-600 hover:bg-teal-700 text-white px-5 py-2.5 rounded-md text-sm font-semibold transition"
+        >
+            إضافة الدوريات
+            <span class="flex items-center justify-center w-6 h-6 rounded-md bg-white/20">
+                <i class="pi pi-plus text-xs text-white"></i>
+            </span>
+        </button>
+    </div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-2 mt-6">
+    <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+        <h3 class="text-gray-800 font-semibold text-base mb-4 text-right">توزيع النقاط الأمنية</h3>
+
+        <div *ngFor="let item of securityPoints; let i = index">
+            <div
+                class="rounded-xl p-5 mb-4"
+                [ngClass]="item.status === 'success' ? 'bg-gray-100' : ''"
+            >
+                <div class="flex justify-between items-center mb-3" dir="rtl">
+                    <div class="flex items-center gap-2">
+                        <div
+                            class="w-7 h-7 rounded-full border flex items-center justify-center self-start"
+                            [ngClass]="
+                                item.status === 'success'
+                                    ? 'border-green-500 bg-green-50'
+                                    : 'border-red-500 bg-red-50'
+                            "
+                        >
+                            <i
+                                class="pi text-xs"
+                                [ngClass]="
+                                    item.status === 'success'
+                                        ? 'pi-check text-green-600'
+                                        : 'pi-times text-red-600'
+                                "
+                            ></i>
+                        </div>
+
+                        <div class="flex flex-col items-start gap-1">
+                            <span class="text-gray-900 font-semibold text-sm">
+                                {{ item.name }}
+                            </span>
+
+                            <span
+                                class="text-sm px-3 py-1 rounded-md font-medium"
+                                [ngClass]="'bg-orange-50 text-orange-700 border border-orange-200'"
+                            >
+                                {{ item.type }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="flex justify-between text-base text-cyan-700 font-semibold mt-2 text-[#0C7C80]"
+                    dir="rtl"
+                >
+                    <span>العدد المطلوب: {{ item.required }}</span>
+                    <span>{{ item.location }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+        <h3 class="text-gray-800 font-semibold text-base mb-4 text-right">توزيع الدوريات</h3>
+
+        <div *ngFor="let item of patrols; let i = index">
+            <div
+                class="rounded-xl p-5 mb-4"
+                [ngClass]="item.status === 'success' ? 'bg-gray-100' : ''"
+            >
+                <div class="flex justify-between items-center mb-3" dir="rtl">
+                    <div class="flex items-center gap-2">
+                        <div
+                            class="w-7 h-7 rounded-full border flex items-center justify-center self-start"
+                            [ngClass]="
+                                item.status === 'success'
+                                    ? 'border-green-500 bg-green-50'
+                                    : 'border-red-500 bg-red-50'
+                            "
+                        >
+                            <i
+                                class="pi text-xs"
+                                [ngClass]="
+                                    item.status === 'success'
+                                        ? 'pi-check text-green-600'
+                                        : 'pi-times text-red-600'
+                                "
+                            ></i>
+                        </div>
+
+                        <div class="flex flex-col items-start gap-1">
+                            <span class="text-gray-900 font-semibold text-sm">
+                                {{ item.name }}
+                            </span>
+
+                            <span
+                                class="text-sm px-3 py-1 rounded-md font-medium"
+                                [ngClass]="'bg-blue-100 text-blue-600'"
+                            >
+                                {{ item.type }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="flex justify-between text-base text-cyan-700 font-semibold mt-2 text-[#0C7C80]"
+                    dir="rtl"
+                >
+                    <span>العدد المطلوب: {{ item.required }}</span>
+                    <span>{{ item.location }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

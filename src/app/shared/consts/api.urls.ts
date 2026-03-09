@@ -86,10 +86,43 @@ export const API_URL_PROCCESS_APPROVAL = '/ExcutedProcess/ProcessApproval';
 export const API_URL_PROCCESS_APPROVAL_USER = '/ExcutedProcess/ProcessApprovalUser';
 
 // Types of Patrols
-export const API_URL_TYPE_OF_PATROLS = '/#####################';
+export const API_URL_TYPE_OF_PATROLS = '/PatrolsTypes';
 
 // Types of Security Checkpoints
-export const API_URL_TYPE_OF_SECURITY_CHECKPOINTS = '/#####################';
+export const API_URL_TYPE_OF_SECURITY_CHECKPOINTS = '/SecurityPointSettings';
 
 // Work Systems
-export const API_URL_WORK_SYSTEMS = '/#####################';
+export const API_URL_WORK_SYSTEMS = '/ShiftRotationType';
+
+// List of Plans
+export const API_URL_LIST_OF_PLANS = '/#####################';
+
+// Hypothetical plan
+export const API_URL_HYPOTHETICAL_PLAN = '/#####################';
+
+// Duty Officers
+export const API_URL_DUTY_OFFICERS = '/#####################';
+
+// Duty Shifts
+export const API_URL_DUTY_SHIFTS = '/#####################';
+
+// Distribution Individuals
+export const API_URL_DISTRIBUTION_INDIVIDUALS = '/#####################';
+
+// plan summary
+export const API_URL_PLAN_SUMMARY = '/#####################';
+
+// plan details
+export const API_URL_PLAN_DETAILS = '/#####################';
+
+// Location Card
+export const API_URL_LOCATION_CARD = '/#####################';
+
+// plan reviews
+export const API_URL_PLAN_REVIEWS = '/#####################';
+
+// Approvals Center
+export const API_URL_APPROVALS_CENTER = '/#####################';
+
+// Incidents
+export const API_URL_INCIDENTS = '/#################';

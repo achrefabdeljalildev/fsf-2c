@@ -1,0 +1,281 @@
+<p-breadcrumb
+    [model]="[
+        { label: ('breadcrumbs.securitySystems' | translate), routerLink: '/' },
+        { label: ('breadcrumbs.performanceEvaluationAndDevelopmentDivision' | translate) },
+        { label: ('breadcrumbs.operationalPlan' | translate) },
+        { label: ('breadcrumbs.listOfSites' | translate) },
+    ]"
+/>
+<div class="w-full bg-white border rounded-xl px-8 py-6">
+    <div class="relative flex items-center justify-between" dir="rtl">
+        <div
+            class="absolute top-[18px] h-[2.5px] bg-slate-200"
+            style="right: calc(50% / 6); left: calc(50% / 6)"
+        ></div>
+
+        <div
+            class="absolute top-[18px] h-[2.5px] bg-teal-500 transition-all duration-300"
+            [style.right]="startOffset"
+            [style.width.%]="progressWidth"
+        ></div>
+
+        <ng-container *ngFor="let step of steps; let i = index">
+            <div class="relative z-10 flex flex-col items-center flex-1">
+                <div
+                    class="w-9 h-9 rounded-full bg-white border flex items-center justify-center text-sm font-semibold"
+                    [ngClass]="{
+                        'border-teal-500 text-teal-600': step.id <= currentStep,
+                        'border-slate-300 text-slate-400': step.id > currentStep,
+                    }"
+                >
+                    {{ step.id }}
+                </div>
+
+                <span
+                    class="mt-2 text-sm"
+                    [ngClass]="{
+                        'text-slate-700': step.id <= currentStep,
+                        'text-slate-400': step.id > currentStep,
+                    }"
+                >
+                    {{ step.label }}
+                </span>
+            </div>
+        </ng-container>
+    </div>
+</div>
+<div class="w-full bg-white border rounded-xl p-6 mt-6">
+    <div class="flex items-center mb-4" dir="rtl">
+        <div class="flex gap-3 ml-auto">
+            <button
+                class="flex items-center gap-2 bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-md text-sm font-semibold transition"
+                routerLink="/duty-officers/list"
+            >
+                التالي
+                <i class="pi pi-arrow-left text-xs"></i>
+            </button>
+
+            <button
+                class="flex items-center gap-2 bg-amber-400 hover:bg-amber-500 text-white px-4 py-2 rounded-md text-sm font-semibold transition"
+            >
+                حفظ
+                <i class="pi pi-bookmark text-xs"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="h-px bg-slate-200 mb-6"></div>
+
+    <div class="mb-6" dir="rtl">
+        <div class="w-1/3">
+            <label class="block text-sm text-slate-700 mb-2 font-medium">رمز الموقع</label>
+            <input
+                type="text"
+                class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
+            />
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6" dir="rtl">
+        <div>
+            <label class="block text-sm text-slate-700 mb-2 font-medium">المحافظة</label>
+            <input
+                type="text"
+                class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm bg-slate-100"
+                placeholder="المحافظة"
+                readonly
+            />
+        </div>
+
+        <div>
+            <label class="block text-sm text-slate-700 mb-2 font-medium">تصنيف الموقع</label>
+            <input
+                type="text"
+                class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm bg-slate-100"
+                placeholder="الموقع"
+                readonly
+            />
+        </div>
+        <div>
+            <label class="block text-sm text-slate-700 mb-2 font-medium">تصنيف الموقع</label>
+            <input
+                type="text"
+                class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm bg-slate-100"
+                placeholder="الموقع"
+                readonly
+            />
+        </div>
+        <div>
+            <label class="block text-sm text-slate-700 mb-2 font-medium">الجهة التابعة لها</label>
+            <input
+                type="text"
+                class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm bg-slate-100"
+                placeholder="الجهة التابعة لها"
+                readonly
+            />
+        </div>
+        <div>
+            <label class="block text-sm text-slate-700 mb-2 font-medium">المنطقة</label>
+            <input
+                type="text"
+                class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm bg-slate-100"
+                placeholder="المنطقة"
+                readonly
+            />
+        </div>
+        <div>
+            <label class="block text-sm text-slate-700 mb-2 font-medium">المنطقة</label>
+            <input
+                type="text"
+                class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm bg-slate-100"
+                placeholder="المنطقة"
+                readonly
+            />
+        </div>
+    </div>
+</div>
+
+<div class="bg-white p-12 mt-6 border rounded-xl">
+    <h2 class="text-xl font-bold mb-6 text-right">هيكل تنظيمي</h2>
+    <div class="relative flex flex-col items-center bg-white p-8 scale-95 origin-top">
+        <div class="bg-teal-700 text-white px-6 py-2 rounded-md font-semibold">مكتب القائد</div>
+
+        <div class="w-px h-8 bg-teal-700"></div>
+
+        <div class="relative w-full max-w-5xl">
+            <div class="absolute top-0 left-0 right-0 h-px bg-teal-700"></div>
+
+            <div class="grid grid-cols-4 gap-10 pt-6">
+                <div class="flex flex-col items-center relative">
+                    <div class="absolute -top-6 w-px h-6 bg-teal-700"></div>
+
+                    <div
+                        class="bg-white border border-gray-300 rounded-md px-4 py-2 font-medium text-sm"
+                    >
+                        شؤون العسكريين
+                    </div>
+
+                    <div class="w-px h-5 bg-teal-700"></div>
+
+                    <div class="space-y-2">
+                        <div
+                            class="flex items-center gap-2 bg-white border rounded-md px-3 py-1 text-sm"
+                        >
+                            <span class="bg-yellow-400 text-xs px-2 rounded-full">12</span>
+                            مختص تموين
+                        </div>
+                        <div
+                            class="flex items-center gap-2 bg-white border rounded-md px-3 py-1 text-sm"
+                        >
+                            <span class="bg-yellow-400 text-xs px-2 rounded-full">12</span>
+                            مشرف تموين
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col items-center relative">
+                    <div class="absolute -top-6 w-px h-6 bg-teal-700"></div>
+
+                    <div
+                        class="bg-white border border-gray-300 rounded-md px-4 py-2 font-medium text-sm"
+                    >
+                        شؤون العسكريين
+                    </div>
+
+                    <div class="w-px h-5 bg-teal-700"></div>
+
+                    <div class="space-y-2">
+                        <div
+                            class="flex items-center gap-2 bg-white border rounded-md px-3 py-1 text-sm"
+                        >
+                            <span class="bg-yellow-400 text-xs px-2 rounded-full">12</span>
+                            مختص تموين
+                        </div>
+                        <div
+                            class="flex items-center gap-2 bg-white border rounded-md px-3 py-1 text-sm"
+                        >
+                            <span class="bg-yellow-400 text-xs px-2 rounded-full">12</span>
+                            مشرف تموين
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col items-center relative">
+                    <div class="absolute -top-6 w-px h-6 bg-teal-700"></div>
+
+                    <div
+                        class="bg-white border border-gray-300 rounded-md px-4 py-2 font-medium text-sm"
+                    >
+                        العمليات
+                    </div>
+
+                    <div class="w-px h-5 bg-teal-700"></div>
+
+                    <div class="space-y-2">
+                        <div
+                            class="flex items-center gap-2 bg-white border rounded-md px-3 py-1 text-sm"
+                        >
+                            <span class="bg-yellow-400 text-xs px-2 rounded-full">12</span>
+                            مختص تموين
+                        </div>
+                        <div
+                            class="flex items-center gap-2 bg-white border rounded-md px-3 py-1 text-sm"
+                        >
+                            <span class="bg-yellow-400 text-xs px-2 rounded-full">12</span>
+                            مشرف تموين
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col items-center relative">
+                    <div class="absolute -top-6 w-px h-6 bg-teal-700"></div>
+
+                    <div
+                        class="bg-white border border-gray-300 rounded-md px-4 py-2 font-medium text-sm"
+                    >
+                        الاتصالات الإدارية
+                    </div>
+
+                    <div class="w-px h-5 bg-teal-700"></div>
+
+                    <div class="space-y-2">
+                        <div
+                            class="flex items-center gap-2 bg-white border rounded-md px-3 py-1 text-sm"
+                        >
+                            <span class="bg-yellow-400 text-xs px-2 rounded-full">12</span>
+                            مختص تموين
+                        </div>
+                        <div
+                            class="flex items-center gap-2 bg-white border rounded-md px-3 py-1 text-sm"
+                        >
+                            <span class="bg-yellow-400 text-xs px-2 rounded-full">12</span>
+                            مشرف تموين
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="absolute right-4 top-24 bg-teal-800 text-white rounded-lg p-4 w-56">
+            <div class="flex justify-between items-center mb-3">
+                <span>إجمالي الإداريين</span>
+                <span class="text-xl font-bold">08</span>
+            </div>
+
+            <div class="space-y-2 text-sm">
+                <div class="flex justify-between">
+                    <span>الاتصالات الإدارية</span>
+                    <span>02</span>
+                </div>
+                <div class="flex justify-between">
+                    <span>العمليات</span>
+                    <span>02</span>
+                </div>
+                <div class="flex justify-between">
+                    <span>شؤون العسكريين</span>
+                    <span>04</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

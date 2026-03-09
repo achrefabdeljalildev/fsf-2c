@@ -1,4 +1,4 @@
-export interface ProcessApproval {
+export interface ProcessApprovalModel {
     id?: number;
     nameAr: string;
     descriptionAr: string;

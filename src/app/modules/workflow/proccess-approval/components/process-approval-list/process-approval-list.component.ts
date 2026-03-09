@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { colDef } from '@bhplugin/ng-datatable';
 import { Observable } from 'rxjs';
-import { ProcessApproval } from '../../models/process-approval';
+import { ProcessApprovalModel } from '../../models/process-approval';
 import { BaseListComponent } from 'src/app/shared/components/base-list-component/base-list-component';
 import { ApiResponseModel, PagedResponse } from 'src/app/shared/models/base/paged-response.model';
 import { ProcessApprovalService } from '../../services/process-approval.service';
@@ -11,7 +11,7 @@ import { ProcessApprovalService } from '../../services/process-approval.service'
     templateUrl: './process-approval-list.component.html',
     standalone: false,
 })
-export class ProcessApprovalListComponent extends BaseListComponent<ProcessApproval> {
+export class ProcessApprovalListComponent extends BaseListComponent<ProcessApprovalModel> {
     showDialog: boolean = false;
     selectedItemId: number | null = null;
 
@@ -28,7 +28,9 @@ export class ProcessApprovalListComponent extends BaseListComponent<ProcessAppro
         ];
     }
 
-    protected override fetchPage(): Observable<ApiResponseModel<PagedResponse<ProcessApproval>>> {
+    protected override fetchPage(): Observable<
+        ApiResponseModel<PagedResponse<ProcessApprovalModel>>
+    > {
         return this.service.getPagedList(this.criteria);
     }
 

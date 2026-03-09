@@ -1,0 +1,139 @@
+<p-breadcrumb
+    [model]="[
+        { label: ('breadcrumbs.securitySystems' | translate), routerLink: '/' },
+        { label: ('breadcrumbs.performanceEvaluationAndDevelopmentDivision' | translate) },
+        { label: ('breadcrumbs.operationalPlan' | translate) },
+        { label: ('breadcrumbs.dutyOfficers' | translate) },
+    ]"
+/>
+
+<div class="w-full bg-white border rounded-xl px-8 py-6">
+    <div class="relative flex items-center justify-between" dir="rtl">
+        <div
+            class="absolute top-[18px] h-[2.5px] bg-slate-200"
+            style="right: calc(50% / 6); left: calc(50% / 6)"
+        ></div>
+
+        <div
+            class="absolute top-[18px] h-[2.5px] bg-teal-500 transition-all duration-300"
+            [style.right]="startOffset"
+            [style.width.%]="progressWidth"
+        ></div>
+
+        <ng-container *ngFor="let step of steps; let i = index">
+            <div class="relative z-10 flex flex-col items-center flex-1">
+                <div
+                    class="w-9 h-9 rounded-full border flex items-center justify-center font-semibold transition-all duration-300 leading-none"
+                    [ngClass]="{
+                        'bg-teal-500 border-teal-500 text-white': step.id < currentStep,
+                        'border-teal-500 text-teal-600': step.id === currentStep,
+                        'border-slate-300 text-slate-400': step.id > currentStep,
+                    }"
+                >
+                    <ng-container *ngIf="step.id < currentStep; else stepNumber">
+                        <i class="pi pi-check text-sm text-white"></i>
+                    </ng-container>
+
+                    <ng-template #stepNumber>
+                        <span class="flex items-center justify-center leading-none bg-white px-3">
+                            {{ step.id }}
+                        </span>
+                    </ng-template>
+                </div>
+
+                <span
+                    class="mt-2 text-sm"
+                    [ngClass]="{
+                        'text-slate-700': step.id <= currentStep,
+                        'text-slate-400': step.id > currentStep,
+                    }"
+                >
+                    {{ step.label }}
+                </span>
+            </div>
+        </ng-container>
+    </div>
+</div>
+
+<div class="w-full bg-white border rounded-xl p-6 mt-6">
+    <div class="flex items-center justify-between mb-4" dir="rtl">
+        <button
+            class="flex items-center gap-2 bg-white hover:bg-gray-100 text-gray-600 px-4 py-2 rounded-md text-sm font-semibold transition border border-gray-300"
+            routerLink="/list-of-sites/list"
+        >
+            <i class="pi pi-arrow-right text-xs"></i>
+            العودة
+        </button>
+
+        <div class="flex gap-3">
+            <button
+                class="flex items-center gap-2 bg-amber-400 hover:bg-amber-500 text-white px-4 py-2 rounded-md text-sm font-semibold transition"
+            >
+                حفظ
+                <i class="pi pi-bookmark text-xs"></i>
+            </button>
+            <button
+                class="flex items-center gap-2 bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-md text-sm font-semibold transition"
+                routerLink="/duty-shifts/list"
+            >
+                التالي
+                <i class="pi pi-arrow-left text-xs"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="h-px bg-slate-200 mb-6"></div>
+    <div class="w-full border-t pt-4 mb-4" dir="rtl">
+        <h3 class="text-teal-600 font-bold text-lg mt-4 mb-4">الضباط المناوبين</h3>
+        <p-select
+            [options]="guardOfficers"
+            placeholder="تحديد عدد ضباط الخفر"
+            class="w-72 inline-block"
+            [showClear]="false"
+        ></p-select>
+    </div>
+
+    <ng-datatable
+        [rows]="rows"
+        [columns]="cols"
+        [sortable]="false"
+        [loading]="isLoading"
+        [pagination]="true"
+        [pageSize]="criteria.pageSize"
+        noDataContent="{{ 'common.noDataOnList' | translate }}"
+    >
+        <ng-template slot="actions" let-value="data">
+            <div class="flex gap-2">
+                <div (click)="openEditDialog(value.id)" class="cursor-pointer">
+                    <i class="pi pi-pencil"></i>
+                </div>
+                <div (click)="removeItem(value.id)" class="cursor-pointer">
+                    <i class="pi pi-trash"></i>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template slot="color" let-value="data">
+            <div
+                [style.backgroundColor]="value.color"
+                class="w-6 h-6 rounded border border-gray-300"
+                [title]="value.color"
+            ></div>
+        </ng-template>
+    </ng-datatable>
+    <button
+        class="flex items-center gap-2 border border-teal-500 text-teal-600 bg-gray-50 hover:bg-teal-50 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200"
+        dir="rtl"
+        (click)="openCreateDialog()"
+    >
+        <span class="flex items-center justify-center w-6 h-6 rounded-md bg-teal-100">
+            <i class="pi pi-plus text-teal-600 text-xs"></i>
+        </span>
+
+        إضافة مناوبين
+    </button>
+</div>
+<app-duty-officers-view
+    [(visible)]="showDialog"
+    [itemId]="selectedItemId"
+    (onSave)="onDialogSave()"
+/>

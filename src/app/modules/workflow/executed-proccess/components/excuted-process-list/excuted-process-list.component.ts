@@ -4,14 +4,14 @@ import { Observable } from 'rxjs';
 import { BaseListComponent } from 'src/app/shared/components/base-list-component/base-list-component';
 import { ApiResponseModel, PagedResponse } from 'src/app/shared/models/base/paged-response.model';
 import { ProcessService } from '../../services/process.service';
-import { ExcutedProcess } from '../../models/excuted-process';
+import { ExcutedProcessModel } from '../../models/excuted-process';
 
 @Component({
     selector: 'app-excuted-process-list',
     templateUrl: './excuted-process-list.component.html',
     standalone: false,
 })
-export class ExcutedProcessListComponent extends BaseListComponent<ExcutedProcess> {
+export class ExcutedProcessListComponent extends BaseListComponent<ExcutedProcessModel> {
     showDialog: boolean = false;
     selectedItemId: number | null = null;
 
@@ -27,7 +27,9 @@ export class ExcutedProcessListComponent extends BaseListComponent<ExcutedProces
         ];
     }
 
-    protected override fetchPage(): Observable<ApiResponseModel<PagedResponse<ExcutedProcess>>> {
+    protected override fetchPage(): Observable<
+        ApiResponseModel<PagedResponse<ExcutedProcessModel>>
+    > {
         return this.service.getPagedList(this.criteria);
     }
 

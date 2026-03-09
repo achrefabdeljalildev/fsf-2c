@@ -15,14 +15,14 @@ export class DashboardComponent extends BaseComponent {
             description: 'command_and_control_desc',
             icon: 'assets/images/icons/command-control-center-logo hover.svg',
             iconActive: 'assets/images/icons/command-control-center-logo.svg',
-            enabled: false,
+            enabled: true,
             subcards: [
                 {
                     id: 11,
                     key: '',
                     title: 'إدارة التحكم و التوجيه',
-                    enabled: false,
-                    routerLink: '/location/dashboard',
+                    enabled: true,
+                    routerLink: '/incidents/dashboard',
                 },
                 {
                     id: 12,

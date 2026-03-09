@@ -43,13 +43,6 @@ export class LocationListComponent extends BaseListComponent<LocationModel> {
             { field: 'organizationNameAr', title: 'formLabels.affiliatedEntity' },
             { field: 'locationClassification', title: 'formLabels.locationClassification' },
             {
-                field: 'siteReceiptDate',
-                title: 'formLabels.receiptDate',
-                hide: this.isRiskLocationList,
-                cellRenderer: (d: LocationModel) =>
-                    new Date(d.siteReceiptDate).toLocaleDateString('fr-EG'),
-            },
-            {
                 field: 'aaa',
                 title: 'formLabels.lastRegisterDateUpdate',
                 hide: !this.isRiskLocationList,

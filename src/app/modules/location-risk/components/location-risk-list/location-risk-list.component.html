@@ -8,7 +8,6 @@
 
 <p-panel class="mb-5" toggleable *ngIf="selectedLocation">
     <ng-template #header>
-        <!-- رمز الموقع - Survey Code -->
         <h1
             for="locationCode"
             class="flex text-2xl mb-4 py-3 w-full border-b-2 border-gray-200 items-center gap-2"
@@ -24,7 +23,6 @@
     </ng-template>
     <form [formGroup]="locationForm" class="flex flex-col gap-3 mb-4">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-            <!-- اسم الموقع - Location Name -->
             <div class="form-group">
                 <label for="nameAr" class="block text-sm font-medium mb-2">
                     اسم الموقع
@@ -40,7 +38,6 @@
                 />
             </div>
 
-            <!-- الجهة - Entity -->
             <div class="form-group">
                 <label for="organization" class="block text-sm font-medium mb-2">الجهة</label>
                 <input
@@ -53,7 +50,6 @@
                 />
             </div>
 
-            <!-- المنطقة - Region -->
             <div class="form-group">
                 <label for="region" class="block text-sm font-medium mb-2">المنطقة</label>
                 <input
@@ -66,7 +62,6 @@
                 />
             </div>
 
-            <!-- المحافظة - Province -->
             <div class="form-group">
                 <label for="province" class="block text-sm font-medium mb-2"> المحافظة </label>
                 <input

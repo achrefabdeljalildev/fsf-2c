@@ -72,8 +72,8 @@ export class HypotheseViewComponent extends BaseComponent implements OnInit {
             hypotheseTitleId: [null, [Validators.required]],
             day: ['', [Validators.required]],
             date: [null, [Validators.required]],
-            fromTimeSpan: [null, [Validators.required]],
-            toTimeSpan: [null, [Validators.required]],
+            fromTimeSpan: [new Date(), [Validators.required]],
+            toTimeSpan: [new Date(), [Validators.required]],
         });
         // Listen to hypotheseTypeId changes to filter titles
         this.hypotheseForm.get('hypotheseTypeId')?.valueChanges.subscribe((typeId) => {

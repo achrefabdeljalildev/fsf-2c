@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { colDef } from '@bhplugin/ng-datatable';
 import { BaseListComponent } from '@shared/components/base-list-component/base-list-component';
 import { Observable } from 'rxjs';
-import { TypesOfSecurityCheckpointsModel } from 'src/app/modules/evaluating-improving-performance/operational-plan/operational-plan-settings/types-of-security-checkpoints/models/types-of-security-checkpoints.model';
-import { TypesOfSecurityCheckpointsService } from 'src/app/modules/evaluating-improving-performance/operational-plan/operational-plan-settings/types-of-security-checkpoints/services/types-of-security-checkpoints.service';
+import { TypesOfSecurityCheckpointsModel } from '../../models/types-of-security-checkpoints.model';
+import { TypesOfSecurityCheckpointsService } from '../../services/types-of-security-checkpoints.service';
 import { ApiResponseModel, PagedResponse } from 'src/app/shared/models/base/paged-response.model';
 
 @Component({

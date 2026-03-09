@@ -228,6 +228,106 @@ export const routes: Routes = [
             ),
         data: { key: 'hypothese' },
     },
+    {
+        path: 'list-of-plans',
+        canActivate: [AuthGuard],
+        component: AppLayout,
+        loadChildren: () =>
+            import('./modules/evaluating-improving-performance/site-plan/list-of-plans/list-of-plans.module').then(
+                (m) => m.listOfPlansModule,
+            ),
+        data: { key: 'hypothese' },
+    },
+    {
+        path: 'list-of-sites',
+        canActivate: [AuthGuard],
+        component: AppLayout,
+        loadChildren: () =>
+            import('./modules/evaluating-improving-performance/operational-plan/list-of-sites/list-of-sites.module').then(
+                (m) => m.listOfSitesModule,
+            ),
+        data: { key: 'hypothese' },
+    },
+    {
+        path: 'duty-officers',
+        canActivate: [AuthGuard],
+        component: AppLayout,
+        loadChildren: () =>
+            import('./modules/evaluating-improving-performance/operational-plan/duty-officers/duty-officers.module').then(
+                (m) => m.dutyOfficersModule,
+            ),
+        data: { key: 'hypothese' },
+    },
+    {
+        path: 'duty-shifts',
+        canActivate: [AuthGuard],
+        component: AppLayout,
+        loadChildren: () =>
+            import('./modules/evaluating-improving-performance/operational-plan/duty-shifts/duty-shifts.module').then(
+                (m) => m.dutyShiftsModule,
+            ),
+        data: { key: 'hypothese' },
+    },
+    {
+        path: 'distribution-individuals',
+        canActivate: [AuthGuard],
+        component: AppLayout,
+        loadChildren: () =>
+            import('./modules/evaluating-improving-performance/operational-plan/distribution-individuals/distribution-individuals.module').then(
+                (m) => m.distributionIndividualsModule,
+            ),
+        data: { key: 'hypothese' },
+    },
+    {
+        path: 'plan-summary',
+        canActivate: [AuthGuard],
+        component: AppLayout,
+        loadChildren: () =>
+            import('./modules/evaluating-improving-performance/operational-plan/plan-summary/plan-summary.module').then(
+                (m) => m.planSummaryModule,
+            ),
+        data: { key: 'hypothese' },
+    },
+    {
+        path: 'plan-details',
+        canActivate: [AuthGuard],
+        component: AppLayout,
+        loadChildren: () =>
+            import('./modules/evaluating-improving-performance/operational-plan/plan-details/plan-details.module').then(
+                (m) => m.planDetailsModule,
+            ),
+        data: { key: 'hypothese' },
+    },
+    {
+        path: 'location-card',
+        canActivate: [AuthGuard],
+        component: AppLayout,
+        loadChildren: () =>
+            import('./modules/evaluating-improving-performance/operational-plan/location-card/location-card.module').then(
+                (m) => m.locationCardModule,
+            ),
+        data: { key: 'hypothese' },
+    },
+    {
+        path: 'approvals-center',
+        canActivate: [AuthGuard],
+        component: AppLayout,
+        loadChildren: () =>
+            import('./modules/approvals-center/approvals-center.module').then(
+                (m) => m.approvalsCenterModule,
+            ),
+        data: { key: 'hypothese' },
+    },
+    {
+        path: 'plan-reviews',
+        canActivate: [AuthGuard],
+        component: AppLayout,
+        loadChildren: () =>
+            import('./modules/evaluating-improving-performance/operational-plan/plan-reviews/plan-reviews.module').then(
+                (m) => m.planReviewsModule,
+            ),
+        data: { key: 'hypothese' },
+    },
 
     // globalSettings routes
     {
@@ -292,5 +392,13 @@ export const routes: Routes = [
                 (m) => m.ProcessApprovalModule,
             ),
         data: { key: 'globalSettings' },
+    },
+    {
+        path: 'incidents',
+        canActivate: [AuthGuard],
+        component: AppLayout,
+        loadChildren: () =>
+            import('./modules/incidents/incidents.module').then((m) => m.incidentsModule),
+        data: { key: 'ControlAndDirectionManagement' },
     },
 ];

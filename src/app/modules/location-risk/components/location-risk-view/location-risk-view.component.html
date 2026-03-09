@@ -13,7 +13,6 @@
     <form [formGroup]="locationRiskForm" (ngSubmit)="submit()" class="space-y-6">
         <div class="grid grid-cols-3 gap-6">
             <div class="panel flex flex-col col-span-2">
-                <!-- Top Action Buttons -->
                 <div class="flex justify-start gap-2 mb-4">
                     <button
                         type="button"
@@ -29,9 +28,7 @@
                     </button>
                 </div>
 
-                <!-- Grid Layout: 2 cols for form + 1 col for attachments -->
                 <div class="flex flex-col gap-6">
-                    <!-- Name -->
                     <div class="form-group">
                         <label for="nameAr" class="block text-sm font-medium mb-2">
                             {{ 'formLabels.name' | translate }}
@@ -59,7 +56,6 @@
                         </small>
                     </div>
 
-                    <!-- Location Selection -->
                     <div class="form-group">
                         <label for="locationId" class="block text-sm font-medium mb-2">
                             {{ 'formLabels.locationCode' | translate }}
@@ -102,10 +98,8 @@
                         </small>
                     </div>
 
-                    <!-- Location Details (Read-only) -->
                     <div class="p-4 bg-gray-50">
                         <div class="grid grid-cols-2 gap-4">
-                            <!-- Location Name -->
                             <div class="form-group">
                                 <label for="locationName" class="block text-sm font-medium mb-2">
                                     {{ 'formLabels.locationName' | translate }}
@@ -119,7 +113,6 @@
                                     readonly
                                 />
                             </div>
-                            <!-- Organization -->
                             <div class="form-group">
                                 <label for="organization" class="block text-sm font-medium mb-2">
                                     {{ 'formLabels.affiliatedEntities' | translate }}
@@ -133,7 +126,7 @@
                                     readonly
                                 />
                             </div>
-                            <!-- Region -->
+
                             <div class="form-group">
                                 <label for="region" class="block text-sm font-medium mb-2">
                                     {{ 'formLabels.region' | translate }}
@@ -147,7 +140,7 @@
                                     readonly
                                 />
                             </div>
-                            <!-- Province -->
+
                             <div class="form-group">
                                 <label for="province" class="block text-sm font-medium mb-2">
                                     {{ 'formLabels.province' | translate }}
@@ -165,7 +158,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Right: Attachments (1 col) -->
+
             <div class="col-span-1">
                 <app-file-attachments
                     [attachments]="attachments"
@@ -189,7 +182,6 @@
             <p-tabpanels>
                 <p-tabpanel value="0">
                     <div class="grid grid-cols-2 gap-6">
-                        <!-- Risk Type -->
                         <div class="form-group">
                             <label for="riskTypeId" class="block text-sm font-medium mb-2">
                                 {{ 'locationRisk.riskType' | translate }}
@@ -222,7 +214,6 @@
                             </small>
                         </div>
 
-                        <!-- Risk Impact -->
                         <div class="form-group">
                             <label for="riskImpactId" class="block text-sm font-medium mb-2">
                                 {{ 'locationRisk.riskImpact' | translate }}
@@ -278,7 +269,6 @@
                             </small>
                         </div>
 
-                        <!-- Risk Likelihood -->
                         <div class="form-group">
                             <label for="riskLikeliHoodId" class="block text-sm font-medium mb-2">
                                 {{ 'locationRisk.riskLikelihood' | translate }}
@@ -336,7 +326,6 @@
                             </small>
                         </div>
 
-                        <!-- Risk Status -->
                         <div class="form-group">
                             <label for="riskStatusId" class="block text-sm font-medium mb-2">
                                 {{ 'locationRisk.riskStatus' | translate }}
@@ -370,7 +359,7 @@
                                 </span>
                             </small>
                         </div>
-                        <!-- Description -->
+
                         <div class="form-group col-span-2">
                             <label for="descriptionAr" class="block text-sm font-medium mb-2">
                                 {{ 'formLabels.description' | translate }}

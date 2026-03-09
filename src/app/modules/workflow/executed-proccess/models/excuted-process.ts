@@ -1,4 +1,4 @@
-export interface ExcutedProcess {
+export interface ExcutedProcessModel {
     id?: number;
     nameAr: string;
     descriptionAr: string;

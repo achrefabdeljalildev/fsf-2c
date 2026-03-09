@@ -1,0 +1,28 @@
+<p-breadcrumb
+    [model]="[
+        { label: ('breadcrumbs.securitySystems' | translate), routerLink: '/' },
+        { label: ('breadcrumbs.ControlAndGuidanceManagement' | translate), routerLink: '/' },
+        { label: ('breadcrumbs.incidentsDepartment' | translate), routerLink: '/' },
+        { label: ('breadcrumbs.SpecialistDashboard' | translate) },
+    ]"
+/>
+<main-content [isPanel]="false">
+    <div
+        class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4 p-4 rounded-lg bg-[rgb(219_236_237)]"
+    >
+        <p-card
+            *ngFor="let s of stats"
+            class="rounded-xl bg-[#cfdfe1] text-center shadow-sm hover:shadow-md transition-all duration-200 p-6"
+        >
+            <div class="text-4xl font-extrabold text-teal-800 leading-none">
+                {{ s.value }}
+            </div>
+
+            <div class="text-slate-700 text-sm font-semibold mt-2">
+                {{ s.label }}
+            </div>
+        </p-card>
+    </div>
+
+    <div class="text-slate-900 font-extrabold text-xl mt-4">البلاغات المرفوعة اخيراً</div>
+</main-content>

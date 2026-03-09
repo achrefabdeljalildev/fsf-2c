@@ -187,34 +187,71 @@ export const HYPOTHESE_PROTECTION_SIDEBAR_MENU: TreeNode[] = [
         routerLink: '/evaluating-improving-field-performance/operational-plan',
         children: [
             {
-                key: '2411',
-                label: 'اعداد الخطة التشغيلية',
+                key: '242',
+                label: 'قائمة الخطط',
+                data: 'List of Plans',
+                icon: 'assets/images/icons/field-survey-sidebar.svg',
+                routerLink: '/list-of-plans/list',
+            },
+            {
+                key: '243',
+                label: 'الهيكل التنظيمي',
+                data: 'Organizational Structure',
+                icon: 'assets/images/icons/field-survey-sidebar.svg',
+                routerLink: '/list-of-sites/list',
+            },
+            {
+                key: '244',
+                label: 'تفاصيل الخطة',
+                data: 'Plan Details',
+                icon: 'assets/images/icons/field-survey-sidebar.svg',
+                routerLink: '/plan-details/list',
+            },
+            {
+                key: '245',
+                label: 'إعدادات الخطة التشغيلية',
                 data: 'Operational Plan setting',
                 routerLink:
                     '/evaluating-improving-field-performance/operational-plan/operational-plan-settings',
                 children: [
                     {
-                        key: '24111',
-                        label: 'انواع النقاط الأمنية',
+                        key: '2451',
+                        label: 'أنواع النقاط الأمنية',
                         data: 'types of patrols',
                         icon: 'pi pi-list',
                         routerLink: '/types-of-security-checkpoints/list',
                     },
                     {
-                        key: '24112',
-                        label: 'انواع الدوريات',
+                        key: '2452',
+                        label: 'أنواع الدوريات',
                         data: 'types of patrols',
                         icon: 'pi pi-list',
                         routerLink: '/types-of-patrols/list',
                     },
                     {
-                        key: '24113',
-                        label: 'انظمة العمل',
+                        key: '2453',
+                        label: 'أنظمة العمل',
                         data: 'work systems',
                         icon: 'pi pi-list',
                         routerLink: '/work-systems/list',
                     },
                 ],
+            },
+        ],
+    },
+    {
+        key: '242',
+        label: 'ادارة مركز الموافقات',
+        data: 'Approvals Center',
+        icon: 'assets/images/icons/field-survey-sidebar.svg',
+        routerLink: '/approvals-center',
+        children: [
+            {
+                key: '2421',
+                label: 'مركز الموافقات',
+                data: 'Approvals Center',
+                icon: 'pi pi-list',
+                routerLink: '/approvals-center/list',
             },
         ],
     },
@@ -293,6 +330,24 @@ export const GLOBAL_SETTINGS_SIDEBAR_MENU: TreeNode[] = [
     },
 ];
 
+export const CONTROL_AND_DIRECTION_SIDEBAR_MENU: TreeNode[] = [
+    {
+        key: '1',
+        label: 'البلاغات',
+        data: 'Incidents',
+        icon: 'assets/images/icons/control-direction-sidebar-logo.svg',
+        children: [
+            {
+                key: '11',
+                label: 'قائمة المختص ',
+                data: 'Incidents Dashboard',
+                icon: 'pi pi-list',
+                routerLink: '/incidents/dashboard',
+            },
+        ],
+    },
+];
+
 export const SIDEBAR_MENUS_KEYS = [
     { key: 'fieldSurvey', title: 'إدارة المسح الميداني', sidebarMenus: FIELD_SURVEY_SIDEBAR_MENU },
     {
@@ -304,5 +359,10 @@ export const SIDEBAR_MENUS_KEYS = [
         key: 'globalSettings',
         title: 'الإعدادات العامة',
         sidebarMenus: GLOBAL_SETTINGS_SIDEBAR_MENU,
+    },
+    {
+        key: 'ControlAndDirectionManagement',
+        title: 'إدارة التحكم و التوجيه',
+        sidebarMenus: CONTROL_AND_DIRECTION_SIDEBAR_MENU,
     },
 ];

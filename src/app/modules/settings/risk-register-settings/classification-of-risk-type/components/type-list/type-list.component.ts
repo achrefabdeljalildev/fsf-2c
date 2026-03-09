@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { colDef } from '@bhplugin/ng-datatable';
 import { BaseListComponent } from '@shared/components/base-list-component/base-list-component';
 import { Observable } from 'rxjs';
-import { classificationOfRisktype as ClassificationOfRiskType } from 'src/app/modules/settings/risk-register-settings/classification-of-risk-type/models/classification-of-risk-type';
-import { ClassificationOfRiskTypeService } from 'src/app/modules/settings/risk-register-settings/classification-of-risk-type/services/classification-of-risk-type.service';
+import { classificationOfRisktype as ClassificationOfRiskType } from '../../models/classification-of-risk-type';
+import { ClassificationOfRiskTypeService } from '../../services/classification-of-risk-type.service';
 import { ApiResponseModel, PagedResponse } from 'src/app/shared/models/base/paged-response.model';
 
 @Component({

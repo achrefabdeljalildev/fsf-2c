@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { colDef } from '@bhplugin/ng-datatable';
 import { BaseListComponent } from '@shared/components/base-list-component/base-list-component';
 import { Observable } from 'rxjs';
-import { WorkSystemsModel } from 'src/app/modules/evaluating-improving-performance/operational-plan/operational-plan-settings/work-systems/models/work-systems.model';
-import { WorkSystemsService } from 'src/app/modules/evaluating-improving-performance/operational-plan/operational-plan-settings/work-systems/services/work-systems.service';
+import { WorkSystemsModel } from '../../models/work-systems.model';
+import { WorkSystemsService } from '../../services/work-systems.service';
 import { ApiResponseModel, PagedResponse } from 'src/app/shared/models/base/paged-response.model';
 
 @Component({
